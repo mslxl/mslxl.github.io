@@ -37,7 +37,7 @@ layout: default
                     <a class="left-margin" :href="item.url">[ Read more ]</a>
                 </div>
                 <div class="card-action">
-                    <a class="waves-effect waves-light btn right-margin" v-for="tag in item.tag">{{ tag }}</a>
+                    <a class="waves-effect waves-light btn right-margin" v-for="tag in item.tag" :href="'/pages/categories.html#'+tag">{{ tag }}</a>
                 </div>
             </div>
         </div>
