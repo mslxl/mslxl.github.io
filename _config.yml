@@ -20,10 +20,11 @@ plugins:
 paginate: 8
 
 github_username:  mslxl
-
+repo: "mslxl/mslxl.github.io"
 
 # SideNav
 sidenav_enabel: true
+
 sidenav_bg: "/img/sidebar_header.png"
 avatar: "https://avatars3.githubusercontent.com/u/11132880?s=460"
 
