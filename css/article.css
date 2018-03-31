@@ -1,0 +1,140 @@
+@media (min-width: 480px) {
+    .article-container {
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+}
+
+.article-container {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 80px 20px 100px;
+    width: 100%;
+    line-height: 1.7;
+    font-size: 16px;
+    color: #404040;
+}
+
+.article-container h1,
+.article-container h2,
+.article-container h3,
+.article-container h4,
+.article-container h5,
+.article-container h6 {
+    margin: 30px 0 10px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+
+
+.article-container p {
+    font-size: 16px;
+}
+
+.article-container h1 {
+    font-size: 36px;
+}
+
+.article-container h2 {
+    font-size: 30px;
+}
+
+.article-container h3 {
+    font-size: 24px;
+}
+
+.article-container h4 {
+    font-size: 21px;
+}
+
+.article-container h5 {
+    font-size: 15px;
+    font-weight: 600;
+    color: gray;
+}
+
+.article-container h6 {
+    font-size: 16px;
+    font-weight: 600;
+    color: gray;
+}
+
+.article-container blockquote {
+    color: gray;
+    font-style: italic;
+    font-size: .95em;
+    margin: 20px 0 20px;
+    padding: 10px 20px;
+    border-left: 5px solid #EEE;
+}
+
+.article-container p {
+    margin: 30px 0;
+}
+
+pre {
+    display: block;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    font-family: "Fira code", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+pre code {
+    display: block;
+    width: auto;
+    white-space: pre;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+
+table > tbody > tr > td,
+table > tbody > tr > th,
+table > tbody > tfoot > tr > td,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > thead > tr > th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+table th, table td {
+    border: 1px solid #eee !important;
+}
+
+.article-container ul, .article-container ol {
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.article-container ul {
+    list-style-type: disc;
+}

@@ -1,0 +1,25 @@
+
+html,body{
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+.header{
+    margin: 0 0 0 0;
+}
+.avatar{
+    width: 32px;
+    height: 32px;
+}
+.main{
+    max-width: 900px;
+    display: flex;!important;
+    flex-flow: row wrap;
+    margin: auto;
+}
+
+.left-margin{
+    margin-left: 10px;
+}
+.right-margin{
+    margin-right: 10px;
+}

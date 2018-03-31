@@ -22,4 +22,4 @@ template: true
 
 ~~可能会偶尔发发牢骚或者学习有关的试题~~
 
-![我好菜啊](assets/img/expression-pack/我好菜啊.jpg)
+![我好菜啊](img/expression-pack/我好菜啊.jpg)

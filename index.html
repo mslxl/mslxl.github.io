@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+{% if paginator.page == 1 %}
+
+{% raw %}
+<div id="vue-el" class="main">
+    <div class="row" ondragstart="return false;">
+        <div>
+            <div class="card header">
+                <div class="card-image">
+                    <img :src="['/img/header/' + imageNum + '.jpg']">
+                    <span class="card-title">Mslxl 的小窝</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">search</i></a>
+                </div>
+{% endraw %}
+{% if site.avatar %}
+                <div class="card-content valign-wrapper">
+                    <img class="circle avatar" src="{{ site.avatar }}"/>
+                    <span class="name left-margin">{{ site.username }}</span>
+                </div>
+{% endif %}
+{% raw %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row" v-for="item in items">
+        <div>
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="left-align title"> {{ item.title }}</h5>
+                    <hr/>
+                    <span class="left-align"> {{ item.preview }}</span>
+                    <a class="left-margin" :href="item.url">[ Read more ]</a>
+                </div>
+                <div class="card-action">
+                    <a class="waves-effect waves-light btn right-margin" v-for="tag in item.tag">{{ tag }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endraw %}
+
+{% endif %}
+
+<!--嘿同志，下面的才是真正的数据-->
+<script id="data-json" type="application/json">
+{
+  "article":[
+      {% for post in paginator.posts %}
+      {
+          "title":"{{post.title | json_escape}}",
+          "date":"{{ post.date | date_to_long_string }}",
+          "url":"{{post.url | prepend: site.baseurl| json_escape}}",
+          "preview":"{{post.content | strip_html | strip_newlines | truncate:200| json_escape }}",
+          "tag":[
+              {% for tag in post.tags %}
+              "{{ tag | json_escape }}"{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+          ]
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+  ]{% if paginator.previous_page %},
+  "previous":"/page{{paginator.previous_page}}"
+  {% endif %}
+  {% if paginator.next_page %},
+  "next":"/page{{paginator.next_page}}"
+  {% endif %}
+}
+</script>
+
+<script src="/js/inedx.js"></script>

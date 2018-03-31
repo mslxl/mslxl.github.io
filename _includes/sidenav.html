@@ -1,0 +1,55 @@
+<ul id="page-menu" class="dropdown-content">
+    <li><a href="/feed.xml">RSS</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">three</a></li>
+</ul>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo left-margin">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a class="dropdown-trigger" href="#!" data-target="page-menu"><i class="material-icons right">more_vert</i></a></li>
+        </ul>
+    </div>
+</nav>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light red sidenav-trigger left" data-target="slide-out"><i class="material-icons">menu</i></a>
+</div>
+
+<ul id="slide-out" class="sidenav">
+    {% if site.sidenav_enabel %}
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="{{ site.sidenav_bg }}">
+            </div>
+            <a><img class="circle" src="{{ site.avatar }}"></a>
+            {% if site.username %} <a><div class="name white-text">{{ site.username }}</div></a> {% endif %}
+            {% if site.email %} <a href="mailto:{{ site.email }}"><div class="email white-text">{{ site.email }}</div></a> {% endif %}
+
+        </div>
+    </li>
+
+    {% endif %}
+    <li><a href="/">Home</a></li>
+
+    {% for page in site.pages %}
+    {% if page.title %}
+    <li><a href="{{page.url | prepend: site.baseurl}}">{{page.title}}</a></li>
+    {% endif %}
+    {% endfor %}
+    <li class="divider"></li>
+    <li><a class="subheader">Share</a></li>
+
+    <li class="divider"></li>
+    <li><a class="subheader">Other</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+</ul>
+
+<script>
+    $(document).ready(()=>{
+        $('.sidenav').sidenav()
+        $('.collapsible').collapsible()
+        $('.dropdown-trigger').dropdown()
+    })
+</script>
