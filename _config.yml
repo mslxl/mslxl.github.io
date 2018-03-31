@@ -12,6 +12,7 @@ url: "http://mslxl.github.io"
 markdown: kramdown
 kramdown:
   input: GFM
+  syntax_highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-paginate

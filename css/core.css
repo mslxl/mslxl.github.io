@@ -23,3 +23,6 @@ html,body{
 .right-margin{
     margin-right: 10px;
 }
+.width-full { width: 100% !important; }
+
+.height-full { height: 100% !important; }

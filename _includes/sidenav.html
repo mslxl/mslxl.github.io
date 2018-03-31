@@ -1,15 +1,18 @@
-<ul id="page-menu" class="dropdown-content">
+<!--<ul id="page-menu" class="dropdown-content">
     <li><a href="/feed.xml">RSS</a></li>
     <li class="divider"></li>
     <li><a href="#!">three</a></li>
-</ul>
+</ul>-->
 
 <nav>
     <div class="nav-wrapper">
         <a href="#" class="brand-logo left-margin">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</a>
+
+<!--
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a class="dropdown-trigger" href="#!" data-target="page-menu"><i class="material-icons right">more_vert</i></a></li>
         </ul>
+-->
     </div>
 </nav>
 <div class="fixed-action-btn">
@@ -36,6 +39,7 @@
     {% for page in site.pages %}
     {% if page.title %}
     <li><a href="{{page.url | prepend: site.baseurl}}">{{page.title}}</a></li>
+
     {% endif %}
     {% endfor %}
     <li class="divider"></li>
