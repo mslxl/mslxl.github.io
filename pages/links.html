@@ -3,7 +3,7 @@ title: Links
 layout: page
 ---
 
-{% assign friends = site.data.friends | sort %}
+{% assign friends = site.data.friends | sort:'name' %}
 
 <ul class="collection width-full">
     {% for friend in friends %}
