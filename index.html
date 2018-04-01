@@ -12,7 +12,7 @@ layout: default
                 <div class="card-image">
                     <img :src="['/img/header/' + imageNum + '.jpg']">
                     <span class="card-title">Mslxl 的小窝</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">search</i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#search-modal"><i class="material-icons">search</i></a>
                 </div>
 {% endraw %}
 {% if site.avatar %}
@@ -26,9 +26,8 @@ layout: default
         </div>
     </div>
 
-    <div class="row" v-for="item in items">
-        <div>
-            <div class="card">
+    <div class="row">
+            <div class="card" v-for="item in items">
                 <div class="card-content">
                     <h5 class="left-align title"> {{ item.title }}</h5>
                     <span class="date-text"> {{ item.date }} </span>
@@ -41,10 +40,25 @@ layout: default
                 </div>
             </div>
         </div>
-    </div>
-
 </div>
 {% endraw %}
+
+<div id="search-modal" class="modal">
+    <div class="modal-content">
+        <h4>Search</h4>
+        <div class="input-field">
+            <input id="search-text" type="text" class="validate">
+            <label for="search-text">Text</label>
+        </div>
+        <label>
+            <input id="enable-fast-search" type="checkbox" checked="checked" />
+            <span>Fast search (Only search title)</span>
+        </label>
+    </div>
+    <div class="modal-footer">
+        <a onclick="searchText()" class="modal-action modal-close waves-effect waves-green btn-flat">Search</a>
+    </div>
+</div>
 
 {% endif %}
 

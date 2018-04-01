@@ -16,7 +16,7 @@ $(()=>{
     let loading = false
     const loadJson = (json) =>{
         let obj = JSON.parse(json)
-        obj['article'].forEach((value, index, array)=>{
+        obj['article'].forEach((value)=>{
             vue.items.push(value)
         })
         let page = {
