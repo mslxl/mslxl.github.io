@@ -25,3 +25,20 @@ layout: page
 <div id="content" class="article-container">
     {{content}}
 </div>
+{% if page.speak %}
+<script>
+    // Live2d msg
+    disableHitokoto = true
+    const speak = [
+        {% for speak in page.speak %}"{{speak}}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ]
+    function showSpeak(){
+        showMessage(speak[randomFrom(0,speak.length-1)], 5000);
+    }
+
+    window.setInterval(showSpeak,30000);
+</script>
+{% endif %}
+
+{% include live2d-init.html %}

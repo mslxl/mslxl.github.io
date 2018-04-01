@@ -7,6 +7,7 @@ description: > # this means to ignore newlines until "baseurl:"
   绝对没有一点技术含量
 baseurl: ""
 url: "https://mslxl.github.io"
+res: "http://mslxl.gitee.io/bolg-res"
 
 # Build settings
 markdown: kramdown
