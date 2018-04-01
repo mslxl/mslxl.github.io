@@ -6,7 +6,7 @@ email: 1302485739@qq.com
 description: > # this means to ignore newlines until "baseurl:"
   绝对没有一点技术含量
 baseurl: ""
-url: "https://mslxl.github.io"
+url: "http://mslxl.github.io"
 
 # Build settings
 markdown: kramdown
