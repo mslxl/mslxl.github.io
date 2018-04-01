@@ -80,10 +80,10 @@ layout: default
       }{% unless forloop.last %},{% endunless %}
       {% endfor %}
   ]{% if paginator.previous_page %},
-  "previous":"/page{{paginator.previous_page}}"
+  "previous":"/page{{paginator.previous_page}}/index.html"
   {% endif %}
   {% if paginator.next_page %},
-  "next":"/page{{paginator.next_page}}"
+  "next":"/page{{paginator.next_page}}/index.html"
   {% endif %}
 }
 </script>
