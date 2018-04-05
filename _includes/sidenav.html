@@ -35,19 +35,10 @@
 
         </div>
     </li>
-
     {% endif %}
     <li><a href="/">Home</a></li>
-
     {% assign pages = site.pages | concat: site.data.pages | sort: 'title'  %}
-    {% for page in pages %}
-    {% if page.title %}
-    <li><a href="{{ page.url }}">{{page.title}}</a></li>
-
-    {% endif %}
-    {% endfor %}
-
-
+    {% for page in pages %} {% if page.title %}<li><a href="{{ page.url }}">{{page.title}}</a></li>{% endif %} {% endfor %}
     <li class="divider"></li>
     <li><a class="subheader">Other</a></li>
     <li><a href="/feed.xml">RSS</a></li>
@@ -66,9 +57,7 @@
                 <div>
                     <p class="title card-title">{{ page.title }}</p>
                     <p class="date-text">{{ page.date | date_to_long_string }}</p>
-                    {% for tag in page.tags %}
-                    <a class="waves-effect waves-light right-margin" href="/pages/categories.html#{{ tag }}">{{ tag }}</a>
-                    {% endfor %}
+                    {% for tag in page.tags %}<a class="waves-effect waves-light right-margin" href="/pages/categories.html#{{ tag }}">{{ tag }}</a>{% endfor %}
                     <p>{{page.url | prepend: site.url}}</p>
                 </div>
             </div>
