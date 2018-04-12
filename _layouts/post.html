@@ -9,22 +9,23 @@ layout: page
             <i id="show-introduction" class="material-icons right">more_vert</i>
             {% endif %}
         </span>
-        <p><a href="#">{{ page.date | date_to_long_string}}</a></p>
+            <p><a href="#">{{ page.date | date_to_long_string}}</a></p>
+        </div>
+        {% if page.tags %}
+        <div class="card-action">
+            {% for tag in page.tags %}
+            <a class="waves-effect waves-light btn right-margin" href="/pages/categories.html#{{ tag }}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if page.introduction %}
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Introduction<i class="material-icons right">close</i></span>
+            <p>{{ page.introduction }}</p>
+        </div>
+        {% endif %}
     </div>
-    {% if page.tags %}
-    <div class="card-action">
-        {% for tag in page.tags %}
-        <a class="waves-effect waves-light btn right-margin" href="/pages/categories.html#{{ tag }}">{{ tag }}</a>
-        {% endfor %}
-    </div>
-    {% endif %}
-    {% if page.introduction %}
-    <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Introduction<i class="material-icons right">close</i></span>
-        <p>{{ page.introduction }}</p>
-    </div>
-    {% endif %}
-</div>
+
 
 {% if page.introduction %}
 <div class="tap-target" data-target="show-introduction">

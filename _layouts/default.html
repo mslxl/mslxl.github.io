@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="/js/settings.js"></script>
     {% include head.html %}
     {% for css in post.css %}
         <link type="text/css" rel="stylesheet" href="{{css}}"/>
@@ -14,14 +13,14 @@
 
 <body>
 
-<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/lib/jquery-3.3.1.js"></script>
 
-<script src="/js/vue.js"></script>
+<script src="/js/lib/vue.js"></script>
 
 {% include sidenav.html %}
 
 
-<script src="/js/materialize.js"></script>
+<script src="/js/lib/materialize.js"></script>
 
 
 {{content}}
