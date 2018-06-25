@@ -4,13 +4,19 @@
             <div class="col l6 s12">
                 <h5 class="white-text">{{ site.title }}</h5>
                 <p class="grey-text text-lighten-4">
-                <div>Last Build: {{ site.time }}</div>
-                {% if page.date %}
-                <div>Last Edit: {{ page.date }}</div>
-                {% endif %}
-                <div>Last Commit Time: <span id="last-commit-time" class="github-load">Loading...</span></div>
-                <div>Last Committer: <a id="last-committer" class="github-load">Loading...</a></div>
-                <div>Last Commit Msg: <a id="last-commit-msg" class="github-load">Loading...</a></div>
+                    <div>Last Build: {{ site.time }}</div>
+                    {% if page.date %}
+                    <div>Last Edit: {{ page.date }}</div>
+                    {% endif %}
+                    <div>Last Commit Time:
+                        <span id="last-commit-time" class="github-load">Loading...</span>
+                    </div>
+                    <div>Last Committer:
+                        <a id="last-committer" class="github-load">Loading...</a>
+                    </div>
+                    <div>Last Commit Msg:
+                        <a id="last-commit-msg" class="github-load">Loading...</a>
+                    </div>
 
                 </p>
             </div>
@@ -19,7 +25,9 @@
                 <h5 class="white-text">Links</h5>
                 <ul>
                     {% for friend in site.data.friends limit:5%}
-                    <li><a class="grey-text text-lighten-3" target="_blank" href="{{ friend.url }}">{{ friend.name }}</a></li>
+                    <li>
+                        <a class="grey-text text-lighten-3" target="_blank" href="{{ friend.url }}">{{ friend.name }}</a>
+                    </li>
                     {% endfor %}
                 </ul>
 
@@ -57,7 +65,7 @@
                         let committer = commit['committer']
                         let committerName = committer['name']
                         let committerEmail = committer['email']
-                        let committerText =`${committerName ? committerName : 'Unknown committer' } ( ${committerEmail ? committerEmail : 'Unknown email' })`
+                        let committerText = `${committerName ? committerName : 'Unknown committer'} ( ${committerEmail ? committerEmail : 'Unknown email'})`
                         el = $('#last-committer')
                         el.text(committerText)
                         url && el.attr('href', `https://github.com/${committerName}`)
@@ -70,4 +78,17 @@
             $('.github-load').text(state)
         }
     })
+</script>
+
+<script>
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["/*  */input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [['$', '$'], ["\\(", "\\)"]],
+            displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+    });
 </script>

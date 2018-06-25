@@ -217,8 +217,9 @@ DEPENDENCIES
   github-pages
   jekyll (= 3.5.2)
   jekyll-feed (~> 0.6)
+  jekyll-mermaid (= 1.0.0)
   jekyll-paginate (~> 1.1.0)
   tzinfo-data
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
