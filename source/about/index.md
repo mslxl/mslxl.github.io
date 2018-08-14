@@ -1,7 +1,8 @@
 ---
 layout: post
-date: 2018-04-12
 title: About
+abbrlink: 74350de7
+date: 2018-04-12 00:00:00
 ---
 
 您现在所看到的，是 2018 年 4 月 12 日的我。

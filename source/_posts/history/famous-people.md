@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "历史名人表"
-date:   2017-10-26 12:47:00 +0800
+title: 历史名人表
+date: '2017-10-26 12:47:00 +0800'
 tags:
-    - History
+  - History
+abbrlink: c5cb9deb
 ---
 
 | 人物 | 国籍 | 职业 | 著作 | 称号 | 备注 |

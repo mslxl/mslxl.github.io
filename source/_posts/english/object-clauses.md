@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "宾语从句"
-date:   2017-05-08 21:20:00 +0800
+title: 宾语从句
+date: '2017-05-08 21:20:00 +0800'
 tags:
-    - English
+  - English
+abbrlink: 1ee29c1f
 ---
 
 英语难点

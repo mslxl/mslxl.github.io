@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "生物实验（九） 观察根尖结构"
-date:   2017-04-14 22:23:00 +0800
+title: 生物实验（九） 观察根尖结构
+date: '2017-04-14 22:23:00 +0800'
 tags:
-    - Biology
+  - Biology
+abbrlink: b2b027e0
 ---
 
 ## 观察根尖结构

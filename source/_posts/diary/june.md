@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "六月"
-date:   2018-06-26 01:00:00 +0800
-introduction: "六月，再见"
+title: 六月
+date: '2018-06-26 01:00:00 +0800'
+introduction: 六月，再见
 tags:
-    - Diary
+  - Diary
+abbrlink: a2b4b7be
 ---
 
 白马过隙，转眼间六月就要过去了。

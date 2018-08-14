@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "关于名词动词形容词的特殊规律"
-date:   2017-09-03 21:05:00 +0800
+title: 关于名词动词形容词的特殊规律
+date: '2017-09-03 21:05:00 +0800'
 tags:
-    - English
+  - English
+abbrlink: c1330899
 ---
 
 名词复数

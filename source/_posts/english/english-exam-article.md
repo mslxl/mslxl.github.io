@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "初三第二周考试英语文章"
-date:   2017-09-19 21:05:00 +0800
+title: 初三第二周考试英语文章
+date: '2017-09-19 21:05:00 +0800'
 tags:
-    - English
-    - Exam
-    - Article
+  - English
+  - Exam
+  - Article
+abbrlink: 2ab6b594
 ---
 
 # A

@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "生物实验（一） 观察种子结构"
-date:   2017-04-14 18:15:00 +0800
+title: 生物实验（一） 观察种子结构
+date: '2017-04-14 18:15:00 +0800'
 tags:
-    - Biology
+  - Biology
+abbrlink: fe99a684
 ---
 
 ## 观察种子内部结构

@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "生物实验（三） 制作洋葱鳞片临时装片"
-date:   2017-04-14 18:15:00 +0800
+title: 生物实验（三） 制作洋葱鳞片临时装片
+date: '2017-04-14 18:15:00 +0800'
 tags:
-    - Biology
+  - Biology
+abbrlink: f6e00fac
 ---
 
 ## 制作洋葱鳞片临时装片

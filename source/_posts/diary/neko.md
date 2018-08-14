@@ -1,26 +1,29 @@
 ---
 layout: post
-title:  "Ayaka Neko"
-date:   2018-03-24 10:00:00 +0800
-introduction: "R.I.P<br/>See more <a target='_blank' href='https://zhuanlan.zhihu.com/p/34901959'>information</a>"
+title: Ayaka Neko
+date: '2018-03-24 10:00:00 +0800'
+introduction: >-
+  R.I.P<br/>See more <a target='_blank'
+  href='https://zhuanlan.zhihu.com/p/34901959'>information</a>
 tags:
-    - Eyewash
-    - Diary
+  - Eyewash
+  - Diary
 speak:
-    - "千叶要好好的"
-    - "さようなら，天空从此又多了一颗星"
-    - "R.I.P"
-    - "愿你来世是个漂漂亮亮的女孩子"
-    - "一路走好"
-    - "抱歉"
-    - "We nerver forget you"
-    - "人为什么要互相伤害呢"
+  - 千叶要好好的
+  - さようなら，天空从此又多了一颗星
+  - R.I.P
+  - 愿你来世是个漂漂亮亮的女孩子
+  - 一路走好
+  - 抱歉
+  - We nerver forget you
+  - 人为什么要互相伤害呢
 click:
-    - "さようなら"
-    - "屏幕前的你也会感到悲伤吗"
-    - "明明是个敲可爱的小姐姐，可是为什么..."
-    - "屏幕前的你也是这么想的吗"
-    - "这是谋杀!"
+  - さようなら
+  - 屏幕前的你也会感到悲伤吗
+  - 明明是个敲可爱的小姐姐，可是为什么...
+  - 屏幕前的你也是这么想的吗
+  - 这是谋杀!
+abbrlink: 37b8d2c7
 ---
 
 昨天晚上看到了 Ayaka Neko 的死讯，明明之前还一直好好的，转眼间什么都没了。

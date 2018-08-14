@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "换了一个模板"
-date:   2017-05-16 20:00:00 +0800
-author:     "Mslxl"
-subtitle:   ""
+title: 换了一个模板
+date: '2017-05-16 20:00:00 +0800'
+author: Mslxl
+subtitle: ''
 tags:
-    - Misc
+  - Misc
+abbrlink: b6404640
 ---
 
 宝宝不想说话
