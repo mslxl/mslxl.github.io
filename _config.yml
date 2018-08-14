@@ -81,6 +81,12 @@ theme: anatole
 deploy:
   type:
 
+# Sitemap
+sitemap: 
+  path: sitemap.xml
+baidusitemap: 
+  path: baidusitemap.xml
+
 # abbrlink config
 abbrlink:
   alg: crc32

@@ -17,10 +17,6 @@
       li
         a(href="http://github.com/" + theme.github)
           i.fa.fa-github
-    if theme.rss
-      li
-        a(href= url_for(theme.rss))
-          i.fa.fa-rss
     if theme.mail
       li
         a(href= "mailto:" + theme.mail)
@@ -29,4 +25,8 @@
       li
         a(href= "tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=" + theme.qq + "&website=www.oicqzone.com")
           i.fa.fa-qq
+    if theme.rss
+      li
+        a(href= url_for(theme.rss))
+          i.fa.fa-rss
   include footer
