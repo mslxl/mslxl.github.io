@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# 莫名感觉批处理简单
+read -r -p "Are you sure to deploy? [Y/n]" input
+
+case $input in
+    [yY][eE][sS]|[yY])
+    ;;
+
+    [nN][oO]|[nN])
+    exit 0
+    ;;
+
+    *)
+	;;
+esac
+
+hexo clean
+hexo g
+
+git add .
+git status
+
+read -r -p "Are you sure to commit these file? [Y/n]" input
+
+case $input in
+    [yY][eE][sS]|[yY])
+    ;;
+
+    [nN][oO]|[nN])
+    exit 0
+    ;;
+
+    *)
+	;;
+esac
+
+read -r -p "Commit msg:" msg
+
+git commit -m "$msg"
+
+git push origin master
