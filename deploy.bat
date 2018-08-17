@@ -14,5 +14,5 @@ if %errorlevel%==2 exit
 set /p msg=Commit msg:
 git commit -m "%msg%"
 
-git push origin master
+git push origin source
 

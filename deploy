@@ -39,4 +39,4 @@ read -r -p "Commit msg:" msg
 
 git commit -m "$msg"
 
-git push origin master
+git push origin source

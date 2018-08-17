@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 历史名人表
+title: 初中历史名人表
 date: '2017-10-26 12:47:00 +0800'
 tags:
   - History
