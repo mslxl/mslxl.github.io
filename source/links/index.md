@@ -1,5 +1,5 @@
 ---
-date: 2018-8-14
+noDate: true
 ---
 
 * [YooMo:A daily that describe my nice life](https://yoomo.github.io/)

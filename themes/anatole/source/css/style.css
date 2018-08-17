@@ -159,12 +159,12 @@ a:hover, a:active {
   height: 32px;
   border-radius: 300px;
 }
-.page-top .information .back_btn {
+.page-top .information .btn_bar {
   float: left;
   padding-top: 5px;
   margin-right: -10px;
 }
-.page-top .information .back_btn li {
+.page-top .information .btn_bar li {
   display: initial;
   padding-right: 40px;
 }

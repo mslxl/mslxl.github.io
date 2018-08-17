@@ -21,11 +21,14 @@
       else
         a(href="/links")= __('Links')		
   .information
-    .back_btn
-      li
-        if is_post()
+    .btn_bar
+      if is_post()
+        li
           a.fa.fa-chevron-left(onclick="window.history.go(-1)") 
-        else
-          a.fa.fa-chevron-left(onclick="window.history.go(-1)",style="display:none;") 
-    .avatar
-      img(src=theme.avatar)
+      li.search-bar(style="display:none;")
+        input#text-input(type="text", name="")
+        a.fa.fa-search.search-btn
+      li.search
+        a.fa.fa-search#toggle-search-bar
+    //- .avatar
+    //-   img(src=theme.avatar)
