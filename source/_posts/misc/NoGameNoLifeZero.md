@@ -7,6 +7,8 @@ tags:
 abbrlink: 405a5b08
 ---
 
+<hr/>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=490182455&auto=1&height=32"></iframe>
 
 
 首先，这是一个悲剧，这是一个有关挣扎，奋斗，生存的悲剧
@@ -19,7 +21,7 @@ abbrlink: 405a5b08
 
 太阳被摧毁，大地在燃烧，所有的种族互相仇视、争斗，将天空染成了血红色。
 
-但，在这些种族里唯独没有人类。
+值得一提的是，在这些种族里唯独没有人类。
 
 人类如此弱小，以至于连参战都不配。人类就像战场中的蚂蚁，不要说炮弹，即使是遇到路过的士兵也可能被踩死——即使他是无心的。
 
