@@ -27,7 +27,7 @@ git push origin source
 
 if %errorlevel%==0 (
 	echo successful
-)else(
+) else (
 	echo failed
 )
 pause >nul
