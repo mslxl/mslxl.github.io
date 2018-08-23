@@ -21,11 +21,11 @@ date: 2018-08-23 00:00:00
 
 *按下 $mod 键 ( Alt 键 )*
 
-![keyboard-layer1](/img/i3/keyboard-layer1.png)
+![keyboard-layer1](/assets/i3/keyboard-layer1.png)
 
 *按下 Shift + $mod 键*
 
-![keyboard-layer2](/img/i3/keyboard-layer2.png)
+![keyboard-layer2](/assets/i3/keyboard-layer2.png)
 
 
 
@@ -43,11 +43,11 @@ date: 2018-08-23 00:00:00
 
 打开一个新终端窗口是非常基础的操作，默认快捷键下为 `$mod + Enter`，也就是说在使用默认配置文件时的 `Mod1 + Enter`，通过按下 `$mod + Enter` 打开一个新终端，他将会占据屏幕上所有可用空间。
 
-![POI](/img/i3/single_terminal.png)
+![POI](/assets/i3/single_terminal.png)
 
 如果再打开另一个终端，i3 会把它放到当前窗口之后，把屏幕一分为二，分割方向依赖于显示器，I3 将创建的窗口放在现有窗口旁（在宽显示器上）或现有窗口之下（旋转显示）。
 
-![Nanodesu](/img/i3/two_terminals.png)
+![Nanodesu](/assets/i3/two_terminals.png)
 
 你可以使用像 `vi` 上的方式移动焦点，但是在 i3 中你需要按住 `$mod` 键再按这些按键（在`vi`中，这些按键为了兼容大多数键盘布局都被向左移动了一个键）。因此，`$mod + j`是向左，`$mod + k` 是向下，`$mod + l`是向上，`$mod + ;`是向右，所以，在两个终端之前切换只需要 `$mod + k` 和 `$mod + l`，当然，你也可以使用方向键。
 
@@ -67,16 +67,16 @@ split container 可以有一下几种布局：
 
 * splith/splitv
   * 相同容器内的每个窗口获得相等的空间
-  * splith ：水平分割
-  * splitv ：垂直分割
-* stacking
+  * splith ：横向布局
+  * splitv ：纵向布局
+* stacking：堆叠
   * 只显示容器内具有焦点的窗口，在容器的顶部会显示所有窗口的列表
-* tabbed
+* tabbed：选项卡
   * 与 stacking 相同，但是容器顶部的窗口列表是横向显示
 
 使用 `$mod + e` 切换 splith 和 splitv 模式，按`$mod + s` 切换到 stacking 模式，按 `$mod + w` 切换到 tabbed 模式
 
-![up white ze smart voice](/img/i3/modes.png)
+![up white ze smart voice](/assets/i3/modes.png)
 
 ### 2.3. 窗口全屏
 
