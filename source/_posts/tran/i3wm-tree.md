@@ -2,7 +2,7 @@
 title: i3 User's Guide 进阶操作篇（对应第 3 节）
 tags:
   - i3
-  - translation
+  - Translation
 abbrlink: bfc0c476
 date: 2018-08-24 00:00:00
 ---

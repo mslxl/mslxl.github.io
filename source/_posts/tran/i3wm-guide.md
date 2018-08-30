@@ -2,7 +2,7 @@
 title: i3 User's Guide 操作篇
 tags:
   - i3
-  - translation
+  - Translation
 abbrlink: 4937fd9b
 date: 2018-08-23 00:00:00
 ---
