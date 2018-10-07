@@ -5,6 +5,7 @@ date: '2017-10-26 12:47:00 +0800'
 tags:
   - History
 abbrlink: c5cb9deb
+noLive2d: true
 ---
 
 | 人物 | 国籍 | 职业 | 著作 | 称号 | 备注 |

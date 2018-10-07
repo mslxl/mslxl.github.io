@@ -132,3 +132,30 @@ image_minifier:
 search:
   path: search.json
   field: posts
+
+# Live2D
+## https://github.com/EYHN/hexo-helper-live2d
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: assets/live2d/
+  pluginJsPath: lib/
+  pluginModelPath: model/
+  tagMode: true
+  debug: false
+  model:
+    use: /assets/live2d/model/pio/model.json
+  mobile:
+    show: true
+    scale: 0.5
+  display:
+    position: left
+    hOffset: 0
+    vOffset: -160
+    superSample: 2
+    width: 150
+    height: 300
+  react:
+    opacityDefault: 1
+    opacityOnHover: 1
+    

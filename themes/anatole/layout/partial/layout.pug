@@ -15,3 +15,5 @@ html(lang="zh-CN")
     script(src= url_for('js/jquery.appear.js'))
     script(src= url_for('js/search-bar.js'))
     script(src= url_for('js/baidu-push.js'))
+    if(!page.noLive2d)
+      | !{ live2d() }

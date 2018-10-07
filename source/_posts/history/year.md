@@ -5,6 +5,7 @@ date: '2017-12-29 19:57:00 +0800'
 tags:
   - History
 abbrlink: bebe151e
+noLive2d: true
 ---
 
 # UNITED ! WE ARE STRONG !
