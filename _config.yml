@@ -146,7 +146,7 @@ live2d:
   model:
     use: /assets/live2d/model/pio/model.json
   mobile:
-    show: true
+    show: false
     scale: 0.5
   display:
     position: left
