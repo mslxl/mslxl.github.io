@@ -11,8 +11,6 @@ mermaid: true
 date: 2018-10-27 00:00:00
 ---
 
-## Katex 大法好！
-
 {% katex %}
 c = \pm\sqrt{a^2 + b^2}
 {% endkatex %}
