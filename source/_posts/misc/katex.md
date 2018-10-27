@@ -22,7 +22,11 @@ c = \pm\sqrt{a^2 + b^2}
 {% katex %}
 \lg ^{a*b} = \lg ^a + \lg ^b
 
+\\\
+
 \ln ^{e} = 1
+
+\\
 
 \log _{a}^{1} = 0
 {% endkatex %}
