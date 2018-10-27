@@ -158,4 +158,9 @@ live2d:
   react:
     opacityDefault: 1
     opacityOnHover: 1
-    
+
+pangu:
+  enable: false
+
+katex:
+  enable: true
