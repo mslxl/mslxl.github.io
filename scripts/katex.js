@@ -25,7 +25,9 @@ if (hexo.config.katex.enable) {
     });
 
     hexo.extend.filter.register('after_post_render', function (data) {
-        if (data.katex) {
+
+
+        if (data.katex || data.content.toString().indexOf('<span class="katex">') != -1) {
             data.content = util.htmlTag('link', {
                 rel: 'stylesheet',
                 type: 'text/css',

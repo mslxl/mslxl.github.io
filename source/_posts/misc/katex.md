@@ -6,7 +6,6 @@ tags:
   - Katex
   - Hexo
 abbrlink: d330a755
-katex: true
 mermaid: true
 date: 2018-10-27 00:00:00
 ---

@@ -30,5 +30,3 @@ block content
         if next
           li.next.pagbuttons
             a.btn(role="navigation",href=url_for(next), title=page.next.title)!= __('next_post')
-    if page.comments
-        include partial/comments
