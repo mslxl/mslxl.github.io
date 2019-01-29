@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 假期作业
 abbrlink: homework
 noDate: true
