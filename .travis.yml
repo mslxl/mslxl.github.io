@@ -11,7 +11,7 @@ install:
 - npm install
 script:
 - hexo clean
-- hexo g
+- sudo hexo g
 after_script:
 - cd ./public
 - git init
