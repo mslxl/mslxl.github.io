@@ -1,9 +1,5 @@
 language: node_js
 node_js: stable
-cache:
-  apt: true
-  directories:
-  - node_modules
 install:
 - npm install -g hexo
 - npm install -g hexo-cli
@@ -22,6 +18,10 @@ after_script:
 branches:
   only:
   - source
+cache:
+  apt: true
+  directories:
+  - node_modules
 env:
   global:
   - GH_REF: git.coding.net/mslxl/mslxl.coding.me

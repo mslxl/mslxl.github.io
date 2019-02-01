@@ -18,6 +18,8 @@ noDate: true
 
 Unity3D 开发者，不过博客基本是空的(已被 Base64 编码)
 
+<hr/>
+
 [Hoshino Tented](http://blog.hoshino9.org)
 
 可爱的 loli，信竞选手
@@ -36,7 +38,9 @@ Unity3D 开发者，不过博客基本是空的(已被 Base64 编码)
 
 [YooMo:啊啊啊啊啊啊啊啊啊啊啊啊啊咕咕咕](https://yoomo.github.io/)
 
-我们学校 4 班的一个小胖子，鸽子精一位，同时是位语文 dalao
+我们学校 4 班的一个小胖子，魔鬼，鸽子精一位，同时是位语文 dalao
+
+个性稍微有点恶劣
 
 特别皮，我舍友被他制裁的巨惨
 
