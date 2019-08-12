@@ -144,20 +144,24 @@ live2d:
   tagMode: true
   debug: false
   model:
+    scale: 1
     use: /assets/live2d/model/pio/model.json
   mobile:
     show: false
     scale: 0.5
   display:
     position: left
-    hOffset: 0
-    vOffset: -160
+    hOffset: 60
+    vOffset: -130
     superSample: 2
-    width: 150
-    height: 300
+    width: 270
+    height: 510
   react:
     opacityDefault: 1
     opacityOnHover: 1
+  dialog:
+    enable: true
+    hitokoto: true
 
 pangu:
   enable: false
