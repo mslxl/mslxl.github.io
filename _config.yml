@@ -6,7 +6,14 @@
 title: Mslxl's Blog
 subtitle:
 description: 
-keywords: 笔记,编程,学习,日记,Blog,博客,Mslxl
+keywords:
+  - 笔记
+  - 编程
+  - 学习
+  - 日记
+  - Blog
+  - 博客
+  - Mslxl
 author: Mslxl
 language: zh-cn
 timezone: Asia/Shanghai
@@ -83,7 +90,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: anatole
+theme: melody
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

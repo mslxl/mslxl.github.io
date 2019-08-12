@@ -1,7 +1,7 @@
 ---
-layout: post
 title: About
 abbrlink: about
+date: 2018-10-15 00:00:00
 noDate: true
 ---
 
