@@ -113,6 +113,7 @@ scripts:
   - /js/transition.js
   - /js/scroll.js
   - /js/head.js
+  - /js/baidu-push.js
 
   # cdn for third-party library
   # ---------------

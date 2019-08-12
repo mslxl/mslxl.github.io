@@ -148,7 +148,7 @@ live2d:
   pluginRootPath: assets/live2d/
   pluginJsPath: lib/
   pluginModelPath: model/
-  tagMode: true
+  tagMode: false
   debug: false
   model:
     scale: 1
@@ -157,9 +157,11 @@ live2d:
     show: false
     scale: 0.5
   display:
-    position: left
+    position: right
     hOffset: 60
+    #hOffset: 0
     vOffset: -130
+    #vOffset: 0
     superSample: 2
     width: 270
     height: 510
