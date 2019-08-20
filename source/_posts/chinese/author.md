@@ -4,6 +4,8 @@ title: 语文作者
 date: '2018-04-25 00:00:00 +0800'
 tags:
   - Chinese
+  - Note
+  - 初三
 speak:
   - 今天也要好好学习
   - 努力

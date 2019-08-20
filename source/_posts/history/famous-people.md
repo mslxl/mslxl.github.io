@@ -4,6 +4,8 @@ title: 初中历史名人表
 date: '2017-10-26 12:47:00 +0800'
 tags:
   - History
+  - Note
+  - 初三
 abbrlink: c5cb9deb
 noLive2d: true
 ---
