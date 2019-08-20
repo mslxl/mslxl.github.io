@@ -45,15 +45,11 @@ noDate: true
 
 学习到能用的语言有: Java Scala Kotlin C# JavaScript HTML Python Bash 
 
-高中弱鸡学渣。
-
 博客大概什么都会写一写，但更多的应该是学习笔记吧。
 
+高中弱鸡学渣。
+
 懒癌患者，抗癌中...
-
-<br/>
-
-
 
 <hr/>
 
