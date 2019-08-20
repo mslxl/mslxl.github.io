@@ -53,7 +53,7 @@ highlight_theme: default
 social:
   github fa: https://github.com/mslxl
   twitter fa: https://twitter.com/mslxl
-  qq fa: tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1302485739&website=blog.mslxl.com
+  qq fa: http://wpa.qq.com/msgrd?v=3&uin=1302485739&site=qq&menu=yes
   rss fa: /atom.xml
 #icon_name fa: url
 #icon_name fab: url
@@ -135,7 +135,7 @@ avatar: https://q1.qlogo.cn/g?b=qq&nk=1302485739&s=100
 top_img: false # false or url of img
 
 post_meta:
-  date_type: updated # created or updated
+  date_type: created # created or updated
   categories: false
   tags: true
 
