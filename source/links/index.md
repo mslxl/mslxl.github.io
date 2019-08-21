@@ -15,7 +15,7 @@ noDate: true
 
 [JadMax](https://jadmax.github.io)
 
-17 班真正的巨佬，刘三字，他另外一个网名是 AbelongstoA
+17 班真正的巨佬，他另外一个网名是 AbelongstoA
 
 Unity3D 开发者，不过博客基本是空的(已被 Base64 编码)
 
