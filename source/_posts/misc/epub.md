@@ -113,7 +113,7 @@ application/epub+zip
 
 该文件储存有关加密的信息
 
-例子：
+下面的一个例子展示了被 AES 加密的 `image.jpeg` ,使用 John Smith 的 RSA 密匙进一步加密。
 ```xml
 <encryption
     xmlns ="urn:oasis:names:tc:opendocument:xmlns:container"
@@ -150,6 +150,88 @@ application/epub+zip
 * META-INF/rights.xml
 * META-INF/signatures.xml
 
+### manifest.xml (可选)
 
-# TODO 待整理
-假期太忙了抱歉
+该文件提供 epub 中的文件清单
+
+OCF 并没有规定清单格式
+
+### metadata.xml (可选)
+
+该文件定义 epub 文件中的元数据
+
+如果 `metadata.xml`存在，他的命名空间必须被显示的声明为 [[XMLNS]](https://www.w3.org/TR/2009/REC-xml-names-20091208/)。文件应当在命名空间 `http://www.idpf.org/2013/metadata` 仅包含一个根节点 `metadata`。其他的节点为了向后兼容允许存在，，阅读器应当无视 `metadata.xml` 中不能识别的根节点。
+
+3.1版的 OCF 中并没有定义 `metadata.xml` 中元数据的用途。也许未来会有。
+
+### rights.xml (可选)
+
+该文件用于数字版权管理（DRM），用于在权利人，中间人和用户之间信任交换EPUB出版物的信息。
+3.1 版的 OCF 标准中并未规定 DRM 细细的特殊格式，但未来也许有。`rights.xml` 的命名空间应当被显式的声明为  [[XMLNS]](https://www.w3.org/TR/2009/REC-xml-names-20091208/) 来避免以后的冲突。
+
+当 rights.xml 不存在时，版权信息可能位于其他位置。
+
+### signatures.xml (可选)
+
+该文件存有 epub 的数组签名。它的内容必须符合 [signatures.xml](https://www.w3.org/Submission/epub-ocf/#app-schema-signatures)  schema.
+
+`signatures.xml` 的根节点为 `signatures`，子节点为定义在 [XML DSIG Core](https://www.w3.org/Submission/epub-ocf/#refXMLDSIGCORE) 中的 `Signature`。签名可以部分应用，也可以应用到 epub 整体，它可以使任何形式的签名数据，也就是说，不仅仅是 XML。
+
+
+下面的 XML 是 signatures.xml的一个例子，它包含了一个签名，应用到了两个资源，分别是 `EPUB/book.xhtml` 和 `EPUB/images/cover.jpeg`
+```xml
+<signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+    <Signature Id="sig" xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+            <CanonicalizationMethod 
+                Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/>
+            <Reference URI="#Manifest1">
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                <DigestValue>j6lwx3rvEPO0vKtMup4NbeVu8nk=</DigestValue>
+            </Reference>
+        </SignedInfo>
+        <SignatureValue>…</SignatureValue>
+        <KeyInfo>
+            <KeyValue>
+                <DSAKeyValue>
+                    <P>…</P><Q>…</Q><G>…</G><Y>…</Y> 
+                </DSAKeyValue>
+            </KeyValue>
+        </KeyInfo>
+        <Object>
+            <Manifest Id="Manifest1">
+                <Reference URI="EPUB/book.xhtml">                    
+                    <Transforms>                                                
+                        <Transform
+                            Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>                        
+                    </Transforms>
+                    <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                    <DigestValue></DigestValue>
+                </Reference>
+                <Reference URI="EPUB/images/cover.jpeg">
+                    <Transforms>                                                
+                        <Transform
+                            Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>                        
+                    </Transforms>
+                    <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                    <DigestValue></DigestValue>
+                </Reference>
+            </Manifest>
+        </Object>
+    </Signature> 
+</signatures>
+```
+
+## 内容目录 TODO
+
+其实这个目录并没有什么固定的名字，主要包含的是书籍内容。
+
+~~一般来说这个文件夹名字是OEPBS，但 OCF 推荐叫做该书的名字~~
+
+目录内存有 opf 、ncx、css、html等文件...
+
+重要的文件有 OPF 和 NCX
+
+> 剩下的等下次放假
+> QAQ
