@@ -43,7 +43,7 @@ noDate: true
 
 姑且是个业余开发者，各种技能都有点一点，但都不精。
 
-学习到能用的语言有: Java Scala Kotlin C# JavaScript HTML Python Bash 
+学习到能用的语言有: Java Scala Kotlin C# JavaScript HTML Python Shell
 
 博客大概什么都会写一写，但更多的应该是学习笔记吧。
 
@@ -96,7 +96,6 @@ noDate: true
 一个辣鸡业余开发者，Kotlin 粉。
 
 </details>
-
 
 <details>
 <summary>2017-02-27</summary>

@@ -74,6 +74,7 @@ application/epub+zip
 
 ~~这不是和 OCF 对着干吗~~
 
+`OEBPS/content.opf` 就是下文中要提到的 [opf 文件](#opf)
 
 <details>
 <summary>测试内容</summary>
@@ -223,7 +224,7 @@ OCF 并没有规定清单格式
 </signatures>
 ```
 
-## 内容目录 TODO
+## 内容目录
 
 其实这个目录并没有什么固定的名字，主要包含的是书籍内容。
 
@@ -233,5 +234,167 @@ OCF 并没有规定清单格式
 
 重要的文件有 OPF 和 NCX
 
-> 剩下的等下次放假
-> QAQ
+### opf
+
+以下为一个例子。
+我认为只需要一个例子就能说明了。
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE package PUBLIC "+//ISBN 978-7-308-05831-5//DTD OEB 1.2 Package//EN" "http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd">
+<package unique-identifier="bookid" 
+    xmlns:opf="http://www.idpf.org/2007/opf" 
+    xmlns="http://www.idpf.org/2007/opf" version="2.0">
+    <metadata>
+        <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" 
+            xmlns:dcterms="http://purl.org/dc/terms/" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dc:title>龙族 I</dc:title>
+            <dc:creator>江南老贼</dc:creator>
+            <!-- dc:subject 主题或关键字 -->
+            <dc:subject>幻想</dc:subject>
+            <dc:subject>刀片</dc:subject>
+            <dc:subject>胃药</dc:subject>
+            <dc:subject>冒险</dc:subject>
+            <!-- dc:description 简介 -->
+            <dc:description>你年少的时候，是否有过孤独而热血的梦？2010，龙，改变世界秘史！<dc:description>
+            <!-- dc:publisher 出版方 -->
+            <dc:publisher>长江出版社</dc:publisher>
+            <!-- dc:contributor 贡献者 -->
+            <dc:contributor/>
+            <dc:date>2013-07-01</dc:date>
+            <dc:type>普通图书</dc:type>
+            <dc:format>Text/html(.html,.htm)</dc:format>
+            <dc:identifier id="bookid" opf:scheme="ISBN">isbn:9787549220632</dc:identifier>
+            <!-- dc:source 来源 -->
+            <dc:source/>
+            <dc:language>chinese</dc:language>
+            <dc:relation/>
+            <dc:coverage/>
+            <dc:rights>机械工业出版社版权所有</dc:rights>
+        </dc-metadata>
+    <x-metadata/>
+    </metadata>
+    <!--manifest 文件清单，列出OEBPS文档及相关的文件（图片），仅由一种子元素组成
+        id 可以自由命名，在以后多个位置都有使用，较为重要 -->
+    <manifest>
+        <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+        <item id="style" href="style.css" media-type="text/css"/>
+        <item id="cover" href="cover.htm" media-type="text/html"/>
+        <item id="tableofc" href="toc.xhtml" media-type="application/xhtml+xml"/>
+        <item id="forword" href="forword.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap01" href="chap01.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap02" href="chap02.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap03" href="chap03.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap04" href="chap04.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap05" href="chap05.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap06" href="chap06.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap07" href="chap07.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap08" href="chap08.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap09" href="chap09.xhtml" media-type="application/xhtml+xml"/>
+        <item id="chap10" href="chap10.xhtml" media-type="application/xhtml+xml"/>
+        <item id="reference" href="reference.xhtml" media-type="application/xhtml+xml"/>
+    </manifest>
+    <!-- 提供书籍的线性阅读次序
+        toc 填上面 manifest 中 ncx 文件的 ID，关于 ncx 文件下面提 -->
+    <spine toc="ncx">
+        <!-- idref 是上面 manifest 中 item 的 id -->
+        <itemref idref="cover"/>
+        <itemref idref="tableofc"/>
+        <itemref idref="forword"/>
+        <itemref idref="chap01"/>
+        <itemref idref="chap02"/>
+        <itemref idref="chap03"/>
+        <itemref idref="chap04"/>
+        <itemref idref="chap05"/>
+        <itemref idref="chap06"/>
+        <itemref idref="chap07"/>
+        <itemref idref="chap08"/>
+        <itemref idref="chap09"/>
+        <itemref idref="chap10"/>
+        <itemref idref="reference"/>
+    </spine>
+    <!-- guide 指南,依次列出电子书的特定页面, 例如封面、目录、序言等, 属性值指向文件保存地址。一般情况下，epub电子书不用该元素 -->
+    <guide/>
+    <!-- tour 导读。可以根据不同的读者水平或者阅读目的, 按一定次序, 选择电子书中的部分页面组成导读。一般情况下，epub电子书不用该元素。-->
+    <tour/>
+</package>
+```
+另：~~江南就是个写小说的，他懂个什么龙族~~
+
+### ncx
+
+ncx文件用来描述电子书的目录结构，一般来说，opf 中 spine 一般也会出现在这里。
+
+```xml
+<?xml version='1.0' encoding='utf-8' ?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+    <head>
+        <meta content="coay_307750" name="dtb:uid" />
+        <meta content="2" name="dtb:depth" />
+        <meta content="COAY.COM [http://www.coay.com]" name="dtb:generator" />
+        <meta content="0" name="dtb:totalPageCount" />
+        <meta content="0" name="dtb:maxPageNumber" />
+    </head>
+    <docTitle>
+        <text>《龙族 I》</text>
+    </docTitle>
+    <docAuthor>
+        <text>江南</text>
+    </docAuthor>
+    <navMap>
+        <!-- class 划重点
+            id 这里好像没什么用处
+            playOrder 要和 opf 中 spine 的 item 顺序一致 -->
+        <navPoint class="chapter" id="article_307750_1" playOrder="1">
+            <navLabel>
+                <text>第1章</text>
+            </navLabel>
+            <content src="article_307750_1.html" />
+        </navPoint>
+        <navPoint class="chapter" id="article_307750_2" playOrder="2">
+            <navLabel>
+                <text>第2章</text>
+            </navLabel>
+            <content src="article_307750_2.html" />
+        </navPoint>
+        <navPoint class="chapter" id="article_307750_3" playOrder="3">
+            <navLabel>
+                <text>第3章</text>
+            </navLabel>
+            <content src="article_307750_3.html" />
+        </navPoint>
+        <navPoint class="chapter" id="article_307750_4" playOrder="4">
+            <navLabel>
+                <text>第4章</text>
+            </navLabel>
+            <content src="article_307750_4.html" />
+        </navPoint>
+        <navPoint class="chapter" id="article_307750_5" playOrder="5">
+            <navLabel>
+                <text>第5章</text>
+            </navLabel>
+            <content src="article_307750_5.html" />
+        </navPoint>
+        <!-- 经测试这里是可以分卷的
+            不过标准中没写，可能会出现不兼容的情况 -->
+        <navPoint class="chapter" id="article_307750_5" playOrder="5">
+            <navLabel>
+                <text>第1卷</text>
+            </navLabel>
+            <navPoint class="chapter" id="article_307750_1" playOrder="1">
+                <navLabel>
+                    <text>第1章</text>
+                </navLabel>
+                <content src="article_307750_1.html" />
+            </navPoint>
+            <navPoint class="chapter" id="article_307750_2" playOrder="2">
+                <navLabel>
+                    <text>第2章</text>
+                </navLabel>
+                <content src="article_307750_2.html" />
+            </navPoint>
+        </navPoint>
+    </navMap>
+</ncx>
+```
