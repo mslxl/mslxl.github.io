@@ -322,6 +322,8 @@ OCF 并没有规定清单格式
 ```
 另：~~江南就是个写小说的，他懂个什么龙族~~
 
+**千万千万不要写不存在的 path 或 idref， Edge 会哭给你看的哦**
+
 ### ncx
 
 ncx文件用来描述电子书的目录结构，一般来说，opf 中 spine 一般也会出现在这里。
@@ -376,8 +378,8 @@ ncx文件用来描述电子书的目录结构，一般来说，opf 中 spine 一
             </navLabel>
             <content src="article_307750_5.html" />
         </navPoint>
-        <!-- 经测试这里是可以分卷的
-            不过标准中没写，可能会出现不兼容的情况 -->
+        <!-- 经 Okular 测试这里是可以分卷的
+            不过标准中没写，可能会出现无法识别的情况（比如 Edge） -->
         <navPoint class="chapter" id="article_307750_5" playOrder="5">
             <navLabel>
                 <text>第1卷</text>
@@ -398,3 +400,26 @@ ncx文件用来描述电子书的目录结构，一般来说，opf 中 spine 一
     </navMap>
 </ncx>
 ```
+
+## html 坑点
+
+以下内容一点也不能少，少了 Edge 会哭的。
+
+
+```html
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>第二章</title>
+</head>
+<body>
+    <div>
+        正文
+    </div>
+</body>
+</html>
+
+```
+~~又是你 Edge~~
