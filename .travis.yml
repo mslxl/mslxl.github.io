@@ -1,12 +1,10 @@
 language: node_js
 node_js: stable
 install:
-- npm install --no-bin-links
-- npm install -g hexo --no-bin-links
-- npm install -g hexo-cli --no-bin-links
+- yarn
 script:
-- hexo clean
-- hexo g 
+- yarn run clean
+- yarn run build
 after_script:
 - cd ./public
 - git init
