@@ -1,5 +1,6 @@
 {
-    "allowStart":{
-        "scholarAnswer":true
+    "queryScholarAnswer":{
+        "allowStart":true,
+        "disableMsg":""
     }
 }
