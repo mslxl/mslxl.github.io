@@ -115,7 +115,6 @@ scripts:
   - /js/scroll.js
   - /js/head.js
   - /js/baidu-push.js
-  - /js/mourn.js
 
   # cdn for third-party library
   # ---------------
