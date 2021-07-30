@@ -1,0 +1,41 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Load cache
+        uses: actions/cache@v2
+        id: cache-dependencies
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
+            
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.5
+     
+      - name: Init package
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: Build project
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: build
+          
+      - name: Test node
+        run: node --version
+          
+      - name: Deploy to gh-pages
+        if: ${{ !env.ACT }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./public
