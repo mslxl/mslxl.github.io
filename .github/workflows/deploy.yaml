@@ -8,34 +8,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Config apt mirror
+        if: ${{ env.ACT}}
+        run: |
+          sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+          sed -i 's|security.debian.org/debian-security|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list
+
+      - name: Install package 
+        run: |
+          sudo apt update
+          sudo apt install -y git 
+          sudo apt install -y nodejs yarn autoconf
+          sudo apt install -y libx11-6 libx11-xcb1
+
       - uses: actions/checkout@v2
 
+      - name: Config git proxy
+        if: ${{ env.ACT}}
+        run: |
+          git config http.proxy http://127.0.0.1:1081
+          git config https.proxy http://127.0.0.1:1081
+
       - name: Load cache
+        if: ${{ !env.ACT }}
         uses: actions/cache@v2
         id: cache-dependencies
         with:
           path: node_modules
           key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
-            
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.1.5
      
-      - name: Init package
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
+      - name: Config mirror
+        if: ${{ env.ACT }}
+        run: yarn config set registry http://registry.npm.taobao.org/
 
-      - name: Build project
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: build
-          
-      - name: Test node
-        run: node --version
+      - name: Building
+        run: |
+          yarn
+          yarn build
           
       - name: Deploy to gh-pages
         if: ${{ !env.ACT }}
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
