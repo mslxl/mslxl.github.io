@@ -277,6 +277,7 @@ public:
           ln.value * this->lazy_multiply + this->lazy_add * ln.interval_size();
       ln.lazy_multiply = ln.lazy_multiply * this->lazy_multiply;
       ln.lazy_add = ln.lazy_add * this->lazy_multiply + this->lazy_add;
+      printf("Push [%lld, %lld] is %lld\n", ln.left, ln.right, ln.value);
 
       rn.value =
           rn.value * this->lazy_multiply + this->lazy_add * rn.interval_size();
@@ -292,7 +293,7 @@ public:
       if (start <= left && right <= end) {
         this->value = this->value * value;
         this->lazy_multiply = this->lazy_multiply * value;
-        this->lazy_add = this->value * value;
+        this->lazy_add = this->lazy_add * value;
       } else {
         push_down();
         left_node().multiply_interval(start, end, value);
@@ -413,6 +414,40 @@ int main() {
 
     st.multiply_interval(2, 5, 50);
     assert(st.ask_interval(1, 5) == 250);
+    st.clear();
+  }
+  { // Simple compose
+    int arr[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    SegTree<int, int> st(arr, arr + 10, 1);
+    assert(st.ask_interval(1, 10) == 550);
+    printf("Add:\n");
+    st.add_interval(1, 5, 10);
+    assert(st.ask_interval(1, 10) == 600);
+    printf("Mul:\n");
+    st.multiply_interval(1, 3, 10);
+    assert(st.ask_interval(1, 10) == 1410);
+    printf("Add(!!):\n");
+    st.add_interval(2, 5, 100);
+    assert(st.ask_interval(1, 10) == 1810);
+    printf("Add:\n");
+    st.add_interval(4, 9, 100);
+    assert(st.ask_interval(1, 10) == 2410);
+    st.clear();
+  }
+  { // Data from P3373
+    long long arr[] = {5929, 7152, 8443, 6028, 8580, 5449, 8473, 4237};
+    SegTree<int, long long> st(arr, arr + 8, 1);
+    printf("Add:\n");
+    st.add_interval(4, 8, 4376);
+    printf("Mul:\n");
+    st.multiply_interval(2, 8, 9637);
+    printf("Add:\n");
+    st.add_interval(2, 6, 7918);
+    printf("Add:\n");
+    st.add_interval(5, 8, 5681);
+    printf("%lld\n", st.ask_interval(2, 8) % 571373);
+    assert(st.ask_interval(2, 8) % 571373 == 478836);
+    st.clear();
   }
 
   std::cout << "Test passed!" << std::endl;
