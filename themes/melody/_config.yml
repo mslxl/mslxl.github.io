@@ -77,14 +77,14 @@ local_search:
 # ---------------
 mathjax:
   enable: false
-  cdn: https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  cdn: https://unpkg.zhimg.com/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 # KaTeX
 # ---------------
 katex:
   enable: false
   cdn:
-    css: https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css
+    css: https://unpkg.zhimg.com/katex@latest/dist/katex.min.css
 
 # Toggle fireworks (IE >= 10)
 # ---------------
@@ -120,14 +120,14 @@ scripts:
   # ---------------
 cdn:
   css:
-    fontawesome: https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css
+    fontawesome: https://unpkg.zhimg.com/font-awesome@latest/css/font-awesome.min.css
     # fontawesomeV5: https://use.fontawesome.com/releases/v5.3.1/css/all.css
   js:
-    anime: https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js
-    jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js
-    fancybox: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js
-    velocity: https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js
-    velocity-ui: https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js
+    anime: https://unpkg.zhimg.com/animejs@latest/anime.min.js
+    jquery: https://unpkg.zhimg.com/jquery@latest/dist/jquery.min.js
+    fancybox: https://unpkg.zhimg.com/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js
+    velocity: https://unpkg.zhimg.com/velocity-animate@latest/velocity.min.js
+    velocity-ui: https://unpkg.zhimg.com/velocity-ui-pack@latest/velocity.ui.min.js
 
 # Post info settings
 # ---------------
