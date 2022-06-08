@@ -1,5 +1,5 @@
 ---
-title: About Mermaid
+title: Render mermaid diagrams by puppeteer in Hexo
 tags:
   - Misc
   - Mermaid

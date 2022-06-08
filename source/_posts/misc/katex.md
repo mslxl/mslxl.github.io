@@ -1,6 +1,6 @@
 ---
 layout: post
-title: KaTeX 大法好！
+title: 在 Hexo 中使用 KaTex 静态渲染数学公式
 tags:
   - Misc
   - Katex
@@ -28,9 +28,9 @@ c = \pm\sqrt{a^2 + b^2}
 
 ## 静态渲染
 
-其实我本来是想用 {%katexline \LaTeX %} 的，结果发现了 {%katexline \KaTeX %} ,根据它的介绍 {%katexline \KaTeX %} 竟然提供了一套不依赖于浏览器的 API ，这就为静态渲染提供了可能，在使用的时候只需要引入对应的 CSS 就可以正常显示，不需要引入新的 JavaScript 代码。
+其实我本来是想用 MathJax 的，结果发现了 {%katexline \KaTeX %} ,根据它的介绍 {%katexline \KaTeX %} 提供了一套不依赖于浏览器的 API ，这就为静态渲染提供了可能，在使用的时候只需要引入对应的 CSS 就可以正常显示，不需要引入新的 JavaScript 代码。
 
-于是就有了下面的一段代码
+结合 Hexo 的文档，就可以写出下面的代码
 
 
 ```javascript
@@ -72,3 +72,14 @@ if (hexo.config.katex.enable) {
     });
 }
 ```
+
+使用 katex tag 就可以做到下面的效果了
+```
+{％ katex %}
+c = \pm\sqrt{a^2 + b^2}
+{％ endkatex %}
+```
+
+{% katex %}
+c = \pm\sqrt{a^2 + b^2}
+{% endkatex %}

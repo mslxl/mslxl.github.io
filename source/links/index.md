@@ -5,42 +5,27 @@ noDate: true
 
 [ice100: Intermediate Representation](https://ice1000.org)
 
-真正的大佬，大一，Jetbrains 吹，多语言开发者
+大佬，
 
-说起来我的 Kotlin 也是跟他学的，真要论起来我感觉我可以叫他老师
+说起来我的 Kotlin 也是跟他学的，真要论起来我感觉我可以叫他老师。
 
-巨强，打不过
+博客中有很多值得学习的文章，还有很多被删除的文章可以从知乎找到。
 
 <hr/>
 
 [JadMax](https://jadmax.github.io)
 
-17 班真正的巨佬，他另外一个网名是 AbelongstoA
-
-Unity3D 开发者，不过博客基本是空的(已被 Base64 编码)
+高中时期的好友，Unity 开发者
 
 <hr/>
 
 
 [后宫学长](https://haremu.com)
 
-前端开发者、社畜、死宅
-
-没了
+前端开发者、强
 
 <hr/>
 
-[YooMo:啊啊啊啊啊啊啊啊啊啊啊啊啊咕咕咕](https://yoomo.github.io/)
-
-我们学校 4 班的一个小胖子，魔鬼，*鸽子精*一位，同时是位语文 dalao
-
-个性稍微有点恶劣
-
-特别皮，我舍友被他制裁的巨惨
-
-可能是我唯一能打过的
-<hr/>
-
-[絢香的羽毛](https://oao.moe/)
+[絢香的羽毛](https://siyuanlau.github.io)
 
 这个人离去了....
