@@ -26,6 +26,6 @@ noDate: true
 
 <hr/>
 
-[絢香的羽毛](https://siyuanlau.github.io)
+[絢香的羽毛](https://siyuanlau.github.io/oaomoemirror/oao.moe/index.html)
 
 这个人离去了....

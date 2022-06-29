@@ -1,0 +1,376 @@
+pre,
+code {
+  font-family: "Fira Code", "Noto Mono", "Source Code Pro", "courier new", "微软雅黑", "Input Mono",
+    "PT Mono", Consolas, Monaco, Menlo, monospace;
+  font-weight: normal;
+}
+
+code {
+  padding: 2px;
+  border-radius: 2px;
+  color: @color-pink;
+}
+
+pre {
+  padding: 10px;
+  code {
+    padding: 10px;
+  }
+}
+
+.highlight {
+  display: block;
+  overflow-x: auto;
+  color: #555;
+  font-size: 14px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.15);
+  background-color: @bg-code;
+  overflow-y: hidden;
+  margin: 20px 0;
+  position: relative;
+  table {
+    margin: 0 !important;
+    border: none !important;
+    position: relative;
+    tr {
+      border: none !important;
+    }
+    td {
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0 6px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #e6e9ea;
+      content: "Code";
+      color: #708090;
+      height: 28px;
+    }
+  }
+
+  pre,
+  code {
+    background-color: @bg-code;
+  }
+
+  .line {
+    height: 20px;
+    line-height: 20px;
+  }
+  .gutter {
+    pre {
+      padding: 10px;
+      color: #869194;
+      background-color: #eff2f3;
+      text-align: center;
+      overflow: hidden;
+    }
+  }
+  .code {
+    font-size: @code-size;
+    pre {
+      padding: 38px 10px 10px;
+    }
+  }
+  .comment,
+  .meta {
+    color: #b3b3b3;
+  }
+  .string,
+  .value,
+  .variable,
+  .template-variable,
+  .strong,
+  .emphasis,
+  .quote,
+  .inheritance,
+  .ruby .symbol,
+  .xml .cdata {
+    color: @site-color;
+  }
+  .keyword,
+  .selector-tag,
+  .type,
+  .javascript .function {
+    color: #e96900;
+  }
+  .preprocessor,
+  .built_in,
+  .params,
+  .constant,
+  .symbol,
+  .bullet,
+  .attribute,
+  .css .hexcolor {
+    color: @site-color;
+  }
+  .number,
+  .literal {
+    color: #ae81ff;
+  }
+  .section,
+  .header,
+  .name,
+  .function,
+  .python .decorator,
+  .python .title,
+  .ruby .function .title,
+  .ruby .title .keyword,
+  .perl .sub,
+  .javascript .title,
+  .coffeescript .title {
+    color: #525252;
+  }
+  .tag,
+  .regexp {
+    color: #2973b7;
+  }
+  .title,
+  .attr,
+  .selector-id,
+  .selector-class,
+  .selector-attr,
+  .selector-pseudo,
+  .ruby .constant,
+  .xml .tag .title,
+  .xml .pi,
+  .xml .doctype,
+  .html .doctype,
+  .css .id,
+  .css .pseudo,
+  .class,
+  .ruby .class .title {
+    color: #2973b7;
+  }
+  .css .code .attribute {
+    color: #e96900;
+  }
+  .css .class {
+    color: #525252;
+  }
+  .tag .attribute {
+    color: #e96900;
+  }
+  .addition {
+    color: #55a532;
+    background-color: #eaffea;
+  }
+  .deletion {
+    color: #bd2c00;
+    background-color: #ffecec;
+  }
+  .link {
+    text-decoration: underline;
+  }
+  .function {
+    .keyword {
+      color: #0092db;
+    }
+    .params {
+      color: #808080;
+    }
+    .title {
+      color: #525252;
+      font-weight: 500;
+    }
+  }
+}
+.highlight {
+  &.html > table::after {
+    content: "HTML";
+  }
+  &.html > figcaption > span::after {
+    content: " · HTML";
+  }
+  &.html figcaption + table::after {
+    display: none;
+  }
+  &.javascript > table::after {
+    content: "JavaScript";
+  }
+  &.javascript > figcaption > span::after {
+    content: " · JavaScript";
+  }
+  &.javascript figcaption + table::after {
+    display: none;
+  }
+  &.bash > table::after {
+    content: "Bash";
+  }
+  &.bash > figcaption > span::after {
+    content: " · Bash";
+  }
+  &.bash figcaption + table::after {
+    display: none;
+  }
+  &.css > table::after {
+    content: "CSS";
+  }
+  &.css > figcaption > span::after {
+    content: " · CSS";
+  }
+  &.css figcaption + table::after {
+    display: none;
+  }
+  &.scss > table::after {
+    content: "Scss";
+  }
+  &.scss > figcaption > span::after {
+    content: " · Scss";
+  }
+  &.scss figcaption + table::after {
+    display: none;
+  }
+  &.java > table::after {
+    content: "Java";
+  }
+  &.java > figcaption > span::after {
+    content: " · Java";
+  }
+  &.java figcaption + table::after {
+    display: none;
+  }
+  &.xml > table::after {
+    content: "XML";
+  }
+  &.xml > figcaption > span::after {
+    content: " · XML";
+  }
+  &.xml figcaption + table::after {
+    display: none;
+  }
+  &.python > table::after {
+    content: "Python";
+  }
+  &.python > figcaption > span::after {
+    content: " · Python";
+  }
+  &.python figcaption + table::after {
+    display: none;
+  }
+  &.javascripton > table::after {
+    content: "JSON";
+  }
+  &.javascripton > figcaption > span::after {
+    content: " · JSON";
+  }
+  &.javascripton figcaption + table::after {
+    display: none;
+  }
+  &.swift > table::after {
+    content: "Swift";
+  }
+  &.swift > figcaption > span::after {
+    content: " · Swift";
+  }
+  &.swift figcaption + table::after {
+    display: none;
+  }
+  &.ruby > table::after {
+    content: "Ruby";
+  }
+  &.ruby > figcaption > span::after {
+    content: " · Ruby";
+  }
+  &.ruby figcaption + table::after {
+    display: none;
+  }
+  &.php > table::after {
+    content: "PHP";
+  }
+  &.php > figcaption > span::after {
+    content: " · PHP";
+  }
+  &.php figcaption + table::after {
+    display: none;
+  }
+  &.c > table::after {
+    content: "C";
+  }
+  &.c > figcaption > span::after {
+    content: " · C";
+  }
+  &.c figcaption + table::after {
+    display: none;
+  }
+  &.cpp > table::after {
+    content: "C++";
+  }
+  &.cpp > figcaption > span::after {
+    content: " · C++";
+  }
+  &.cpp figcaption + table::after {
+    display: none;
+  }
+  &.scheme > table::after {
+    content: "Scheme";
+  }
+  &.scheme > figcaption > span::after {
+    content: " · Scheme";
+  }
+  &.scheme figcaption + table::after {
+    display: none;
+  }
+  &.objectivec > table::after {
+    content: "Objective-C";
+  }
+  &.objectivec > figcaption > span::after {
+    content: " · Objective-C";
+  }
+  &.objectivec figcaption + table::after {
+    display: none;
+  }
+  &.yml > table::after {
+    content: "YAML";
+  }
+  &.yml > figcaption > span::after {
+    content: " · YAML";
+  }
+  &.yml figcaption + table::after {
+    display: none;
+  }
+  &.stylus > table::after {
+    content: "Stylus";
+  }
+  &.stylus > figcaption > span::after {
+    content: " · Stylus";
+  }
+  &.stylus figcaption + table::after {
+    display: none;
+  }
+  &.sql > table::after {
+    content: "SQL";
+  }
+  &.sql > figcaption > span::after {
+    content: " · SQL";
+  }
+  &.sql figcaption + table::after {
+    display: none;
+  }
+  &.http > table::after {
+    content: "HTTP";
+  }
+  &.http > figcaption > span::after {
+    content: " · HTTP";
+  }
+  &.http figcaption + table::after {
+    display: none;
+  }
+  &.go > table::after {
+    content: "Go";
+  }
+  &.go > figcaption > span::after {
+    content: " · Go";
+  }
+  &.go figcaption + table::after {
+    display: none;
+  }
+}

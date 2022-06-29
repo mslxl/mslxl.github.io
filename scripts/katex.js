@@ -7,7 +7,7 @@ const util = require('hexo-util');
 
 hexo.config.katex = Object.assign({
     enable: true,
-    css: 'https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css'
+    css: '/assets/css/katex.min.css'
 }, hexo.config.katex);
 
 if (hexo.config.katex.enable) {

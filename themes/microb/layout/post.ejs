@@ -1,0 +1,37 @@
+<article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      <%=page.title || theme.default_post_title || "Untitled" %>
+    </h1>
+    <% if (theme.show_date && page.date) { %>
+    <time class="time" datetime="<%=date_xml(page.date)%>">
+      <%=date(page.date)%>
+    </time>
+    <% } %>
+    <hr>
+  </header>
+  <div class="post-content">
+    <%-page.content%>
+
+    <!-- 显示photos -->
+    <% if (page.photos !== undefined && page.photos.length > 0) { %>
+    <div class="photos">
+      <% page.photos.forEach(function(url) { %>
+      <div class="photo">
+        <%- image_tag(url) %>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+  </div>
+  <div class="post-tags">
+    <%- list_tags(page.tags, {
+            show_count: false,
+            class: 'article-tag'
+          }) %>
+  </div>
+</article>
+<%- partial('partials/prenext') %>
+<%- partial('partials/disqus') %>
+<%- partial('partials/toc') %>

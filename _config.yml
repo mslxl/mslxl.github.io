@@ -90,7 +90,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: melody
+theme: microb
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -139,41 +139,3 @@ image_minifier:
 search:
   path: search.json
   field: posts
-
-# Live2D
-## https://github.com/EYHN/hexo-helper-live2d
-live2d:
-  enable: true
-  scriptFrom: local
-  pluginRootPath: assets/live2d/
-  pluginJsPath: lib/
-  pluginModelPath: model/
-  tagMode: false
-  debug: false
-  model:
-    scale: 1
-    use: /assets/live2d/model/pio/model.json
-  mobile:
-    show: false
-    scale: 0.5
-  display:
-    position: right
-    hOffset: 60
-    #hOffset: 0
-    vOffset: -130
-    #vOffset: 0
-    superSample: 2
-    width: 270
-    height: 510
-  react:
-    opacityDefault: 1
-    opacityOnHover: 1
-  dialog:
-    enable: true
-    hitokoto: true
-
-pangu:
-  enable: false
-
-katex:
-  enable: true
