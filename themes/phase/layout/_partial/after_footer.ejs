@@ -1,0 +1,27 @@
+<%- js('js/jquery-3.4.1.min.js') %>
+<%- js('js/jquery.imagesloaded.min.js') %>
+<%- js('js/gallery.js') %>
+
+<% if (config.disqus_shortname){ %>
+<script>
+var disqus_shortname = '<%= config.disqus_shortname %>';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = 'https://' + disqus_shortname + '.disqus.com/<% if (page.comments){ %>embed.js<% } else { %>count.js<% } %>';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+<% } %>
+
+<% if (theme.fancybox){ %>
+<%- js('fancybox/jquery.fancybox.min.js') %>
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+<% } %>
+
+<%- partial('phasebeam') %>
