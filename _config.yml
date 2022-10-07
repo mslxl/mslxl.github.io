@@ -10,7 +10,6 @@ keywords:
   - 笔记
   - 编程
   - 学习
-  - 日记
   - Blog
   - 博客
   - Mslxl
@@ -90,18 +89,12 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: microb
+theme: phase
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
-
-# Sitemap
-sitemap: 
-  path: sitemap.xml
-baidusitemap: 
-  path: baidusitemap.xml
 
 # abbrlink config
 abbrlink:
