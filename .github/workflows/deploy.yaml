@@ -44,6 +44,7 @@ jobs:
       - name: Building
         run: |
           yarn
+          yarn clean
           yarn build
           
       - name: Deploy to gh-pages
