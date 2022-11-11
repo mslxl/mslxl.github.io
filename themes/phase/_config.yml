@@ -1,6 +1,7 @@
 menu:
   Home: /
   Archives: /archives
+  Links: /links
 
 addthis:
   enable: true

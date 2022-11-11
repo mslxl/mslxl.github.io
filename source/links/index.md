@@ -1,31 +1,35 @@
 ---
 title: Links
 noDate: true
+abbrlink: 10438e1c
 ---
 
-[ice100: Intermediate Representation](https://ice1000.org)
+<link rel="stylesheet" href="/css/style.css">
 
-大佬，
+<style>
 
-说起来我的 Kotlin 也是跟他学的，真要论起来我感觉我可以叫他老师。
+</style>
 
-博客中有很多值得学习的文章，还有很多被删除的文章可以从知乎找到。
+## <img src="https://www.helloimg.com/images/2022/03/23/R1SwPb.jpg" width=16/> [Yrh](https://myyrh.com/)
 
-<hr/>
+![大佬！是我校大佬！](/assets/meme/lao.png)
 
-[JadMax](https://jadmax.github.io)
+## <img src="http://ice1000.org/assets/favicon.ico" width=16/> [ice100: Intermediate Representation](https://ice1000.org)
+
+佬，
+
+最初我的 Kotlin 也是跟他学的，真要论起来我感觉我可以叫他老师
+
+最近似乎是在 PLT 领域深耕
+
+博客中有很多值得学习的文章，还有很多被删除的文章可以从知乎找到
+
+
+## [JadMax](https://jadmax.github.io)
 
 高中时期的好友，Unity 开发者
 
-<hr/>
 
-
-[后宫学长](https://haremu.com)
-
-前端开发者、强
-
-<hr/>
-
-[絢香的羽毛](https://siyuanlau.github.io/oaomoemirror/oao.moe/index.html)
+## [絢香的羽毛](https://siyuanlau.github.io/oaomoemirror/oao.moe/index.html)
 
 这个人离去了....
