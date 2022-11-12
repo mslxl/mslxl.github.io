@@ -30,6 +30,6 @@ abbrlink: 10438e1c
 高中时期的好友，Unity 开发者
 
 
-## [絢香的羽毛](https://siyuanlau.github.io/oaomoemirror/oao.moe/index.html)
+## [絢香的羽毛](https://zhangyubaka.github.io/)
 
 这个人离去了....
