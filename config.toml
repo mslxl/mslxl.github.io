@@ -1,0 +1,4 @@
+baseURL = 'https://blog.mslxl.com'
+languageCode = 'zh-cn'
+title = "Mslxl's Blog"
+theme = 'minima'

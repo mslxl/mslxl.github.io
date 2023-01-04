@@ -1,0 +1,3 @@
+[submodule "themes/minima"]
+	path = themes/minima
+	url = git@github.com:mivinci/hugo-theme-minima.git
