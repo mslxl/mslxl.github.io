@@ -1,0 +1,85 @@
+---
+layout: post
+title: 在 Hexo 中使用 KaTex 静态渲染数学公式
+tags:
+  - Misc
+  - Katex
+  - Hexo
+abbrlink: d330a755
+mermaid: true
+date: 2018-10-27 00:00:00
+---
+
+{% katex %}
+c = \pm\sqrt{a^2 + b^2}
+{% endkatex %}
+
+{% katex %}
+\sin\theta \qquad \cos\theta \qquad \tan\theta \qquad \cot \theta
+{% endkatex %}
+
+{% katex %}
+\lg ^{a*b} = \lg ^a + \lg ^b
+\\
+\ln ^{e} = 1
+\\
+\log _{a}^{1} = 0
+{% endkatex %}
+
+## 静态渲染
+
+其实我本来是想用 MathJax 的，结果发现了 {%katexline \KaTeX %} ,根据它的介绍 {%katexline \KaTeX %} 提供了一套不依赖于浏览器的 API ，这就为静态渲染提供了可能，在使用的时候只需要引入对应的 CSS 就可以正常显示，不需要引入新的 JavaScript 代码。
+
+结合 Hexo 的文档，就可以写出下面的代码
+
+
+```javascript
+'use strict';
+/* global hexo */
+
+const log = hexo.log || console;
+const katex = require('katex');
+const util = require('hexo-util');
+
+hexo.config.katex = Object.assign({
+    enable: true,
+    css: 'https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css'
+}, hexo.config.katex);
+
+if (hexo.config.katex.enable) {
+    hexo.extend.tag.register('katex', function (args, content) {
+        return katex.renderToString(content, {
+            displayMode: true,
+            throwOnError: false
+        });
+    }, { ends: true });
+
+    hexo.extend.tag.register('katexline', function (args) {
+        return katex.renderToString(args[0], {
+            throwOnError: false
+        });
+    });
+
+    hexo.extend.filter.register('after_post_render', function (data) {
+        if (data.katex) {
+            data.content = util.htmlTag('link', {
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: hexo.config.katex.css
+            }) + data.content;
+        }
+        return data;
+    });
+}
+```
+
+使用 katex tag 就可以做到下面的效果了
+```
+{％ katex %}
+c = \pm\sqrt{a^2 + b^2}
+{％ endkatex %}
+```
+
+{% katex %}
+c = \pm\sqrt{a^2 + b^2}
+{% endkatex %}

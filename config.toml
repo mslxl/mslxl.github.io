@@ -1,4 +1,66 @@
 baseURL = 'https://blog.mslxl.com'
 languageCode = 'zh-cn'
 title = "Mslxl's Blog"
+copyright= '© 2023 X'
 theme = 'minima'
+
+
+paginate = 12
+[author]
+name = "Mslxl"
+status = ">Living in Gensokyo"
+switch = ["🌚", "🌝"]
+description = "Here is Mslxl, a Chinese student who just programing for interest.\n\n Mail me with `(λx.λy.λz. y@z.x) com i mslxl`"
+
+[params]
+greet= 'Hi! There👋'
+subtitle= 'Made in heaven'
+defaultTheme= 'system'
+displayDate = true
+displayDescription = true
+selectable = true
+
+[[params.social]]
+name = 'github'
+url = 'https://github.com/mslxl'
+
+[[params.social]]
+name = 'rss'
+url = '/index.xml'
+
+[params.math]
+enable = true
+provider = 'katex'
+
+[params.diagram]
+enable = true
+provider = 'mermaid'
+
+[markup]  
+[markup.goldmark]    
+[markup.goldmark.renderer]     
+unsafe = true
+[markup.highlight]
+lineNos = true
+noClasses = false
+
+[menu]
+[[menu.main]]
+identifier = '/'
+name = 'Home'
+weight = 1
+[[menu.main]]
+identifier = 'tags'
+name = 'Tags'
+weight = 2
+
+[[menu.main]]
+identifier = 'about'
+name = 'Links'
+weight = 3
+
+[[menu.main]]
+identifier = 'links'
+name = 'Links'
+weight = 4
+
