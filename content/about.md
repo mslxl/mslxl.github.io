@@ -1,6 +1,4 @@
 ---
-type: page
-layout: static
 title: About
 abbrlink: about
 noDate: true

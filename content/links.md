@@ -1,6 +1,4 @@
 ---
-type: page
-layout: static
 title: Links
 noDate: true
 abbrlink: 10438e1c

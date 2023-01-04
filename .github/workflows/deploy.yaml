@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install package 
         run: |
           sudo apt update
           sudo apt install -y git hugo
-
-      - uses: actions/checkout@v2
+          git submodule update --init
 
       - name: Building
         run: |

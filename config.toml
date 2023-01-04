@@ -9,12 +9,12 @@ paginate = 12
 [author]
 name = "Mslxl"
 status = ">Living in Gensokyo"
-switch = ["🌚", "🌝"]
 description = "Here is Mslxl, a Chinese student who just programing for interest.\n\n Mail me with `(λx.λy.λz. y@z.x) com i mslxl`"
 
 [params]
 greet= 'Hi! There👋'
 subtitle= 'Made in heaven'
+switch = ["🌚", "🌝"]
 defaultTheme= 'system'
 displayDate = true
 displayDescription = true
