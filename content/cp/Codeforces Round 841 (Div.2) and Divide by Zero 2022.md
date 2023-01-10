@@ -3,6 +3,8 @@ title: Codeforces Round 841 (Div. 2) and Divide by Zero 2022 - ABCD
 abbrlink: 682df6fc
 date: 2022-12-31 18:00:11
 tags:
+  - Competitive Programming
+  - Codeforces
 ---
 
 [Codeforces Round #841 (Div. 2) and Divide by Zero 2022](https://codeforces.com/contest/1731)
