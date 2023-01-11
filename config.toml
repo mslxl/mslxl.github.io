@@ -14,7 +14,7 @@ description = "Here is Mslxl, a Chinese student who just programing for interest
 [params]
 greet= 'Hi! There👋'
 subtitle= 'Made in heaven'
-switch = ["🌚", "🌝"]
+switch = ["🌙", "☀️"]
 defaultTheme= 'system'
 displayDate = true
 displayDescription = true

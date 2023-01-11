@@ -7,6 +7,8 @@ tags:
   - ICPC
   - 2020
   - 沈阳
+  - 训练
+  - 题解
 ---
 
 [The 2020 ICPC Asia Shenyang Regional Programming Contest - Codeforces Gym](https://codeforces.com/gym/103202)
@@ -214,6 +216,103 @@ int main(){
     return 0;
 }
 ```
+
+# D - Journey to Un'Goro
+> 路线中仅包含红蓝两种颜色。输入一个整数，构造一个这样的路线，使的从 $i$ 出发到达$j$经过的红色数量为奇数的路径的数量最大。
+> 
+> $1 \le i \le j \le n$
+>
+> 输出满足要求的$(i,j)$的最大数量和这些路线。当路线数量大于100个时，仅输出字典序小的前100个。
+
+赛时没做出来
+
+在此介绍一篇神答案 [打表+找规律](https://blog.csdn.net/dyy7777777/article/details/119083417)
+
+将 `r` 设为 $1$，`b` 设为 $0$。那么子串中 $r$ 的数量就是前缀和之差。
+
+考虑什么时候 $r$ 的数量为奇数：显而易见，当前缀和数组中两个元素的奇偶性不同时，其表示的区间才是奇数。记奇数的个数为 $O$，偶数的个数为 $E$。那么在这段区间中，
+可以选择任何一个前缀和为奇数的元素和一个前缀和为偶数的元素来构成一个其区间为奇数的子区间。显而易见，这种符合条件的子区间的个数应该是 $O\times E$ 个。
+
+根据高中学的某个忘掉名字的不等式，当 $O = E$时，$O\times E$取最大值，也就是 $O$ 和 $E$ 各取一半的时候。
+此时 $O = \lceil \frac{n+1}{2} \rceil$，$E=\lfloor \frac{n+1}{2} \rfloor$（加一是为了考虑前缀和要留出 $i$ = 0 的空间）
+
+根据上述内容，我们一顿爆搜就可以了，当$\max(O,E) \gt \lceil \frac{n+1}{2} \rceil$ 时直接剪掉即可。
+
+在实际搜索中，我们没必要记录前缀和，只需要维护当前的奇偶状态即可。
+
+```cpp
+// clang-format off
+#include <bits/stdc++.h> 
+using ll = long long; using ul = unsigned long long; using ld = long double;
+template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
+void solve(const std::size_t testcase);
+#define rep(NAME, MAX) for(decltype(MAX) NAME = 0; NAME < MAX; NAME++)
+#define rep1(NAME, MAX) for(decltype(MAX) NAME = 1; NAME <= MAX; NAME++)
+#define repv0(NAME, START) for(decltype(START) NAME = START; NAME >= 0; NAME--)
+#define repv1(NAME, START) for(decltype(START) NAME = START; NAME >= 1; NAME--)
+int main() {
+  std::size_t t = 1;
+  // read(t);
+  // std::ios::sync_with_stdio(false); std::cin.tie(nullptr); std::cout.tie(nullptr);
+  rep1(i, t) solve(t);
+  return 0;
+}
+template <class A, class B> std::ostream &operator<<(std::ostream &s, std::pair<A, B> const &a) { return s << "(" << std::get<0>(a) << ", " << std::get<1>(a) << ")"; } template <size_t n, typename... T> typename std::enable_if<(n >= sizeof...(T))>::type print_tuple(std::ostream &, const std::tuple<T...> &) {} template <size_t n, typename... T> typename std::enable_if<(n < sizeof...(T))>::type print_tuple(std::ostream &os, const std::tuple<T...> &tup) { if (n != 0) os << ", "; os << std::get<n>(tup); print_tuple<n + 1>(os, tup); } template <typename... T> std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup) { os << "("; print_tuple<0>(os, tup); return os << ")"; } template <class T> std::ostream &print_collection(std::ostream &s, T const &a) { s << '['; for (auto it = std::begin(a); it != std::end(a); ++it) { s << *it; if (it != std::prev(end(a))) s << ", "; } return s << ']'; } template <class T, class U> std::ostream &operator<<(std::ostream &s, std::map<T, U> const &a) { return print_collection(s, a); } template <class T> std::ostream &operator<<(std::ostream &s, std::set<T> const &a) { return print_collection(s, a); } template <class T> std::ostream &operator<<(std::ostream &s, std::vector<T> const &a) { return print_collection(s, a); } void __debug_out() { std::cerr << std::endl; } template <typename T, class = typename std::enable_if<std::is_pointer<T>::value>::type> void __debug_out(T beg, T end) { std::cerr << '['; for (auto it = beg; it != end; it++) { std::cerr << *it; if (it != std::prev(end)) { std::cerr << ", "; } } std::cerr << ']' << std::endl; } template <typename H, typename... Tail> void __debug_out(H h, Tail... T) { std::cerr << " " << h; __debug_out(T...); }
+#ifndef ONLINE_JUDGE
+#define debug_do if(true)
+#else
+#define debug_do if(false)
+#endif
+#define debug(...) debug_do std::cerr << "[" << #__VA_ARGS__ << "]:", __debug_out(__VA_ARGS__)
+// clang-format on
+#define int ll
+
+const ll maxn = 1e5 + 17;
+ll n;
+ll O, E;
+char s[maxn];
+
+int ans_counter = 0;
+
+void dfs(int pos, int cnt_odd, int cnt_even, bool cur_odd) {
+  if (std::max(cnt_odd, cnt_even) > O)
+    return;
+  if (pos == n) {
+    s[n] = 0;
+    std::cout << s << std::endl;
+    if (++ans_counter >= 100) {
+      std::exit(0);
+    }
+    return;
+  }
+
+  s[pos] = 'b';
+  if (cur_odd) {
+    dfs(pos + 1, cnt_odd + 1, cnt_even, cur_odd);
+  } else {
+    dfs(pos + 1, cnt_odd, cnt_even + 1, cur_odd);
+  }
+  s[pos] = 'r';
+  if (cur_odd) {
+    dfs(pos + 1, cnt_odd, cnt_even + 1, !cur_odd);
+  } else {
+    dfs(pos + 1, cnt_odd + 1, cnt_even, !cur_odd);
+  }
+}
+
+void solve(const std::size_t testcase) {
+  read(n);
+  O = std::ceil((1.0l * n + 1) / 2);
+  E = std::floor((1.0l * n + 1) / 2);
+
+  assert(O==(n+2)/2);
+  std::cout << (O * E) << "\n";
+
+  dfs(0, 0, 1, false);
+}
+```
+
+
 
 # F - Kobolds and Catacombs
 
