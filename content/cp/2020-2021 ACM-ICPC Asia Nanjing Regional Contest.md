@@ -2,6 +2,13 @@
 title: "2020-2021 ACM ICPC Asia Nanjing Regional Contest"
 date: 2023-01-14T18:08:26+08:00
 draft: false
+tags:
+tags:
+  - Competitive Programming
+  - ICPC
+  - 南京
+  - 训练
+  - 题解
 ---
 
 <table>

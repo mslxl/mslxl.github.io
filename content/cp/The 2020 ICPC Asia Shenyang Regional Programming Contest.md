@@ -5,7 +5,6 @@ draft: false
 tags:
   - Competitive Programming
   - ICPC
-  - 2020
   - 沈阳
   - 训练
   - 题解
