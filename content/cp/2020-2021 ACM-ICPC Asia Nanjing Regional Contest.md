@@ -6,8 +6,6 @@ tags:
 tags:
   - Competitive Programming
   - ICPC
-  - 南京
-  - 训练
   - 题解
 ---
 

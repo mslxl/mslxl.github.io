@@ -5,8 +5,6 @@ draft: false
 tags:
   - Competitive Programming
   - ICPC
-  - 沈阳
-  - 训练
   - 题解
 ---
 

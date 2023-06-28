@@ -1,8 +1,6 @@
 ---
 title: Render mermaid diagrams by puppeteer in Hexo
 tags:
-  - Misc
-  - Mermaid
   - Hexo
 mermaid: true
 abbrlink: ac3de20f

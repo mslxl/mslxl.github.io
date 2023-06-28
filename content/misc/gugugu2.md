@@ -1,8 +1,5 @@
 ---
 title: 论鸽子
-tags:
-  - 鸽子
-  - 脑洞
 abbrlink: e64e0e7e
 date: 2018-10-06 00:00:00
 ---

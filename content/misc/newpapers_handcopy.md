@@ -1,8 +1,7 @@
 ---
 title: 谈谈手抄报
 tags:
-  - Diary
-  - Eyewash
+  - Daily
 abbrlink: '3e694798'
 date: 2018-10-15 00:00:00
 ---

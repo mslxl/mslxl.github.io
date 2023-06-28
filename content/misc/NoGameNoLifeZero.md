@@ -2,8 +2,7 @@
 title: No Game No Life Zero
 date: 2018-08-21
 tags:
-  - Movie
-  - Eyewash
+  - Daily
 abbrlink: 405a5b08
 ---
 

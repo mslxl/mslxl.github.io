@@ -2,8 +2,6 @@
 layout: post
 title: 在 Hexo 中使用 KaTex 静态渲染数学公式
 tags:
-  - Misc
-  - Katex
   - Hexo
 abbrlink: d330a755
 mermaid: true
