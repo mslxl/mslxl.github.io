@@ -1,7 +1,6 @@
 ---
 title: Links
-noDate: true
-abbrlink: 10438e1c
+searchHidden: true
 ---
 
 <link rel="stylesheet" href="/css/style.css">
@@ -10,26 +9,33 @@ abbrlink: 10438e1c
   main h2{
     display: flex;
     border-top: 1px solid gray;
-    margin-top: 32px !important;
+    padding-top: 32px !important;
   }
   main h2 img{
-    width: 32px;
     height: 32px;
     padding-right: 16px;
+    margin: 0 !important;
   }
-
+  main h2 a{
+    line-height: 32px;
+    height: 32px;
+    text-decoration: none !important;
+    box-shadow: none !important;
+  }
   main table, main tr, main td, main tbody{
     overflow: hidden;
     border: none !important;
   }
 </style>
 
-## <img src="https://myyrh.com/images/logo.svg" width=16/> [Yrh's Blog](https://myyrh.com/)
+## <img src="https://myyrh.com/images/logo.svg" /> [Yrh's Blog](https://myyrh.com/)
 
 <table>
 <tr>
 <td>
-两年半的 ACM 练习生, 2021 级 ACM 学社社长, 接触面特别广,什么都会. ~最关键的是有女朋友~
+
+两年半的 ACM 练习生, 2021 级 ACM 学社社长, 接触面特别广,什么都会. ~~最关键的是有女朋友~~
+
 </td>
 
 <td>
@@ -40,17 +46,17 @@ abbrlink: 10438e1c
 </table>
 
 
-## <img src="http://galong.org/favicon.ico" width=16/> [Galong's Blog](http://galong.org)
+## <img src="http://galong.org/favicon.ico"/> [Galong's Blog](http://galong.org)
 
 我校 SDCPC2023 银牌队队长, 创造了我校省赛最好成绩的人员之一. 在学习人工智能 CV
 
 据本人声称未来可能会写点算法题解或者 Transformer 内容
 
-## <img src="http://sdufeacm.club/favicon.ico" width=16/> [SDUFE ACM: 山东财经大学 ACM 学社](https://sdufeacm.club)
+## <img src="http://sdufeacm.club/favicon.ico"/> [SDUFE ACM: 山东财经大学 ACM 学社](https://sdufeacm.club)
 
 快来看快来看 nanodesu
 
-## <img src="http://ice1000.org/assets/favicon.ico" width=16/> [ice100: Intermediate Representation](https://ice1000.org)
+## <img src="http://ice1000.org/assets/favicon.ico"/> [ice100: Intermediate Representation](https://ice1000.org)
 
 佬，
 

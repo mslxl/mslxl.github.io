@@ -4,8 +4,6 @@ date: 2023-01-18T14:54:04+08:00
 draft: false
 tags:
   - Competitive Programming
-  - 训练
-  - 树上DP
 ---
 
 前几天基本每场都遇到树形DP，趁此熟悉抓紧练练

@@ -1,5 +1,6 @@
 ---
 title: About
+searchHidden: true
 ---
 <blockquote>
 <center>
@@ -31,7 +32,7 @@ title: About
 </tr>
 </table>
 </center>
-</blockquote>
+</blockquote> 
 
 
 
