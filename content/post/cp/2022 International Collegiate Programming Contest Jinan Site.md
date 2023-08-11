@@ -9,7 +9,7 @@ tags:
 
 [Gym-104076](https://codeforces.com/gym/104076)
 
-# A - Tower
+## A - Tower
 
 > 有 $n$ 个塔, 每个塔的高度为 $a_i$. 首先先移除其中 $m$ 个塔, 然后可以进行以下操作:
 >
@@ -96,7 +96,7 @@ void solve(const std::size_t testcase) {
 }
 ```
 
-# E - Identical Parity
+## E - Identical Parity
 > 定义序列的 value 为该序列所有数字的和
 >
 > 判断是否存在长度为 $n$ 的排列, 他们所有长度为 $k$ 的子段的 value 具有相同的奇偶性.
