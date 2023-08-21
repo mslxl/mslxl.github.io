@@ -1,5 +1,5 @@
 ---
-title: "Educational Codeforces Round 153 (Rated for Div. 2) A-E"
+title: "Educational Codeforces Round 153 A-E (博弈论 DP 拆点)"
 date: 2023-08-18T23:18:30+08:00
 draft: false
 tags:

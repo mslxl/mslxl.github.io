@@ -82,16 +82,16 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 <center>
 
-![](/assets/cp/2020njd1.png)
+![](2020njd1.png)
 
-![](/assets/cp/2020njd2.png)
+![](2020njd2.png)
 </center>
 
 太难看了，我们重新整理一下
 
 <center>
 
-![](/assets/cp/2020njd3.png)
+![](2020njd3.png)
 
 </center>
 
@@ -100,7 +100,7 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 <center>
 
-![](/assets/cp/2020njd4.png)
+![](2020njd4.png)
 
 
 </center>
@@ -112,7 +112,7 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 <center>
 
-![](/assets/cp/2020njd5.png)
+![](2020njd5.png)
 
 
 </center>
@@ -125,7 +125,7 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 <center>
 
 
-![](/assets/cp/2020njd6.png)
+![](2020njd6.png)
 
 
 </center>
@@ -135,7 +135,7 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 <center>
 
-![](/assets/cp/2020njd4.png)
+![](2020njd4.png)
 
 
 </center>
@@ -145,7 +145,7 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 <center>
 
-![](/assets/cp/2020njd7.png)
+![](2020njd7.png)
 
 
 </center>

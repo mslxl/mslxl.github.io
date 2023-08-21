@@ -22,7 +22,7 @@ tags:
 
 有关 Thompson's Construction 构造可以参考 Comp412 课件。
 
-![Thompson's Construction](/assets/cp/2.png)
+![Thompson's Construction](2.png)
 
 > - You will be tempted to take shortcuts, such as leaving out some of the $\epsilon$ transitions
 > - Do not do it. Memorize these four patterns. They will keep you out of trouble.
@@ -321,7 +321,7 @@ void solve(const std::size_t testcase) {
 
 ~~能卡着时间过~~
 
-![result](/assets/cp/3.png)
+![result](3.png)
 
 ```cpp
 #include<bits/stdc++.h>
@@ -538,7 +538,7 @@ int main(){
 >
 > 二元分类也存在误判。它可以将实际为 `positive` 的实例判定为 `negative`，这种情况称为 `false negative`；也可以将实际为 `negative` 的实例判断为 `positive`,这种情况称为 `false negative`
 >
-> ![](/assets/cp/5.png)
+> ![](5.png)
 >
 > 现在题目给出一个数据集和一个分类器。定义 true positive rate(TPR) 和 false positive rate(FPR) 为以下内容
 >
@@ -552,7 +552,7 @@ int main(){
 >
 > 例如现在有三个测试数据，当阈值取值为$\theta=30$时，有3个 TP, 2个 FP,2个TN，1个 FN。
 > 因此，此时的 $TPR(30)=0.75$，$FPR(30)=0.5$。当 $\theta$变化时，我们能画出 ROC 曲线，并**直接计算出 AUC**。如图片1。
-> ![](/assets/cp/4.png)
+> ![](4.png)
 >
 > <hr/>
 >

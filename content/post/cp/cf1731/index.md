@@ -1,6 +1,5 @@
 ---
 title: Codeforces Round 841 (Div. 2) and Divide by Zero 2022 - ABCD
-abbrlink: 682df6fc
 date: 2022-12-31 18:00:11
 tags:
   - Competitive Programming
@@ -68,7 +67,7 @@ void solve(const std::size_t testcase) {
 
 首先根据 $a+b\ge 2\sqrt{ab}$，当 $a=b$时，$a*b$取最大，所以移动路线应该是这样的:
 
-![map](/assets/cp/1.png)
+![map](1.png)
 
 当我们走到$(1,1)$时,获得积分 $a_1 = 1 * 1$
 
