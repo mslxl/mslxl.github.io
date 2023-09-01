@@ -1,7 +1,10 @@
 ---
-title: "Harbour.Space Scholarship Contest 2023-2024 (Div. 1 + Div. 2) A-E 二进制拆分 线段树"
+title: "Harbour.Space Scholarship Contest 2023-2024 (Div. 1 + Div. 2) A-E 二进制拆分 组合数学"
 date: 2023-08-27T10:40:50+08:00
 draft: false
+tags:
+    - Competitive Programming
+    - Codeforces
 ---
 
 ## A.Increasing and Decreasing
@@ -366,14 +369,4 @@ void solve() {
 
   std::cout << (divide(s, 1) / n / n);
 }
-
-
 ```
-
-
-
-
-
-
-
-

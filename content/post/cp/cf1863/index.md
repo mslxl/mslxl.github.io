@@ -1,0 +1,304 @@
+---
+title: "Pinely Round 2 (Div. 1 + Div. 2) A-E"
+date: 2023-08-31T20:49:33+08:00
+draft: false
+tags:
+    - Codeforces
+    - Competitive Programming
+---
+
+## A. Channel
+
+> 有 $n$ 个人订阅了一个频道，当前在线 $a$ 人，收到了 $q$ 个上/下线通知
+> 
+> 上下线通知不包含上线的用户信息。在最开始的时候 Petya 发了一个视频，请判断是否所有的订阅用户都能看到这个视频
+
+`模拟`
+
+如果所有的人在同一时刻在线，那么所有用户都能看到
+
+如果在线人数和收到上线通知的次数和大于等于 $n$，则可能都能看见
+
+```cpp
+void solve() {
+  int n, a, q;
+  read(n, a, q);
+  std::string s;
+  std::cin >> s;
+  if(a == n){
+    std::cout << "YES";
+    return;
+  }
+  int online = a;
+  for(int i = 0; i < q; i++){
+    if(s[i] == '+'){
+      online++;
+    }else{
+      online--;
+    }
+    if(online == n){
+      std::cout << "YES";
+      return;
+    }
+  }
+  int pos = std::count(all(s), '+');
+  if(pos + a >= n){
+    std::cout << "MAYBE";
+    return;
+  }
+  std::cout << "NO";
+}
+```
+
+## B. Split Sort
+
+> 有 $n$ 个数组成一个排列 $p$，现在要通过特定操作进行排序
+> 
+> 每次只能选择一个数 $x \in p$，并将小于 $x$ 的数按照原来的相对顺序放在前面，大于等于原来的放在后面
+> 
+> 输出最小操作次数
+
+`思维` 
+
+**从小到大**选择数字$a_i$，如果$a_i > a_j$，且 $i < j$ ，则需要令 $x = a_i$ 进行操作
+
+用 $O(n)$ 的操作从头到尾扫一遍，即可获得答案   
+
+```cpp
+void solve() {
+    int n;
+    read(n);
+    V<int> s(n+1);
+    rep(i, n){
+        int v;
+        read(v);
+        s[v] = i;
+    }
+    int ans = 0;
+    for(int i = 2; i <= n; i++){
+        ans += (s[i] < s[i-1]);
+    }
+     std::cout << ans;
+}
+```
+
+## C. Mex Repetition
+
+> 给出一个序列 $a$，序列中的元素两两互不相同
+> 
+> 定义某操作为：从头到尾依次选择序列中的 $a_i$ ，并将 $a_i$ 替换为 $MEX(a_1, a_2, \ldots, a_n)$
+> 
+> 将这个操作重复 $k$ 次，输出最终结果 
+
+`MEX`
+
+~~玩过博弈论SG函数的应该都见过这个规律~~
+
+将 MEX 的结果放到序列结尾，那么每次操作都是对序列的旋转操作
+
+```cpp
+int mex(const V<int>& v){
+  std::set<int> vis(all(v));
+  for(int i = 0; ;i++){
+    if(!vis.count(i)) return i;
+  }
+}
+void solve() {
+  int n, k;
+  read(n, k);
+  k %= (n+1);
+  V<int> s(n);
+  reads(all(s));
+  s.pb(mex(s));
+  std::rotate(s.begin(), s.begin()+(n-k)+1, s.end());
+  rep(i, n){
+    std::cout << s[i] << " ";
+  }
+}
+```
+
+## D. Two-Colored Dominoes
+
+> 有 $n\times m$ 大小的一个单元格组成的板子，在板子上有一些牌，每个牌覆盖两个相邻的单元格，并且没有牌重叠
+> 
+> 对所有的牌进行上色，要求满足：
+> 
+> - 对于所有的牌，它所在的一个单元格被涂为黑色，另一个涂为白色
+> 
+> - 每一行中黑色单元格个个数等于白色的个数
+> 
+> - 每一列中黑色的个数等于白色的个数
+> 
+> 输出涂色方案，或者输出不可能(`-1`)
+
+`构造` `贪心`
+
+如果牌是横着放的，那么这一行中黑色和白色的个数都会+1，只需要考虑竖着的排的上色方案
+
+首先扫描每一行的U的数量，并为其分配颜色，在分配颜色时给下一行对应的 D 也分配一个相反的颜色
+
+然后看第二行，先统计出这一行中的  D 的颜色，然后再次分配 U 的颜色和下一行 D 的颜色，重复此过程
+
+对所有行都操作结束后，再对每一列也进行相同的操作
+
+```cpp
+void solve() {
+  cin >> n >> m;
+  V<std::string> mp(n);
+  for (auto &s : mp) cin >> s;
+  V<i64> row(n), col(m);
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      if (mp[i][j] == 'L') {
+        col[j]++;
+      }
+      if (mp[i][j] == 'U') {
+        row[i]++;
+      }
+    }
+  }
+  bool pos = true;
+  for (auto &i : row) {
+    if (i & 1) pos = false;
+    i /= 2;
+  }
+  for (auto &i : col) {
+    if (i & 1) pos = false;
+    i /=2;
+  }
+  if (!pos) {
+    cout << "-1\n";
+    return;
+  }
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      if (mp[i][j] == 'L') {
+        if (col[j]) {
+          mp[i][j] = 'W';
+          mp[i][j + 1] = 'B';
+          col[j]--;
+        } else {
+          mp[i][j] = 'B';
+          mp[i][j + 1] = 'W';
+        }
+      }
+      else if (mp[i][j] == 'U') {
+        if (row[i]) {
+          mp[i][j] = 'W';
+          mp[i + 1][j] = 'B';
+          row[i]--;
+        } else {
+          mp[i][j] = 'B';
+          mp[i + 1][j] = 'W';
+        }
+      }
+    }
+  }
+  for (auto s : mp) cout << s << "\n";
+}
+```
+
+## E. Speed Run
+
+> 一个游戏日有 $k$ 小时，当一天过去后，另一天马上开始。现在有 $n$ 个任务，每个任务必须在游戏日的第 $h_j$ 小时才能完成。同时任务之间有依赖关系，若要完成任务 $b_i$，则必须先完成任务 $a_i$。
+> 
+> 保证任务之间没有环状依赖，且任务完成不需要时间（即使两个任务之间存在依赖关系）
+
+`拓扑排序` `线性DP`
+
+首先看到题目考虑搜索，由于任务之间存在依赖关系，单纯的搜索需要确定任务的完成顺序，可以先对其进行拓扑排序。拓扑排序后即可以拿到合法的任务执行顺序
+
+但是由于这个执行顺序是一个线性结构，如果写搜索的话不如DP递推实现难度低，于是考虑DP的写法。
+
+易得完成第 $i$ 个任务所需要的时间为 $f[i] = \max_{j\in dep[i]}(f[i], f[j] + (h[i] - h[j] + k) \\%k )$
+
+接下来枚举开始第一个任务，但由于我们统计的 $f[i]$ 表示从任务 $i$ 开始完成后续所有任务所需的时间，他们的起点不一致，直接比较很困难，因此我们可以将将 $f[i] + h[i]$，让起点为每天的起点。
+
+枚举任务$i$为起点所用的时间时，如果$i$ 之前的任务完成时刻比$i$要小，那么 $i$ 之前的任务必须放到 $i$ 之后的一天完成，完成用时增加了1天时间($k$ 小时)。
+
+```cpp
+const int maxn = 2e5 + 17;
+struct Edge {
+  int to, next;
+} e[maxn];
+int head[maxn], eid = -1;
+int inde[maxn];
+int h[maxn];
+V<int> topo_seq;
+void clear() {
+  // std::memset(head, -1, sizeof(head));
+  eid = -1;
+  // std::memset(inde, 0, sizeof(inde));
+  // topo_seq.clear();
+}
+void add_edge(int u, int v) {
+  eid++;
+  e[eid].to = v;
+  e[eid].next = head[u];
+  head[u] = eid;
+  inde[v]++;
+}
+ 
+void solve() {
+  clear();
+  int n, m, k;
+  read(n, m, k);
+  rep(i, n) read(h[i]);
+  std::memset(head, -1, sizeof(int) * n);
+  std::memset(inde, 0, sizeof(int) * n);
+  rep(i, m) {
+    int u, v;
+    read(u, v);
+    u--, v--;
+    add_edge(u, v);
+  }
+ 
+  std::queue<int> q;
+  rep(i, n) if (inde[i] == 0) { q.push(i); }
+  topo_seq.clear();
+  topo_seq.reserve(n);
+  while (!q.empty()) {
+    topo_seq.push_back(q.front());
+    auto u = q.front();
+    q.pop();
+ 
+    for (int i = head[u]; ~i; i = e[i].next) {
+      const int v = e[i].to;
+      inde[v]--;
+      if (inde[v] == 0) {
+        q.push(v);
+      }
+    }
+  }
+  
+  V<int> f(n);
+  for (int i = n - 1; i >= 0; i--) {
+    int x = topo_seq[i];
+    for (int eid = head[x]; ~eid; eid = e[eid].next) {
+      const int v = e[eid].to;
+      f[x] = mmax(f[x], f[v] + (h[v] - h[x] + k) % k);
+    }
+  } 
+ 
+  for (int i = 0; i < n; i++) {
+    f[i] += h[i]; 
+  }
+ 
+  int ans = maxnum(int);
+  int res = *std::max_element(all(f));
+ 
+  V<int> p(n);
+  std::iota(all(p), 0);
+  std::sort(all(p), [&](const int l, const int r){
+      return h[l] < h[r];
+  });
+   
+  debug(p);
+  for(auto i: p){
+    ans = mmin(ans, res - h[i]);
+    res = mmax(res, f[i] + k);
+  }
+  std::cout << ans;
+  
+}
+```
