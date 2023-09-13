@@ -2,4 +2,5 @@
 /resources/_gen/
 
 
+/.direnv
 /.hugo_build.lock
