@@ -435,6 +435,73 @@ type error interface {
 }
 ```
 
+## 泛型
+
+```go
+type Slice[T int|float32|float64 ] []T
+
+type WowStruct[T int | float32, S []T] struct {
+    Data     S
+    MaxValue T
+    MinValue T
+}
+
+type NewType[T interface{*int}] []T //通过 interface 消歧义
+type NewType2[T interface{*int|*float64}] []T 
+
+func Add[T int | float32 | float64](a T, b T) T {
+    return a + b
+}
+```
+
+```go
+var a Slice[int] = []int{1, 2, 3}  
+```
+
+匿名结构体不支持泛型
+
+### 接口组合
+
+```go
+type Int interface {
+    int | int8 | int16 | int32 | int64
+}
+
+type Uint interface {
+    uint | uint8 | uint16 | uint32
+}
+
+type Float interface {
+    float32 | float64
+}
+
+type Slice[T Int | Uint | Float] []T  // 使用 '|' 将多个接口类型组合
+```
+
+### 底层类型
+
+使用 `~` 标明
+
+```go
+type Int interface {
+    ~int | ~int8 | ~int16 | ~int32 | ~int64
+}
+
+type Uint interface {
+    ~uint | ~uint8 | ~uint16 | ~uint32
+}
+type Float interface {
+    ~float32 | ~float64
+}
+
+type Slice[T Int | Uint | Float] []T 
+
+
+type MyInt int
+var s2 Slice[MyInt]  // MyInt 底层类型是 int，所以可以用于实例化
+
+```
+
 
 
 ## 并发
@@ -700,6 +767,6 @@ func BenchmarkSelectParallel(b *testing.B){
 
 运行方式
 
-```bash
+```
 $ go test -bench=.
 ```
