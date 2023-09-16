@@ -1,7 +1,7 @@
 ---
 title: 实现一个自己的脚本语言（绪）
 date: 2022-11-01
-abbrlink: c864d339
+draft: true
 tag:
   - Compiler
 ---
