@@ -1,6 +1,6 @@
 baseURL: "https://blog.mslxl.com"
 title: Mslxl's Blog 
-paginate: 5
+paginate: 8
 theme: PaperMod
 
 enableRobotsTXT: true
@@ -154,7 +154,7 @@ markup:
   highlight:
     noClasses: false
     # anchorLineNos: true
-    # codeFences: true
-    # guessSyntax: true
+    codeFences: true
+    guessSyntax: true
     # lineNos: true
-    # style: monokai
+    style: monokai
