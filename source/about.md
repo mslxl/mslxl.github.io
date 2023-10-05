@@ -50,3 +50,7 @@ searchHidden: true
 - 鸽子
 - 屎山
 - 社会主义
+
+---
+
+> 首页 banner 来自 Galgame [Fox Hime Zero](https://store.steampowered.com/app/844930/Fox_Hime_Zero/)

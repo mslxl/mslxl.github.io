@@ -103,8 +103,8 @@ home_banner:
   style: fixed # static or fixed
   # Home banner image
   image: 
-    light: /images/wallhaven-wqery6-light.webp # light mode
-    dark: /images/wallhaven-wqery6-dark.webp # dark mode
+    light: /assets/bg-light.webp # light mode
+    dark: /assets/bg-dark.webp # dark mode
   # Home banner title
   title: Mslxl's Blog
   # Home banner subtitle
@@ -127,7 +127,7 @@ home_banner:
   # Color of home banner text
   text_color: 
     light: "#fff" # light mode
-    dark: "#d1d1b6" # dark mode
+    dark: "#fff" # dark mode
   # Specific style of the text
   text_style: 
     # Title font size
