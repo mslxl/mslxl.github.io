@@ -1,8 +1,9 @@
 ---
 title: i3 User's Guide 操作篇
+categories:
+  - 翻译
 tags:
-  - i3
-  - Translation
+  - i3wm
 date: 2018-08-23 00:00:00
 ---
 

@@ -3,6 +3,9 @@
 title: MIT6.824 分布式系统 MapReduce
 date: 2023-09-15T10:27:24+08:00
 draft: false
+mathjax: true
+categories:
+  - 笔记
 tags:
   - mit6.824
   - 分布式系统

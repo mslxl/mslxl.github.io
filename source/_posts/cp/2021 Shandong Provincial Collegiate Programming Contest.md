@@ -2,10 +2,11 @@
 title: "2021 Shandong Provincial Collegiate Programming Contest"
 date: 2023-03-04T08:27:52+08:00
 draft: false
+categories:
+  - 题解
 tags:
   - Competitive Programming
   - ICPC
-  - 题解
 ---
 
 [比赛链接](https://codeforces.com/gym/103118)

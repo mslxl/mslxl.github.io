@@ -1,25 +1,27 @@
 ---
 title: 使用 Doom Emacs 工作
+categories:
+  - 翻译
 tags:
   - emacs
-  - Translation
 date: 2021-08-30 00:00:00
 ---
 
 
 # Table of Contents
 
-1.  [安装](#org6a62219)
-2.  [项目与工作空间 (Projects and Workspaces)](#org8fec0f7)
-3.  [常见任务 (Common Tasks)](#org7198548)
-4.  [寻找文本 (Finding Text)](#org747bd18)
-5.  [在文本间移动 (Moving To Text)](#orgdeef4b5)
-6.  [扩大和缩小范围 (Narrowing and Widening Regions)](#orgd28a4f0)
-7.  [多光标 (Multiple Cursors)](#org806bc14)
-8.  [撤销与重做 (Undoing and Redoing)](#org35af536)
-9.  [在编译输出间导航 (Navigating Compliation Output)](#org4a475a3)
-10. [杂项](#org2d0afb3)
-11. [了解更多 Doom](#orgdbc49a3)
+- [Table of Contents](#table-of-contents)
+- [安装](#安装)
+- [项目与工作空间 (Projects and Workspaces)](#项目与工作空间-projects-and-workspaces)
+- [常见任务 (Common Tasks)](#常见任务-common-tasks)
+- [寻找文本 (Finding Text)](#寻找文本-finding-text)
+- [在文本间移动 (Moving To Text)](#在文本间移动-moving-to-text)
+- [扩大和缩小范围 (Narrowing and Widening Regions)](#扩大和缩小范围-narrowing-and-widening-regions)
+- [多光标 (Multiple Cursors)](#多光标-multiple-cursors)
+- [撤销与重做 (Undoing and Redoing)](#撤销与重做-undoing-and-redoing)
+- [在编译输出间导航 (Navigating Compliation Output)](#在编译输出间导航-navigating-compliation-output)
+- [杂项](#杂项)
+- [了解更多 Doom](#了解更多-doom)
 
 原文: [Doom Emacs Workflows](https://noelwelsh.com/posts/doom-emacs/) 发布于 2019 年 2 月 15日，部分功能可能已发生变化。
 

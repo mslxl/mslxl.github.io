@@ -5,9 +5,6 @@ draft: false
 tags:
   - Linux
   - NixOS
-  - Flake
-  - Homemanager
-  - Hyprland
 ---
 
 

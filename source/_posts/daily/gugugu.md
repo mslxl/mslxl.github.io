@@ -1,6 +1,9 @@
 ---
 title: 咕咕咕咕
 date: 2018-08-30 00:00:00
+hidden: true
+categories:
+  - 随笔
 ---
 
 各位:

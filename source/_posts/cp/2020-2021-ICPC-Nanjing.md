@@ -2,10 +2,12 @@
 title: "2020-2021 ACM ICPC Asia Nanjing Regional Contest"
 date: 2023-01-14T18:08:26+08:00
 draft: false
+mathjax: true
+categories:
+  - 题解
 tags:
   - Competitive Programming
   - ICPC
-  - 题解
 ---
 
 <table>
@@ -27,7 +29,7 @@ tags:
 # A - Ah, It’s Yesterday Once More
 
 > 构造一张二维地图，仅有墙壁和空白组成。在每个空白处都有一个人，每个人在接下来的 50000 步中将向一个方向随机移动。
-> 要求构造的地图必须小于 $20\times 20$，至少有两个空白，每个空白之前必须是相互可达的，不能有环，50000步后所有的人$25\\%$的可能性不在同一个格子。
+> 要求构造的地图必须小于 $20\times 20$，至少有两个空白，每个空白之前必须是相互可达的，不能有环，50000步后所有的人$25\%$的可能性不在同一个格子。
 
 `构造`
 
@@ -70,14 +72,18 @@ tags:
 
 `图论` `并查集` `思维` `生成树`
 
-~~训练的时候没做出来~~~~现在某种意义上我是抄的这个题解[Degree of Spanning Tree](https://blog.csdn.net/weixin_45697774/article/details/114681396)~~
+~~训练的时候没做出来~~ ~~现在某种意义上我是抄的这个题解[Degree of Spanning Tree](https://blog.csdn.net/weixin_45697774/article/details/114681396)~~
 
 CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://codeforces.com/problemset/problem/1133/F2)
-</hr>
+
+---
 
 假如我们现在有这样一张图和它的一个生成树
 
 我们想要降低顶点 $1$ 的度
+
+
+
 
 <center>
 
@@ -116,7 +122,7 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 </center>
 
-显然，新连接的边的定点不符合题意。我们可以反过来试一下（这里没有这个必要，但是部分情况可能会用到这个操作)
+显然，新连接的边的定点不符合题意。我们可以反过来试一下（这里没有这个必要，但是部分情况可能会用到这个操作）
 
 我们连接$(2,4)$时，不再断开$(1,2)$，而是断开$(1,4)$
 
@@ -154,8 +160,6 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 类似的，这道题我们也可以采用这种方式。树我们可以随便生成一个，而其中度数大于$\frac{n}{2}$的定点只会有一个。
 
 我们只需要将这个顶点作为根，重复上面的操作即可。
-
-
 ```cpp
 // clang-format off
 #include <algorithm>
@@ -1045,4 +1049,3 @@ int main() {
   }
 }
 ```
-

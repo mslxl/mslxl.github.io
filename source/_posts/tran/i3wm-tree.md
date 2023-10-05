@@ -1,8 +1,9 @@
 ---
 title: i3 User's Guide 进阶操作篇（对应第 3 节）
+categories:
+  - 翻译
 tags:
-  - i3
-  - Translation
+  - i3wm
 date: 2018-08-24 00:00:00
 ---
 

@@ -1,7 +1,10 @@
 ---
 title: 树形 DP 练习
 date: 2023-01-18T14:54:04+08:00
+mathjax: true
 draft: false
+categories:
+  - 题解
 tags:
   - Competitive Programming
 ---

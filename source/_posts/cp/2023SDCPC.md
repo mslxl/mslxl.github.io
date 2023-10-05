@@ -2,10 +2,11 @@
 title: "2023 SDCPC 赛后回顾"
 date: 2023-06-05T02:17:17+08:00
 draft: false
+categories:
+  - 随笔
 tags:
   - Competitive Programming
   - ICPC
-  - Daily
 ---
 
 周围的人都写了篇小作文, 那我也跟按照圈子里的惯例写个小流水帐吧,文笔不好,算给日后的自己留个纪念吧

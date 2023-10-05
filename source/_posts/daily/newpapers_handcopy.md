@@ -3,6 +3,9 @@ title: 谈谈手抄报
 tags:
   - Daily
 date: 2018-10-15 00:00:00
+hidden: true
+categories:
+  - 随笔
 ---
 
 

@@ -1,10 +1,9 @@
 ---
 title: Epub 文件结构
-keyword:
-    - epub文件
-    - epub结构
-    - toc.ncx
-    - content.opf
+categories:
+    - 教程
+tags:
+    - Epub
 date: 2019-09-20T20:00:00+08:00
 ---
 

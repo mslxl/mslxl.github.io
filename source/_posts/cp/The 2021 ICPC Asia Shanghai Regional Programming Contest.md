@@ -1,11 +1,13 @@
 ---
 title: "The 2021 ICPC Asia Shanghai Regional Programming Contest"
 date: 2023-01-16T10:35:31+08:00
+mathjax: true
 draft: false
+categories:
+  - 题解
 tags:
   - Competitive Programming
   - ICPC
-  - 题解
 ---
 
 

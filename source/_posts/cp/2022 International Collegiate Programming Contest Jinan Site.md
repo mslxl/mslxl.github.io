@@ -2,6 +2,9 @@
 title: "2022 International Collegiate Programming Contest Jinan Site"
 date: 2023-01-28T17:46:28+08:00
 draft: false
+mathjax: true
+categories:
+  - 题解
 tags:
   - Competitive Programming
   - ICPC

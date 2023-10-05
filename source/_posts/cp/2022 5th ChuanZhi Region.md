@@ -1,6 +1,9 @@
 ---
 title: 2022 第五届传智杯初赛
 date: 2022-12-29 16:00:11
+mathjax: true
+categories:
+  - 题解
 tags:
   - Competitive Programming
   - 传智杯

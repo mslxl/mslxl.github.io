@@ -1,8 +1,9 @@
 ---
 title: No Game No Life Zero
 date: 2018-08-21
-tags:
-  - Daily
+hidden: true
+categories:
+  - 随笔
 ---
 
 <hr/>

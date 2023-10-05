@@ -2,10 +2,12 @@
 title: "The 2020 ICPC Asia Shenyang Regional Programming Contest"
 date: 2023-01-10T17:08:40+08:00
 draft: false
+categories:
+  - 题解
+mathjax: true
 tags:
   - Competitive Programming
   - ICPC
-  - 题解
 ---
 
 [The 2020 ICPC Asia Shenyang Regional Programming Contest - Codeforces Gym](https://codeforces.com/gym/103202)

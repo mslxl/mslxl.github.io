@@ -4,6 +4,9 @@ tags:
   - Competitive Programming
   - ICPC
 date: 2022-12-13 18:40:19
+categories:
+  - 题解
+mathjax: true
 ---
 
 只把签到题做了做。
