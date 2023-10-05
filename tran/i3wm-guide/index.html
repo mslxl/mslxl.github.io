@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Mslxl">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.mslxl.com/tran/i3wm-guide/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="原页面  该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;i3wm&#x2F;  是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。 1.默认键位这是为那些“太长，不读”的用户准备的默认键位的一览 按下 $mod 键 ( Alt 键 )  按下 Shift + $mod 键  注意在启动 i3 时如果没有配置文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="i3 User&#39;s Guide 操作篇">
+<meta property="og:url" content="https://blog.mslxl.com/tran/i3wm-guide/index.html">
+<meta property="og:site_name" content="Mslxl&#39;s blog">
+<meta property="og:description" content="原页面  该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;i3wm&#x2F;  是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。 1.默认键位这是为那些“太长，不读”的用户准备的默认键位的一览 按下 $mod 键 ( Alt 键 )  按下 Shift + $mod 键  注意在启动 i3 时如果没有配置文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-guide/keyboard-layer1.png">
+<meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-guide/keyboard-layer2.png">
+<meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-guide/single_terminal.png">
+<meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-guide/two_terminals.png">
+<meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-guide/modes.png">
+<meta property="article:published_time" content="2018-08-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-05T15:51:03.256Z">
+<meta property="article:author" content="Mslxl">
+<meta property="article:tag" content="i3wm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.mslxl.com/tran/i3wm-guide/keyboard-layer1.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/11132880?v=4" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <!--- Page Info-->
+    
+    <title>
+        
+            i3 User&#39;s Guide 操作篇 -
+        
+        Mslxl&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Mslxl's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Mslxl&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/links">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/links">友情链接</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">i3 User&#39;s Guide 操作篇</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header flex flex-row gap-2 items-center">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://avatars.githubusercontent.com/u/11132880?v=4">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Mslxl</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2018-08-23</span>
+        <span class="mobile">2018-08-23</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-05 23:51:03</span>
+            <span class="mobile">2023-10-05 23:51:03</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/i3wm/">i3wm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p><a class="link"   target="_blank" rel="noopener" href="https://i3wm.org/docs/userguide.html" >原页面 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查<a target="_blank" rel="noopener" href="https://www.reddit.com/r/i3wm/"><a class="link"   target="_blank" rel="noopener" href="https://www.reddit.com/r/i3wm/" >https://www.reddit.com/r/i3wm/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></a> 是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。</p>
+<h2 id="1-默认键位"><a href="#1-默认键位" class="headerlink" title="1.默认键位"></a>1.默认键位</h2><p>这是为那些“太长，不读”的用户准备的默认键位的一览</p>
+<p><em>按下 $mod 键 ( Alt 键 )</em></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/tran/i3wm-guide/keyboard-layer1.png"
+                      alt="keyboard-layer1"
+                ></p>
+<p><em>按下 Shift + $mod 键</em></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/tran/i3wm-guide/keyboard-layer2.png"
+                      alt="keyboard-layer2"
+                ></p>
+<p>注意在启动 i3 时如果没有配置文件，i3-config-wizard 将会为你提供一份像上图一样的键位，不管你使用什么键盘布局，如果你想使用自己的配置文件，那么只需要取消掉 i3-config-wizard 的提示，然后配置 <code>/etc/i3/config</code>。</p>
+<h2 id="2-使用-i3"><a href="#2-使用-i3" class="headerlink" title="2. 使用 i3"></a>2. 使用 i3</h2><p>整篇导航中的 <code>$mod</code> 都指的是配置文件中配置的修饰键。默认是 Alt 键 (<code>Mod1</code>)，不过 Windows 键 (<code>Mod4</code>) 也是一个十分流行的<code>$mod</code>键，可以有效的防止与应用程序之间的快捷键发生冲突。</p>
+<h3 id="2-1-打开终端并四处移动"><a href="#2-1-打开终端并四处移动" class="headerlink" title="2.1. 打开终端并四处移动"></a>2.1. 打开终端并四处移动</h3><p>打开一个新终端窗口是非常基础的操作，默认快捷键下为 <code>$mod + Enter</code>，也就是说在使用默认配置文件时的 <code>Mod1 + Enter</code>，通过按下 <code>$mod + Enter</code> 打开一个新终端，他将会占据屏幕上所有可用空间。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/tran/i3wm-guide/single_terminal.png"
+                      alt="POI"
+                ></p>
+<p>如果再打开另一个终端，i3 会把它放到当前窗口之后，把屏幕一分为二，分割方向依赖于显示器，I3 将创建的窗口放在现有窗口旁（在宽显示器上）或现有窗口之下（旋转显示）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/tran/i3wm-guide/two_terminals.png"
+                      alt="Nanodesu"
+                ></p>
+<p>你可以使用像 <code>vi</code> 上的方式移动焦点，但是在 i3 中你需要按住 <code>$mod</code> 键再按这些按键（在<code>vi</code>中，这些按键为了兼容大多数键盘布局都被向左移动了一个键）。因此，<code>$mod + j</code>是向左，<code>$mod + k</code> 是向下，<code>$mod + l</code>是向上，<code>$mod + ;</code>是向右，所以，在两个终端之前切换只需要 <code>$mod + k</code> 和 <code>$mod + l</code>，当然，你也可以使用方向键。</p>
+<p>此时，你包含两个终端的工作空间是被指定的方向分割的（默认为横向），每个窗口都可以像工作空间一样重新横向或纵向分割。术语是 “window”，用于包含 X11 窗口（如终端或浏览器）的容器，以及“split container” 用于由一个或多个窗口组成的容器。</p>
+<blockquote>
+<p> TODO: picture of the tree </p>
+<p>原文中就是 TODO 我也很绝望啊</p>
+</blockquote>
+<p>要垂直分割窗口，请在创建新窗口之前按 <code>$mod+v</code>。要水平拆分，按 <code>$mod+h</code>。</p>
+<h3 id="2-2-改变容器布局"><a href="#2-2-改变容器布局" class="headerlink" title="2.2. 改变容器布局"></a>2.2. 改变容器布局</h3><p>split container 可以有一下几种布局：</p>
+<ul>
+<li>splith&#x2F;splitv<ul>
+<li>相同容器内的每个窗口获得相等的空间</li>
+<li>splith ：横向布局</li>
+<li>splitv ：纵向布局</li>
+</ul>
+</li>
+<li>stacking：堆叠<ul>
+<li>只显示容器内具有焦点的窗口，在容器的顶部会显示所有窗口的列表</li>
+</ul>
+</li>
+<li>tabbed：选项卡<ul>
+<li>与 stacking 相同，但是容器顶部的窗口列表是横向显示</li>
+</ul>
+</li>
+</ul>
+<p>使用 <code>$mod + e</code> 切换 splith 和 splitv 模式，按<code>$mod + s</code> 切换到 stacking 模式，按 <code>$mod + w</code> 切换到 tabbed 模式</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/tran/i3wm-guide/modes.png"
+                      alt="up white ze smart voice"
+                ></p>
+<h3 id="2-3-窗口全屏"><a href="#2-3-窗口全屏" class="headerlink" title="2.3. 窗口全屏"></a>2.3. 窗口全屏</h3><p>对当前窗口开关全屏模式，请按 <code>$mod+f</code> 键。</p>
+<p>在 I3 中还有一个全局全屏模式，命令为 <code>fullscreen toggle global</code></p>
+<h3 id="2-4-打开其他应用程序"><a href="#2-4-打开其他应用程序" class="headerlink" title="2.4. 打开其他应用程序"></a>2.4. 打开其他应用程序</h3><p>除了打开终端外，默认也可以按 <code>$mod + d</code> 来打开 <code>dmenu</code> 的菜单。只需要键入你要打开的程序名称就可以打开该应用。<code>dmenu</code> 将在  <code>$PATH</code> 中寻找应用程序。</p>
+<p>此外，如果您的应用程序非常频繁地打开，则可以创建用于直接启动应用程序的键绑定。详情请参阅章节 <a class="link"   target="_blank" rel="noopener" href="https://i3wm.org/docs/userguide.html#configuring" >配置 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<h3 id="2-5-关闭窗口"><a href="#2-5-关闭窗口" class="headerlink" title="2.5. 关闭窗口"></a>2.5. 关闭窗口</h3><p>如果一个应用程序不提供关闭机制（大多数应用提供一个菜单或者像是 <code>Control + w </code> 的快捷键），你可以按 <code>$mod + Shift + q</code> 来关闭窗口。对于支持 WM_DELETE 协议的应用程序，这将正确地关闭应用程序（保存或执行其他清理操作）。如果应用程序不支持 WM_DELETE 协议，则 X 服务器将关闭窗口，并且之后的行为取决于应用程序。</p>
+<h3 id="2-6-使用工作空间"><a href="#2-6-使用工作空间" class="headerlink" title="2.6. 使用工作空间"></a>2.6. 使用工作空间</h3><p>工作空间是一个可以把窗口组合起来的简单方式。默认情况下你位于第一工作空间，在左下角的指示条上会显示。若要切换到其他工作空间，请按 <code>$mod + num</code>，<code>num</code>是要打开的工作空间的序号，如果这个工作空间不存在将会被创建。</p>
+<h3 id="2-7-在工作空间中移动窗口"><a href="#2-7-在工作空间中移动窗口" class="headerlink" title="2.7. 在工作空间中移动窗口"></a>2.7. 在工作空间中移动窗口</h3><p>要将窗口移动到另一个工作区，只需按 <code>$mod+Shift+num</code>，其中 <code>num</code> 是目标工作区的序号。和切换工作空间相似，目标工作空间如果不存在将会被创建。</p>
+<h3 id="2-8-调整大小"><a href="#2-8-调整大小" class="headerlink" title="2.8. 调整大小"></a>2.8. 调整大小</h3><p>调整容器大小的最最最简单方法是使用鼠标：拖住边框并将其移动到所需大小。</p>
+<p>你也可以使用 <a class="link"   target="_blank" rel="noopener" href="https://i3wm.org/docs/userguide.html#binding_modes" >模式绑定 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>来定义一个模式，以供使用键盘移动和调整大小。举个栗子，由 i3 提供的<a class="link"   target="_blank" rel="noopener" href="https://github.com/i3/i3/blob/next/etc/config.keycodes" >默认配置 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="2-9-重启-i3"><a href="#2-9-重启-i3" class="headerlink" title="2.9. 重启 i3"></a>2.9. 重启 i3</h3><p>如果你遇到了什么 bug 或者要升级高版本，没有必要重启电脑，只需要<code>$mod + Shift + r</code>。</p>
+<h3 id="2-10-退出-i3"><a href="#2-10-退出-i3" class="headerlink" title="2.10. 退出 i3"></a>2.10. 退出 i3</h3><p>使用 <code>$mod + Shift + e</code>可以不关闭 X 服务退出 i3。默认会有一个弹窗来讯问你是否退出。</p>
+<h3 id="2-11-浮动模式"><a href="#2-11-浮动模式" class="headerlink" title="2.11. 浮动模式"></a>2.11. 浮动模式</h3><p> 浮动模式和平铺模式是两个截然相反的模式。窗口的位置和大小不是由 i3 自动管理，而是由您手动管理。使用此模式违反了平铺标准，但对于某些特殊情况（如 “另存为” 对话框窗口或工具栏窗口（GIMP 等））非常有用。这些窗口通常设置适当的提示，默认情况下以浮动模式打开。</p>
+<p>你可以通过 <code>$mod + Shift + Space</code> 来开关浮动模式。使用你的鼠标拖动窗口的标题可以任意移动该窗口。拖动窗口边框可以重设大小。你也可以使用 <a class="link"   target="_blank" rel="noopener" href="https://i3wm.org/docs/userguide.html#floating_modifier" >floating_modifier <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。右键标题并拖动也是调整窗口大小的另一种方式。</p>
+<p>使用键盘在浮动模式调整窗口大小可以参见 <a class="link"   target="_blank" rel="noopener" href="https://github.com/i3/i3/blob/next/etc/config.keycodes" >i3 默认配置 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>浮动窗口始终位于平铺窗口上。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/i3wm/">#i3wm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/tran/i3wm-tree/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">i3 User&#39;s Guide 进阶操作篇（对应第 3 节）</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/compiler/n5/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">编译原理：绪论 —— 中间代码生成和编译器后端</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">i3 User&#39;s Guide 操作篇</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%BB%98%E8%AE%A4%E9%94%AE%E4%BD%8D"><span class="nav-text">1.默认键位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-i3"><span class="nav-text">2. 使用 i3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF%E5%B9%B6%E5%9B%9B%E5%A4%84%E7%A7%BB%E5%8A%A8"><span class="nav-text">2.1. 打开终端并四处移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%94%B9%E5%8F%98%E5%AE%B9%E5%99%A8%E5%B8%83%E5%B1%80"><span class="nav-text">2.2. 改变容器布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%AA%97%E5%8F%A3%E5%85%A8%E5%B1%8F"><span class="nav-text">2.3. 窗口全屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%89%93%E5%BC%80%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.4. 打开其他应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%85%B3%E9%97%AD%E7%AA%97%E5%8F%A3"><span class="nav-text">2.5. 关闭窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E4%BD%BF%E7%94%A8%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">2.6. 使用工作空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E5%9C%A8%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%A7%BB%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-text">2.7. 在工作空间中移动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-%E8%B0%83%E6%95%B4%E5%A4%A7%E5%B0%8F"><span class="nav-text">2.8. 调整大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-%E9%87%8D%E5%90%AF-i3"><span class="nav-text">2.9. 重启 i3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-10-%E9%80%80%E5%87%BA-i3"><span class="nav-text">2.10. 退出 i3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-11-%E6%B5%AE%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">2.11. 浮动模式</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2018</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Mslxl</a>
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="right-bottom-tools rss flex justify-center items-center">
+                <a class="flex justify-center items-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                <i class="fa-regular fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/libs/mermaid.min.js"></script>
+
+    
+<script src="/js/plugins/mermaid.js"></script>
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

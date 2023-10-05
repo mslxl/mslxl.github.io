@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Mslxl">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.mslxl.com/compiler/ts-combinator/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="Parser 组合子(Parser Combinator) 可用于实现词法分析器或者 LL 语法分析器，它的实现较为简单，但缺点是运行效率较低(尤其是在组合层数较多时)，在对性能要求不高时可采用 Parser 组合子来进行解析任务。 本文最终会实现这样的 Parser Combinator: 123456let input &#x3D; &quot;114514aabbcc&quot;let result">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 ts 实现 Parser 组合子">
+<meta property="og:url" content="https://blog.mslxl.com/compiler/ts-combinator/index.html">
+<meta property="og:site_name" content="Mslxl&#39;s blog">
+<meta property="og:description" content="Parser 组合子(Parser Combinator) 可用于实现词法分析器或者 LL 语法分析器，它的实现较为简单，但缺点是运行效率较低(尤其是在组合层数较多时)，在对性能要求不高时可采用 Parser 组合子来进行解析任务。 本文最终会实现这样的 Parser Combinator: 123456let input &#x3D; &quot;114514aabbcc&quot;let result">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-05T15:51:03.204Z">
+<meta property="article:author" content="Mslxl">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/11132880?v=4" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <!--- Page Info-->
+    
+    <title>
+        
+            使用 ts 实现 Parser 组合子 -
+        
+        Mslxl&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Mslxl's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Mslxl&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/links">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/links">友情链接</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">使用 ts 实现 Parser 组合子</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header flex flex-row gap-2 items-center">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://avatars.githubusercontent.com/u/11132880?v=4">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Mslxl</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2022-10-07 12:00</span>
+        <span class="mobile">2022-10-07 12:00</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-05 23:51:03</span>
+            <span class="mobile">2023-10-05 23:51:03</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E6%95%99%E7%A8%8B/">教程</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p>Parser 组合子(Parser Combinator) 可用于实现词法分析器或者 LL 语法分析器，它的实现较为简单，但缺点是运行效率较低(尤其是在组合层数较多时)，在对性能要求不高时可采用 Parser 组合子来进行解析任务。</p>
+<p>本文最终会实现这样的 Parser Combinator:</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> input = <span class="string">&quot;114514aabbcc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = parser.<span class="title function_">digit1</span>()(input)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123; kind: &#x27;Right&#x27;, right: &#123; first: &#x27;aabbcc&#x27;, second: &#x27;114514&#x27; &#125; &#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h2 id="准备-Either"><a href="#准备-Either" class="headerlink" title="准备: Either"></a>准备: <code>Either</code></h2><p>要表示 Parser Combinator，首先要先分别表示出 parse 成功和失败的两种状态。<br>本文采用了类似 <code>Either</code> 的概念，其 Left 储存错误信息，而 Right 储存匹配成功项和剩余项。</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Left</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">kind</span>: <span class="string">&#x27;Left&#x27;</span>,</span><br><span class="line">    <span class="attr">left</span>: E</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Right</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">kind</span>: <span class="string">&#x27;Right&#x27;</span>,</span><br><span class="line">    <span class="attr">right</span>: E</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Either</span>&lt;L, R&gt; = <span class="title class_">Left</span>&lt;L&gt; | <span class="title class_">Right</span>&lt;R&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>为了方便对 <code>Either</code> 的基本操作，我们添加以下代码:</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Pair</span>&lt;F,S&gt;&#123;</span><br><span class="line">    <span class="attr">first</span>: F,</span><br><span class="line">    <span class="attr">second</span>: S</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> left&lt;L, R = <span class="built_in">never</span>&gt;(<span class="attr">value</span>: L): <span class="title class_">Either</span>&lt;L, R&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">kind</span>: <span class="string">&#x27;Left&#x27;</span>,</span><br><span class="line">        <span class="attr">left</span>: value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> right&lt;R, L = <span class="built_in">never</span>&gt;(<span class="attr">value</span>: R): <span class="title class_">Either</span>&lt;L, R&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">kind</span>: <span class="string">&#x27;Right&#x27;</span>,</span><br><span class="line">        <span class="attr">right</span>: value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> is_left&lt;L=<span class="built_in">never</span>, R=<span class="built_in">never</span>&gt; (<span class="attr">either</span>: <span class="title class_">Either</span>&lt;L,R&gt;): <span class="built_in">boolean</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> either.<span class="property">kind</span> == <span class="string">&quot;Left&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> is_right&lt;L=<span class="built_in">never</span>, R=<span class="built_in">never</span>&gt; (<span class="attr">either</span>: <span class="title class_">Either</span>&lt;L,R&gt;): <span class="built_in">boolean</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> either.<span class="property">kind</span> == <span class="string">&quot;Right&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>其中 <code>left</code> 和 <code>right</code> 用于构造一个 <code>Either</code></p>
+<h2 id="第一个-Parser-组合子-text"><a href="#第一个-Parser-组合子-text" class="headerlink" title="第一个 Parser 组合子: text"></a>第一个 Parser 组合子: <code>text</code></h2><p>有了这些准备，我们就可以实现一个最简单的 Parser 组合子了。</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Parser</span>&lt;E, L&gt; = <span class="function">(<span class="params">input: <span class="built_in">String</span></span>) =&gt;</span> either.<span class="property">Either</span>&lt;L, <span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, E&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">text</span>(<span class="params">expect: <span class="built_in">string</span></span>): <span class="title class_">Parser</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">input: <span class="built_in">string</span></span>): either.<span class="property">Either</span>&lt;<span class="built_in">string</span>, <span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (input.<span class="title function_">startsWith</span>(expect)) &#123;</span><br><span class="line">            <span class="keyword">return</span> either.<span class="title function_">right</span>(&#123; <span class="attr">first</span>: input.<span class="title function_">substring</span>(expect.<span class="property">length</span>), <span class="attr">second</span>: expect &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> either.<span class="title function_">left</span>(expect)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>如果 <code>input</code> 是以 <code>expect</code> 开头的字符串，则返回 <code>Right</code> 表示匹配成功，否则返回 <code>Left</code> 表示失败。这样我们就可以使用 text 来匹配特定的字符了</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> input = <span class="string">&quot;114514abababa&quot;</span></span><br><span class="line"><span class="keyword">let</span> result = <span class="title function_">text</span>(<span class="string">&quot;114&quot;</span>)(input)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line"><span class="comment">// &#123; kind: &#x27;Right&#x27;, right: &#123; first: &#x27;514abababa&#x27;, second: &#x27;114&#x27; &#125; &#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>很明显这远远不够，因为有时我们不能确定要匹配的文本出现顺序，比方说我们要匹配一个数字，但是不能确定数字是什么，使用 <code>text</code> 就无能为力了，这时候我们就需要一个新的组合子来修饰旧组合子了。</p>
+<h2 id="oneOf-Parser-组合子"><a href="#oneOf-Parser-组合子" class="headerlink" title="oneOf Parser 组合子"></a><code>oneOf</code> Parser 组合子</h2><p>我们在下面实现一个 <code>oneOf</code> 组合子，它将从提供的所有 Parser 组合子中选择第一个匹配成功项并返回。</p>
+<p>从一系列结果中选择成功项很容易让我们联想到 <code>Alternative</code> 的性质，所以让我们先让结果 <code>Either</code> 能进行 <code>Alternative</code> 的运算吧(即实现 <code>alt</code> 和 <code>map</code> 函数)</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> map&lt;L, R, E&gt;(<span class="attr">either</span>: <span class="title class_">Either</span>&lt;L, R&gt;, <span class="attr">block</span>: <span class="function">(<span class="params">right: R</span>) =&gt;</span> E): <span class="title class_">Either</span>&lt;L, E&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (either.<span class="property">kind</span> == <span class="string">&#x27;Right&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="title function_">block</span>(either.<span class="property">right</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">right</span>(value)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> either <span class="keyword">as</span> <span class="title class_">Either</span>&lt;L, E&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> alt&lt;L, R&gt;(...<span class="attr">either</span>: <span class="title class_">Either</span>&lt;L, R&gt;[]): <span class="title class_">Either</span>&lt;L, R&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> either.<span class="title function_">reduce</span>(<span class="function">(<span class="params">p, c</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (p.<span class="property">kind</span> == <span class="string">&#x27;Right&#x27;</span>) <span class="keyword">return</span> p</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> c</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><code>map</code> 会对 <code>Right</code> 中的元素进行操作，原样返回 <code>Left</code> 中的元素，<code>alt</code> 则会选择第一个 <code>Right</code>，抛弃前面的所有 <code>Left</code>（放在 Haskell 上也就是使 <code>Either</code> 是 <code>Alternative</code> 的一个实现）</p>
+<p>有了 <code>alt</code>， 我们很容易实现 <code>oneOf</code> 函数。只需要从所有匹配结果中选择第一个成功项即可（即 <code>Right</code>)</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> oneOf&lt;E, L&gt;(...<span class="attr">parsers</span>: <span class="title class_">Parser</span>&lt;E, L&gt;[]): <span class="function">(<span class="params">input: <span class="built_in">string</span></span>) =&gt;</span> either.<span class="property">Either</span>&lt;L, <span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, E&gt;&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">input: <span class="built_in">string</span></span>): either.<span class="property">Either</span>&lt;L, <span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, E&gt;&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> parsers</span><br><span class="line">            .<span class="title function_">map</span>(<span class="function">(<span class="params">p</span>) =&gt;</span> <span class="title function_">p</span>(input))</span><br><span class="line">            .<span class="title function_">reduce</span>(<span class="function">(<span class="params">c, p</span>) =&gt;</span> either.<span class="title function_">alt</span>(c, p))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>让我们来试着匹配任一个数字:</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">digit1</span>(<span class="params"></span>): <span class="title class_">Parser</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> digit = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>];</span><br><span class="line">    <span class="keyword">let</span> digitParser = digit.<span class="title function_">map</span>(<span class="function"><span class="params">i</span> =&gt;</span> <span class="title function_">text</span>(i.<span class="title function_">toString</span>()))</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">oneOf</span>(...digitParser)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">digit1</span>()(<span class="string">&quot;1145aa&quot;</span>)</span><br><span class="line"><span class="comment">// &#123; kind: &#x27;Right&#x27;, right: &#123; first: &#x27;145aa&#x27;, second: &#x27;1&#x27; &#125; &#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>那么如果我们想要匹配一串数字怎么办？这时候就要借助 <code>many</code> 了</p>
+<h2 id="many-Parser-组合子"><a href="#many-Parser-组合子" class="headerlink" title="many Parser 组合子"></a><code>many</code> Parser 组合子</h2><p>让我们先理一下 <code>many</code> 的行为。<code>many</code> 会不停的使用提供的组合子进行匹配，直到匹配失败为止，以数组的形式返回之前的匹配成功项。</p>
+<p>下面是代码，<del>写的有点摸鱼，但是能用</del></p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> many0&lt;E, L&gt;(<span class="attr">parser</span>: <span class="title class_">Parser</span>&lt;E, L&gt;): <span class="title class_">Parser</span>&lt;E[], L&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">input: <span class="built_in">string</span></span>): either.<span class="property">Either</span>&lt;L, <span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, E[]&gt;&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="attr">result</span>: E[] = []</span><br><span class="line">        <span class="keyword">let</span> <span class="attr">err</span>: L = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">let</span> success = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> v = <span class="title function_">parser</span>(input);</span><br><span class="line">            <span class="keyword">if</span> (either.<span class="title function_">is_left</span>(v)) &#123;</span><br><span class="line">                err = (v <span class="keyword">as</span> either.<span class="property">Left</span>&lt;L&gt;).<span class="property">left</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                success = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">let</span> rv = v <span class="keyword">as</span> either.<span class="property">Right</span>&lt;<span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, E&gt;&gt;</span><br><span class="line">                input = rv.<span class="property">right</span>.<span class="property">first</span></span><br><span class="line">                result.<span class="title function_">push</span>(rv.<span class="property">right</span>.<span class="property">second</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (success) &#123;</span><br><span class="line">            <span class="keyword">return</span> either.<span class="title function_">right</span>(&#123; <span class="attr">first</span>: input, <span class="attr">second</span>: result &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> either.<span class="title function_">left</span>(err)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<p>让我们用 <code>many</code> 和 <code>oneOf</code> 试着匹配一串数字，修改 <code>digit1</code> 函数如下:</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">digit1</span>(<span class="params"></span>): <span class="title class_">Parser</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> digit = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>];</span><br><span class="line">    <span class="keyword">let</span> digitParser = digit.<span class="title function_">map</span>(<span class="function"><span class="params">i</span> =&gt;</span> <span class="title function_">text</span>(i.<span class="title function_">toString</span>()))</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">many0</span>(<span class="title function_">oneOf</span>(...digitParser))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title function_">digit1</span>()(<span class="string">&quot;114aba&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123; kind: &#x27;Right&#x27;, right: &#123; first: &#x27;aba&#x27;, second: [&#x27;1&#x27;, &#x27;1&#x27;, &#x27;4&#x27;] &#125; &#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>似乎成功了，但是返回结果是 <code>[&#39;1&#39;, &#39;1&#39;, &#39;4&#39;]</code>，我们想要的是 <code>114</code>，怎么办？</p>
+<p>很遗憾没有办法，parser 组合子就是从最小的单位开始匹配，匹配结果理所当然的是一个一个的最小单元，但是你可以在 <code>many</code> 中将这些元素拼起来(不推荐)，或者再创建一个用于处理匹配结果的组合子。</p>
+<p>这里利用 <code>Either</code> 的 <code>map</code> 再写一个 <code>map</code> 组合子用于处理匹配结果：</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> map&lt;E, L, R&gt;(<span class="attr">parser</span>: <span class="title class_">Parser</span>&lt;E, L&gt;, <span class="attr">block</span>: <span class="function">(<span class="params">e: E</span>) =&gt;</span> R): <span class="title class_">Parser</span>&lt;R, L&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">input: <span class="built_in">string</span></span>): either.<span class="property">Either</span>&lt;L, <span class="title class_">Pair</span>&lt;<span class="built_in">string</span>, R&gt;&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> either.<span class="title function_">map</span>(<span class="title function_">parser</span>(input), <span class="function">(<span class="params">r</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> result = <span class="title function_">block</span>(r.<span class="property">second</span>)</span><br><span class="line">            <span class="keyword">return</span> &#123; <span class="attr">first</span>: r.<span class="property">first</span>, <span class="attr">second</span>: result &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>再改造一下 <code>digit1</code> 函数：</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">digit1</span>(<span class="params"></span>): <span class="title class_">Parser</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> digit = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>];</span><br><span class="line">    <span class="keyword">let</span> digitParser = digit.<span class="title function_">map</span>(<span class="function"><span class="params">i</span> =&gt;</span> <span class="title function_">text</span>(i.<span class="title function_">toString</span>()))</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">map</span>(<span class="title function_">many0</span>(<span class="title function_">oneOf</span>(...digitParser)), <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> e.<span class="title function_">reduce</span>(<span class="function">(<span class="params">p,c</span>)=&gt;</span>p+c)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>现在我们已经可以用 <code>digit1</code> 来愉快的匹配数字了</p>
+<div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">digit1</span>()(<span class="string">&quot;114514ababab&quot;</span>)</span><br><span class="line"><span class="comment">// &#123; kind: &#x27;Right&#x27;, right: &#123; first: &#x27;ababab&#x27;, second: &#x27;114514&#x27; &#125; &#125;</span></span><br><span class="line"><span class="title function_">digit1</span>()(<span class="string">&quot;66ccff&quot;</span>)</span><br><span class="line"><span class="comment">// &#123; kind: &#x27;Right&#x27;, right: &#123; first: &#x27;ccff&#x27;, second: &#x27;66&#x27; &#125; &#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>当然， Parser 组合子还不仅如此，你还可以写出 <code>optional</code> 等等组合子，或者写出自己想要的组合子。Parser 组合子也不止可以处理字符串，只需改动少量代码，上述代码便可处理任意序列</p>
+<p>这里有一份 Json 解析器是用 Haskell 写的 Parser 组合子，可共参考 <a class="link"   target="_blank" rel="noopener" href="https://github.com/mslxl/MeoAssistantArknightsCLI/blob/main/app/JsonParser.hs" >JsonParser.hs <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/cxx/opencv-env/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Dev-C++ OpenCV 环境搭建</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/daily/recent/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">关于消失的页面</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">使用 ts 实现 Parser 组合子</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87-Either"><span class="nav-text">准备: Either</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA-Parser-%E7%BB%84%E5%90%88%E5%AD%90-text"><span class="nav-text">第一个 Parser 组合子: text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oneOf-Parser-%E7%BB%84%E5%90%88%E5%AD%90"><span class="nav-text">oneOf Parser 组合子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#many-Parser-%E7%BB%84%E5%90%88%E5%AD%90"><span class="nav-text">many Parser 组合子</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2018</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Mslxl</a>
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="right-bottom-tools rss flex justify-center items-center">
+                <a class="flex justify-center items-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                <i class="fa-regular fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/libs/mermaid.min.js"></script>
+
+    
+<script src="/js/plugins/mermaid.js"></script>
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
