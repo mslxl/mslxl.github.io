@@ -18,15 +18,15 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="语义分析语义分析的任务语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 标识符 (id)，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息 对声明语句语义分析的任务 种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、">
+        <meta name="description" content="语义分析 语义分析的任务 语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 标识符 (id)，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息 对声明语句语义分析的任务  种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译原理：绪论 —— 语义分析">
 <meta property="og:url" content="https://blog.mslxl.com/compiler/n4/index.html">
 <meta property="og:site_name" content="Mslxl&#39;s blog">
-<meta property="og:description" content="语义分析语义分析的任务语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 标识符 (id)，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息 对声明语句语义分析的任务 种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、">
+<meta property="og:description" content="语义分析 语义分析的任务 语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 标识符 (id)，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息 对声明语句语义分析的任务  种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-06-25T10:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-05T16:05:48.666Z">
+<meta property="article:modified_time" content="2023-10-10T03:32:50.995Z">
 <meta property="article:author" content="Mslxl">
 <meta property="article:tag" content="Compiler">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@
     
     <script id="hexo-configurations">
     window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -361,8 +361,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-06 00:05:48</span>
-            <span class="mobile">2023-10-06 00:05:48</span>
+            <span class="desktop">2023-10-10 11:32:50</span>
+            <span class="mobile">2023-10-10 11:32:50</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -396,101 +396,99 @@
 
 
         <div class="article-content markdown-body">
-            <h2 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h2><h3 id="语义分析的任务"><a href="#语义分析的任务" class="headerlink" title="语义分析的任务"></a>语义分析的任务</h3><p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
-<h4 id="对声明语句语义分析的任务"><a href="#对声明语句语义分析的任务" class="headerlink" title="对声明语句语义分析的任务"></a>对声明语句语义分析的任务</h4><ol>
+            <h2 id="语义分析">语义分析</h2>
+<h3 id="语义分析的任务">语义分析的任务</h3>
+<p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
+<h4 id="对声明语句语义分析的任务">对声明语句语义分析的任务</h4>
+<ol type="1">
 <li>种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、…），还是过程、…</li>
 <li>类型 （Type） : 这个我相信都不用说了把</li>
 <li>储存位置、长度 : 比如说我们写了一个对象或过程，我们都要在内存中给他分配一段空间，这样存储位置和所占用的空间的大小（长度）就成为标识符重要的属性</li>
 <li>值</li>
 <li>作用域</li>
 </ol>
-<h5 id="关于-3-举个例子："><a href="#关于-3-举个例子：" class="headerlink" title="关于 3 举个例子："></a>关于 3 举个例子：</h5><div class="highlight-container" data-rel="Pascal"><figure class="iseeu highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">	real x[<span class="number">8</span>]</span><br><span class="line">	integer i,j;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 &#x3D; 68</em> ，以此类推。</p>
+<h5 id="关于-3-举个例子">关于 3 举个例子：</h5>
+<div class="highlight-container" data-rel="Pascal"><figure class="iseeu highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">	real x[<span class="number">8</span>]</span><br><span class="line">	integer i,j;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 = 68</em> ，以此类推。</p>
 <table>
 <thead>
-<tr>
-<th align="center">名字</th>
-<th align="center">相对地址</th>
+<tr class="header">
+<th style="text-align: center;">名字</th>
+<th style="text-align: center;">相对地址</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">x</td>
-<td align="center">0</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
 </tr>
-<tr>
-<td align="center">i</td>
-<td align="center">64</td>
+<tr class="even">
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">64</td>
 </tr>
-<tr>
-<td align="center">j</td>
-<td align="center">68</td>
+<tr class="odd">
+<td style="text-align: center;">j</td>
+<td style="text-align: center;">68</td>
 </tr>
-</tbody></table>
-<p>|:-:|:-:|<br>|0|x[0]|<br>|8|x[1]|<br>| | |<br>| |……|<br>|56|x[7]|<br>|64|i|<br>|68|j|</p>
-<h4 id="对过程语义分析的任务"><a href="#对过程语义分析的任务" class="headerlink" title="对过程语义分析的任务"></a>对过程语义分析的任务</h4><p>对于过程来说，作用有<br>0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
-<h4 id="符号表-Symbol-Table"><a href="#符号表-Symbol-Table" class="headerlink" title="符号表 (Symbol Table)"></a>符号表 (Symbol Table)</h4><table>
+</tbody>
+</table>
+<p>|:-:|:-:| |0|x[0]| |8|x[1]| | | | | |……| |56|x[7]| |64|i| |68|j|</p>
+<h4 id="对过程语义分析的任务">对过程语义分析的任务</h4>
+<p>对于过程来说，作用有 0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
+<h4 id="符号表-symbol-table">符号表 (Symbol Table)</h4>
+<table>
 <thead>
-<tr>
-<th align="center">NAME</th>
-<th align="center">TYPE</th>
-<th align="center">KIND</th>
-<th align="center">VAL</th>
-<th align="center">ADDR</th>
+<tr class="header">
+<th style="text-align: center;">NAME</th>
+<th style="text-align: center;">TYPE</th>
+<th style="text-align: center;">KIND</th>
+<th style="text-align: center;">VAL</th>
+<th style="text-align: center;">ADDR</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">SIMPLE</td>
-<td align="center">整</td>
-<td align="center">简变</td>
-<td align="center"></td>
-<td align="center"></td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">SIMPLE</td>
+<td style="text-align: center;">整</td>
+<td style="text-align: center;">简变</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
-<tr>
-<td align="center">SYMBLE</td>
-<td align="center">实</td>
-<td align="center">数组</td>
-<td align="center"></td>
-<td align="center"></td>
+<tr class="even">
+<td style="text-align: center;">SYMBLE</td>
+<td style="text-align: center;">实</td>
+<td style="text-align: center;">数组</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
-<tr>
-<td align="center">TABLE</td>
-<td align="center">字符</td>
-<td align="center">常数</td>
-<td align="center"></td>
-<td align="center"></td>
+<tr class="odd">
+<td style="text-align: center;">TABLE</td>
+<td style="text-align: center;">字符</td>
+<td style="text-align: center;">常数</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
-<tr>
-<td align="center">.</td>
-<td align="center">.</td>
-<td align="center">.</td>
-<td align="center">.</td>
-<td align="center">.</td>
+<tr class="even">
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
 </tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>语义分析中收集的标识符的信息都会存放在符号表里，每一个标识符都对应着一条记录，每个字段对应着一个属性，比如说 <code>类型 (TYPE)</code>、<code>种属 (KIND)</code>、<code>值 (VALUE)</code> 和 <code>地址 (ADDRESS)</code>等等。</p>
 <p>符号表中通常带有一个字符串表，用来存放程序中标识符的名称和字符常数，这样的话 <code>NAME</code> 字段就会被分割成两个部分，一个用来存放标识符在字符串表中的起始位置，另一个存放标识符的长度，这里由于 Markdown 的限制不能将其表现出来。符号表中设计字符串表的作用是节省内存空间。</p>
-<h4 id="语义分析的另一个任务：语义检查"><a href="#语义分析的另一个任务：语义检查" class="headerlink" title="语义分析的另一个任务：语义检查"></a>语义分析的另一个任务：语义检查</h4><p>常见的语义错误有：</p>
-<ol>
-<li>变量或过程<strong>未经声明就使用</strong></li>
-<li>变量或过程名<strong>重复声明</strong></li>
-<li><strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换</li>
-<li><strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配<ul>
-<li><strong>数组下标</strong> 不是整数</li>
-<li>对<strong>非数组变量</strong>使用数组访问操作符</li>
-<li>对<strong>非过程名</strong>使用过程调用操作符</li>
-<li>过程调用的<strong>参数类型或数目</strong>不匹配</li>
-<li>函数<strong>返回类型</strong>有误</li>
-</ul>
-</li>
-</ol>
-<hr>
+<h4 id="语义分析的另一个任务语义检查">语义分析的另一个任务：语义检查</h4>
+<p>常见的语义错误有： 1. 变量或过程<strong>未经声明就使用</strong> 0. 变量或过程名<strong>重复声明</strong> 0. <strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换 0. <strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配 + <strong>数组下标</strong> 不是整数 + 对<strong>非数组变量</strong>使用数组访问操作符 + 对<strong>非过程名</strong>使用过程调用操作符 + 过程调用的<strong>参数类型或数目</strong>不匹配 + 函数<strong>返回类型</strong>有误</p>
+<hr />
 <pre class="mermaid">
 graph TD
     Start-- 字符流 -->词法分析器
@@ -502,7 +500,6 @@ graph TD
     目标代码生成器-- 目标机器语言 -->机器相关代码优化器
     机器相关代码优化器-- 目标机器语言 -->Fin
 </pre>
-
 
         </div>
 

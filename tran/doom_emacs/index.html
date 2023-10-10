@@ -18,15 +18,15 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="Table of Contents Table of Contents 安装 项目与工作空间 (Projects and Workspaces) 常见任务 (Common Tasks) 寻找文本 (Finding Text) 在文本间移动 (Moving To Text) 扩大和缩小范围 (Narrowing and Widening Regions) 多光标 (Multiple Cursors)">
+        <meta name="description" content="Table of Contents  Table of Contents 安装 项目与工作空间 (Projects and Workspaces) 常见任务 (Common Tasks) 寻找文本 (Finding Text) 在文本间移动 (Moving To Text) 扩大和缩小范围 (Narrowing and Widening Regions) 多光标 (Multiple Cursors">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Doom Emacs 工作">
 <meta property="og:url" content="https://blog.mslxl.com/tran/doom_emacs/index.html">
 <meta property="og:site_name" content="Mslxl&#39;s blog">
-<meta property="og:description" content="Table of Contents Table of Contents 安装 项目与工作空间 (Projects and Workspaces) 常见任务 (Common Tasks) 寻找文本 (Finding Text) 在文本间移动 (Moving To Text) 扩大和缩小范围 (Narrowing and Widening Regions) 多光标 (Multiple Cursors)">
+<meta property="og:description" content="Table of Contents  Table of Contents 安装 项目与工作空间 (Projects and Workspaces) 常见任务 (Common Tasks) 寻找文本 (Finding Text) 在文本间移动 (Moving To Text) 扩大和缩小范围 (Narrowing and Widening Regions) 多光标 (Multiple Cursors">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-05T16:05:48.710Z">
+<meta property="article:modified_time" content="2023-10-10T03:32:51.043Z">
 <meta property="article:author" content="Mslxl">
 <meta property="article:tag" content="emacs">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@
     
     <script id="hexo-configurations">
     window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -361,8 +361,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-06 00:05:48</span>
-            <span class="mobile">2023-10-06 00:05:48</span>
+            <span class="desktop">2023-10-10 11:32:51</span>
+            <span class="mobile">2023-10-10 11:32:51</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -412,19 +412,20 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1><ul>
+            <h1 id="table-of-contents">Table of Contents</h1>
+<ul>
 <li><a href="#table-of-contents">Table of Contents</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4-projects-and-workspaces">项目与工作空间 (Projects and Workspaces)</a></li>
-<li><a href="#%E5%B8%B8%E8%A7%81%E4%BB%BB%E5%8A%A1-common-tasks">常见任务 (Common Tasks)</a></li>
-<li><a href="#%E5%AF%BB%E6%89%BE%E6%96%87%E6%9C%AC-finding-text">寻找文本 (Finding Text)</a></li>
-<li><a href="#%E5%9C%A8%E6%96%87%E6%9C%AC%E9%97%B4%E7%A7%BB%E5%8A%A8-moving-to-text">在文本间移动 (Moving To Text)</a></li>
-<li><a href="#%E6%89%A9%E5%A4%A7%E5%92%8C%E7%BC%A9%E5%B0%8F%E8%8C%83%E5%9B%B4-narrowing-and-widening-regions">扩大和缩小范围 (Narrowing and Widening Regions)</a></li>
-<li><a href="#%E5%A4%9A%E5%85%89%E6%A0%87-multiple-cursors">多光标 (Multiple Cursors)</a></li>
-<li><a href="#%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E5%81%9A-undoing-and-redoing">撤销与重做 (Undoing and Redoing)</a></li>
-<li><a href="#%E5%9C%A8%E7%BC%96%E8%AF%91%E8%BE%93%E5%87%BA%E9%97%B4%E5%AF%BC%E8%88%AA-navigating-compliation-output">在编译输出间导航 (Navigating Compliation Output)</a></li>
-<li><a href="#%E6%9D%82%E9%A1%B9">杂项</a></li>
-<li><a href="#%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A-doom">了解更多 Doom</a></li>
+<li><a href="#安装">安装</a></li>
+<li><a href="#项目与工作空间-projects-and-workspaces">项目与工作空间 (Projects and Workspaces)</a></li>
+<li><a href="#常见任务-common-tasks">常见任务 (Common Tasks)</a></li>
+<li><a href="#寻找文本-finding-text">寻找文本 (Finding Text)</a></li>
+<li><a href="#在文本间移动-moving-to-text">在文本间移动 (Moving To Text)</a></li>
+<li><a href="#扩大和缩小范围-narrowing-and-widening-regions">扩大和缩小范围 (Narrowing and Widening Regions)</a></li>
+<li><a href="#多光标-multiple-cursors">多光标 (Multiple Cursors)</a></li>
+<li><a href="#撤销与重做-undoing-and-redoing">撤销与重做 (Undoing and Redoing)</a></li>
+<li><a href="#在编译输出间导航-navigating-compliation-output">在编译输出间导航 (Navigating Compliation Output)</a></li>
+<li><a href="#杂项">杂项</a></li>
+<li><a href="#了解更多-doom">了解更多 Doom</a></li>
 </ul>
 <p>原文: <a class="link"   target="_blank" rel="noopener" href="https://noelwelsh.com/posts/doom-emacs/" >Doom Emacs Workflows <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 发布于 2019 年 2 月 15日，部分功能可能已发生变化。</p>
 <p>我最近放弃了 Spacemacs, 开始使用 <a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/doom-emacs" >Doom Emacs <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>. 目前为止，Doom Emacs 的文档仍十分简陋，所以我用 Doom Emacs 写了这篇个人笔记来介绍我的工作流（包含一些我认为比较重要但是缺少文档的功能）。</p>
@@ -436,14 +437,15 @@
 </ul>
 <p>这篇文章并不打算介绍 Emacs 的运行方式和基础的 Vim 按键绑定，而是把焦点放在我认为出类拔萃的地方</p>
 <p><a id="org6a62219"></a></p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>一定要使用 <code>develop</code> 分支，不是 <code>master</code> ! 使用 <code>develop</code> 分支需要</p>
+<h1 id="安装">安装</h1>
+<p>一定要使用 <code>develop</code> 分支，不是 <code>master</code> ! 使用 <code>develop</code> 分支需要</p>
 <pre><code>git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 cd ~/.emacs.d
-git checkout develop
-</code></pre>
+git checkout develop</code></pre>
 <p>然后运行 <code>bin/doom quickstart</code> 即可完成安装。之后您可以运行 <code>bin/doom help</code> 查看可用命令。</p>
 <p><a id="org8fec0f7"></a></p>
-<h1 id="项目与工作空间-Projects-and-Workspaces"><a href="#项目与工作空间-Projects-and-Workspaces" class="headerlink" title="项目与工作空间 (Projects and Workspaces)"></a>项目与工作空间 (Projects and Workspaces)</h1><p>我发现使用项目与工作空间来管理工作十分有用。我从中得到了两点好处：从当前项目中寻找东西更快，还可以快速方便的通过保存和恢复 window 和 buffer 配置来回到工作。在 Doom 中，这些功能由 <code>projectile</code> 和 <code>persp-mode</code> 实现。</p>
+<h1 id="项目与工作空间-projects-and-workspaces">项目与工作空间 (Projects and Workspaces)</h1>
+<p>我发现使用项目与工作空间来管理工作十分有用。我从中得到了两点好处：从当前项目中寻找东西更快，还可以快速方便的通过保存和恢复 window 和 buffer 配置来回到工作。在 Doom 中，这些功能由 <code>projectile</code> 和 <code>persp-mode</code> 实现。</p>
 <p>基本工作流程如下：</p>
 <ul>
 <li>判断我自己要做什么。是单独的一个项目，还是涉及多个项目 (例如管理 Todo 列表)，亦或是不需要在项目中保存 (像是进行在 scratch buffer 中快速计算)？如果是单独的项目，就把它放到一个属于它的工作空间中，否则就把它放在默认工作空间中（main)</li>
@@ -457,7 +459,8 @@ git checkout develop
 <li><code>SPC f r</code> 打开最近浏览的文件</li>
 </ul>
 <p><a id="org7198548"></a></p>
-<h1 id="常见任务-Common-Tasks"><a href="#常见任务-Common-Tasks" class="headerlink" title="常见任务 (Common Tasks)"></a>常见任务 (Common Tasks)</h1><p>我经常使用的有：</p>
+<h1 id="常见任务-common-tasks">常见任务 (Common Tasks)</h1>
+<p>我经常使用的有：</p>
 <ul>
 <li><code>SPC :</code> 而非 <code>M x</code></li>
 <li><code>SPC g g</code> 打开 <a class="link"   target="_blank" rel="noopener" href="https://magit.vc/" >Magit <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 这是我唯一使用 Git 的方式</li>
@@ -468,30 +471,33 @@ git checkout develop
 <li><code>SPC b B</code> 切换到当前项目外的 buffer</li>
 </ul>
 <p><a id="org747bd18"></a></p>
-<h1 id="寻找文本-Finding-Text"><a href="#寻找文本-Finding-Text" class="headerlink" title="寻找文本 (Finding Text)"></a>寻找文本 (Finding Text)</h1><p>如果你知道有某个文本存在，却不知道它的位置，有两种方式可以找到它：</p>
+<h1 id="寻找文本-finding-text">寻找文本 (Finding Text)</h1>
+<p>如果你知道有某个文本存在，却不知道它的位置，有两种方式可以找到它：</p>
 <ul>
 <li><code>SPC s p</code> 搜索当前项目中的所有文件 （按下 <code>SPC s</code> 后等待弹窗出现可以了解其他选项)。您可以在搜索结果的 buffer 中使用 <code>Return</code> 跳转到该位置，或者使用 <code>C-c C-e</code> 来编辑所有的搜索结果。无论您修改了什么，您都可以使用 <code>C-c C-c</code> 来保存修改，或者使用 <code>C-c C-k</code> 放弃保存。这对于简单或者复杂的编辑多个文件中的内容都特别有用。</li>
 <li><code>/</code> 在当前 buffer 中搜索。使用 <code>n</code> 和 <code>N</code> 分别跳转的下一个搜索结果和上一个搜索结果。 (使用 <code>?</code> 可以向上搜索)</li>
 </ul>
 <p><a id="orgdeef4b5"></a></p>
-<h1 id="在文本间移动-Moving-To-Text"><a href="#在文本间移动-Moving-To-Text" class="headerlink" title="在文本间移动 (Moving To Text)"></a>在文本间移动 (Moving To Text)</h1><p>当您在屏幕上看到某个特定文字时，有很多方式可让您快速的将光标移动到那里：</p>
+<h1 id="在文本间移动-moving-to-text">在文本间移动 (Moving To Text)</h1>
+<p>当您在屏幕上看到某个特定文字时，有很多方式可让您快速的将光标移动到那里：</p>
 <ul>
-<li><code>s</code> 然后输入两个字符，您就能跳转的当前位置下方的最近的匹配项，用 <code>S</code> 则可以向上跳转。输入 <code>,</code> 可以继续跳转到该 buffer 中的上一项，&#x3D;;&#x3D; 则能跳转到下一项。通常配置下，这些功能只会跳转到当前行中的匹配结果，但是如果您多次输入 <code>,</code> 或 <code>;</code> ，您就可以在整个 buffer 中进行跳转操作。这是 <a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/evil-snipe" >evil-snipe <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的功能。</li>
+<li><code>s</code> 然后输入两个字符，您就能跳转的当前位置下方的最近的匹配项，用 <code>S</code> 则可以向上跳转。输入 <code>,</code> 可以继续跳转到该 buffer 中的上一项，=;= 则能跳转到下一项。通常配置下，这些功能只会跳转到当前行中的匹配结果，但是如果您多次输入 <code>,</code> 或 <code>;</code> ，您就可以在整个 buffer 中进行跳转操作。这是 <a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/evil-snipe" >evil-snipe <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的功能。</li>
 <li><code>g s SPC</code> ，然后键入你想找的文字。当没有歧义时，您可以直接跳转到那里，否则需要使用特定的字母组合来选择位置。如果您在 <code>config.el</code> 文件中配置了 <code>(seq avy-all-windows t)</code> ，则会在所有的可见窗口中进行匹配。我比较喜欢这个功能，因为他能让我在屏幕中快速跳转。该功能使用了 <a class="link"   target="_blank" rel="noopener" href="https://github.com/abo-abo/avy" >Avy <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</li>
 <li><code>g s</code> 后等待弹窗出现可以了解其他选项，其实我并没有真正使用过这个，因为上面的两个方法完全可以满足我的需求，但是或许我在这里错过了什么。</li>
 </ul>
 <p>当我想跳转到的位置和现在的位置比较近时，我会使用 evil-snipe (<code>s</code> 和 <code>S</code>)。如果位置较远或在另一个窗口，我会使用 Avy (<code>g s SPC</code>)。它们都能用来选择文本，假如我们有这样的一串文本：</p>
-<pre><code>Just some example text
-</code></pre>
+<pre><code>Just some example text</code></pre>
 <p>当光标位于 <code>J</code> 时，如果我们想选中 <code>Just some example</code> 。我们可以用 <code>v3e</code> ，但如果这样我们就需要去查单词的数量（还要记住 <code>e</code> 和 <code>w</code> 的区别），因此，我们可以用 <code>vsle</code> 。 <code>s</code> 表示使用 evil-snipe , <code>le</code> 则是我们找的两个字母。我们也可以用 <code>vgs SPC le</code> 来使用 Avy (然后我们需要把光标向右移动一个字母)。</p>
 <p>使用 evil-snipe 有点复杂。它把选择命令绑定到了 <code>s</code> 键上，但是其他一些指令（例如 yank, 或者说 <code>y</code>) 被 <a class="link"   target="_blank" rel="noopener" href="https://github.com/emacs-evil/evil-surround" >evil-surround <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 绑定到了 <code>s</code> 上。在这种情况下， evil-snipe 被绑定到了 <code>z</code> 键（ <code>Z</code> 来向后搜索）。如果我们不想在选中的文字中包含某个特定文本，我们可以使用 <code>x</code> ( <code>X</code> 键向后搜索 )</p>
 <p><a id="orgd28a4f0"></a></p>
-<h1 id="扩大和缩小范围-Narrowing-and-Widening-Regions"><a href="#扩大和缩小范围-Narrowing-and-Widening-Regions" class="headerlink" title="扩大和缩小范围 (Narrowing and Widening Regions)"></a>扩大和缩小范围 (Narrowing and Widening Regions)</h1><blockquote>
+<h1 id="扩大和缩小范围-narrowing-and-widening-regions">扩大和缩小范围 (Narrowing and Widening Regions)</h1>
+<blockquote>
 <p>译者注：该部分在新版 Doom emacs 中有较大变化，故该部分存在少许调整与原文不同，如需查看旧版本操作请查看原文。</p>
 </blockquote>
 <p>在 Emacs 中有一个叫 Narrowing 的功能，对于将 buffer 限制到一个选择的文本中十分有用，但它由于经常给初学者造成困扰，默认情况下被禁用，在初次使用时可以选择是否启用。它特别适合与多个光标（见下）同时使用。您可以用 <code>C-x n n</code> 来将范围缩小到当前选择的区域，使用 <code>C-x n w</code> 执行相反操作（即扩大范围）。用 <code>C-x n d</code> 来缩小范围到当前的函数也十分有用。</p>
 <p><a id="org806bc14"></a></p>
-<h1 id="多光标-Multiple-Cursors"><a href="#多光标-Multiple-Cursors" class="headerlink" title="多光标 (Multiple Cursors)"></a>多光标 (Multiple Cursors)</h1><p>多光标允许您同时编辑多个地方。Doom 提供了两种多光标的实现方式，它们分别是 <a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/evil-multiedit" >evil-multiedit <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 和 <a class="link"   target="_blank" rel="noopener" href="https://github.com/gabesoft/evil-mc" >evil-mc <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。我各人感觉 evil-multiedit 更容易使用，但是功能比较局限。</p>
+<h1 id="多光标-multiple-cursors">多光标 (Multiple Cursors)</h1>
+<p>多光标允许您同时编辑多个地方。Doom 提供了两种多光标的实现方式，它们分别是 <a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/evil-multiedit" >evil-multiedit <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 和 <a class="link"   target="_blank" rel="noopener" href="https://github.com/gabesoft/evil-mc" >evil-mc <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。我各人感觉 evil-multiedit 更容易使用，但是功能比较局限。</p>
 <p>有两种方式可以开始使用 evil-multiedit ：</p>
 <ul>
 <li>选择您想编辑的文本，然后按 <code>R</code> 继续选择在当前 buffer 中您想要编辑的文本。</li>
@@ -516,23 +522,27 @@ git checkout develop
 <p>如果光标之间不同步，使用撤消一些命令通常可以解决问题。</p>
 <p>当您完成了编辑操作后，按下 <code>gzu</code> 来移除所有光标</p>
 <p><a id="org35af536"></a></p>
-<h1 id="撤销与重做-Undoing-and-Redoing"><a href="#撤销与重做-Undoing-and-Redoing" class="headerlink" title="撤销与重做 (Undoing and Redoing)"></a>撤销与重做 (Undoing and Redoing)</h1><blockquote>
+<h1 id="撤销与重做-undoing-and-redoing">撤销与重做 (Undoing and Redoing)</h1>
+<blockquote>
 <p>译者注：原文在这里标注了 TODO</p>
 </blockquote>
 <p><em>TODO</em></p>
 <p><code>u</code> 键撤销。 <code>undo-tree</code> 系统比较复杂，但是您会慢慢习惯它。 <code>C-r</code> 和 <code>M-_</code> 执行重做操作， <code>C-x u</code> 显示撤销树（undo tree）</p>
 <p><a id="org4a475a3"></a></p>
-<h1 id="在编译输出间导航-Navigating-Compliation-Output"><a href="#在编译输出间导航-Navigating-Compliation-Output" class="headerlink" title="在编译输出间导航 (Navigating Compliation Output)"></a>在编译输出间导航 (Navigating Compliation Output)</h1><p><em>TODO</em></p>
+<h1 id="在编译输出间导航-navigating-compliation-output">在编译输出间导航 (Navigating Compliation Output)</h1>
+<p><em>TODO</em></p>
 <p>按下 <code>SPC p c</code> 或 <code>M-b</code> 来进行编译。 <code>]e</code> 和 <code>[e</code> 查看下一个或上一个 flycheck (一种拼写检查) 错误。 <code>SPC c x</code> 来分别列出所有错误。</p>
 <p><a id="org2d0afb3"></a></p>
-<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><ul>
+<h1 id="杂项">杂项</h1>
+<ul>
 <li><code>gcc</code> 注释或取消当前行的注释</li>
 <li><code>SPC oA</code> 打开 Org agenda</li>
 <li><code>SPC x</code> 为任意笔记打开临时 buffer (scratch buffer)</li>
 <li>更改文字大小： <code>M-=+</code> 增加字号， <code>M--</code> 缩小字号， <code>M-+</code> 重置</li>
 </ul>
 <p><a id="orgdbc49a3"></a></p>
-<h1 id="了解更多-Doom"><a href="#了解更多-Doom" class="headerlink" title="了解更多 Doom"></a>了解更多 Doom</h1><p>我对 Doom 的了解大多数都是通过阅读<a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/doom-emacs/blob/develop/modules/config/default/+evil-bindings.el" >默认按键绑定 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 查看我不认识的命令获得的。在 scratch buffer 中实验每个命令的含义很容易。</p>
+<h1 id="了解更多-doom">了解更多 Doom</h1>
+<p>我对 Doom 的了解大多数都是通过阅读<a class="link"   target="_blank" rel="noopener" href="https://github.com/hlissner/doom-emacs/blob/develop/modules/config/default/+evil-bindings.el" >默认按键绑定 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 查看我不认识的命令获得的。在 scratch buffer 中实验每个命令的含义很容易。</p>
 
         </div>
 
@@ -597,7 +607,7 @@ git checkout develop
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">使用 Doom Emacs 工作</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Table-of-Contents"><span class="nav-text">Table of Contents</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4-Projects-and-Workspaces"><span class="nav-text">项目与工作空间 (Projects and Workspaces)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E4%BB%BB%E5%8A%A1-Common-Tasks"><span class="nav-text">常见任务 (Common Tasks)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E6%96%87%E6%9C%AC-Finding-Text"><span class="nav-text">寻找文本 (Finding Text)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%96%87%E6%9C%AC%E9%97%B4%E7%A7%BB%E5%8A%A8-Moving-To-Text"><span class="nav-text">在文本间移动 (Moving To Text)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%A4%A7%E5%92%8C%E7%BC%A9%E5%B0%8F%E8%8C%83%E5%9B%B4-Narrowing-and-Widening-Regions"><span class="nav-text">扩大和缩小范围 (Narrowing and Widening Regions)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%85%89%E6%A0%87-Multiple-Cursors"><span class="nav-text">多光标 (Multiple Cursors)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E5%81%9A-Undoing-and-Redoing"><span class="nav-text">撤销与重做 (Undoing and Redoing)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E7%BC%96%E8%AF%91%E8%BE%93%E5%87%BA%E9%97%B4%E5%AF%BC%E8%88%AA-Navigating-Compliation-Output"><span class="nav-text">在编译输出间导航 (Navigating Compliation Output)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9"><span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A-Doom"><span class="nav-text">了解更多 Doom</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#table-of-contents"><span class="nav-text">Table of Contents</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4-projects-and-workspaces"><span class="nav-text">项目与工作空间 (Projects and Workspaces)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E4%BB%BB%E5%8A%A1-common-tasks"><span class="nav-text">常见任务 (Common Tasks)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E6%96%87%E6%9C%AC-finding-text"><span class="nav-text">寻找文本 (Finding Text)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%96%87%E6%9C%AC%E9%97%B4%E7%A7%BB%E5%8A%A8-moving-to-text"><span class="nav-text">在文本间移动 (Moving To Text)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%A4%A7%E5%92%8C%E7%BC%A9%E5%B0%8F%E8%8C%83%E5%9B%B4-narrowing-and-widening-regions"><span class="nav-text">扩大和缩小范围 (Narrowing and Widening Regions)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%85%89%E6%A0%87-multiple-cursors"><span class="nav-text">多光标 (Multiple Cursors)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E5%81%9A-undoing-and-redoing"><span class="nav-text">撤销与重做 (Undoing and Redoing)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E7%BC%96%E8%AF%91%E8%BE%93%E5%87%BA%E9%97%B4%E5%AF%BC%E8%88%AA-navigating-compliation-output"><span class="nav-text">在编译输出间导航 (Navigating Compliation Output)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9"><span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A-doom"><span class="nav-text">了解更多 Doom</span></a></li></ol>
 
     </div>
 </div>

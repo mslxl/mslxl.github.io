@@ -18,12 +18,12 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="原页面  该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;i3wm&#x2F;  是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。 3. 树i3 以树结构存储 X11 的输出，工作空间和窗口布局的所有信息。根节点是 X11 根窗口，接着是 X11 输出，然后是停靠区和内容容器，然后是工作区，最后是窗口本身。在">
+        <meta name="description" content="原页面  该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查&lt;https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;i3wm&#x2F;&gt;  是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。 3. 树 i3 以树结构存储 X11 的输出，工作空间和窗口布局的所有信息。根节点是 X11 根窗口，接着是 X11 输出，然后是停靠区和内容容器，然后是工作区，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="i3 User&#39;s Guide 进阶操作篇（对应第 3 节）">
 <meta property="og:url" content="https://blog.mslxl.com/tran/i3wm-tree/index.html">
 <meta property="og:site_name" content="Mslxl&#39;s blog">
-<meta property="og:description" content="原页面  该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;i3wm&#x2F;  是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。 3. 树i3 以树结构存储 X11 的输出，工作空间和窗口布局的所有信息。根节点是 X11 根窗口，接着是 X11 输出，然后是停靠区和内容容器，然后是工作区，最后是窗口本身。在">
+<meta property="og:description" content="原页面  该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查&lt;https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;i3wm&#x2F;&gt;  是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。 3. 树 i3 以树结构存储 X11 的输出，工作空间和窗口布局的所有信息。根节点是 X11 根窗口，接着是 X11 输出，然后是停靠区和内容容器，然后是工作区，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-tree/tree-shot4.png">
 <meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-tree/tree-layout2.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-tree/tree-layout1.png">
 <meta property="og:image" content="https://blog.mslxl.com/tran/i3wm-tree/tree-shot3.png">
 <meta property="article:published_time" content="2018-08-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-05T16:05:48.714Z">
+<meta property="article:modified_time" content="2023-10-10T03:32:51.043Z">
 <meta property="article:author" content="Mslxl">
 <meta property="article:tag" content="i3wm">
 <meta name="twitter:card" content="summary">
@@ -81,7 +81,7 @@
     
     <script id="hexo-configurations">
     window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -368,8 +368,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-06 00:05:48</span>
-            <span class="mobile">2023-10-06 00:05:48</span>
+            <span class="desktop">2023-10-10 11:32:51</span>
+            <span class="mobile">2023-10-10 11:32:51</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -420,69 +420,77 @@
 
         <div class="article-content markdown-body">
             <p><a class="link"   target="_blank" rel="noopener" href="https://i3wm.org/docs/userguide.html" >原页面 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查<a target="_blank" rel="noopener" href="https://www.reddit.com/r/i3wm/"><a class="link"   target="_blank" rel="noopener" href="https://www.reddit.com/r/i3wm/" >https://www.reddit.com/r/i3wm/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></a> 是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。</p>
-<h2 id="3-树"><a href="#3-树" class="headerlink" title="3. 树"></a>3. 树</h2><p>i3 以树结构存储 X11 的输出，工作空间和窗口布局的所有信息。根节点是 X11 根窗口，接着是 X11 输出，然后是停靠区和内容容器，然后是工作区，最后是窗口本身。在以前版本的 I3 中，我们有多个集合（包含输出、工作区）和每个工作区的表。这种方法使用起来很复杂，而且很难理解和实施。</p>
-<h3 id="3-1-容器树"><a href="#3-1-容器树" class="headerlink" title="3.1. 容器树"></a>3.1. 容器树</h3><p>组成树的每一个节点都叫做<code>容器（Containers）</code>，一个<code>容器（Container）</code>可以容纳一个窗口（ X11 窗口，就是那种可以看见并操作的，比如浏览器）。不过，<code>容器（Container）</code>也可以容纳其他的<code>容器（Containers）</code>。举一个十分常见的例子：当你在一个用一个显示器启动 i3 并在一个工作空间中打开两个终端，将会是像这样的一棵树：</p>
+<p>该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查<a class="link"   target="_blank" rel="noopener" href="https://www.reddit.com/r/i3wm/" >&lt;https://www.reddit.com/r/i3wm/&gt; <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。</p>
+<h2 id="树">3. 树</h2>
+<p>i3 以树结构存储 X11 的输出，工作空间和窗口布局的所有信息。根节点是 X11 根窗口，接着是 X11 输出，然后是停靠区和内容容器，然后是工作区，最后是窗口本身。在以前版本的 I3 中，我们有多个集合（包含输出、工作区）和每个工作区的表。这种方法使用起来很复杂，而且很难理解和实施。</p>
+<h3 id="容器树">3.1. 容器树</h3>
+<p>组成树的每一个节点都叫做<code>容器（Containers）</code>，一个<code>容器（Container）</code>可以容纳一个窗口（ X11 窗口，就是那种可以看见并操作的，比如浏览器）。不过，<code>容器（Container）</code>也可以容纳其他的<code>容器（Containers）</code>。举一个十分常见的例子：当你在一个用一个显示器启动 i3 并在一个工作空间中打开两个终端，将会是像这样的一棵树：</p>
 <table>
 <thead>
-<tr>
-<th align="left"><img  
+<tr class="header">
+<th style="text-align: left;"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/tran/i3wm-tree/tree-shot4.png"
-                      alt="tree-shot4"
+                     data-src="tree-shot4.png"
+                      alt="tree-shot4" 
                 ></th>
-<th align="right"><img  
+<th style="text-align: right;"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/tran/i3wm-tree/tree-layout2.png"
-                      alt="tree-layout2"
+                     data-src="tree-layout2.png"
+                      alt="tree-layout2" 
                 ></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left"></td>
-<td align="right"></td>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
 </tr>
-</tbody></table>
-<h3 id="3-2-定向分割容器"><a href="#3-2-定向分割容器" class="headerlink" title="3.2. 定向分割容器"></a>3.2. 定向分割容器</h3><p>当使用树型结构作为数据结构时，使用所谓的<code>分割容器（Split Containers）</code>来构建布局是很自然的。在 i3 中，每个<code>容器</code>都有方向（水平、垂直或未指定），并且方向取决于容器的布局（横向布局、纵向布局、堆叠、和选项卡）。在我们的工作区示例中，工作区容器的默认布局是横向分割（现在大多数监视器都是宽屏的）。如果将布局更改为 <code>纵向布局（splitv）</code>（默认按 <code>$mod+v</code> ），然后打开两个终端，i3 将显示如下窗口：</p>
+</tbody>
+</table>
+<h3 id="定向分割容器">3.2. 定向分割容器</h3>
+<p>当使用树型结构作为数据结构时，使用所谓的<code>分割容器（Split Containers）</code>来构建布局是很自然的。在 i3 中，每个<code>容器</code>都有方向（水平、垂直或未指定），并且方向取决于容器的布局（横向布局、纵向布局、堆叠、和选项卡）。在我们的工作区示例中，工作区容器的默认布局是横向分割（现在大多数监视器都是宽屏的）。如果将布局更改为 <code>纵向布局（splitv）</code>（默认按 <code>$mod+v</code> ），然后打开两个终端，i3 将显示如下窗口：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/tran/i3wm-tree/tree-shot2.png"
-                      alt="tree-shot2"
+                     data-src="tree-shot2.png"
+                      alt="tree-shot2" 
                 ></p>
 <p>从 v4 向后的版本可以拆分一切的东西：假设在工作空间上有两个终端（横向布局），将焦点移动到右面的终端，现在你想在下面再打开一个终端。如果你直接打开新终端，由于横向布局的原因，它会显示在右边。因此应该按下 <code>$mod + v</code> 将当前容器切换到纵向布局（切换到横向布局按<code>$mod+h</code>），现在再打开一个新终端，他会显示在当前的终端下面</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/tran/i3wm-tree/tree-shot1.png"
-                      alt="tree-shot1"
+                     data-src="tree-shot1.png"
+                      alt="tree-shot1" 
                 ></th>
 <th><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/tran/i3wm-tree/tree-layout1.png"
-                      alt="tree-layout1"
+                     data-src="tree-layout1.png"
+                      alt="tree-layout1" 
                 ></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>你可能已经猜到了：这棵树并没有深度限制</p>
-<h3 id="3-3-移动焦点到父容器"><a href="#3-3-移动焦点到父容器" class="headerlink" title="3.3. 移动焦点到父容器"></a>3.3. 移动焦点到父容器</h3><p>让我们继续 3.2 的例子，我们现有 1 个终端在左边，2 个终端一上一下摆在右边，焦点正在右下角的终端上，当你再打开一个新终端的时候，它会出现在右下角终端的下面。</p>
+<h3 id="移动焦点到父容器">3.3. 移动焦点到父容器</h3>
+<p>让我们继续 3.2 的例子，我们现有 1 个终端在左边，2 个终端一上一下摆在右边，焦点正在右下角的终端上，当你再打开一个新终端的时候，它会出现在右下角终端的下面。</p>
 <p>那么，如何打开新终端窗口，让它在当前窗口的右侧呢？答案就是<code>聚焦父容器（focus parent）</code>，在样，聚点将会移动到横向布局的容器。因此，现在新的窗口将被打开到右侧：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/tran/i3wm-tree/tree-shot3.png"
-                      alt="tree-shot3"
+                     data-src="tree-shot3.png"
+                      alt="tree-shot3" 
                 ></p>
 
         </div>
@@ -548,7 +556,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">i3 User&#39;s Guide 进阶操作篇（对应第 3 节）</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%A0%91"><span class="nav-text">3. 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%AE%B9%E5%99%A8%E6%A0%91"><span class="nav-text">3.1. 容器树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AE%9A%E5%90%91%E5%88%86%E5%89%B2%E5%AE%B9%E5%99%A8"><span class="nav-text">3.2. 定向分割容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E7%A7%BB%E5%8A%A8%E7%84%A6%E7%82%B9%E5%88%B0%E7%88%B6%E5%AE%B9%E5%99%A8"><span class="nav-text">3.3. 移动焦点到父容器</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91"><span class="nav-text">3. 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E6%A0%91"><span class="nav-text">3.1. 容器树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E5%90%91%E5%88%86%E5%89%B2%E5%AE%B9%E5%99%A8"><span class="nav-text">3.2. 定向分割容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%84%A6%E7%82%B9%E5%88%B0%E7%88%B6%E5%AE%B9%E5%99%A8"><span class="nav-text">3.3. 移动焦点到父容器</span></a></li></ol></li></ol>
 
     </div>
 </div>

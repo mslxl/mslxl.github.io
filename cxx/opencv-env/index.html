@@ -18,12 +18,12 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="该文章写于 2022 年十月，部分内容可能已经过时此文目的为实验室同学参考，个人还是推荐尽早换下 Dev  用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。 用 Visual Studio 的话网上全是教程，直接百度就行。 需要准备的软件 Dev-C++ 或 RedPanda C++ MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时">
+        <meta name="description" content="该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev  用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。 用 Visual Studio 的话网上全是教程，直接百度就行。 需要准备的软件  Dev-C++ 或 RedPanda C++ MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dev-C++ OpenCV 环境搭建">
 <meta property="og:url" content="https://blog.mslxl.com/cxx/opencv-env/index.html">
 <meta property="og:site_name" content="Mslxl&#39;s blog">
-<meta property="og:description" content="该文章写于 2022 年十月，部分内容可能已经过时此文目的为实验室同学参考，个人还是推荐尽早换下 Dev  用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。 用 Visual Studio 的话网上全是教程，直接百度就行。 需要准备的软件 Dev-C++ 或 RedPanda C++ MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时">
+<meta property="og:description" content="该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev  用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。 用 Visual Studio 的话网上全是教程，直接百度就行。 需要准备的软件  Dev-C++ 或 RedPanda C++ MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.mslxl.com/cxx/opencv-env/src.png">
 <meta property="og:image" content="https://blog.mslxl.com/cxx/opencv-env/mingw.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://blog.mslxl.com/cxx/opencv-env/set.png">
 <meta property="og:image" content="https://blog.mslxl.com/cxx/opencv-env/prev.png">
 <meta property="article:published_time" content="2022-10-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-05T16:05:48.670Z">
+<meta property="article:modified_time" content="2023-10-10T03:32:50.999Z">
 <meta property="article:author" content="Mslxl">
 <meta property="article:tag" content="OpenCV">
 <meta property="article:tag" content="C++">
@@ -86,7 +86,7 @@
     
     <script id="hexo-configurations">
     window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -373,8 +373,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-06 00:05:48</span>
-            <span class="mobile">2023-10-06 00:05:48</span>
+            <span class="desktop">2023-10-10 11:32:50</span>
+            <span class="mobile">2023-10-10 11:32:50</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -429,17 +429,19 @@
 
         <div class="article-content markdown-body">
             <blockquote>
-<p>该文章写于 2022 年十月，部分内容可能已经过时<br>此文目的为实验室同学参考，个人还是推荐尽早换下 Dev</p>
+<p>该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev</p>
 </blockquote>
 <p>用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。</p>
 <p>用 Visual Studio 的话网上全是教程，直接百度就行。</p>
-<h2 id="需要准备的软件"><a href="#需要准备的软件" class="headerlink" title="需要准备的软件"></a>需要准备的软件</h2><ul>
+<h2 id="需要准备的软件">需要准备的软件</h2>
+<ul>
 <li>Dev-C++ 或 RedPanda C++</li>
 <li>MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时安装)</li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://opencv.org/releases" >OpenCV Source <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://cmake.org/download/" >CMake <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<h2 id="步骤">步骤</h2>
+<ol type="1">
 <li>下载 OpenCV 源代码</li>
 </ol>
 <p>由于新版的 OpenCV 不提供 gcc 的编译，而 Dev-C++ 只能使用 gcc 编译器，所以我们需要自行使用 gcc 编译 OpenCV</p>
@@ -447,42 +449,40 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/src.png"
-                     
+                     data-src="src.png"
+                      
                 ></p>
 <p>下载完成后进行解压（这里解压到 <code>D:\Code\opencv\opencv-4.6.0</code> )</p>
-<ol start="2">
+<ol start="2" type="1">
 <li>配置 OpenCV 编译环境</li>
 </ol>
 <p>在 <code>Dev-C++</code> 的安装目录找到 <code>MinGW</code> 目录</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/mingw.png"
-                     
+                     data-src="mingw.png"
+                      
                 ></p>
 <p>将 <code>MinGW\bin</code> 添加到 Path 环境变量中（具体方法参考百度）</p>
-<ol start="3">
+<ol start="3" type="1">
 <li>编译 OpenCV</li>
 </ol>
 <p>打开命令行，进入 opencv 的代码文件夹</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/pwd.png"
-                     
+                     data-src="pwd.png"
+                      
                 ></p>
-<p>依次执行下列命令</p>
-<div class="highlight-container" data-rel="Pwsh"><figure class="iseeu highlight pwsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir build <span class="comment">#创建 build 文件夹</span></span><br><span class="line"><span class="built_in">cd</span> build <span class="comment">#进入 build 文件夹</span></span><br><span class="line">cmake <span class="literal">-G</span> <span class="string">&quot;MinGW Makefiles&quot;</span> .. <span class="comment">#生成 makefile</span></span><br><span class="line">mingw32<span class="literal">-make</span> <span class="comment">#根据 makefile 编译</span></span><br><span class="line">mingw32<span class="literal">-make</span> install</span><br></pre></td></tr></table></figure></div>
-
-<p>在执行 cmake 的时候可能会下载其他依赖，这个过程比较慢，<del>有科技手段的话可以用点科技手段</del><br>执行 <code>mingw-make</code> 时可以使用 <code>-j</code> 参数指定进程数量</p>
-<p>最终编译后的文件将保存在代码目录下的 <code>build/install</code> 下<br><img  
+<p>依次执行下列命令 <div class="highlight-container" data-rel="Pwsh"><figure class="iseeu highlight pwsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir build <span class="comment">#创建 build 文件夹</span></span><br><span class="line"><span class="built_in">cd</span> build <span class="comment">#进入 build 文件夹</span></span><br><span class="line">cmake <span class="literal">-G</span> <span class="string">&quot;MinGW Makefiles&quot;</span> .. <span class="comment">#生成 makefile</span></span><br><span class="line">mingw32<span class="literal">-make</span> <span class="comment">#根据 makefile 编译</span></span><br><span class="line">mingw32<span class="literal">-make</span> install</span><br></pre></td></tr></table></figure></div></p>
+<p>在执行 cmake 的时候可能会下载其他依赖，这个过程比较慢，<del>有科技手段的话可以用点科技手段</del> 执行 <code>mingw-make</code> 时可以使用 <code>-j</code> 参数指定进程数量</p>
+<p>最终编译后的文件将保存在代码目录下的 <code>build/install</code> 下 <img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/done.png"
-                     
+                     data-src="done.png"
+                      
                 ></p>
-<ol start="4">
+<ol start="4" type="1">
 <li>配置 IDE</li>
 </ol>
 <p>在 Dev-C++ 中编译器配置里</p>
@@ -494,50 +494,48 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/bin.png"
-                     
+                     data-src="bin.png"
+                      
                 ></p>
 <p>在 <code>Library</code> 中添加 <code>build\install\x64\mingw\lib</code> 目录</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/lib.png"
-                     
+                     data-src="lib.png"
+                      
                 ></p>
 <p>在 <code>C++ Include</code> 中添加 <code>build\install\include</code> 目录</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/inc.png"
-                     
+                     data-src="inc.png"
+                      
                 ></p>
 <p>在 Linker 参数中加入以下链接库</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-lopencv_highgui460.dll -lopencv_calib3d460.dll -lopencv_core460.dll -lopencv_dnn460.dll -lopencv_features2d460.dll -lopencv_flann460.dll -lopencv_gapi460.dll -lopencv_imgcodecs460.dll -lopencv_imgproc460.dll -lopencv_ml460.dll -lopencv_objdetect460.dll -lopencv_photo460.dll -lopencv_stitching460.dll -lopencv_video460.dll -lopencv_videoio460.dll</span><br></pre></td></tr></table></figure></div>
-
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/linker.png"
-                     
+                     data-src="linker.png"
+                      
                 ></p>
 <p>至此，OpenCV 环境配置完成</p>
-<p><strong>需注意</strong>，以上配置应对同一组编译器配置，而且使用的编译器配置应当和设置的编译器配置一致。<br><img  
+<p><strong>需注意</strong>，以上配置应对同一组编译器配置，而且使用的编译器配置应当和设置的编译器配置一致。 <img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/set.png"
-                     
+                     data-src="set.png"
+                      
                 ></p>
-<ol start="5">
+<ol start="5" type="1">
 <li>测试</li>
 </ol>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;opencv2/highgui.hpp&quot;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cv::namedWindow(&quot;Test Windows&quot;);</span><br><span class="line">	cv::waitKey();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
 <p>试试这个段代码，这段代码将会创建一个空白窗口</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/cxx/opencv-env/prev.png"
-                     
+                     data-src="prev.png"
+                      
                 ></p>
 
         </div>
