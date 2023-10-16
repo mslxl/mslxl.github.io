@@ -6,26 +6,27 @@
   };
   outputs = inputs@ { self, nixpkgs }:
     let
-      # supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      supportedSystems = [ "x86_64-linux" ];
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit system; };
       });
     in
     {
-      devShells = forEachSupportedSystem ({ pkgs }: let 
-          typora = pkgs.callPackage ./.flake-package/typora.nix {};
-          hugo = pkgs.callPackage ./.flake-package/hugo-extended.nix {};
-        in{
+      devShells = forEachSupportedSystem ({ pkgs }: 
+        {
           default = pkgs.mkShell {
             buildInputs = [
               pkgs.nixpkgs-fmt
             ];
-            packages = [
+            packages = with pkgs; [
               pkgs.shellcheck
-              typora
-              hugo
+              pandoc
+              nodejs
+              nodePackages.pnpm
             ];
+            shellHook = ''
+              pnpm install
+            '';
           };
       });
     };
