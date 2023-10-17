@@ -13,24 +13,26 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://blog.mslxl.com/cp/2023sdcpc/"/>
+    <link rel="canonical" href="https://blog.mslxl.com/project/mit6.824/gfs/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="周围的人都写了篇小作文, 那我也跟按照圈子里的惯例写个小流水帐吧,文笔不好,算给日后的自己留个纪念吧 首先恭喜我校2银3铜, 听说是校史上就牌子数量的的最好成绩. 其次恭喜我自己终于拿到了XCPC上的第一块牌子(算是弥补了去年打铁的遗憾, RK55 也算是一个好开始吧). 这次的队伍算是重组后的队伍, 前前后后自行进行了几场训练, 也参加了几场学校里的自行组织的几场训练, 现在回想起来这些确实给我">
+        <meta name="description" content="GFS （Google File System） 是一种可拓展的分布式文件系统，主要用于大型分布式数据密集型应用。它在廉价的普通硬件上提供了运行时的容错，并为大量客户机提供了聚合性能 在论文中，Google 介绍了支持分布式应用程序的拓展文件系统接口，并讨论了 GFS 设计，基准测试和实际表现的种种方面 介绍 GFS 和传统的分布式文件系统在性能，拓展性，稳定性和可用性上有同样的目标，但是传统的分">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2023 SDCPC 赛后回顾">
-<meta property="og:url" content="https://blog.mslxl.com/cp/2023SDCPC/index.html">
+<meta property="og:title" content="MIT6.824 分布式系统 GFS 笔记">
+<meta property="og:url" content="https://blog.mslxl.com/project/mit6.824/gfs/index.html">
 <meta property="og:site_name" content="Mslxl&#39;s blog">
-<meta property="og:description" content="周围的人都写了篇小作文, 那我也跟按照圈子里的惯例写个小流水帐吧,文笔不好,算给日后的自己留个纪念吧 首先恭喜我校2银3铜, 听说是校史上就牌子数量的的最好成绩. 其次恭喜我自己终于拿到了XCPC上的第一块牌子(算是弥补了去年打铁的遗憾, RK55 也算是一个好开始吧). 这次的队伍算是重组后的队伍, 前前后后自行进行了几场训练, 也参加了几场学校里的自行组织的几场训练, 现在回想起来这些确实给我">
+<meta property="og:description" content="GFS （Google File System） 是一种可拓展的分布式文件系统，主要用于大型分布式数据密集型应用。它在廉价的普通硬件上提供了运行时的容错，并为大量客户机提供了聚合性能 在论文中，Google 介绍了支持分布式应用程序的拓展文件系统接口，并讨论了 GFS 设计，基准测试和实际表现的种种方面 介绍 GFS 和传统的分布式文件系统在性能，拓展性，稳定性和可用性上有同样的目标，但是传统的分">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-04T10:17:17.000Z">
-<meta property="article:modified_time" content="2023-10-17T05:22:33.003Z">
+<meta property="og:image" content="https://blog.mslxl.com/project/mit6.824/gfs/image-20230921174912019.png">
+<meta property="article:published_time" content="2023-09-21T00:39:00.000Z">
+<meta property="article:modified_time" content="2023-10-17T05:22:33.035Z">
 <meta property="article:author" content="Mslxl">
-<meta property="article:tag" content="Competitive Programming">
-<meta property="article:tag" content="ICPC">
+<meta property="article:tag" content="mit6.824">
+<meta property="article:tag" content="分布式系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.mslxl.com/project/mit6.824/gfs/image-20230921174912019.png">
     
     
     <!--- Icon Part-->
@@ -42,7 +44,7 @@
     
     <title>
         
-            2023 SDCPC 赛后回顾 -
+            MIT6.824 分布式系统 GFS 笔记 -
         
         Mslxl&#39;s Blog
     </title>
@@ -335,7 +337,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">2023 SDCPC 赛后回顾</h1>
+                <h1 class="article-title-regular">MIT6.824 分布式系统 GFS 笔记</h1>
             
             </div>
             
@@ -355,8 +357,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-06-04 18:17:17</span>
-        <span class="mobile">2023-06-04 18:17:17</span>
+        <span class="desktop">2023-09-21 08:39</span>
+        <span class="mobile">2023-09-21 08:39</span>
         <span class="hover-info">创建</span>
     </span>
     
@@ -369,33 +371,17 @@
     
 
     
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-    
     
         <span class="article-tags article-meta-item">
             <i class="fa-regular fa-tags"></i>&nbsp;
             <ul>
                 
                     <li>
-                        <a href="/tags/Competitive-Programming/">Competitive Programming</a>&nbsp;
+                        <a href="/tags/mit6-824/">mit6.824</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/ICPC/">ICPC</a>&nbsp;
+                        | <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a>&nbsp;
                     </li>
                 
             </ul>
@@ -417,21 +403,128 @@
 
 
         <div class="article-content markdown-body">
-            <p>周围的人都写了篇小作文, 那我也跟按照圈子里的惯例写个小流水帐吧,文笔不好,算给日后的自己留个纪念吧</p>
-<p>首先恭喜我校2银3铜, 听说是校史上就牌子数量的的最好成绩. 其次恭喜我自己终于拿到了XCPC上的第一块牌子(算是弥补了去年打铁的遗憾, RK55 也算是一个好开始吧).</p>
-<p>这次的队伍算是重组后的队伍, 前前后后自行进行了几场训练, 也参加了几场学校里的自行组织的几场训练, 现在回想起来这些确实给我们队伍的合作提供了很大的帮助. 十分感谢学校提供的训练场地(尽管有点难以描述)和 yrh lmy 等人的帮助. 不同于 lmy 的队伍, 我们队其实是到学校统一组织训练的时候才知道出题人是 SUA 并开始专门挑 SUA 的题目训练, 如果不是因为 lmy 的消息和 yrh 及学校老师组织的训练, 我们队伍这次比赛大概并不会这么轻松愉快.</p>
-<p>day(-9) 突然抗原阳了,在此之前我还没阳过, 在家里烧了4天, 说实话这一周都过的有点浑浑噩噩的, 阳康后已经 day(-3) 了, 赛前稍微怀着愧疚的心理看了看半平面交, 这段时间说实话感觉精神还不太对, 没办法集中注意力太长时间, 心里已经准备者打铁争铜了,不过当时还有一点希望万一队友能带我飞呢(划去)</p>
-<p>day0 热身赛前我和队内的佬 mhy 乘大巴到了 QLU, 中午在和队友一起逛 QLU 校园, 围着校园走了一圈,深刻认识到了我财专计科输输输. 绕学校一圈差不多走了 1 小时, 回到艺体中心的时候差点没瘫到座位上. 热身赛题目发现来一眼往年原题(但是已经忘了当初训练谁写的了). 感觉签的挺慢的, 不过都是一遍过. 签完后玩了差不多1小时,稍微测了下评测机后给QLU OJ贡献了差不多70发D题, 说实话感觉评测机挺拉的. 离结束还剩半小时的时候在草稿纸记了记次日需要改的电脑配置, 主要就是交换键盘 ESC 和 CapsLk, 启用 VSCode 的 vim 和 cph 插件, 改字号为 28, 打开 Natrual Scrolling. 打完笔记完后和队长 gjh , 巨佬mhy 一起去“老胖烧烤”吃了一顿. (还没给队长烧烤钱呢, 希望队长看不到这段话)(笑)</p>
-<p>晚上有点怕第二天晕车, 直接在长清找了个旅馆住下了. 值得一提的是晚上 gjh 直接上门交流, 然后回去抄了张二分的板子</p>
-<p>day1 正式赛. 我先按照热身赛记的笔记修改比赛机配置, 队友 gjh 和 mhy 开始开题. 事后听闻 gjh 一下开到了 H 题无人区(笑), 有时候不得不感慨太巧了. 改完配置后我按着顺序开了 A 题, 读了 3 行发现是签到, 8分钟时间一遍过. 之后 gjh 给我喂了 I 题的题意, 15分钟提交一遍过. 之后我和 mhy 去开了 G 题, 巨佬 mhy 给喂了一个关键的公式变形, 我自己按着这个变形稍微改了改一遍过. 在这之后 gjh 提出 D 题是二分. 队里没人会二分, 但昨晚某先知刚抄了二分板子. gjh 接过电脑后一遍过 D 题. 这时候我们罚时才 167, 没有榜能跟了, 因为我们就是领榜的人 ,这也给我们痛失金牌做了不少铺垫(之前没遇到过这种情况).</p>
-<p>因为之前我对计算几何比较熟悉, 我直接去开了 M 题, mhy 和 gjh 去开了 E. 这时候就稍微有点卡题, gjh 过来看了一眼 M, 一会又给我喂了一个三分的思路. 这时候 M 题已经可以说是过了. 但是我没带零点三角切分有向面积的板子, 只依稀记得公式的样子和它的推导巨长. 我推了一段时间后发现推不出来, 因此按照三分的思路换了双指针的写法, 计算面积的时候选择 b - 1 作为基, 特判了 k = 1 的情况, 没想到 WA 了一发. 一时半会没思路就把电脑让给 mhy 写 E 题了, 我在纸上找错误. 当时 mhy 提出了使用费马小定理做 E, 不过当时没人会, 就稍微写了点暴力. 当时想的是万一打个表能找到规律呢, 本地跑的挺快, 结果大胆一交 WA 了. 这时候我大概找到了 M 错误的原因, 接过电脑又改了改, 结果造错了样例浪费 20 分钟. 在这段时间队长 gjh 证明了 E 的正确性, mhy 开始改E. E 改完后mhy佬不太敢交, 我稍微改了改M题后发现交不上去, 大概找了四五分钟的原因. mhy 大胆交了一发E 后 AC 了, 我们就猜测 M 题文件名有空格导致提交失败, 修改文件名后提交就 AC了. 此时刚封榜, 还有 1 小时时间</p>
-<p>这时候之前积累的隐患就出现, 我们没有看榜单去开了 B 题, 由于代码量过大 gjh 实现不来, 而我被喂了两三遍题意才懂, 结果最后也没写完. 此时我们也没有看榜, 算着自己应该是金尾银首.直到滚榜的时候我们才发现 M 题是个金牌题, 而 L 题作为铜牌题我们甚至都没人去读. 最后草草结果以 RK 55 基本上算银首收场.</p>
-<p>说多了都是泪, 如果我带了计算几何的板子就可以高速收掉 M 去做其他题, 或者说如果有人在卡题的时候去看了 L 题, 可能就是 7 题金了. 但是叉吸劈吸没有如果, 银了就是银, 只能以后的赛事中吸取教训了.</p>
-<p>回顾往年, 大一的时候我还是对算法一无所知, 和 lmy 说的功利性不同, 我来打 XCPC 大概只是为了弥补高中时候的遗憾吧, 高中的时候我是有心去参加 oi 的, 但是苦于没有教练, 学校也不支持, 只能做罢. 而大学加入 ACM 学社只是因为热爱和高中留下的遗憾. 不知道能读到这里的人有多少, 我和其他人对 ACM 的观点不太一样, ACM 现在是比较知名的高投入低回报比赛, 而我校作为一个弱校, 训练困难, 鼓励政策也不大, 甚至可以说没有. 在这种情况下用一种功利的心态去打比赛, 我个人认为它回报很难能达到一种能令人满意的程度. 如果只是单纯为了一块牌子, 不如早早收手. 毕竟在现在的这个互联网寒冬中,过去一块牌子乱杀的时代已经一去不复返了</p>
-<p>对于我个人而言, 去年SDCPC打铁, 区域赛又铁, 现在终于能算出了点成果了. 正如蒋莉所说的, 没有什么是加训解决不了的, 如果有, 那就 all in. 这个比赛很累, 准备时间也很长, 但是如果只要网瘾程度够大, 那这个比赛还是很快乐的. 过去一年队伍聚聚散散, 干过与队友熬夜做题, 早起训练, 也试过晚上独自留在教学楼中熬夜打 cf(值得一提的是打完后给lmy发消息吐槽, 结果发现他也在熬夜打), 现在回味起来还是充满乐趣的. 到现在我也算经历了不少比赛, 感受过天赋性选手, 也在榜单上见过奋斗形选手, 被高中生吊打过, 但也曾吊打过其他大学生(虽然是在很水的赛事上). 我比较认可在我算法模板上的一句话, 但他的来源我已经找不到了: “在没有结束之前, 总要做很多没有意义的事情, 这样才可以在某一天, 用这些无意义的事情去堵住那些讨厌的缺口”. 可能现在我所做的是无意义的, 但总有一天它能发挥它的作用. 希望我校那些真正热爱的人能吸取我们队的教训, 做好重视平时的训练和积累, 加训, 加训, 注意练习中积累一套自己的模板和经验, 别人的模板自己用起来终究不是那么熟练.</p>
-<p>最后写点可能看起来有点像八股的话吧. 感谢现在的队长 gjh 在大一的时候作为我领路人, 感谢 h5 对我平时问题的解答, 感谢大一辅导员任楠开明的态度. 还有与我一起训练的朋友能在我心态爆炸的时候能一同吹水, lmy, xzy 和 yrh 的恶意出题让我见到世界的开阔与变化. 感谢之前一年班长 shy 的陪伴(虽然他现在已经放弃了 xcpc 而转头去做了 semantic seg 的研究). 感谢我的队友和社团成员的陪伴, 希望接下来的大学生活中大家能一同走向辉煌.</p>
-<p>比赛没拍照, 偷一张学校的宣传图. 先沉淀一个月准备期末考试, 如果网络赛能抢到名额的话, 接下来区域赛再见了.</p>
-<p>Good luck, and farewell.</p>
+            <p>GFS （Google File System） 是一种可拓展的分布式文件系统，主要用于大型分布式数据密集型应用。它在廉价的普通硬件上提供了运行时的容错，并为大量客户机提供了聚合性能</p>
+<p>在论文中，Google 介绍了支持分布式应用程序的拓展文件系统接口，并讨论了 GFS 设计，基准测试和实际表现的种种方面</p>
+<h2 id="介绍">介绍</h2>
+<p>GFS 和传统的分布式文件系统在性能，拓展性，稳定性和可用性上有同样的目标，但是传统的分布式文件系统目前存在以下缺点：</p>
+<ol type="1">
+<li>组成部分的故障是一个常见的现象。由大量机器组成的系统实际上使的系统的部分故障会是一个非常常见的现象，因此文件系统中必须集成有持续监控，错误检测，容错机制和自动恢复功能</li>
+<li>在传统意义上分布式文件系统上存储的文件一般很大，因此对于 IO操作的设想和块大小需要重新考虑</li>
+<li>大多数文件的操作不是覆写，而是在原有的基础上进行追加。随机写文件在实际操作中也不存在。通常一个文件在被写入后，只会被顺序的反复读取。考虑以上特点，在原子性保证和性能方面应着重考虑文件追加操作。而客户机的缓存数据块没有任何优点</li>
+<li>在设计文件系统的 API 时增加系统的灵活性，可以使的整个系统受益。Google 通过放宽一致性模型极大的简化的文件系统，也不会给应用程序带来沉重的负担</li>
+</ol>
+<h2 id="设计一览">设计一览</h2>
+<h3 id="设想">设想</h3>
+<ul>
+<li>系统运行在常见的商用机上。它必须能<strong>自我监控和检测</strong>，并在常规基础上检测、容忍组件故障，并迅速从组件故障中恢复。</li>
+<li><strong>系统存储大文件</strong>。以 GB 为单位的文件是一种常见情况，应该被高效的管理，而小文件不需要优化。</li>
+<li>工作负载主要由两部分组成：<strong>大量的读取流</strong>和少量的随机读。在读取流中，每次通常读取 <span class="math inline">\(1 MiB +\)</span>。同一客户机上的读取通常是一段连续的区域。随机读通常只有几KB，并且每次偏移一定值。故注重性能的应用程序通常对它们的小读取进行批处理和排序，以便在文件中稳定地前进，而不是来回移动。</li>
+<li>工作负载也包含追加文件时的<strong>大量的连续写操作。</strong>通常写的大小和读的大小相似。文件一经写入，很少进行修改。少量的写操作会有，但不需要优化</li>
+<li>系统需要对多客户端并发追加同一个文件具备良好高效的语义定义。文件系统中的文件常作为生产-消费模型中的队列，或者是用于数据合并。运行在不同主机上的生产者可能会同时写一个文件，同时文件可能会同时或稍后被读取，因此需要在少量开销下保证原子性。</li>
+<li>高带宽比低延迟重要。大多数目标应用程序都重视以高速率批量处理数据，而很少有对单个读或写有严格的响应时间要求</li>
+</ul>
+<h3 id="接口">接口</h3>
+<p>GFS 提供了一些常见的文件系统接口。此外，具有<strong>快照</strong>和<strong>追加</strong>操作。快照以较低的成本创建文件或目录树的副本。追加允许多个客户端并发地向同一个文件追加数据，同时保证每个客户端追加的原子性。它对于实现多路合并结果和生产者-消费者队列非常有用，许多客户机可以同时追加到这些队列，而无需额外的锁定。我们发现这些类型的文件在构建大型分布式应用程序时是无价的。</p>
+<h3 id="架构">架构</h3>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="image-20230921174912019.png"
+                      
+                ></p>
+<p>GFS 集群包含可以被客户端访问到的一个 master 的复数个 Chunk Servers。每个都是一个 Linux 主机运行的用户级的程序。</p>
+<p>每个文件被拆分成多个 Chunk，每个 Chunk 一般为 64 MiB 存储在不同的 Chunk Server 中。</p>
+<h2 id="维护内容">维护内容</h2>
+<h3 id="元信息">元信息</h3>
+<p>在 master 中维护有以下内容：</p>
+<ol type="1">
+<li>文件名与 chunk handle 数组的对应关系</li>
+<li>chunk handle 和 chunk 版本号的对应关系</li>
+<li>chunk handle 和 chunk server 地址、primary chunk server、租约的对应关系</li>
+<li>日志</li>
+<li>检查点</li>
+</ol>
+<p>除第三点外，所有数据均需要进行持久化存储</p>
+<p>Master 不存储 chunk handle 和 chunk server 的对应关系，这些信息只保存在内存当中。Chunk server 会定期通过心跳的方式通知 master 其含有的所有 chunk。Master 根据目前内存中已有的 chunk server 的数量采取相应的行动（复制，删除等）。因为 master 不存储 chunk 中的内容（即 master 不决定 chunk），chunk server 的宕机、数据错误、离线等都需要 master 进行相应的修改，而 master 可能止一个，master 进行主动的修改可能会导致一致性问题，因此 master 不持久化维护对应关系，而是由 chunk server 决定这些内容</p>
+<p>而 chunk 到版本号的关系必须持久化。由于 chunk server 可能会掉线，从而错过某次更新，所以 chunk server 所存储的版本号不一定正确。 master 存储版本号，以需要区分哪一个 chunk server 中的信息是过时的，而哪一个是最新的。</p>
+<p>所有信息的修改均通过操作日志的方式实现。在收到RPC指令后，Master 会将所有的操作记录在日志中，并将日志同步到备份 Master 上，当操作、记录与同步均完成后 Master 才会对 Client 进行回复，任意一个过程的失败均标志着全过程的失败。Master 在重启中恢复时，会通过重放 Log 的方式恢复数据，为了减少重放的负担，Master 会定期对数据建立检查点，每次回放时只需要从最近的检查点开始回放。</p>
+<h3 id="锁">锁</h3>
+<p>为了保证数据的一致性，确保在并发操作中文件名不会冲突，需要对文件和路径进行加锁，每个文件和目录均有一个读写锁。GFS 会对每个文件和所属目录从根目录开始逐级加锁。</p>
+<h2 id="读文件">读文件</h2>
+<pre class="mermaid">sequenceDiagram
+    Client->>+Master: 发送文件名和要读取的位置(Offset)
+    Master-->>-Client: 返回 chunk server, handle, 版本号（一般返回3条）
+    Client->>Client: 缓存
+    Client->>+Chunk Server: 读取 Chunk
+    Chunk Server->>Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
+    Chunk Server-->>Client: 返回 Chunk 内容</pre>
+<p>如果在读取 Chunk 时，Client 未能正常连接 Chunk Server，或者 Chunk Server 校验失败，那么 Client 会去请求另一个 Chunk Server。</p>
+<p>在读取过程中，如果请求的 Chunk Server 是 Primary，那么数据就是一致的。否则数据有可能就旧的。</p>
+<p>客户端的实现逻辑一般是请求最近的 Chunk Server</p>
+<h2 id="删除文件">删除文件</h2>
+<p>GFS 删除文件为惰性删除：当收到删除命令时， Master 会将该文件名后追加时间戳（即变为隐藏文件）。Master 会定期遍利所有的文件名和所有的 Chunk，在遍历文件名时若发现文件已经被标记一段时间后，会从删除自身存储的对应关系; 而在遍历 Chunk 时， 若发现该 Chunk 为孤儿 Chunk（即不存在它的对应关系），那么会对这个 Chunk 进行真正的删除操作</p>
+<h2 id="写文件">写文件</h2>
+<p>在写文件时，Master 会通过租约的方式保证数据一致，并通过流水线技术保证写速度。</p>
+<p>当 Client 试图写文件时，会首先向 Master 请求对应的位置。Master会检查此时该文件是否存在 Primary Chunk Server，它的组约是否过期，如果存在且未过期则返回 Primary Chunk Server 对应的信息和操作标识以及Secondary Chunk Server，否则则进行Primary Chunk Server的分配。Client 拿到信息后，会通过流水线(pipeline) 向服务器发送文件，并在发送完成时向 Primary Chunk Server 发送控制命令，Primary Chunk Server 再分别对所有 Chunk Server 进行操作，所有操作结束后才会对 Client 进行回应。</p>
+<p>其过程如下图</p>
+<pre class="mermaid">flowchart LR
+    Client -->|1. 请求写操作| Master
+    Master -->|2. 返回信息| Client
+    Client ==>|3. 发送 Chunk 数据| NCS[Nearest Chunk Server]
+    NCS ==>|3. 同步 Chunk 数据| PCS[Primary Chunk Server]
+    PCS ==>|3. 同步 Chunk 数据| SCS[Secondary Chunk Server]
+    Client -->|4. 发送写指令| PCS
+    PCS -->|5. 发送写指令 | NCS
+    PCS -->|5. 发送写指令 | SCS
+    NCS -->|6. 返回操作结果| PCS
+    SCS -->|6. 返回操作结果| PCS
+    PCS -->|7. 返回操作结果| Client</pre>
+<p>在操作3中，Chunk 数据的发送与同步并不是等待文件全部接受后再向下一个服务器进行同步，而是一遍接受一遍发送。每个 Chunk Server向其最新的 Chunk Server 发送数据</p>
+<pre class="mermaid">sequenceDiagram
+    participant Master
+    participant Client
+    participant Nearest Chunk Server
+    participant Primary Chunk Server
+    participant Secondary Chunk Server
+    Client ->>+Master: 请求写操作
+    Master ->>Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
+    Master ->>-Client: 返回 Chunk Server 信息
+    par
+        Client ->> Nearest Chunk Server:同步 Chunk 数据
+    and
+        Nearest Chunk Server ->> Primary Chunk Server:同步 Chunk 数据
+    and
+        Primary Chunk Server ->> Secondary Chunk Server:同步 Chunk 数据
+    end
+    Client ->> Primary Chunk Server: 发送指令
+    par
+        Primary Chunk Server ->> Nearest Chunk Server: 发送指令
+        Nearest Chunk Server ->> Primary Chunk Server: 返回结果
+    and
+        Primary Chunk Server ->> Secondary Chunk Server: 发送指令
+        Secondary Chunk Server ->> Primary Chunk Server: 返回结果
+    end
+    Primary Chunk Server ->> Client: 返回结果</pre>
+<h2 id="追加">追加</h2>
+<p>追加在 GFS 中是一个常用的操作。GFS 中的追加不是在文件末尾进行追加，而是在文件后添加一个新的 Chunk。如果原本文件的最后一个 Chunk 未满也不会在后面追加。每次文件的追加都是在写一个全新的 Chunk，GFS 通过这种方式保证了数据的正确</p>
+<p>在一致性模型中，只有追加是定义但不一致的：其原因是如果有 Chunk Server 在追加过程中失败，Client 会重试此操作，在最终成功之前可能会有多次追加操作，会产生很多不一致的数据，但这些数据是无用且不影响的</p>
+<h2 id="文件快照">文件快照</h2>
+<p>GFS 通过类似 COW 的方式建立文件的快照，以减少文件的复制操作。其过程如下</p>
+<p>当 Master接收到一个文件快照命令之后，找到该文件包含的所有 chunk，取消所有 Chunk 的租约。之后在元数据中建立新的对应关系，其对应的 chunk 仍为原本的 Chunk。在记录日志之后，所有操作结束</p>
+<p>在后续修改 Chunk 时，Master 会先要求 Chunk Server 建立原 Chunk 的副本，再选择 Primary Chunk Server 进行操作。</p>
+<p>取消租约的原因是防止建立文件快照的过程中对原 Chunk 进行修改，导致快照内容并不是原本的内容</p>
+<h2 id="chunk-大小-64mib">Chunk 大小 64MiB?</h2>
+<p>64 MiB 是实验室数据，它是一个平衡点。</p>
+<p>作为一个较大的 Chunk， 其优势是：</p>
+<ol type="1">
+<li>减少了客户端与master的交互，即减少了客户端请求master获取filename与chunkserver的对应关系。</li>
+<li>减少了网络开销，因为一个chunk很大，客户端的一次读写可以更加集中在少量的chunkserver上，复用TCP连接。</li>
+<li>减少master管理的元信息的大小。</li>
+</ol>
+<p>但也有劣势</p>
+<ol type="1">
+<li>可能会形成热点，导致大量的客户端请求集中在某几个chunkserver上。（可以通过客户端请求的次数和频率加副本减缓）</li>
+</ol>
 
         </div>
 
@@ -441,11 +534,11 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/Competitive-Programming/">#Competitive Programming</a>&nbsp;
+                        <a href="/tags/mit6-824/">#mit6.824</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/ICPC/">#ICPC</a>&nbsp;
+                        <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">#分布式系统</a>&nbsp;
                     </li>
                 
             </ul>
@@ -456,29 +549,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/cp/cf1853/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">Codeforces Round 891 (Div. 3) A-G</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/cp/2021%20Shandong%20Provincial%20Collegiate%20Programming%20Contest/"
+                        href="/project/mit6.824/mr/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">2021 Shandong Provincial Collegiate Programming Contest</span>
+                                <span class="post-nav-title-item">MIT6.824 分布式系统 MapReduce</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -499,8 +577,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">2023 SDCPC 赛后回顾</div>
-        
+        <div class="page-title">MIT6.824 分布式系统 GFS 笔记</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E4%B8%80%E8%A7%88"><span class="nav-text">设计一览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E6%83%B3"><span class="nav-text">设想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-text">接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-text">架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E5%86%85%E5%AE%B9"><span class="nav-text">维护内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E4%BF%A1%E6%81%AF"><span class="nav-text">元信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81"><span class="nav-text">锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="nav-text">读文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-text">写文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%BD%E5%8A%A0"><span class="nav-text">追加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%BF%AB%E7%85%A7"><span class="nav-text">文件快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chunk-%E5%A4%A7%E5%B0%8F-64mib"><span class="nav-text">Chunk 大小 64MiB?</span></a></li></ol>
 
     </div>
 </div>
