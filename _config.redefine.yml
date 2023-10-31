@@ -77,8 +77,8 @@ global:
   open_graph: true
   # Google Analytics
   google_analytics:
-    enable: false # Whether to enable Google Analytics
-    id:  # Google Analytics Measurement ID
+    enable: true # Whether to enable Google Analytics
+    id: G-Q6N8MGDECT # Google Analytics Measurement ID
 # SITE CUSTOMIZATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
     
 

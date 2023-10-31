@@ -32,6 +32,9 @@ dependencies:
   hexo-generator-searchdb:
     specifier: ^1.4.1
     version: 1.4.1
+  hexo-generator-sitemap:
+    specifier: ^3.0.1
+    version: 3.0.1
   hexo-generator-tag:
     specifier: ^2.0.0
     version: 2.0.0
@@ -566,6 +569,17 @@ packages:
   /hexo-generator-searchdb@1.4.1:
     resolution: {integrity: sha512-7m8IBpZbI6iKb2jRYxs4pghD6Ln8ylQSRGl6MIC4G9wws21vYSXSD8rvC3MoCO+pWBHs6E/mTA/rjG+p2AZfVg==}
     dependencies:
+      nunjucks: 3.2.4
+    transitivePeerDependencies:
+      - chokidar
+    dev: false
+
+  /hexo-generator-sitemap@3.0.1:
+    resolution: {integrity: sha512-n+0KLNmq6TLbiZPTQF6NY5MbEem/O+DFx0lgQZNQcU4tdjXIZRrQJs+KRKeT66NTkdlYTqb4WwCxswLqQz0crA==}
+    engines: {node: '>=12.13.0'}
+    dependencies:
+      hexo-util: 2.7.0
+      micromatch: 4.0.5
       nunjucks: 3.2.4
     transitivePeerDependencies:
       - chokidar
