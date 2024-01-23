@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Mslxl">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://cdn.staticfile.org" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.mslxl.com/tran/reliable-udp-translation/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="此草案已过期，未成为事实标准 原文地址: draft-ietf-sigtran-reliable-udp-00   1. 介绍 此互联网草案讨论了可靠UDP协议（RUDP）。RUDP是一个简单的基于数据包的传输协议。RUDP 基于 RFCs 1151 和 908 可靠数据协议。RUDP 位于UDP&#x2F;IP 协议之上，为上层每个虚拟连接提供不超过最大重传次数的可靠的有序的数据传递。RUDP 具有灵活">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可靠 UDP 协议(RUDP协议)">
+<meta property="og:url" content="https://blog.mslxl.com/tran/reliable-udp-translation/index.html">
+<meta property="og:site_name" content="Mslxl&#39;s blog">
+<meta property="og:description" content="此草案已过期，未成为事实标准 原文地址: draft-ietf-sigtran-reliable-udp-00   1. 介绍 此互联网草案讨论了可靠UDP协议（RUDP）。RUDP是一个简单的基于数据包的传输协议。RUDP 基于 RFCs 1151 和 908 可靠数据协议。RUDP 位于UDP&#x2F;IP 协议之上，为上层每个虚拟连接提供不超过最大重传次数的可靠的有序的数据传递。RUDP 具有灵活">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-21T07:03:19.000Z">
+<meta property="article:modified_time" content="2024-01-23T02:45:07.592Z">
+<meta property="article:author" content="Mslxl">
+<meta property="article:tag" content="UDP">
+<meta property="article:tag" content="RUDP">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-Q6N8MGDECT"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q6N8MGDECT');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/11132880?v=4" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <!--- Page Info-->
+    
+    <title>
+        
+            可靠 UDP 协议(RUDP协议) -
+        
+        Mslxl&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fonts/fonts.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fonts/Satoshi/satoshi.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fonts/Chillax/chillax.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left"},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":true,"id":"G-Q6N8MGDECT"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.6","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Mslxl's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Mslxl&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/links">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/links">友情链接</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">可靠 UDP 协议(RUDP协议)</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://avatars.githubusercontent.com/u/11132880?v=4">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Mslxl</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-01-21 15:03:19</span>
+        <span class="mobile">2024-01-21 15:03:19</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-01-23 10:45:07</span>
+            <span class="mobile">2024-01-23 10:45:07</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/UDP/">UDP</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/RUDP/">RUDP</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <blockquote>
+<p>此草案已过期，未成为事实标准</p>
+<p>原文地址: <a class="link"   target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/draft-ietf-sigtran-reliable-udp-00.txt" >draft-ietf-sigtran-reliable-udp-00 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</blockquote>
+<h2 id="介绍">1. 介绍</h2>
+<p>此互联网草案讨论了可靠UDP协议（RUDP）。RUDP是一个简单的基于数据包的传输协议。RUDP 基于 RFCs 1151 和 908 可靠数据协议。RUDP 位于UDP/IP 协议之上，为上层每个虚拟连接提供不超过最大重传次数的可靠的有序的数据传递。RUDP 具有灵活的设计，即它适用于多种传输用途，比如传输电信信号等</p>
+<h3 id="背景">1.1 背景</h3>
+<p>跨 IP 网络的远程信号传输需要一种可靠的传输协议，这种传输协议的架构必须能够为多种应用在IP网提供传输服务</p>
+<p>对现有的 IP 协议进行审查，可得出：需要一种新的可靠传输机制来用于电信信号协议。这种协议需要满足下列标准：</p>
+<ul>
+<li>传输需要提供不超过最大重传次数的可靠传递服务（因此可避免旧消息滞留）</li>
+<li>传输需要保证消息有序传递</li>
+<li>传输基于消息报</li>
+<li>传输提供流量控制</li>
+<li>传输应该是低开销，高性能的</li>
+<li>每个虚拟连接应该是可配置的（比如定时器）</li>
+<li>传输应该提供保活机制</li>
+<li>传输应当提供错误检测机制</li>
+<li>应当保证安全传输</li>
+</ul>
+<p>RUDP 旨在允许单独配置每个连接，以便可以在同一平台上同时实现具有不同传输要求的多种协议。</p>
+<h3 id="数据结构格式">1.2 数据结构格式</h3>
+<h4 id="用于数据传输的-6-个八位位组最小-rudp-头部">1. 用于数据传输的 6 个八位位组最小 RUDP 头部</h4>
+<p>每个由 RUDP 发送的 UDP 包的首部必须由 6 个八位位组的头部开始。第一个位组包含 8 个单独的 flags 位。接下来 3 个位组形成3个字段，每次字段占1个八位位组，分别是头长度(Header length)，序列号(Sequence number) 和确认号 (Acknowledgment number)。这三个字段后面是校验和，占2个位组。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 0 1 2 3 4 5 6 7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">|S|A|E|R|N|C|T| |    Header     |</span><br><span class="line">|Y|C|A|S|U|H|C|0|    Length     |</span><br><span class="line">|N|K|K|T|L|K|S| |               |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">|  Sequence #   +   Ack Number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|            Checksum           |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">     Figure 1, RUDP Header</span><br></pre></td></tr></table></figure></div>
+<h5 id="控制位control-bits">控制位(Control bits)</h5>
+<p>控制位指示数据包中存在的内容。 SYN 位表示存在同步段。 ACK 位表示头中的确认号有效。 EACK 位表示存在扩展确认段。 RST位表示数据包是一个复位段。 NUL 位指示数据包是空段。 TCS 位指示该数据包是传输连接状态段。SYN， EACK， RST 和 TCS 互斥。当 NUL 位置1时，ACK位同时置1。CHK 位指示校验和字段仅包含标头或同时包含标头的校验和和主体（数据）。如果 CHK 位为零，则校验和字段 仅包含标头的校验和。如果 CHK 位为 1，则校验和字段包含报头和数据的校验和。</p>
+<h5 id="头长度header-length">头长度(Header length)</h5>
+<p>头长度字段指示用户数据在数据包中的开始位置。 如果数据包的总长度大于标头的值，则数据包中存在用户数据。用户数据不能存在在设置了 EACK、NULL 或 RST 位的数据包中。包含用户数据的数据包中始终设置了 ACK 位，称为数据段。</p>
+<h5 id="序列号sequence-number">序列号(Sequence number)</h5>
+<p>每个包包含一个序列号。当连接初次建立时，每个对等体随机选择一个初始序列号。序列号在同步段中用于打开连接。每次传输数据，发送空段或者重置都会增加序列号。</p>
+<h5 id="确认号acknowledgment-number">确认号(Acknowledgment Number)</h5>
+<p>确认号指示所接受到的最后一个有序分组的序列号</p>
+<h5 id="检验和checksum">检验和(Checksum)</h5>
+<p>为了确保数据的完整性，在 RUDP 的头部总是会计算校验和。此外，当 CHK 位被置为 1 时，检验和同时计算头和数据的内容。RUDP 的校验和算法应当采用和 UDP 或 TCP 相同的检验和算法，即每16位数据位的二进制反码相加然后再进行取反。</p>
+<h4 id="同步段syn-segment">2. 同步段(SYN Segment)</h4>
+<p>同步段用于建立连接，同时同步两个主机的序列号。同步段同时还包含两个连接的协商参数。对等方必须知道的所有可配置参数都包含在此段中。这包括本地 RUDP 愿意接受段的最大数量和正在建立的连接的选项的标志位。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> 0             7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| |A| | | | | | |               |</span><br><span class="line">|1|C|0|0|0|0|0|0|       28      |</span><br><span class="line">| |K| | | | | | |               |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">+  Sequence #   +   Ack Number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Vers  | Spare | Max # of Out  |</span><br><span class="line">|       |       | standing Segs |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Option Flags  |     Spare     |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|      Maximum Segment Size       |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Retransmission Timeout Value  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Cumulative Ack Timeout Value  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|   Null Segment Timeout Value  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Transfer State Timeout Value  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|  Max Retrans  | Max Cum Ack   |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Max Out of Seq| Max Auto Reset|</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|    Connection Identifier      |</span><br><span class="line">+                               +</span><br><span class="line">|      (32 bits in length)      |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|           Checksum            |</span><br><span class="line">+---------------+---------------+</span><br><span class="line"></span><br><span class="line">     Figure 2, SYN segment</span><br></pre></td></tr></table></figure></div>
+<h5 id="序列号sequence-number-1">序列号(Sequence Number)</h5>
+<p>该字段包含了此连接选择的初始序列号</p>
+<h5 id="确认号acknowledgement-number">确认号(Acknowledgement Number)</h5>
+<p>该字段当且仅当 ACK 标志位置 1 时才有效。在这种情况下，该字段将会包含接受到的 RUDP 的序列号</p>
+<h5 id="版本号version">版本号(Version)</h5>
+<p>使用的 RUDP 版本号。初始值为 1。</p>
+<h5 id="最大未完成段数列maximum-number-of-outstanding-segments">最大未完成段数列(Maximum Number of Outstanding Segments)</h5>
+<p>未收到 ACK 时能发送的最大分片。 被接收端用作流控手段。连接建立时确定，在通信过程中不会改变。发送数据时，每端必须使用对端提供的值。</p>
+<h5 id="选项标志字段options-flag-field">选项标志字段(Options Flag Field)</h5>
+<p>这个两个八位位组的字段包含一组选项标志，指定此连接所需的一组可选功能。 标志的初步子集定义如下：</p>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 10%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bit</th>
+<th>#</th>
+<th>Bit Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td></td>
+<td>未使用</td>
+<td>未使用，必须设置为 1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td></td>
+<td>CHK</td>
+<td>启用数据校验和。如果该位被启用，那么校验和字段应该包含整个 RUDP 包的校验和（头和数据）。这是一个协商字段</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td></td>
+<td>REUSE</td>
+<td>该位必须在自动复位(auto reset)期间设置，以指示应使用先前的可协商参数。当该位设置时，SYN 的以下字段应由发送方设置为零，并且必须由接收方忽略：最大段大小(Maximun Segment Size)、重传超时值(Retransmission Timeout Value)、累积确认超时值(Cumulative Ack Timeout Value)、最大重传数(Max Retransmissions)、最大累积确认数(Max Cumulative Ack)、最大超时数顺序(Max Out of Sequence)和最大自动重置次数(Max Auto Reset)。</td>
+</tr>
+<tr class="even">
+<td>3-7</td>
+<td></td>
+<td>Spare</td>
+<td>留空备用</td>
+</tr>
+</tbody>
+</table>
+<h5 id="最大段大小maximum-segment-size">最大段大小(Maximum Segment Size)</h5>
+<p>发送该 SYN 段消息的对等体可以接收的最大八位字节数。每一个对等体都可以指定一个不同的数值。每个对等体不可发送多于对方在连接协商时发送的这个域的值。这个数值应当也包含 RUDP 头的大小。这不是一个协商字段</p>
+<h5 id="重传超时时间retransmission-timeout-value">重传超时时间(Retransmission Timeout Value)</h5>
+<p>对于未确认的报文的超时重传时间。这个值以毫秒表示，有效值区间为 100 到 65536. 这是一个协商字段，对等双方必须在这个参数上达成一致。</p>
+<h5 id="累积确认超时时间cumulative-ack-timeout-value">累积确认超时时间(Cumulative Ack Timeout Value)</h5>
+<p>如果没有收到其他确认段时，超时发送确认段的时间。该字段以毫秒表示，有效值为 100 到 65536。这是一个协商字段，对等双方必须在这个参数上达成一致。此外，这个值应当比<a href="#重传超时时间retransmission-timeout-value">超时重传时间</a>小</p>
+<h5 id="心跳时间null-segment-timeout-value">心跳时间(Null Segment Timeout Value)</h5>
+<p>如果没有收到其他数据段时，超时发送 null 段的时间。null 段作为保活机制发挥作用，目的在于心跳。这个值以毫秒表示，取值范围为 0 到 65536。0代表禁用 null 段。这是一个协商字段，对等双方必须在这个参数上达成一致。</p>
+<h5 id="发送状态超时时间transfer-state-timeout-value">发送状态超时时间（Transfer State Timeout Value）</h5>
+<p>此超时值表示在自动重置发生之前为连接保存状态信息的时间量。这个值以毫秒表示，取值范围为 0 到 65536。这是一个协商字段，对等双方必须在这个参数上达成一致。取值为 0 则代表连接将会立刻自动重置。</p>
+<h5 id="最大重传次数max-retrans">最大重传次数(Max Retrans)</h5>
+<p>在认为连接断开之前，最大尝试重传的次数。取值 0 到 255。0 表示永远尝试重传而不认为是连接断开。这是一个协商字段，对等双方必须在这个参数上达成一致。</p>
+<h5 id="最大累计确认max-cum-ack">最大累计确认(Max Cum Ack)</h5>
+<p>如果未发送另一个段（指捎带确认）之前允许累积的最大确认数 。取值 0 到 255。如果取值为 0 则表示不进行累计确认，在收到数据段(data segment)，空段(null segment) 或者重置段(reset segment)时会立刻确认。这是一个协商字段，对等双方必须在这个参数上达成一致。</p>
+<h5 id="最大失序数max-out-of-seq">最大失序数(Max Out of Seq)</h5>
+<p>在发送 EACK 之前最大允许的失序数据报的积累数量。取值 0 到 255. 取值为0表示在收到失序报文后立刻发送 EACK。这是一个协商字段，对等双方必须在这个参数上达成一致。</p>
+<h5 id="最大自动复位max-auto-reset">最大自动复位（Max Auto Reset）</h5>
+<p>在连接被重置前，可执行连续自动复位的最大次数。取值 0 到 255. 0表示不会尝试自动复位。 这是一个协商字段，对等双方必须在这个参数上达成一致。当连接打开时，连续自动复位计数器应被清空。</p>
+<h5 id="连接标识connection-identifier">连接标识(Connection Identifier)</h5>
+<p>建立一个新的连接时，对等双方会通过当前RUDP连接传输一个唯一的连接 ID 给对方。双方均保存这个唯一ID。当自动复位发生时，对等双方应该发送原本保存的 ID 来指示当前连接正在发生自动复位。</p>
+<h4 id="ack-段">3. ACK 段</h4>
+<p>ACK 段用于确认有序段到达。它在RUDP头中包含接下来发送的序列号和确认序列号。ACK 段可以单独发送，也可以和数据组合进行捎带发送。Data 和 Null 段中必须设置 Ack 控制位(ACK bit)和确认号字段（Acknowledge Number field)。单独的确认段有 6 个八位位组。图 3 反应了一个单独的 ACK 段</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 0 1 2 3 4 5 6 7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">|0|1|0|0|0|0|0|0|       6       |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| Sequence #    |   Ack Number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|           Checksum            |</span><br><span class="line">+---------------+---------------+</span><br><span class="line"></span><br><span class="line"> Figure 3, Stand-alone ACK segment</span><br></pre></td></tr></table></figure></div>
+<h4 id="eack-段">4. EACK 段</h4>
+<p>EACK 段用于确认到达的失序段。它包含一个或多个接收到的失序序列号。 EACK 总是应该和 ACK 段进行组合，并给出未失序情况下应当接收到的序号。对于 EACK 段来说，头的长度是一个变量。它最小是 7，最大取决于于最大接收队列长度。图 4 反应了单独的 EACK 段</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> 0 1 2 3 4 5 6 7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">|0|1|1|0|0|0|0|0|     N + 6     |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| Sequence #    |   Ack Number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|1st out of seq |2nd out of seq |</span><br><span class="line">|  ack number   |   ack number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|  . . .        |Nth out of seq |</span><br><span class="line">|               |   ack number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|            Checksum           |</span><br><span class="line">+---------------+---------------+</span><br><span class="line"></span><br><span class="line">    Figure 4, EACK segment</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h4 id="rst-段">5. RST 段</h4>
+<p>RST 段用于关闭或重置连接。在受到RST 段后，发送方应当在将从 API 接受到的数据包发送后停止发送新的数据报，在此期间停止API停止接受新数据。RST 段应当被单独发送且不包含任何数据。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> 0 1 2 3 4 5 6 7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| |A| | | | | | |               |</span><br><span class="line">|0|C|0|1|0|0|0|0|        6      |</span><br><span class="line">| |K| | | | | | |               |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| Sequence #    |   Ack Number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|         Header Checksum       |</span><br><span class="line">+---------------+---------------+</span><br><span class="line"></span><br><span class="line">       Figure 5, RST segment</span><br></pre></td></tr></table></figure></div>
+<h4 id="nul-段">6. NUL 段</h4>
+<p>NUL 段用于判断连接是否存活。因此 NUL 段作为保活机制发挥作用。当收到 NUL 段时，在连接合法的情况下RUDP 实现必须立刻发送确认，序列号为下一个应受到的序列号。NUL 段必须和 ACK 组合，但不和用户数据组合。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 0 1 2 3 4 5 6 7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">|0|1|0|0|1|0|0|0|       6       |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| Sequence #    |  Ack Number   |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|            Checksum           |</span><br><span class="line">+---------------+---------------+</span><br><span class="line"></span><br><span class="line">     Figure 6, NUL segment</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h4 id="tcs-段">7. TCS 段</h4>
+<p>TCS 用于传输状态信息</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> 0 1 2 3 4 5 6 7 8            15</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| |A| | | | | | |               |</span><br><span class="line">|0|C|0|0|0|0|1|0|       12      |</span><br><span class="line">| |K| | | | | | |               |</span><br><span class="line">+-+-+-+-+-+-+-+-+---------------+</span><br><span class="line">| Sequence #    |   Ack Number  |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| Seq Adj Factor|      Spare    |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|      Connection Identifier    |                           </span><br><span class="line">|       (32 bits in length)     |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">|            Checksum           |</span><br><span class="line">+---------------+---------------+</span><br><span class="line"></span><br><span class="line">       Figure 7, TCS segment</span><br></pre></td></tr></table></figure></div>
+<h5 id="序列号sequence-number-2">序列号(Sequence Number)</h5>
+<p>序列号字段包含该连接选择的初始序列号</p>
+<h5 id="确认号acknowledgement-number-1">确认号(Acknowledgement Number)</h5>
+<p>确认号指示收到的按序传输的最后一个数据包</p>
+<h5 id="序列调整因子seq-adj-factor">序列调整因子(Seq Adj Factor)</h5>
+<p>这个字段用于在旧连接和新连接之间在传输阶段调整序列号的状态</p>
+<h5 id="连接标识connection-identifier-1">连接标识(Connection Identifier)</h5>
+<p>建立一个新的连接时，对等双方会通过当前RUDP连接传输一个唯一的连接 ID 给对方。双方均保存这个唯一ID。当自动复位发生时，对等双方应该发送原本保存的 ID 来指示当前连接正在发生自动复位。</p>
+<h4 id="详细设计">1.2.1 详细设计</h4>
+<p>单独的一份使用 SDL 格式描述连接状态和传输的互联网草案还在准备中。</p>
+<p><del>1999年就过期了，不会有了</del> #### 1.2.2 功能描述</p>
+<h5 id="重传定时器">1. 重传定时器</h5>
+<p>发送端有重传定时器，超时时间可配。每次发送 data，null 或 reset 段并且当前没有一个片段被计时，都会初始化此计时器。</p>
+<p>如果在定时器到期时未收到对此数据段的确认，则重发已发送但未确认的所有分片。如果仍有一个或多个已发送但未确认的数据包，则在收到定时段时重启重传定时器。 重传定时器的推荐值为600毫秒。</p>
+<h5 id="重传计数器">2. 重传计数器</h5>
+<p>发送端维护一个重发次数的计数器，计数器最大值可配，建议为 2。如果计数器超过其最大值，则认为连接已断开。</p>
+<h5 id="独立-ack-分片">3. 独立 ACK 分片</h5>
+<p>独立 ACK 段是仅包含确认信息的段。 其 sequence number 字段包含要发送的下一个 data，null 或 reset 段的序列号。</p>
+<h5 id="ack-信息捎带">4. ACK 信息捎带</h5>
+<p>当接收端向发送端发送 data，null 或 reset 段时，接收端需要在报头的 ACK 中填上最后的一次从发送端收到的 data，null 或 reset 段的序列号。</p>
+<h5 id="累积-ack-计数器">5. 累积 ACK 计数器</h5>
+<p>接收端维持接收到的未确认分片的计数器，计数器的最大值可配。 如果超过计数器的最大值，则接收端发送独立 ACK 或 EACK（如果存在无序分片）。 累积 ACK 计数器的建议值为3。</p>
+<h5 id="无序-ack-计数器">6. 无序 ACK 计数器</h5>
+<p>接收端维护一个已经无序到达的分片的计数器。当计数器超过配置的最大值时，发送一个包含已经接收的所有当前无序段的序列号的 EACK 段到发送端，然后计数器重置为零。无序 ACK 计数器的建议值为3。</p>
+<p>当发送端接收到 EACK 时，会将丢失的数据段重新发送给接收端。</p>
+<h5 id="累积-ack-分片定时器">7. 累积 ACK 分片定时器</h5>
+<p>当接收端有未确认的分片或无序队列中有分片时，它会分别在发送独立确认或扩展确认之前等待最长时间。 当此定时器到期时，如果在无序队列中存在分片，则发送扩展确认。 否则，如果当前有未确认分片，则发送独立确认。 累积 ACK 定时器的建议值为 300 毫秒。</p>
+<p>每当在数据，空或重置段中发送确认时，重新启动累积 ACK 定时器，前提是当前没有分片在无序列队列中。 如果序列外队列中存在分片，则不会重新启动定时器，以便在再次到期时再发送另一个扩展确认。</p>
+<h5 id="null-段定时器">8. NULL 段定时器</h5>
+<p>Client 维护一个定时器，连接打开时启动，每次发送数据段时重置。如果 Client 的 NULL 段定时器到期，则 Client 将 NULL 段发送到 Server。</p>
+<p>如果 Server 的序列号有效，则由 Server 确认空段。 Server 维护一个空段定时器，其超时值是 Client 超时值的两倍。</p>
+<p>只要从 Client 收到数据或空段，Server 的计时器就会重置。 如果 Server 的空段定时器到期，则认为连接已断开。空段定时器的值是 2 秒。</p>
+<h5 id="自动重置">9. 自动重置</h5>
+<p>连接的任何一方都可以自动重置。自动重置的原因可能是 - 重传计数超过其最大值 - 服务器的 NULL 段计时器到期 - 传输状态计时器到期</p>
+<p>自动重置将使两端重置其当前状态，包括刷新重传和无序队列，然后重置其初始序列号并重新协商连接。每端将通知其上层协议（ULP）自动重置。</p>
+<p>有一个连续的重置计数器，用于设置在没有连接打开的情况下可以发生的最大自动重置次数。 如果此计数器超过其最大值，则重置连接。连续重置计数器的建议值为 3。</p>
+<h5 id="接收端接收队列大小">10. 接收端接收队列大小</h5>
+<p>接收端接收队列的大小是可配置参数。建议值为 32 个数据包。</p>
+<p>接收队列大小充当流控制机制。</p>
+<h5 id="拥塞控制和慢启动">11. 拥塞控制和慢启动</h5>
+<p>RUDP 未提供。</p>
+<h5 id="udp-端口号">12. UDP 端口号</h5>
+<p>RUDP 对使用哪个 UDP 端口号没有任何限制。 有效端口号是 RFC 1700 中未定义的端口。</p>
+<h5 id="支持冗余连接">13. 支持冗余连接</h5>
+<p>如果 RUDP 连接失败，将发信号通知上层协议，并启动传输状态计时器。 ULP 可以通过 API 调用启动将此状态传输到另一个 RUDP 连接 RUDP 会将状态信息传输到新连接，以确保数据包不会重复或丢失。</p>
+<p>如果 ULP 在传输状态计时器到期之前没有将状态转移到另一个连接，则连接状态将丢失，并且连接队列的缓冲区被释放。 传输状态定时器的超时值是可配置的。</p>
+<p>传输状态计时器的建议值为 1 秒。</p>
+<h5 id="连接断开的处理">14. 连接断开的处理</h5>
+<p>以下情况发生时，则认为 RUDP 连接断开：</p>
+<ul>
+<li>重传定时器到期且重传计数已超过其最大值。</li>
+<li>NULL 段定时器过期。 如果出现上述两种情况中的任何一种并且传输状态超时不为零，则通过 API 的连接失败信号通知ULP 连接失败，并且将启动传输状态定时器。 如果传输状态计时器到期，则执行自动复位，并通过 API 的连接自动复位信号通知 ULP。</li>
+</ul>
+<p>如果传输状态超时值为零，则当上述两种情况中的任何一种发生时，将立即执行自动复位。 ULP 将通过 API 的连接自动重置信号通知连接失败。</p>
+<h5 id="重传算法">15. 重传算法</h5>
+<p>接收到 EACK 段或重传定时器超时而发生重传。</p>
+<p>收到 EACK 段时，消息中指定的段将从未确认的已发送队列中删除。 要重传的段是通过检查 EACK 段中的 ack 号和最后一个 seq 号来确定的。 重新发送未确认的发送队列不包括这两个序列号之间的所有报文段。</p>
+<p>当发生重传超时时，重传未确认的已发送队列上的所有消息。</p>
+<h5 id="上层协议通信信号">16. 上层协议通信信号</h5>
+<p>以下信号将通过 API 传输给上层协议，通知异步事件：</p>
+<ul>
+<li>Connection open：连接状态变为 Open 时发送信号。</li>
+<li>Connection refused：连接状态从 Close Wait 以外状态转为 Closed 时发送信号。</li>
+<li>Connection closed：连接状态从 Close Wait 转为 Closed 时发送信号。</li>
+<li>Connection failure：连接状态断开时发送信号。</li>
+<li>Connection auto reset：连接自动复位时发送信号。向上层协议通知数据可能丢失且 RUDP 正试图将连接返回到打开状态。 ##### 17. 校验和算法 RUDP 中使用的校验和算法与 UDP 和 TCP 头中使用的算法相同，它是被检验数据的每16位求和的补码。CHK 置1时，对整个报文计算校验和。否则，只对头部计算校验和。</li>
+</ul>
+<h5 id="fec-前向纠错">18. FEC 前向纠错</h5>
+<p>RUDP没有定义前向纠错（FEC）的处理。它会丢弃收到的重复包。</p>
+<h5 id="安全性">19. 安全性</h5>
+<p>RUDP 将兼容 IPsec 标准。</p>
+<h3 id="参数协商">1.3. 参数协商</h3>
+<p>当客户端发起连接时，发送一个 SYN 段，包含上层通过 API 定义的协商参数。 服务器可以通过带有 ACK 响应的 SYN 接受这些参数，或者在其 SYN 中使用 ACK 响应提出不同的参数。 然后，客户端可以选择接受服务器发送的参数并发送 ACK 来建立连接，或者发送 RST 来拒绝连接。 在自动重置期间无法重新协商。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/UDP/">#UDP</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/RUDP/">#RUDP</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/cp/cf1901/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Educational Codeforces Round 158 (Rated for Div. 2)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">可靠 UDP 协议(RUDP协议)</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">1. 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">1.1 背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A0%BC%E5%BC%8F"><span class="nav-text">1.2 数据结构格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8D%8F%E5%95%86"><span class="nav-text">1.3. 参数协商</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2018</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Mslxl</a>
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.6</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="right-bottom-tools rss flex justify-center items-center">
+                <a class="flex justify-center items-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                <i class="fa-regular fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/Swup.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupSlideTheme.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupProgressPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupScrollPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/imageViewer.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/utils.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/main.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/navbarShrink.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/scrollTopBottom.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/runtime.js"></script>
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/plugins/typed.js"></script>
+
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/mermaid.min.js"></script>
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/plugins/mermaid.js"></script>
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/anime.min.js"></script>
+        <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/tocToggle.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/toc.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+</body>
+</html>

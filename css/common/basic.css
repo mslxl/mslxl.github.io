@@ -516,13 +516,13 @@ button {
 @media (max-width: 768px) {
   .btn {
     padding: -4;
-    border-radius: 14.4px;
+    border-radius: 18px;
   }
 }
 @media (max-width: 640px) {
   .btn {
     padding: -8;
-    border-radius: 10.799999999999999px;
+    border-radius: 18px;
   }
 }
 .btn:hover {

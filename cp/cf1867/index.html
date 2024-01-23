@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Mslxl">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://cdn.staticfile.org" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.mslxl.com/cp/cf1867/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="打了一半困了，提前下班了 A. green_gold_dog, array and permutation  给一个长度为 \(n\) 的数组 \(a\)，找到一个长度为 \(n\) 的排列 \(b\)，使之 \(a_i - b_i\) 的值不同的数量最大  离散化 贪心 看样例大胆猜测将数组中第 \(k\) 大的元素和排列中的 \(n-k\) 放在一起，可以使 \(a_i - b_i\) 的值不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 897 (Div. 2)">
+<meta property="og:url" content="https://blog.mslxl.com/cp/cf1867/index.html">
+<meta property="og:site_name" content="Mslxl&#39;s blog">
+<meta property="og:description" content="打了一半困了，提前下班了 A. green_gold_dog, array and permutation  给一个长度为 \(n\) 的数组 \(a\)，找到一个长度为 \(n\) 的排列 \(b\)，使之 \(a_i - b_i\) 的值不同的数量最大  离散化 贪心 看样例大胆猜测将数组中第 \(k\) 大的元素和排列中的 \(n-k\) 放在一起，可以使 \(a_i - b_i\) 的值不">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-11T16:36:12.000Z">
+<meta property="article:modified_time" content="2024-01-23T02:45:07.556Z">
+<meta property="article:author" content="Mslxl">
+<meta property="article:tag" content="Competitive Programming">
+<meta property="article:tag" content="Codeforces">
+<meta name="twitter:card" content="summary">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-Q6N8MGDECT"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q6N8MGDECT');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/11132880?v=4" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Codeforces Round 897 (Div. 2) -
+        
+        Mslxl&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fonts/fonts.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fonts/Satoshi/satoshi.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fonts/Chillax/chillax.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left"},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":true,"id":"G-Q6N8MGDECT"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.5.6","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Mslxl's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Mslxl&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/links">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="drawer-navbar-item text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/links">友情链接</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">Codeforces Round 897 (Div. 2)</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://avatars.githubusercontent.com/u/11132880?v=4">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Mslxl</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-09-12 00:36:12</span>
+        <span class="mobile">2023-09-12 00:36:12</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-01-23 10:45:07</span>
+            <span class="mobile">2024-01-23 10:45:07</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Competitive-Programming/">Competitive Programming</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Codeforces/">Codeforces</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p><del>打了一半困了，提前下班了</del></p>
+<h2 id="a.-green_gold_dog-array-and-permutation">A. green_gold_dog, array and permutation</h2>
+<blockquote>
+<p>给一个长度为 <span class="math inline">\(n\)</span> 的数组 <span class="math inline">\(a\)</span>，找到一个长度为 <span class="math inline">\(n\)</span> 的排列 <span class="math inline">\(b\)</span>，使之 <span class="math inline">\(a_i - b_i\)</span> 的值不同的数量最大</p>
+</blockquote>
+<p><code>离散化</code> <code>贪心</code></p>
+<p>看样例大胆猜测将数组中第 <span class="math inline">\(k\)</span> 大的元素和排列中的 <span class="math inline">\(n-k\)</span> 放在一起，可以使 <span class="math inline">\(a_i - b_i\)</span> 的值不同的数量最大</p>
+<p>如果用最大的数减去最小的数，第二大的数减去第二小的数，依次类推，所获得的值应该是依次递减的</p>
+<p>因为 <span class="math inline">\(a_1 \ge a_2 \ge a_3 \ge \ldots \ge a_n\)</span> ，而 <span class="math inline">\(b_1 &lt; b_2 &lt; \ldots &lt; b_n\)</span>，则 <span class="math inline">\(-b_1 &gt; -b_2 &gt; \ldots &gt; -b_n\)</span>，最终结果 <span class="math inline">\(a_1 - b_1 &gt; a_2 - b_2 &gt; \ldots &gt; a_n - b_n\)</span></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Pair <span class="keyword">struct</span> &#123;</span><br><span class="line">	a, b <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Pairs []Pair</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> arr[i].a &gt; arr[j].a</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Swap(i, j <span class="type">int</span>) &#123;</span><br><span class="line">	arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Len() <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	readInt(in)</span><br><span class="line">	a := readArrInt(in)</span><br><span class="line">	b := <span class="built_in">make</span>(Pairs, <span class="built_in">len</span>(a))</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		b[i].a = v</span><br><span class="line">		b[i].b = i</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Sort(b)</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> b &#123;</span><br><span class="line">		a[v.b] = i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;%d &quot;</span>, v+<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="b.-xor-palindormes">B. XOR Palindormes</h2>
+<blockquote>
+<p>给一个长度为 <span class="math inline">\(n\)</span> 的 01 串<span class="math inline">\(s\)</span>。定义数字 <span class="math inline">\(x\)</span> 是好的，当且仅当存在一个长度为 <span class="math inline">\(n\)</span> 的 01 串<span class="math inline">\(l\)</span>包含 <span class="math inline">\(x\)</span> 个1，且 <span class="math inline">\(c = l \oplus s\)</span> 的结果是回文串</p>
+<p>输出答案长度为 <span class="math inline">\(n+1\)</span>序列 <span class="math inline">\(a\)</span>，当数字 <span class="math inline">\(x\)</span> 是好的，令 <span class="math inline">\(a_x = 1\)</span></p>
+</blockquote>
+<p><code>贪心</code></p>
+<p>当 <span class="math inline">\(l\)</span> 中的某一位为 <span class="math inline">\(1\)</span>时，<span class="math inline">\(l \oplus s\)</span> 的结果会使 <span class="math inline">\(s\)</span> 中的某位反转，即<span class="math inline">\(l\)</span> 中包含 1 的数量 <span class="math inline">\(x\)</span> 为反转 <span class="math inline">\(s\)</span> 的位数</p>
+<p>当 $n &gt; 2 $ 时且 <span class="math inline">\(n\)</span> 为偶数时，如果可以通过反转 <span class="math inline">\(k\)</span> 位<span class="math inline">\(s\)</span>中的内容，使的结果是回文串，那么反转 <span class="math inline">\(k+2\)</span> 位的结果一定也是回文串（反转任意两个对称的位置）</p>
+<p>当 <span class="math inline">\(n &gt; 2\)</span> 且 <span class="math inline">\(n\)</span> 为奇数时，反转 <span class="math inline">\(k+2\)</span> 的结果也是回文串（反转任意两个对称位置），反转 <span class="math inline">\(k + 1\)</span> 的结果也是回文串（反转串 <span class="math inline">\(s\)</span> 的中心位置）</p>
+<p>特判 <span class="math inline">\(n=2\)</span> 的情况</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	n := readInt(in)</span><br><span class="line">	s, _ := in.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">	s = strings.Trim(s, <span class="string">&quot; \r\n\t&quot;</span>)</span><br><span class="line"> </span><br><span class="line">	cnt := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s)/<span class="number">2</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> i == n<span class="number">-1</span>-i &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> s[i] != s[n<span class="number">-1</span>-i] &#123;</span><br><span class="line">			cnt++</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; cnt; i++ &#123;</span><br><span class="line">		fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := cnt; i &lt;= n-cnt; i++ &#123;</span><br><span class="line">			<span class="keyword">if</span> (i-cnt)%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := cnt; i &lt;= n-cnt; i++ &#123;</span><br><span class="line">			fmt.Print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := n - cnt + <span class="number">1</span>; i &lt; n+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="c.-salyg1n-and-the-mex-game">C. Salyg1n and the MEX Game</h2>
+<blockquote>
+<p><strong>交互题</strong></p>
+<p>有一个集合 <span class="math inline">\(S\)</span> 包含 <span class="math inline">\(n\)</span> 个不同的数字 <span class="math inline">\(s_1, s_2, \ldots,s_n\)</span>，Alice 和 Bob 玩游戏，规则如下：</p>
+<ul>
+<li>玩家轮流行动，Alice 先手</li>
+<li>Alice 的一次行动可以向 <span class="math inline">\(S\)</span> 中添加一个数字 <span class="math inline">\(x\)</span>，在这之前 <span class="math inline">\(x \not{\in} S\)</span></li>
+<li>Bob 的一次行动可以从 <span class="math inline">\(S\)</span> 中删除一个数字 <span class="math inline">\(y\)</span>，删除的数字 <span class="math inline">\(y\)</span> 必须存在与 <span class="math inline">\(S\)</span> 且<strong>严格小于</strong>上次 Alice 添加 <span class="math inline">\(x\)</span></li>
+<li>游戏将在 <span class="math inline">\(2\cdot n + 1\)</span> 回合后（Alice 最后行动），或者是 Bob 无法行动时停止</li>
+<li>游戏的最终结果为 <span class="math inline">\(MEX(S)\)</span></li>
+<li>Alice 的目标为最大化结果，Bob 要最小化结果</li>
+</ul>
+</blockquote>
+<p><code>交互</code> <code>贪心</code></p>
+<p>除非 Bob 无法行动，否则无论 Alice 在前一步做何决策，Bob 总可以使游戏的结果变为 <span class="math inline">\(0\)</span>（即Bob移除0）。而无论 Bob 做什么行动，下一轮中 Alice 总可以抵消掉 Bob 的行动（即将删除的数重新添加）</p>
+<p>也就是说在前 <span class="math inline">\(2\cdot n\)</span> 中，Alice 只能维持游戏的结果不减小，而 Bob 什么也做不到。行动策略不论 Bob 删除什么数， Alice 只需要每次添加集合中不存在的最小的数，那么游戏的结果将不会减小</p>
+<p>糊个堆贪心即可</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;container/heap&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FPrintln</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	_, _ = fmt.Fprintln(os.Stdout, v)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> hp []<span class="type">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Len() <span class="type">int</span>           &#123; <span class="keyword">return</span> <span class="built_in">len</span>(h) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> &#123; <span class="keyword">return</span> h[i] &lt; h[j] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Swap(i, j <span class="type">int</span>)      &#123; h[i], h[j] = h[j], h[i] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> Push(v any)        &#123; *h = <span class="built_in">append</span>(*h, v.(<span class="type">int</span>)) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> Pop() any          &#123; a := *h; v := a[<span class="built_in">len</span>(a)<span class="number">-1</span>]; *h = a[:<span class="built_in">len</span>(a)<span class="number">-1</span>]; <span class="keyword">return</span> v &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> push(v <span class="type">int</span>)        &#123; heap.Push(h, v) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> pop() <span class="type">int</span>          &#123; <span class="keyword">return</span> heap.Pop(h).(<span class="type">int</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	n := readInt(in)</span><br><span class="line">	s := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">bool</span>)</span><br><span class="line">	seq := readArrInt(in)</span><br><span class="line">	<span class="keyword">for</span> _, x := <span class="keyword">range</span> seq &#123;</span><br><span class="line">		s[x] = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	mex := <span class="built_in">make</span>(hp, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt;= n+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> _, exists := s[i]; !exists &#123;</span><br><span class="line">			mex.push(i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	stop := <span class="literal">true</span></span><br><span class="line">	<span class="keyword">for</span> round := <span class="number">0</span>; round &lt; <span class="number">2</span>*n+<span class="number">1</span> &amp;&amp; stop; round++ &#123;</span><br><span class="line">		v := mex.pop()</span><br><span class="line">		FPrintln(v)</span><br><span class="line"></span><br><span class="line">		y := readInt(in)</span><br><span class="line">		<span class="keyword">if</span> y == <span class="number">-1</span> &#123;</span><br><span class="line">			stop = <span class="literal">false</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">delete</span>(s, y)</span><br><span class="line">			mex.push(y)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Competitive-Programming/">#Competitive Programming</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Codeforces/">#Codeforces</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/nixos/convert/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">皈依 NixOS</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/project/go/go-speedrun/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">速通 Go 语言基础</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Codeforces Round 897 (Div. 2)</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#a.-green_gold_dog-array-and-permutation"><span class="nav-text">A. green_gold_dog, array and permutation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b.-xor-palindormes"><span class="nav-text">B. XOR Palindormes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c.-salyg1n-and-the-mex-game"><span class="nav-text">C. Salyg1n and the MEX Game</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2018</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Mslxl</a>
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.6</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="right-bottom-tools rss flex justify-center items-center">
+                <a class="flex justify-center items-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                <i class="fa-regular fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/Swup.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupSlideTheme.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupProgressPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupScrollPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/imageViewer.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/utils.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/main.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/navbarShrink.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/scrollTopBottom.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/runtime.js"></script>
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.6/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/plugins/typed.js"></script>
+
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/mermaid.min.js"></script>
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/plugins/mermaid.js"></script>
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/libs/anime.min.js"></script>
+        <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/tools/tocToggle.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/layouts/toc.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.6/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+</body>
+</html>
