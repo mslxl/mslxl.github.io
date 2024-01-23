@@ -359,15 +359,13 @@ footer:
 # INJECT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 inject:
   # Whether to enable inject
-  enable: false
+  enable: true
   # Inject custom head html code
   head: 
-    -
-    -
+    - '<script src="https://cdn.staticfile.net/pangu/4.0.7/pangu.min.js"></script>'
   # Inject custom footer html code
   footer:
-    -
-    -
+    - '<script>document.addEventListener("DOMContentLoaded", () => {pangu.autoSpacingPage();});</script>'
 # INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
