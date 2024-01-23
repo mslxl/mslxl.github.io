@@ -54,8 +54,8 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0
   hexo-theme-redefine:
-    specifier: ^2.5.6
-    version: 2.5.6
+    specifier: ^2.6.0
+    version: 2.6.0
   hexo-typora-image:
     specifier: ^0.1.2
     version: 0.1.2
@@ -667,8 +667,8 @@ packages:
       - supports-color
     dev: false
 
-  /hexo-theme-redefine@2.5.6:
-    resolution: {integrity: sha512-RxEqtGnRcvzuxFHVKDYA6OyfQ0+u63VDJTNbuehbP6+dBbP1VSH8/YGYWTN+5aIHMEFql21Xni8J3FBtNo7PHA==}
+  /hexo-theme-redefine@2.6.0:
+    resolution: {integrity: sha512-yqNbtqWjnYrjzmXSDBQEMosAm/fDEH3gw6YdKsTsGlbc9nFb44rqFk/NltTO5/kmMFu0ehTY0GSkHiPK50bSNg==}
     dependencies:
       postcss: 8.4.31
     dev: false

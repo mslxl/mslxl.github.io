@@ -1,0 +1,22 @@
+- links_category: 
+  has_thumbnail: false
+  list: 
+  - name: Yrh's Blog
+    link: https://blog.myyrh.com
+    description: 今日方知我是我
+    avatar: https://avatars.githubusercontent.com/u/32591223?v=4
+  - name: Galong's Blog
+    link: https://galong.org
+    description: Saluton, la mondo
+    avatar: https://avatars.githubusercontent.com/u/94678496?v=4
+  - name: LMY
+    link: https://lmy.sdufeacm.club
+    description: 光坠之地，吾之忧祈
+    avatar: https://avatars.githubusercontent.com/u/102243969?v=4
+- links_category: 组织&机构
+  has_thumbnail: false
+  list: 
+  - name: 山东财经大学 ACM 学社
+    link: https://sdufeacm.club
+    description: 于逆境中创造未来
+    avatar: https://sdufeacm.club/favicon.ico
