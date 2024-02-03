@@ -22,7 +22,7 @@
               pkgs.shellcheck
               pandoc
               nodejs
-              nodePackages.pnpm
+              nodejs.pkgs.pnpm
             ];
             shellHook = ''
               pnpm install
