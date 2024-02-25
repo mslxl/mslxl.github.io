@@ -245,118 +245,6 @@ graph TD
       </tags>
   </entry>
   <entry>
-    <title>编译原理：绪论 —— 语义分析</title>
-    <url>/compiler/n4/</url>
-    <content><![CDATA[<h2 id="语义分析">语义分析</h2>
-<h3 id="语义分析的任务">语义分析的任务</h3>
-<p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
-<h4 id="对声明语句语义分析的任务">对声明语句语义分析的任务</h4>
-<ol type="1">
-<li>种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、…），还是过程、…</li>
-<li>类型 （Type） : 这个我相信都不用说了把</li>
-<li>储存位置、长度 : 比如说我们写了一个对象或过程，我们都要在内存中给他分配一段空间，这样存储位置和所占用的空间的大小（长度）就成为标识符重要的属性</li>
-<li>值</li>
-<li>作用域</li>
-</ol>
-<h5 id="关于-3-举个例子">关于 3 举个例子：</h5>
-<div class="highlight-container" data-rel="Pascal"><figure class="iseeu highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">	real x[<span class="number">8</span>]</span><br><span class="line">	integer i,j;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 = 68</em> ，以此类推。</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">名字</th>
-<th style="text-align: center;">相对地址</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">x</td>
-<td style="text-align: center;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">i</td>
-<td style="text-align: center;">64</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">j</td>
-<td style="text-align: center;">68</td>
-</tr>
-</tbody>
-</table>
-<p>|:-:|:-:| |0|x[0]| |8|x[1]| | | | | |……| |56|x[7]| |64|i| |68|j|</p>
-<h4 id="对过程语义分析的任务">对过程语义分析的任务</h4>
-<p>对于过程来说，作用有 0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
-<h4 id="符号表-symbol-table">符号表 (Symbol Table)</h4>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">NAME</th>
-<th style="text-align: center;">TYPE</th>
-<th style="text-align: center;">KIND</th>
-<th style="text-align: center;">VAL</th>
-<th style="text-align: center;">ADDR</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">SIMPLE</td>
-<td style="text-align: center;">整</td>
-<td style="text-align: center;">简变</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">SYMBLE</td>
-<td style="text-align: center;">实</td>
-<td style="text-align: center;">数组</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">TABLE</td>
-<td style="text-align: center;">字符</td>
-<td style="text-align: center;">常数</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
-<p>语义分析中收集的标识符的信息都会存放在符号表里，每一个标识符都对应着一条记录，每个字段对应着一个属性，比如说 <code>类型 (TYPE)</code>、<code>种属 (KIND)</code>、<code>值 (VALUE)</code> 和 <code>地址 (ADDRESS)</code>等等。</p>
-<p>符号表中通常带有一个字符串表，用来存放程序中标识符的名称和字符常数，这样的话 <code>NAME</code> 字段就会被分割成两个部分，一个用来存放标识符在字符串表中的起始位置，另一个存放标识符的长度，这里由于 Markdown 的限制不能将其表现出来。符号表中设计字符串表的作用是节省内存空间。</p>
-<h4 id="语义分析的另一个任务语义检查">语义分析的另一个任务：语义检查</h4>
-<p>常见的语义错误有： 1. 变量或过程<strong>未经声明就使用</strong> 0. 变量或过程名<strong>重复声明</strong> 0. <strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换 0. <strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配 + <strong>数组下标</strong> 不是整数 + 对<strong>非数组变量</strong>使用数组访问操作符 + 对<strong>非过程名</strong>使用过程调用操作符 + 过程调用的<strong>参数类型或数目</strong>不匹配 + 函数<strong>返回类型</strong>有误</p>
-<hr />
-<pre class="mermaid">
-graph TD
-    Start-- 字符流 -->词法分析器
-    词法分析器-- 词法字节流 -->语法分析器
-    语法分析器-- 语法树 -->语义分析器
-    语义分析器-- 语法树 -->中间代码生成器
-    中间代码生成器-- 中间表示形式 -->机器无关代码优化器
-    机器无关代码优化器-- 中间表示形式 -->目标代码生成器
-    目标代码生成器-- 目标机器语言 -->机器相关代码优化器
-    机器相关代码优化器-- 目标机器语言 -->Fin
-</pre>
-]]></content>
-      <tags>
-        <tag>Compiler</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>编译原理：绪论 —— 中间代码生成和编译器后端</title>
     <url>/compiler/n5/</url>
     <content><![CDATA[<h2 id="中间代码生成">中间代码生成</h2>
@@ -576,6 +464,118 @@ graph TD
       </tags>
   </entry>
   <entry>
+    <title>编译原理：绪论 —— 语义分析</title>
+    <url>/compiler/n4/</url>
+    <content><![CDATA[<h2 id="语义分析">语义分析</h2>
+<h3 id="语义分析的任务">语义分析的任务</h3>
+<p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
+<h4 id="对声明语句语义分析的任务">对声明语句语义分析的任务</h4>
+<ol type="1">
+<li>种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、…），还是过程、…</li>
+<li>类型 （Type） : 这个我相信都不用说了把</li>
+<li>储存位置、长度 : 比如说我们写了一个对象或过程，我们都要在内存中给他分配一段空间，这样存储位置和所占用的空间的大小（长度）就成为标识符重要的属性</li>
+<li>值</li>
+<li>作用域</li>
+</ol>
+<h5 id="关于-3-举个例子">关于 3 举个例子：</h5>
+<div class="highlight-container" data-rel="Pascal"><figure class="iseeu highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">	real x[<span class="number">8</span>]</span><br><span class="line">	integer i,j;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 = 68</em> ，以此类推。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">名字</th>
+<th style="text-align: center;">相对地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">j</td>
+<td style="text-align: center;">68</td>
+</tr>
+</tbody>
+</table>
+<p>|:-:|:-:| |0|x[0]| |8|x[1]| | | | | |……| |56|x[7]| |64|i| |68|j|</p>
+<h4 id="对过程语义分析的任务">对过程语义分析的任务</h4>
+<p>对于过程来说，作用有 0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
+<h4 id="符号表-symbol-table">符号表 (Symbol Table)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">NAME</th>
+<th style="text-align: center;">TYPE</th>
+<th style="text-align: center;">KIND</th>
+<th style="text-align: center;">VAL</th>
+<th style="text-align: center;">ADDR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">SIMPLE</td>
+<td style="text-align: center;">整</td>
+<td style="text-align: center;">简变</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">SYMBLE</td>
+<td style="text-align: center;">实</td>
+<td style="text-align: center;">数组</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TABLE</td>
+<td style="text-align: center;">字符</td>
+<td style="text-align: center;">常数</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>语义分析中收集的标识符的信息都会存放在符号表里，每一个标识符都对应着一条记录，每个字段对应着一个属性，比如说 <code>类型 (TYPE)</code>、<code>种属 (KIND)</code>、<code>值 (VALUE)</code> 和 <code>地址 (ADDRESS)</code>等等。</p>
+<p>符号表中通常带有一个字符串表，用来存放程序中标识符的名称和字符常数，这样的话 <code>NAME</code> 字段就会被分割成两个部分，一个用来存放标识符在字符串表中的起始位置，另一个存放标识符的长度，这里由于 Markdown 的限制不能将其表现出来。符号表中设计字符串表的作用是节省内存空间。</p>
+<h4 id="语义分析的另一个任务语义检查">语义分析的另一个任务：语义检查</h4>
+<p>常见的语义错误有： 1. 变量或过程<strong>未经声明就使用</strong> 0. 变量或过程名<strong>重复声明</strong> 0. <strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换 0. <strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配 + <strong>数组下标</strong> 不是整数 + 对<strong>非数组变量</strong>使用数组访问操作符 + 对<strong>非过程名</strong>使用过程调用操作符 + 过程调用的<strong>参数类型或数目</strong>不匹配 + 函数<strong>返回类型</strong>有误</p>
+<hr />
+<pre class="mermaid">
+graph TD
+    Start-- 字符流 -->词法分析器
+    词法分析器-- 词法字节流 -->语法分析器
+    语法分析器-- 语法树 -->语义分析器
+    语义分析器-- 语法树 -->中间代码生成器
+    中间代码生成器-- 中间表示形式 -->机器无关代码优化器
+    机器无关代码优化器-- 中间表示形式 -->目标代码生成器
+    目标代码生成器-- 目标机器语言 -->机器相关代码优化器
+    机器相关代码优化器-- 目标机器语言 -->Fin
+</pre>
+]]></content>
+      <tags>
+        <tag>Compiler</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>实现一个自己的脚本语言（绪）</title>
     <url>/compiler/own-one/</url>
     <content><![CDATA[<p>说实话很久以前我就有这个想法了，不过近几个月才开始动工。先写篇占坑吧，也提醒自己。</p>
@@ -632,6 +632,127 @@ graph TD
       <categories>
         <category>教程</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Dev-C++ OpenCV 环境搭建</title>
+    <url>/cxx/opencv-env/</url>
+    <content><![CDATA[<blockquote>
+<p>该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev</p>
+</blockquote>
+<p>用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。</p>
+<p>用 Visual Studio 的话网上全是教程，直接百度就行。</p>
+<h2 id="需要准备的软件">需要准备的软件</h2>
+<ul>
+<li>Dev-C++ 或 RedPanda C++</li>
+<li>MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时安装)</li>
+<li><a class="link"   href="https://opencv.org/releases" >OpenCV Source <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://cmake.org/download/" >CMake <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<h2 id="步骤">步骤</h2>
+<ol type="1">
+<li>下载 OpenCV 源代码</li>
+</ol>
+<p>由于新版的 OpenCV 不提供 gcc 的编译，而 Dev-C++ 只能使用 gcc 编译器，所以我们需要自行使用 gcc 编译 OpenCV</p>
+<p>从 <a class="link"   href="https://opencv.org/releases/" >OpenCV Releases Page <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 下载源代码，注意选择 Source</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="src.png"
+                      
+                ></p>
+<p>下载完成后进行解压（这里解压到 <code>D:\Code\opencv\opencv-4.6.0</code> )</p>
+<ol start="2" type="1">
+<li>配置 OpenCV 编译环境</li>
+</ol>
+<p>在 <code>Dev-C++</code> 的安装目录找到 <code>MinGW</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="mingw.png"
+                      
+                ></p>
+<p>将 <code>MinGW\bin</code> 添加到 Path 环境变量中（具体方法参考百度）</p>
+<ol start="3" type="1">
+<li>编译 OpenCV</li>
+</ol>
+<p>打开命令行，进入 opencv 的代码文件夹</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="pwd.png"
+                      
+                ></p>
+<p>依次执行下列命令 <div class="highlight-container" data-rel="Pwsh"><figure class="iseeu highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir build <span class="comment">#创建 build 文件夹</span></span><br><span class="line"><span class="built_in">cd</span> build <span class="comment">#进入 build 文件夹</span></span><br><span class="line">cmake <span class="literal">-G</span> <span class="string">&quot;MinGW Makefiles&quot;</span> .. <span class="comment">#生成 makefile</span></span><br><span class="line">mingw32<span class="literal">-make</span> <span class="comment">#根据 makefile 编译</span></span><br><span class="line">mingw32<span class="literal">-make</span> install</span><br></pre></td></tr></table></figure></div></p>
+<p>在执行 cmake 的时候可能会下载其他依赖，这个过程比较慢，<del>有科技手段的话可以用点科技手段</del> 执行 <code>mingw-make</code> 时可以使用 <code>-j</code> 参数指定进程数量</p>
+<p>最终编译后的文件将保存在代码目录下的 <code>build/install</code> 下 <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="done.png"
+                      
+                ></p>
+<ol start="4" type="1">
+<li>配置 IDE</li>
+</ol>
+<p>在 Dev-C++ 中编译器配置里</p>
+<ul>
+<li>如果你是RedPanda，那么编译器配置在<code>菜单栏-Tools-Options-Compiler-Compiler Set</code> 中</li>
+<li>如果你是Dev-C++，那么编译器配置在 <code>菜单栏-Tools-Compiler Tools</code> 中</li>
+</ul>
+<p>打开编译器配置，在 <code>Binary</code> 中添加 <code>build\install\x64\mingw\bin</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="bin.png"
+                      
+                ></p>
+<p>在 <code>Library</code> 中添加 <code>build\install\x64\mingw\lib</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="lib.png"
+                      
+                ></p>
+<p>在 <code>C++ Include</code> 中添加 <code>build\install\include</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="inc.png"
+                      
+                ></p>
+<p>在 Linker 参数中加入以下链接库</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">-lopencv_highgui460.dll -lopencv_calib3d460.dll -lopencv_core460.dll -lopencv_dnn460.dll -lopencv_features2d460.dll -lopencv_flann460.dll -lopencv_gapi460.dll -lopencv_imgcodecs460.dll -lopencv_imgproc460.dll -lopencv_ml460.dll -lopencv_objdetect460.dll -lopencv_photo460.dll -lopencv_stitching460.dll -lopencv_video460.dll -lopencv_videoio460.dll</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="linker.png"
+                      
+                ></p>
+<p>至此，OpenCV 环境配置完成</p>
+<p><strong>需注意</strong>，以上配置应对同一组编译器配置，而且使用的编译器配置应当和设置的编译器配置一致。 <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="set.png"
+                      
+                ></p>
+<ol start="5" type="1">
+<li>测试</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;opencv2/highgui.hpp&quot;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cv::namedWindow(&quot;Test Windows&quot;);</span><br><span class="line">	cv::waitKey();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>试试这个段代码，这段代码将会创建一个空白窗口</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="prev.png"
+                      
+                ></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+        <tag>C++</tag>
+      </tags>
   </entry>
   <entry>
     <title>2020-2021 ACM ICPC Asia Nanjing Regional Contest</title>
@@ -1614,54 +1735,6 @@ f(i,H,S) = \begin{cases}
       </tags>
   </entry>
   <entry>
-    <title>Codeforces Round 897 (Div. 2)</title>
-    <url>/cp/cf1867/</url>
-    <content><![CDATA[<p><del>打了一半困了，提前下班了</del></p>
-<h2 id="a.-green_gold_dog-array-and-permutation">A. green_gold_dog, array and permutation</h2>
-<blockquote>
-<p>给一个长度为 <span class="math inline">\(n\)</span> 的数组 <span class="math inline">\(a\)</span>，找到一个长度为 <span class="math inline">\(n\)</span> 的排列 <span class="math inline">\(b\)</span>，使之 <span class="math inline">\(a_i - b_i\)</span> 的值不同的数量最大</p>
-</blockquote>
-<p><code>离散化</code> <code>贪心</code></p>
-<p>看样例大胆猜测将数组中第 <span class="math inline">\(k\)</span> 大的元素和排列中的 <span class="math inline">\(n-k\)</span> 放在一起，可以使 <span class="math inline">\(a_i - b_i\)</span> 的值不同的数量最大</p>
-<p>如果用最大的数减去最小的数，第二大的数减去第二小的数，依次类推，所获得的值应该是依次递减的</p>
-<p>因为 <span class="math inline">\(a_1 \ge a_2 \ge a_3 \ge \ldots \ge a_n\)</span> ，而 <span class="math inline">\(b_1 &lt; b_2 &lt; \ldots &lt; b_n\)</span>，则 <span class="math inline">\(-b_1 &gt; -b_2 &gt; \ldots &gt; -b_n\)</span>，最终结果 <span class="math inline">\(a_1 - b_1 &gt; a_2 - b_2 &gt; \ldots &gt; a_n - b_n\)</span></p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Pair <span class="keyword">struct</span> &#123;</span><br><span class="line">	a, b <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Pairs []Pair</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> arr[i].a &gt; arr[j].a</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Swap(i, j <span class="type">int</span>) &#123;</span><br><span class="line">	arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Len() <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	readInt(in)</span><br><span class="line">	a := readArrInt(in)</span><br><span class="line">	b := <span class="built_in">make</span>(Pairs, <span class="built_in">len</span>(a))</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		b[i].a = v</span><br><span class="line">		b[i].b = i</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Sort(b)</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> b &#123;</span><br><span class="line">		a[v.b] = i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;%d &quot;</span>, v+<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<h2 id="b.-xor-palindormes">B. XOR Palindormes</h2>
-<blockquote>
-<p>给一个长度为 <span class="math inline">\(n\)</span> 的 01 串<span class="math inline">\(s\)</span>。定义数字 <span class="math inline">\(x\)</span> 是好的，当且仅当存在一个长度为 <span class="math inline">\(n\)</span> 的 01 串<span class="math inline">\(l\)</span>包含 <span class="math inline">\(x\)</span> 个1，且 <span class="math inline">\(c = l \oplus s\)</span> 的结果是回文串</p>
-<p>输出答案长度为 <span class="math inline">\(n+1\)</span>序列 <span class="math inline">\(a\)</span>，当数字 <span class="math inline">\(x\)</span> 是好的，令 <span class="math inline">\(a_x = 1\)</span></p>
-</blockquote>
-<p><code>贪心</code></p>
-<p>当 <span class="math inline">\(l\)</span> 中的某一位为 <span class="math inline">\(1\)</span>时，<span class="math inline">\(l \oplus s\)</span> 的结果会使 <span class="math inline">\(s\)</span> 中的某位反转，即<span class="math inline">\(l\)</span> 中包含 1 的数量 <span class="math inline">\(x\)</span> 为反转 <span class="math inline">\(s\)</span> 的位数</p>
-<p>当 $n &gt; 2 $ 时且 <span class="math inline">\(n\)</span> 为偶数时，如果可以通过反转 <span class="math inline">\(k\)</span> 位<span class="math inline">\(s\)</span>中的内容，使的结果是回文串，那么反转 <span class="math inline">\(k+2\)</span> 位的结果一定也是回文串（反转任意两个对称的位置）</p>
-<p>当 <span class="math inline">\(n &gt; 2\)</span> 且 <span class="math inline">\(n\)</span> 为奇数时，反转 <span class="math inline">\(k+2\)</span> 的结果也是回文串（反转任意两个对称位置），反转 <span class="math inline">\(k + 1\)</span> 的结果也是回文串（反转串 <span class="math inline">\(s\)</span> 的中心位置）</p>
-<p>特判 <span class="math inline">\(n=2\)</span> 的情况</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	n := readInt(in)</span><br><span class="line">	s, _ := in.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">	s = strings.Trim(s, <span class="string">&quot; \r\n\t&quot;</span>)</span><br><span class="line"> </span><br><span class="line">	cnt := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s)/<span class="number">2</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> i == n<span class="number">-1</span>-i &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> s[i] != s[n<span class="number">-1</span>-i] &#123;</span><br><span class="line">			cnt++</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; cnt; i++ &#123;</span><br><span class="line">		fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := cnt; i &lt;= n-cnt; i++ &#123;</span><br><span class="line">			<span class="keyword">if</span> (i-cnt)%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := cnt; i &lt;= n-cnt; i++ &#123;</span><br><span class="line">			fmt.Print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := n - cnt + <span class="number">1</span>; i &lt; n+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<h2 id="c.-salyg1n-and-the-mex-game">C. Salyg1n and the MEX Game</h2>
-<blockquote>
-<p><strong>交互题</strong></p>
-<p>有一个集合 <span class="math inline">\(S\)</span> 包含 <span class="math inline">\(n\)</span> 个不同的数字 <span class="math inline">\(s_1, s_2, \ldots,s_n\)</span>，Alice 和 Bob 玩游戏，规则如下：</p>
-<ul>
-<li>玩家轮流行动，Alice 先手</li>
-<li>Alice 的一次行动可以向 <span class="math inline">\(S\)</span> 中添加一个数字 <span class="math inline">\(x\)</span>，在这之前 <span class="math inline">\(x \not{\in} S\)</span></li>
-<li>Bob 的一次行动可以从 <span class="math inline">\(S\)</span> 中删除一个数字 <span class="math inline">\(y\)</span>，删除的数字 <span class="math inline">\(y\)</span> 必须存在与 <span class="math inline">\(S\)</span> 且<strong>严格小于</strong>上次 Alice 添加 <span class="math inline">\(x\)</span></li>
-<li>游戏将在 <span class="math inline">\(2\cdot n + 1\)</span> 回合后（Alice 最后行动），或者是 Bob 无法行动时停止</li>
-<li>游戏的最终结果为 <span class="math inline">\(MEX(S)\)</span></li>
-<li>Alice 的目标为最大化结果，Bob 要最小化结果</li>
-</ul>
-</blockquote>
-<p><code>交互</code> <code>贪心</code></p>
-<p>除非 Bob 无法行动，否则无论 Alice 在前一步做何决策，Bob 总可以使游戏的结果变为 <span class="math inline">\(0\)</span>（即Bob移除0）。而无论 Bob 做什么行动，下一轮中 Alice 总可以抵消掉 Bob 的行动（即将删除的数重新添加）</p>
-<p>也就是说在前 <span class="math inline">\(2\cdot n\)</span> 中，Alice 只能维持游戏的结果不减小，而 Bob 什么也做不到。行动策略不论 Bob 删除什么数， Alice 只需要每次添加集合中不存在的最小的数，那么游戏的结果将不会减小</p>
-<p>糊个堆贪心即可</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;container/heap&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FPrintln</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	_, _ = fmt.Fprintln(os.Stdout, v)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> hp []<span class="type">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Len() <span class="type">int</span>           &#123; <span class="keyword">return</span> <span class="built_in">len</span>(h) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> &#123; <span class="keyword">return</span> h[i] &lt; h[j] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Swap(i, j <span class="type">int</span>)      &#123; h[i], h[j] = h[j], h[i] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> Push(v any)        &#123; *h = <span class="built_in">append</span>(*h, v.(<span class="type">int</span>)) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> Pop() any          &#123; a := *h; v := a[<span class="built_in">len</span>(a)<span class="number">-1</span>]; *h = a[:<span class="built_in">len</span>(a)<span class="number">-1</span>]; <span class="keyword">return</span> v &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> push(v <span class="type">int</span>)        &#123; heap.Push(h, v) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> pop() <span class="type">int</span>          &#123; <span class="keyword">return</span> heap.Pop(h).(<span class="type">int</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	n := readInt(in)</span><br><span class="line">	s := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">bool</span>)</span><br><span class="line">	seq := readArrInt(in)</span><br><span class="line">	<span class="keyword">for</span> _, x := <span class="keyword">range</span> seq &#123;</span><br><span class="line">		s[x] = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	mex := <span class="built_in">make</span>(hp, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt;= n+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> _, exists := s[i]; !exists &#123;</span><br><span class="line">			mex.push(i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	stop := <span class="literal">true</span></span><br><span class="line">	<span class="keyword">for</span> round := <span class="number">0</span>; round &lt; <span class="number">2</span>*n+<span class="number">1</span> &amp;&amp; stop; round++ &#123;</span><br><span class="line">		v := mex.pop()</span><br><span class="line">		FPrintln(v)</span><br><span class="line"></span><br><span class="line">		y := readInt(in)</span><br><span class="line">		<span class="keyword">if</span> y == <span class="number">-1</span> &#123;</span><br><span class="line">			stop = <span class="literal">false</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">delete</span>(s, y)</span><br><span class="line">			mex.push(y)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <tags>
-        <tag>Competitive Programming</tag>
-        <tag>Codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Harbour.Space Scholarship Contest 2023-2024 (Div. 1 + Div. 2) A-E 二进制拆分 组合数学</title>
     <url>/cp/cf1864/</url>
     <content><![CDATA[<h2 id="a.increasing-and-decreasing">A.Increasing and Decreasing</h2>
@@ -1836,6 +1909,54 @@ f(i,H,S) = \begin{cases}
       <categories>
         <category>题解</category>
       </categories>
+      <tags>
+        <tag>Competitive Programming</tag>
+        <tag>Codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces Round 897 (Div. 2)</title>
+    <url>/cp/cf1867/</url>
+    <content><![CDATA[<p><del>打了一半困了，提前下班了</del></p>
+<h2 id="a.-green_gold_dog-array-and-permutation">A. green_gold_dog, array and permutation</h2>
+<blockquote>
+<p>给一个长度为 <span class="math inline">\(n\)</span> 的数组 <span class="math inline">\(a\)</span>，找到一个长度为 <span class="math inline">\(n\)</span> 的排列 <span class="math inline">\(b\)</span>，使之 <span class="math inline">\(a_i - b_i\)</span> 的值不同的数量最大</p>
+</blockquote>
+<p><code>离散化</code> <code>贪心</code></p>
+<p>看样例大胆猜测将数组中第 <span class="math inline">\(k\)</span> 大的元素和排列中的 <span class="math inline">\(n-k\)</span> 放在一起，可以使 <span class="math inline">\(a_i - b_i\)</span> 的值不同的数量最大</p>
+<p>如果用最大的数减去最小的数，第二大的数减去第二小的数，依次类推，所获得的值应该是依次递减的</p>
+<p>因为 <span class="math inline">\(a_1 \ge a_2 \ge a_3 \ge \ldots \ge a_n\)</span> ，而 <span class="math inline">\(b_1 &lt; b_2 &lt; \ldots &lt; b_n\)</span>，则 <span class="math inline">\(-b_1 &gt; -b_2 &gt; \ldots &gt; -b_n\)</span>，最终结果 <span class="math inline">\(a_1 - b_1 &gt; a_2 - b_2 &gt; \ldots &gt; a_n - b_n\)</span></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Pair <span class="keyword">struct</span> &#123;</span><br><span class="line">	a, b <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Pairs []Pair</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> arr[i].a &gt; arr[j].a</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Swap(i, j <span class="type">int</span>) &#123;</span><br><span class="line">	arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(arr Pairs)</span></span> Len() <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	readInt(in)</span><br><span class="line">	a := readArrInt(in)</span><br><span class="line">	b := <span class="built_in">make</span>(Pairs, <span class="built_in">len</span>(a))</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		b[i].a = v</span><br><span class="line">		b[i].b = i</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Sort(b)</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> b &#123;</span><br><span class="line">		a[v.b] = i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;%d &quot;</span>, v+<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="b.-xor-palindormes">B. XOR Palindormes</h2>
+<blockquote>
+<p>给一个长度为 <span class="math inline">\(n\)</span> 的 01 串<span class="math inline">\(s\)</span>。定义数字 <span class="math inline">\(x\)</span> 是好的，当且仅当存在一个长度为 <span class="math inline">\(n\)</span> 的 01 串<span class="math inline">\(l\)</span>包含 <span class="math inline">\(x\)</span> 个1，且 <span class="math inline">\(c = l \oplus s\)</span> 的结果是回文串</p>
+<p>输出答案长度为 <span class="math inline">\(n+1\)</span>序列 <span class="math inline">\(a\)</span>，当数字 <span class="math inline">\(x\)</span> 是好的，令 <span class="math inline">\(a_x = 1\)</span></p>
+</blockquote>
+<p><code>贪心</code></p>
+<p>当 <span class="math inline">\(l\)</span> 中的某一位为 <span class="math inline">\(1\)</span>时，<span class="math inline">\(l \oplus s\)</span> 的结果会使 <span class="math inline">\(s\)</span> 中的某位反转，即<span class="math inline">\(l\)</span> 中包含 1 的数量 <span class="math inline">\(x\)</span> 为反转 <span class="math inline">\(s\)</span> 的位数</p>
+<p>当 $n &gt; 2 $ 时且 <span class="math inline">\(n\)</span> 为偶数时，如果可以通过反转 <span class="math inline">\(k\)</span> 位<span class="math inline">\(s\)</span>中的内容，使的结果是回文串，那么反转 <span class="math inline">\(k+2\)</span> 位的结果一定也是回文串（反转任意两个对称的位置）</p>
+<p>当 <span class="math inline">\(n &gt; 2\)</span> 且 <span class="math inline">\(n\)</span> 为奇数时，反转 <span class="math inline">\(k+2\)</span> 的结果也是回文串（反转任意两个对称位置），反转 <span class="math inline">\(k + 1\)</span> 的结果也是回文串（反转串 <span class="math inline">\(s\)</span> 的中心位置）</p>
+<p>特判 <span class="math inline">\(n=2\)</span> 的情况</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	n := readInt(in)</span><br><span class="line">	s, _ := in.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">	s = strings.Trim(s, <span class="string">&quot; \r\n\t&quot;</span>)</span><br><span class="line"> </span><br><span class="line">	cnt := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s)/<span class="number">2</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> i == n<span class="number">-1</span>-i &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> s[i] != s[n<span class="number">-1</span>-i] &#123;</span><br><span class="line">			cnt++</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; cnt; i++ &#123;</span><br><span class="line">		fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := cnt; i &lt;= n-cnt; i++ &#123;</span><br><span class="line">			<span class="keyword">if</span> (i-cnt)%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := cnt; i &lt;= n-cnt; i++ &#123;</span><br><span class="line">			fmt.Print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := n - cnt + <span class="number">1</span>; i &lt; n+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		fmt.Print(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="c.-salyg1n-and-the-mex-game">C. Salyg1n and the MEX Game</h2>
+<blockquote>
+<p><strong>交互题</strong></p>
+<p>有一个集合 <span class="math inline">\(S\)</span> 包含 <span class="math inline">\(n\)</span> 个不同的数字 <span class="math inline">\(s_1, s_2, \ldots,s_n\)</span>，Alice 和 Bob 玩游戏，规则如下：</p>
+<ul>
+<li>玩家轮流行动，Alice 先手</li>
+<li>Alice 的一次行动可以向 <span class="math inline">\(S\)</span> 中添加一个数字 <span class="math inline">\(x\)</span>，在这之前 <span class="math inline">\(x \not{\in} S\)</span></li>
+<li>Bob 的一次行动可以从 <span class="math inline">\(S\)</span> 中删除一个数字 <span class="math inline">\(y\)</span>，删除的数字 <span class="math inline">\(y\)</span> 必须存在与 <span class="math inline">\(S\)</span> 且<strong>严格小于</strong>上次 Alice 添加 <span class="math inline">\(x\)</span></li>
+<li>游戏将在 <span class="math inline">\(2\cdot n + 1\)</span> 回合后（Alice 最后行动），或者是 Bob 无法行动时停止</li>
+<li>游戏的最终结果为 <span class="math inline">\(MEX(S)\)</span></li>
+<li>Alice 的目标为最大化结果，Bob 要最小化结果</li>
+</ul>
+</blockquote>
+<p><code>交互</code> <code>贪心</code></p>
+<p>除非 Bob 无法行动，否则无论 Alice 在前一步做何决策，Bob 总可以使游戏的结果变为 <span class="math inline">\(0\)</span>（即Bob移除0）。而无论 Bob 做什么行动，下一轮中 Alice 总可以抵消掉 Bob 的行动（即将删除的数重新添加）</p>
+<p>也就是说在前 <span class="math inline">\(2\cdot n\)</span> 中，Alice 只能维持游戏的结果不减小，而 Bob 什么也做不到。行动策略不论 Bob 删除什么数， Alice 只需要每次添加集合中不存在的最小的数，那么游戏的结果将不会减小</p>
+<p>糊个堆贪心即可</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;container/heap&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FPrintln</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	_, _ = fmt.Fprintln(os.Stdout, v)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> hp []<span class="type">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Len() <span class="type">int</span>           &#123; <span class="keyword">return</span> <span class="built_in">len</span>(h) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> &#123; <span class="keyword">return</span> h[i] &lt; h[j] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h hp)</span></span> Swap(i, j <span class="type">int</span>)      &#123; h[i], h[j] = h[j], h[i] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> Push(v any)        &#123; *h = <span class="built_in">append</span>(*h, v.(<span class="type">int</span>)) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> Pop() any          &#123; a := *h; v := a[<span class="built_in">len</span>(a)<span class="number">-1</span>]; *h = a[:<span class="built_in">len</span>(a)<span class="number">-1</span>]; <span class="keyword">return</span> v &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> push(v <span class="type">int</span>)        &#123; heap.Push(h, v) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hp)</span></span> pop() <span class="type">int</span>          &#123; <span class="keyword">return</span> heap.Pop(h).(<span class="type">int</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">solve</span><span class="params">(in *bufio.Reader)</span></span> &#123;</span><br><span class="line">	n := readInt(in)</span><br><span class="line">	s := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">bool</span>)</span><br><span class="line">	seq := readArrInt(in)</span><br><span class="line">	<span class="keyword">for</span> _, x := <span class="keyword">range</span> seq &#123;</span><br><span class="line">		s[x] = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	mex := <span class="built_in">make</span>(hp, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt;= n+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> _, exists := s[i]; !exists &#123;</span><br><span class="line">			mex.push(i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	stop := <span class="literal">true</span></span><br><span class="line">	<span class="keyword">for</span> round := <span class="number">0</span>; round &lt; <span class="number">2</span>*n+<span class="number">1</span> &amp;&amp; stop; round++ &#123;</span><br><span class="line">		v := mex.pop()</span><br><span class="line">		FPrintln(v)</span><br><span class="line"></span><br><span class="line">		y := readInt(in)</span><br><span class="line">		<span class="keyword">if</span> y == <span class="number">-1</span> &#123;</span><br><span class="line">			stop = <span class="literal">false</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">delete</span>(s, y)</span><br><span class="line">			mex.push(y)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	in := bufio.NewReader(os.Stdin)</span><br><span class="line">	T := readInt(in)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; T; i++ &#123;</span><br><span class="line">		solve(in)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+]]></content>
       <tags>
         <tag>Competitive Programming</tag>
         <tag>Codeforces</tag>
@@ -2065,125 +2186,17 @@ f(i,H,S) = \begin{cases}
       </tags>
   </entry>
   <entry>
-    <title>Dev-C++ OpenCV 环境搭建</title>
-    <url>/cxx/opencv-env/</url>
+    <title>新春快乐</title>
+    <url>/daily/2024-new-start/</url>
     <content><![CDATA[<blockquote>
-<p>该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev</p>
+<p>时间总是在匆忙间悄悄溜走，曾经坚定的那些遥遥无期都已沦为了转身的天涯…</p>
+<p>很多计划还来不及执行</p>
+<p>很多设想还来不及规划</p>
+<p>很多美好还来不及体会</p>
+<p>但是，因幡之白兔却不再给予机会</p>
+<p>今天，她正式与我们告别，新春快乐wwww</p>
 </blockquote>
-<p>用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。</p>
-<p>用 Visual Studio 的话网上全是教程，直接百度就行。</p>
-<h2 id="需要准备的软件">需要准备的软件</h2>
-<ul>
-<li>Dev-C++ 或 RedPanda C++</li>
-<li>MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时安装)</li>
-<li><a class="link"   href="https://opencv.org/releases" >OpenCV Source <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li><a class="link"   href="https://cmake.org/download/" >CMake <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-</ul>
-<h2 id="步骤">步骤</h2>
-<ol type="1">
-<li>下载 OpenCV 源代码</li>
-</ol>
-<p>由于新版的 OpenCV 不提供 gcc 的编译，而 Dev-C++ 只能使用 gcc 编译器，所以我们需要自行使用 gcc 编译 OpenCV</p>
-<p>从 <a class="link"   href="https://opencv.org/releases/" >OpenCV Releases Page <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 下载源代码，注意选择 Source</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="src.png"
-                      
-                ></p>
-<p>下载完成后进行解压（这里解压到 <code>D:\Code\opencv\opencv-4.6.0</code> )</p>
-<ol start="2" type="1">
-<li>配置 OpenCV 编译环境</li>
-</ol>
-<p>在 <code>Dev-C++</code> 的安装目录找到 <code>MinGW</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="mingw.png"
-                      
-                ></p>
-<p>将 <code>MinGW\bin</code> 添加到 Path 环境变量中（具体方法参考百度）</p>
-<ol start="3" type="1">
-<li>编译 OpenCV</li>
-</ol>
-<p>打开命令行，进入 opencv 的代码文件夹</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="pwd.png"
-                      
-                ></p>
-<p>依次执行下列命令 <div class="highlight-container" data-rel="Pwsh"><figure class="iseeu highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir build <span class="comment">#创建 build 文件夹</span></span><br><span class="line"><span class="built_in">cd</span> build <span class="comment">#进入 build 文件夹</span></span><br><span class="line">cmake <span class="literal">-G</span> <span class="string">&quot;MinGW Makefiles&quot;</span> .. <span class="comment">#生成 makefile</span></span><br><span class="line">mingw32<span class="literal">-make</span> <span class="comment">#根据 makefile 编译</span></span><br><span class="line">mingw32<span class="literal">-make</span> install</span><br></pre></td></tr></table></figure></div></p>
-<p>在执行 cmake 的时候可能会下载其他依赖，这个过程比较慢，<del>有科技手段的话可以用点科技手段</del> 执行 <code>mingw-make</code> 时可以使用 <code>-j</code> 参数指定进程数量</p>
-<p>最终编译后的文件将保存在代码目录下的 <code>build/install</code> 下 <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="done.png"
-                      
-                ></p>
-<ol start="4" type="1">
-<li>配置 IDE</li>
-</ol>
-<p>在 Dev-C++ 中编译器配置里</p>
-<ul>
-<li>如果你是RedPanda，那么编译器配置在<code>菜单栏-Tools-Options-Compiler-Compiler Set</code> 中</li>
-<li>如果你是Dev-C++，那么编译器配置在 <code>菜单栏-Tools-Compiler Tools</code> 中</li>
-</ul>
-<p>打开编译器配置，在 <code>Binary</code> 中添加 <code>build\install\x64\mingw\bin</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="bin.png"
-                      
-                ></p>
-<p>在 <code>Library</code> 中添加 <code>build\install\x64\mingw\lib</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="lib.png"
-                      
-                ></p>
-<p>在 <code>C++ Include</code> 中添加 <code>build\install\include</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="inc.png"
-                      
-                ></p>
-<p>在 Linker 参数中加入以下链接库</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">-lopencv_highgui460.dll -lopencv_calib3d460.dll -lopencv_core460.dll -lopencv_dnn460.dll -lopencv_features2d460.dll -lopencv_flann460.dll -lopencv_gapi460.dll -lopencv_imgcodecs460.dll -lopencv_imgproc460.dll -lopencv_ml460.dll -lopencv_objdetect460.dll -lopencv_photo460.dll -lopencv_stitching460.dll -lopencv_video460.dll -lopencv_videoio460.dll</span><br></pre></td></tr></table></figure></div>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="linker.png"
-                      
-                ></p>
-<p>至此，OpenCV 环境配置完成</p>
-<p><strong>需注意</strong>，以上配置应对同一组编译器配置，而且使用的编译器配置应当和设置的编译器配置一致。 <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="set.png"
-                      
-                ></p>
-<ol start="5" type="1">
-<li>测试</li>
-</ol>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;opencv2/highgui.hpp&quot;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cv::namedWindow(&quot;Test Windows&quot;);</span><br><span class="line">	cv::waitKey();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<p>试试这个段代码，这段代码将会创建一个空白窗口</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="prev.png"
-                      
-                ></p>
 ]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>OpenCV</tag>
-        <tag>C++</tag>
-      </tags>
   </entry>
   <entry>
     <title>Epub 文件结构</title>
@@ -2896,137 +2909,6 @@ git checkout develop</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>MIT6.824 分布式系统 GFS 笔记</title>
-    <url>/project/mit6.824/gfs/</url>
-    <content><![CDATA[<p>GFS （Google File System） 是一种可拓展的分布式文件系统，主要用于大型分布式数据密集型应用。它在廉价的普通硬件上提供了运行时的容错，并为大量客户机提供了聚合性能</p>
-<p>在论文中，Google 介绍了支持分布式应用程序的拓展文件系统接口，并讨论了 GFS 设计，基准测试和实际表现的种种方面</p>
-<h2 id="介绍">介绍</h2>
-<p>GFS 和传统的分布式文件系统在性能，拓展性，稳定性和可用性上有同样的目标，但是传统的分布式文件系统目前存在以下缺点：</p>
-<ol type="1">
-<li>组成部分的故障是一个常见的现象。由大量机器组成的系统实际上使的系统的部分故障会是一个非常常见的现象，因此文件系统中必须集成有持续监控，错误检测，容错机制和自动恢复功能</li>
-<li>在传统意义上分布式文件系统上存储的文件一般很大，因此对于 IO操作的设想和块大小需要重新考虑</li>
-<li>大多数文件的操作不是覆写，而是在原有的基础上进行追加。随机写文件在实际操作中也不存在。通常一个文件在被写入后，只会被顺序的反复读取。考虑以上特点，在原子性保证和性能方面应着重考虑文件追加操作。而客户机的缓存数据块没有任何优点</li>
-<li>在设计文件系统的 API 时增加系统的灵活性，可以使的整个系统受益。Google 通过放宽一致性模型极大的简化的文件系统，也不会给应用程序带来沉重的负担</li>
-</ol>
-<h2 id="设计一览">设计一览</h2>
-<h3 id="设想">设想</h3>
-<ul>
-<li>系统运行在常见的商用机上。它必须能<strong>自我监控和检测</strong>，并在常规基础上检测、容忍组件故障，并迅速从组件故障中恢复。</li>
-<li><strong>系统存储大文件</strong>。以 GB 为单位的文件是一种常见情况，应该被高效的管理，而小文件不需要优化。</li>
-<li>工作负载主要由两部分组成：<strong>大量的读取流</strong>和少量的随机读。在读取流中，每次通常读取 <span class="math inline">\(1 MiB +\)</span>。同一客户机上的读取通常是一段连续的区域。随机读通常只有几KB，并且每次偏移一定值。故注重性能的应用程序通常对它们的小读取进行批处理和排序，以便在文件中稳定地前进，而不是来回移动。</li>
-<li>工作负载也包含追加文件时的<strong>大量的连续写操作。</strong>通常写的大小和读的大小相似。文件一经写入，很少进行修改。少量的写操作会有，但不需要优化</li>
-<li>系统需要对多客户端并发追加同一个文件具备良好高效的语义定义。文件系统中的文件常作为生产-消费模型中的队列，或者是用于数据合并。运行在不同主机上的生产者可能会同时写一个文件，同时文件可能会同时或稍后被读取，因此需要在少量开销下保证原子性。</li>
-<li>高带宽比低延迟重要。大多数目标应用程序都重视以高速率批量处理数据，而很少有对单个读或写有严格的响应时间要求</li>
-</ul>
-<h3 id="接口">接口</h3>
-<p>GFS 提供了一些常见的文件系统接口。此外，具有<strong>快照</strong>和<strong>追加</strong>操作。快照以较低的成本创建文件或目录树的副本。追加允许多个客户端并发地向同一个文件追加数据，同时保证每个客户端追加的原子性。它对于实现多路合并结果和生产者-消费者队列非常有用，许多客户机可以同时追加到这些队列，而无需额外的锁定。我们发现这些类型的文件在构建大型分布式应用程序时是无价的。</p>
-<h3 id="架构">架构</h3>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="image-20230921174912019.png"
-                      
-                ></p>
-<p>GFS 集群包含可以被客户端访问到的一个 master 的复数个 Chunk Servers。每个都是一个 Linux 主机运行的用户级的程序。</p>
-<p>每个文件被拆分成多个 Chunk，每个 Chunk 一般为 64 MiB 存储在不同的 Chunk Server 中。</p>
-<h2 id="维护内容">维护内容</h2>
-<h3 id="元信息">元信息</h3>
-<p>在 master 中维护有以下内容：</p>
-<ol type="1">
-<li>文件名与 chunk handle 数组的对应关系</li>
-<li>chunk handle 和 chunk 版本号的对应关系</li>
-<li>chunk handle 和 chunk server 地址、primary chunk server、租约的对应关系</li>
-<li>日志</li>
-<li>检查点</li>
-</ol>
-<p>除第三点外，所有数据均需要进行持久化存储</p>
-<p>Master 不存储 chunk handle 和 chunk server 的对应关系，这些信息只保存在内存当中。Chunk server 会定期通过心跳的方式通知 master 其含有的所有 chunk。Master 根据目前内存中已有的 chunk server 的数量采取相应的行动（复制，删除等）。因为 master 不存储 chunk 中的内容（即 master 不决定 chunk），chunk server 的宕机、数据错误、离线等都需要 master 进行相应的修改，而 master 可能止一个，master 进行主动的修改可能会导致一致性问题，因此 master 不持久化维护对应关系，而是由 chunk server 决定这些内容</p>
-<p>而 chunk 到版本号的关系必须持久化。由于 chunk server 可能会掉线，从而错过某次更新，所以 chunk server 所存储的版本号不一定正确。 master 存储版本号，以需要区分哪一个 chunk server 中的信息是过时的，而哪一个是最新的。</p>
-<p>所有信息的修改均通过操作日志的方式实现。在收到RPC指令后，Master 会将所有的操作记录在日志中，并将日志同步到备份 Master 上，当操作、记录与同步均完成后 Master 才会对 Client 进行回复，任意一个过程的失败均标志着全过程的失败。Master 在重启中恢复时，会通过重放 Log 的方式恢复数据，为了减少重放的负担，Master 会定期对数据建立检查点，每次回放时只需要从最近的检查点开始回放。</p>
-<h3 id="锁">锁</h3>
-<p>为了保证数据的一致性，确保在并发操作中文件名不会冲突，需要对文件和路径进行加锁，每个文件和目录均有一个读写锁。GFS 会对每个文件和所属目录从根目录开始逐级加锁。</p>
-<h2 id="读文件">读文件</h2>
-<pre class="mermaid">sequenceDiagram
-    Client->>+Master: 发送文件名和要读取的位置(Offset)
-    Master-->>-Client: 返回 chunk server, handle, 版本号（一般返回3条）
-    Client->>Client: 缓存
-    Client->>+Chunk Server: 读取 Chunk
-    Chunk Server->>Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
-    Chunk Server-->>Client: 返回 Chunk 内容</pre>
-<p>如果在读取 Chunk 时，Client 未能正常连接 Chunk Server，或者 Chunk Server 校验失败，那么 Client 会去请求另一个 Chunk Server。</p>
-<p>在读取过程中，如果请求的 Chunk Server 是 Primary，那么数据就是一致的。否则数据有可能就旧的。</p>
-<p>客户端的实现逻辑一般是请求最近的 Chunk Server</p>
-<h2 id="删除文件">删除文件</h2>
-<p>GFS 删除文件为惰性删除：当收到删除命令时， Master 会将该文件名后追加时间戳（即变为隐藏文件）。Master 会定期遍利所有的文件名和所有的 Chunk，在遍历文件名时若发现文件已经被标记一段时间后，会从删除自身存储的对应关系; 而在遍历 Chunk 时， 若发现该 Chunk 为孤儿 Chunk（即不存在它的对应关系），那么会对这个 Chunk 进行真正的删除操作</p>
-<h2 id="写文件">写文件</h2>
-<p>在写文件时，Master 会通过租约的方式保证数据一致，并通过流水线技术保证写速度。</p>
-<p>当 Client 试图写文件时，会首先向 Master 请求对应的位置。Master会检查此时该文件是否存在 Primary Chunk Server，它的组约是否过期，如果存在且未过期则返回 Primary Chunk Server 对应的信息和操作标识以及Secondary Chunk Server，否则则进行Primary Chunk Server的分配。Client 拿到信息后，会通过流水线(pipeline) 向服务器发送文件，并在发送完成时向 Primary Chunk Server 发送控制命令，Primary Chunk Server 再分别对所有 Chunk Server 进行操作，所有操作结束后才会对 Client 进行回应。</p>
-<p>其过程如下图</p>
-<pre class="mermaid">flowchart LR
-    Client -->|1. 请求写操作| Master
-    Master -->|2. 返回信息| Client
-    Client ==>|3. 发送 Chunk 数据| NCS[Nearest Chunk Server]
-    NCS ==>|3. 同步 Chunk 数据| PCS[Primary Chunk Server]
-    PCS ==>|3. 同步 Chunk 数据| SCS[Secondary Chunk Server]
-    Client -->|4. 发送写指令| PCS
-    PCS -->|5. 发送写指令 | NCS
-    PCS -->|5. 发送写指令 | SCS
-    NCS -->|6. 返回操作结果| PCS
-    SCS -->|6. 返回操作结果| PCS
-    PCS -->|7. 返回操作结果| Client</pre>
-<p>在操作3中，Chunk 数据的发送与同步并不是等待文件全部接受后再向下一个服务器进行同步，而是一遍接受一遍发送。每个 Chunk Server向其最新的 Chunk Server 发送数据</p>
-<pre class="mermaid">sequenceDiagram
-    participant Master
-    participant Client
-    participant Nearest Chunk Server
-    participant Primary Chunk Server
-    participant Secondary Chunk Server
-    Client ->>+Master: 请求写操作
-    Master ->>Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
-    Master ->>-Client: 返回 Chunk Server 信息
-    par
-        Client ->> Nearest Chunk Server:同步 Chunk 数据
-    and
-        Nearest Chunk Server ->> Primary Chunk Server:同步 Chunk 数据
-    and
-        Primary Chunk Server ->> Secondary Chunk Server:同步 Chunk 数据
-    end
-    Client ->> Primary Chunk Server: 发送指令
-    par
-        Primary Chunk Server ->> Nearest Chunk Server: 发送指令
-        Nearest Chunk Server ->> Primary Chunk Server: 返回结果
-    and
-        Primary Chunk Server ->> Secondary Chunk Server: 发送指令
-        Secondary Chunk Server ->> Primary Chunk Server: 返回结果
-    end
-    Primary Chunk Server ->> Client: 返回结果</pre>
-<h2 id="追加">追加</h2>
-<p>追加在 GFS 中是一个常用的操作。GFS 中的追加不是在文件末尾进行追加，而是在文件后添加一个新的 Chunk。如果原本文件的最后一个 Chunk 未满也不会在后面追加。每次文件的追加都是在写一个全新的 Chunk，GFS 通过这种方式保证了数据的正确</p>
-<p>在一致性模型中，只有追加是定义但不一致的：其原因是如果有 Chunk Server 在追加过程中失败，Client 会重试此操作，在最终成功之前可能会有多次追加操作，会产生很多不一致的数据，但这些数据是无用且不影响的</p>
-<h2 id="文件快照">文件快照</h2>
-<p>GFS 通过类似 COW 的方式建立文件的快照，以减少文件的复制操作。其过程如下</p>
-<p>当 Master接收到一个文件快照命令之后，找到该文件包含的所有 chunk，取消所有 Chunk 的租约。之后在元数据中建立新的对应关系，其对应的 chunk 仍为原本的 Chunk。在记录日志之后，所有操作结束</p>
-<p>在后续修改 Chunk 时，Master 会先要求 Chunk Server 建立原 Chunk 的副本，再选择 Primary Chunk Server 进行操作。</p>
-<p>取消租约的原因是防止建立文件快照的过程中对原 Chunk 进行修改，导致快照内容并不是原本的内容</p>
-<h2 id="chunk-大小-64mib">Chunk 大小 64MiB?</h2>
-<p>64 MiB 是实验室数据，它是一个平衡点。</p>
-<p>作为一个较大的 Chunk， 其优势是：</p>
-<ol type="1">
-<li>减少了客户端与master的交互，即减少了客户端请求master获取filename与chunkserver的对应关系。</li>
-<li>减少了网络开销，因为一个chunk很大，客户端的一次读写可以更加集中在少量的chunkserver上，复用TCP连接。</li>
-<li>减少master管理的元信息的大小。</li>
-</ol>
-<p>但也有劣势</p>
-<ol type="1">
-<li>可能会形成热点，导致大量的客户端请求集中在某几个chunkserver上。（可以通过客户端请求的次数和频率加副本减缓）</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>mit6.824</tag>
-        <tag>分布式系统</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>速通 Go 语言基础</title>
     <url>/project/go/go-speedrun/</url>
     <content><![CDATA[<p>马上就退役了，要为下一步做点准备了。先速通一下 GO 语言基础，本文章参考了 GO TOUR 和字节的青训营课程，通过列出一些代码来快速上手 GO 语言。</p>
@@ -3272,6 +3154,137 @@ git checkout develop</code></pre>
       </categories>
       <tags>
         <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MIT6.824 分布式系统 GFS 笔记</title>
+    <url>/project/mit6.824/gfs/</url>
+    <content><![CDATA[<p>GFS （Google File System） 是一种可拓展的分布式文件系统，主要用于大型分布式数据密集型应用。它在廉价的普通硬件上提供了运行时的容错，并为大量客户机提供了聚合性能</p>
+<p>在论文中，Google 介绍了支持分布式应用程序的拓展文件系统接口，并讨论了 GFS 设计，基准测试和实际表现的种种方面</p>
+<h2 id="介绍">介绍</h2>
+<p>GFS 和传统的分布式文件系统在性能，拓展性，稳定性和可用性上有同样的目标，但是传统的分布式文件系统目前存在以下缺点：</p>
+<ol type="1">
+<li>组成部分的故障是一个常见的现象。由大量机器组成的系统实际上使的系统的部分故障会是一个非常常见的现象，因此文件系统中必须集成有持续监控，错误检测，容错机制和自动恢复功能</li>
+<li>在传统意义上分布式文件系统上存储的文件一般很大，因此对于 IO操作的设想和块大小需要重新考虑</li>
+<li>大多数文件的操作不是覆写，而是在原有的基础上进行追加。随机写文件在实际操作中也不存在。通常一个文件在被写入后，只会被顺序的反复读取。考虑以上特点，在原子性保证和性能方面应着重考虑文件追加操作。而客户机的缓存数据块没有任何优点</li>
+<li>在设计文件系统的 API 时增加系统的灵活性，可以使的整个系统受益。Google 通过放宽一致性模型极大的简化的文件系统，也不会给应用程序带来沉重的负担</li>
+</ol>
+<h2 id="设计一览">设计一览</h2>
+<h3 id="设想">设想</h3>
+<ul>
+<li>系统运行在常见的商用机上。它必须能<strong>自我监控和检测</strong>，并在常规基础上检测、容忍组件故障，并迅速从组件故障中恢复。</li>
+<li><strong>系统存储大文件</strong>。以 GB 为单位的文件是一种常见情况，应该被高效的管理，而小文件不需要优化。</li>
+<li>工作负载主要由两部分组成：<strong>大量的读取流</strong>和少量的随机读。在读取流中，每次通常读取 <span class="math inline">\(1 MiB +\)</span>。同一客户机上的读取通常是一段连续的区域。随机读通常只有几KB，并且每次偏移一定值。故注重性能的应用程序通常对它们的小读取进行批处理和排序，以便在文件中稳定地前进，而不是来回移动。</li>
+<li>工作负载也包含追加文件时的<strong>大量的连续写操作。</strong>通常写的大小和读的大小相似。文件一经写入，很少进行修改。少量的写操作会有，但不需要优化</li>
+<li>系统需要对多客户端并发追加同一个文件具备良好高效的语义定义。文件系统中的文件常作为生产-消费模型中的队列，或者是用于数据合并。运行在不同主机上的生产者可能会同时写一个文件，同时文件可能会同时或稍后被读取，因此需要在少量开销下保证原子性。</li>
+<li>高带宽比低延迟重要。大多数目标应用程序都重视以高速率批量处理数据，而很少有对单个读或写有严格的响应时间要求</li>
+</ul>
+<h3 id="接口">接口</h3>
+<p>GFS 提供了一些常见的文件系统接口。此外，具有<strong>快照</strong>和<strong>追加</strong>操作。快照以较低的成本创建文件或目录树的副本。追加允许多个客户端并发地向同一个文件追加数据，同时保证每个客户端追加的原子性。它对于实现多路合并结果和生产者-消费者队列非常有用，许多客户机可以同时追加到这些队列，而无需额外的锁定。我们发现这些类型的文件在构建大型分布式应用程序时是无价的。</p>
+<h3 id="架构">架构</h3>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="image-20230921174912019.png"
+                      
+                ></p>
+<p>GFS 集群包含可以被客户端访问到的一个 master 的复数个 Chunk Servers。每个都是一个 Linux 主机运行的用户级的程序。</p>
+<p>每个文件被拆分成多个 Chunk，每个 Chunk 一般为 64 MiB 存储在不同的 Chunk Server 中。</p>
+<h2 id="维护内容">维护内容</h2>
+<h3 id="元信息">元信息</h3>
+<p>在 master 中维护有以下内容：</p>
+<ol type="1">
+<li>文件名与 chunk handle 数组的对应关系</li>
+<li>chunk handle 和 chunk 版本号的对应关系</li>
+<li>chunk handle 和 chunk server 地址、primary chunk server、租约的对应关系</li>
+<li>日志</li>
+<li>检查点</li>
+</ol>
+<p>除第三点外，所有数据均需要进行持久化存储</p>
+<p>Master 不存储 chunk handle 和 chunk server 的对应关系，这些信息只保存在内存当中。Chunk server 会定期通过心跳的方式通知 master 其含有的所有 chunk。Master 根据目前内存中已有的 chunk server 的数量采取相应的行动（复制，删除等）。因为 master 不存储 chunk 中的内容（即 master 不决定 chunk），chunk server 的宕机、数据错误、离线等都需要 master 进行相应的修改，而 master 可能止一个，master 进行主动的修改可能会导致一致性问题，因此 master 不持久化维护对应关系，而是由 chunk server 决定这些内容</p>
+<p>而 chunk 到版本号的关系必须持久化。由于 chunk server 可能会掉线，从而错过某次更新，所以 chunk server 所存储的版本号不一定正确。 master 存储版本号，以需要区分哪一个 chunk server 中的信息是过时的，而哪一个是最新的。</p>
+<p>所有信息的修改均通过操作日志的方式实现。在收到RPC指令后，Master 会将所有的操作记录在日志中，并将日志同步到备份 Master 上，当操作、记录与同步均完成后 Master 才会对 Client 进行回复，任意一个过程的失败均标志着全过程的失败。Master 在重启中恢复时，会通过重放 Log 的方式恢复数据，为了减少重放的负担，Master 会定期对数据建立检查点，每次回放时只需要从最近的检查点开始回放。</p>
+<h3 id="锁">锁</h3>
+<p>为了保证数据的一致性，确保在并发操作中文件名不会冲突，需要对文件和路径进行加锁，每个文件和目录均有一个读写锁。GFS 会对每个文件和所属目录从根目录开始逐级加锁。</p>
+<h2 id="读文件">读文件</h2>
+<pre class="mermaid">sequenceDiagram
+    Client->>+Master: 发送文件名和要读取的位置(Offset)
+    Master-->>-Client: 返回 chunk server, handle, 版本号（一般返回3条）
+    Client->>Client: 缓存
+    Client->>+Chunk Server: 读取 Chunk
+    Chunk Server->>Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
+    Chunk Server-->>Client: 返回 Chunk 内容</pre>
+<p>如果在读取 Chunk 时，Client 未能正常连接 Chunk Server，或者 Chunk Server 校验失败，那么 Client 会去请求另一个 Chunk Server。</p>
+<p>在读取过程中，如果请求的 Chunk Server 是 Primary，那么数据就是一致的。否则数据有可能就旧的。</p>
+<p>客户端的实现逻辑一般是请求最近的 Chunk Server</p>
+<h2 id="删除文件">删除文件</h2>
+<p>GFS 删除文件为惰性删除：当收到删除命令时， Master 会将该文件名后追加时间戳（即变为隐藏文件）。Master 会定期遍利所有的文件名和所有的 Chunk，在遍历文件名时若发现文件已经被标记一段时间后，会从删除自身存储的对应关系; 而在遍历 Chunk 时， 若发现该 Chunk 为孤儿 Chunk（即不存在它的对应关系），那么会对这个 Chunk 进行真正的删除操作</p>
+<h2 id="写文件">写文件</h2>
+<p>在写文件时，Master 会通过租约的方式保证数据一致，并通过流水线技术保证写速度。</p>
+<p>当 Client 试图写文件时，会首先向 Master 请求对应的位置。Master会检查此时该文件是否存在 Primary Chunk Server，它的组约是否过期，如果存在且未过期则返回 Primary Chunk Server 对应的信息和操作标识以及Secondary Chunk Server，否则则进行Primary Chunk Server的分配。Client 拿到信息后，会通过流水线(pipeline) 向服务器发送文件，并在发送完成时向 Primary Chunk Server 发送控制命令，Primary Chunk Server 再分别对所有 Chunk Server 进行操作，所有操作结束后才会对 Client 进行回应。</p>
+<p>其过程如下图</p>
+<pre class="mermaid">flowchart LR
+    Client -->|1. 请求写操作| Master
+    Master -->|2. 返回信息| Client
+    Client ==>|3. 发送 Chunk 数据| NCS[Nearest Chunk Server]
+    NCS ==>|3. 同步 Chunk 数据| PCS[Primary Chunk Server]
+    PCS ==>|3. 同步 Chunk 数据| SCS[Secondary Chunk Server]
+    Client -->|4. 发送写指令| PCS
+    PCS -->|5. 发送写指令 | NCS
+    PCS -->|5. 发送写指令 | SCS
+    NCS -->|6. 返回操作结果| PCS
+    SCS -->|6. 返回操作结果| PCS
+    PCS -->|7. 返回操作结果| Client</pre>
+<p>在操作3中，Chunk 数据的发送与同步并不是等待文件全部接受后再向下一个服务器进行同步，而是一遍接受一遍发送。每个 Chunk Server向其最新的 Chunk Server 发送数据</p>
+<pre class="mermaid">sequenceDiagram
+    participant Master
+    participant Client
+    participant Nearest Chunk Server
+    participant Primary Chunk Server
+    participant Secondary Chunk Server
+    Client ->>+Master: 请求写操作
+    Master ->>Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
+    Master ->>-Client: 返回 Chunk Server 信息
+    par
+        Client ->> Nearest Chunk Server:同步 Chunk 数据
+    and
+        Nearest Chunk Server ->> Primary Chunk Server:同步 Chunk 数据
+    and
+        Primary Chunk Server ->> Secondary Chunk Server:同步 Chunk 数据
+    end
+    Client ->> Primary Chunk Server: 发送指令
+    par
+        Primary Chunk Server ->> Nearest Chunk Server: 发送指令
+        Nearest Chunk Server ->> Primary Chunk Server: 返回结果
+    and
+        Primary Chunk Server ->> Secondary Chunk Server: 发送指令
+        Secondary Chunk Server ->> Primary Chunk Server: 返回结果
+    end
+    Primary Chunk Server ->> Client: 返回结果</pre>
+<h2 id="追加">追加</h2>
+<p>追加在 GFS 中是一个常用的操作。GFS 中的追加不是在文件末尾进行追加，而是在文件后添加一个新的 Chunk。如果原本文件的最后一个 Chunk 未满也不会在后面追加。每次文件的追加都是在写一个全新的 Chunk，GFS 通过这种方式保证了数据的正确</p>
+<p>在一致性模型中，只有追加是定义但不一致的：其原因是如果有 Chunk Server 在追加过程中失败，Client 会重试此操作，在最终成功之前可能会有多次追加操作，会产生很多不一致的数据，但这些数据是无用且不影响的</p>
+<h2 id="文件快照">文件快照</h2>
+<p>GFS 通过类似 COW 的方式建立文件的快照，以减少文件的复制操作。其过程如下</p>
+<p>当 Master接收到一个文件快照命令之后，找到该文件包含的所有 chunk，取消所有 Chunk 的租约。之后在元数据中建立新的对应关系，其对应的 chunk 仍为原本的 Chunk。在记录日志之后，所有操作结束</p>
+<p>在后续修改 Chunk 时，Master 会先要求 Chunk Server 建立原 Chunk 的副本，再选择 Primary Chunk Server 进行操作。</p>
+<p>取消租约的原因是防止建立文件快照的过程中对原 Chunk 进行修改，导致快照内容并不是原本的内容</p>
+<h2 id="chunk-大小-64mib">Chunk 大小 64MiB?</h2>
+<p>64 MiB 是实验室数据，它是一个平衡点。</p>
+<p>作为一个较大的 Chunk， 其优势是：</p>
+<ol type="1">
+<li>减少了客户端与master的交互，即减少了客户端请求master获取filename与chunkserver的对应关系。</li>
+<li>减少了网络开销，因为一个chunk很大，客户端的一次读写可以更加集中在少量的chunkserver上，复用TCP连接。</li>
+<li>减少master管理的元信息的大小。</li>
+</ol>
+<p>但也有劣势</p>
+<ol type="1">
+<li>可能会形成热点，导致大量的客户端请求集中在某几个chunkserver上。（可以通过客户端请求的次数和频率加副本减缓）</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>mit6.824</tag>
+        <tag>分布式系统</tag>
       </tags>
   </entry>
   <entry>
