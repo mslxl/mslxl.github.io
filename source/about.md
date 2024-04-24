@@ -2,6 +2,9 @@
 title: About
 searchHidden: true
 ---
+
+<a href="https://gitroll.io/profile/u9Xp8EyLvuVbaXdf99ltUYGb4k503" target="_blank"><img src="https://gitroll.io/api/badges/profiles/v1/u9Xp8EyLvuVbaXdf99ltUYGb4k503" alt="GitRoll Profile Badge"/></a>
+
 <blockquote>
 <center>
 <table>
