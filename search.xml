@@ -245,6 +245,118 @@ graph TD
       </tags>
   </entry>
   <entry>
+    <title>编译原理：绪论 —— 语义分析</title>
+    <url>/compiler/n4/</url>
+    <content><![CDATA[<h2 id="语义分析">语义分析</h2>
+<h3 id="语义分析的任务">语义分析的任务</h3>
+<p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
+<h4 id="对声明语句语义分析的任务">对声明语句语义分析的任务</h4>
+<ol type="1">
+<li>种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、…），还是过程、…</li>
+<li>类型 （Type） : 这个我相信都不用说了把</li>
+<li>储存位置、长度 : 比如说我们写了一个对象或过程，我们都要在内存中给他分配一段空间，这样存储位置和所占用的空间的大小（长度）就成为标识符重要的属性</li>
+<li>值</li>
+<li>作用域</li>
+</ol>
+<h5 id="关于-3-举个例子">关于 3 举个例子：</h5>
+<div class="highlight-container" data-rel="Pascal"><figure class="iseeu highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">	real x[<span class="number">8</span>]</span><br><span class="line">	integer i,j;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 = 68</em> ，以此类推。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">名字</th>
+<th style="text-align: center;">相对地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">j</td>
+<td style="text-align: center;">68</td>
+</tr>
+</tbody>
+</table>
+<p>|:-:|:-:| |0|x[0]| |8|x[1]| | | | | |……| |56|x[7]| |64|i| |68|j|</p>
+<h4 id="对过程语义分析的任务">对过程语义分析的任务</h4>
+<p>对于过程来说，作用有 0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
+<h4 id="符号表-symbol-table">符号表 (Symbol Table)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">NAME</th>
+<th style="text-align: center;">TYPE</th>
+<th style="text-align: center;">KIND</th>
+<th style="text-align: center;">VAL</th>
+<th style="text-align: center;">ADDR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">SIMPLE</td>
+<td style="text-align: center;">整</td>
+<td style="text-align: center;">简变</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">SYMBLE</td>
+<td style="text-align: center;">实</td>
+<td style="text-align: center;">数组</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TABLE</td>
+<td style="text-align: center;">字符</td>
+<td style="text-align: center;">常数</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>语义分析中收集的标识符的信息都会存放在符号表里，每一个标识符都对应着一条记录，每个字段对应着一个属性，比如说 <code>类型 (TYPE)</code>、<code>种属 (KIND)</code>、<code>值 (VALUE)</code> 和 <code>地址 (ADDRESS)</code>等等。</p>
+<p>符号表中通常带有一个字符串表，用来存放程序中标识符的名称和字符常数，这样的话 <code>NAME</code> 字段就会被分割成两个部分，一个用来存放标识符在字符串表中的起始位置，另一个存放标识符的长度，这里由于 Markdown 的限制不能将其表现出来。符号表中设计字符串表的作用是节省内存空间。</p>
+<h4 id="语义分析的另一个任务语义检查">语义分析的另一个任务：语义检查</h4>
+<p>常见的语义错误有： 1. 变量或过程<strong>未经声明就使用</strong> 0. 变量或过程名<strong>重复声明</strong> 0. <strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换 0. <strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配 + <strong>数组下标</strong> 不是整数 + 对<strong>非数组变量</strong>使用数组访问操作符 + 对<strong>非过程名</strong>使用过程调用操作符 + 过程调用的<strong>参数类型或数目</strong>不匹配 + 函数<strong>返回类型</strong>有误</p>
+<hr />
+<pre class="mermaid">
+graph TD
+    Start-- 字符流 -->词法分析器
+    词法分析器-- 词法字节流 -->语法分析器
+    语法分析器-- 语法树 -->语义分析器
+    语义分析器-- 语法树 -->中间代码生成器
+    中间代码生成器-- 中间表示形式 -->机器无关代码优化器
+    机器无关代码优化器-- 中间表示形式 -->目标代码生成器
+    目标代码生成器-- 目标机器语言 -->机器相关代码优化器
+    机器相关代码优化器-- 目标机器语言 -->Fin
+</pre>
+]]></content>
+      <tags>
+        <tag>Compiler</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>编译原理：绪论 —— 中间代码生成和编译器后端</title>
     <url>/compiler/n5/</url>
     <content><![CDATA[<h2 id="中间代码生成">中间代码生成</h2>
@@ -464,118 +576,6 @@ graph TD
       </tags>
   </entry>
   <entry>
-    <title>编译原理：绪论 —— 语义分析</title>
-    <url>/compiler/n4/</url>
-    <content><![CDATA[<h2 id="语义分析">语义分析</h2>
-<h3 id="语义分析的任务">语义分析的任务</h3>
-<p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
-<h4 id="对声明语句语义分析的任务">对声明语句语义分析的任务</h4>
-<ol type="1">
-<li>种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、…），还是过程、…</li>
-<li>类型 （Type） : 这个我相信都不用说了把</li>
-<li>储存位置、长度 : 比如说我们写了一个对象或过程，我们都要在内存中给他分配一段空间，这样存储位置和所占用的空间的大小（长度）就成为标识符重要的属性</li>
-<li>值</li>
-<li>作用域</li>
-</ol>
-<h5 id="关于-3-举个例子">关于 3 举个例子：</h5>
-<div class="highlight-container" data-rel="Pascal"><figure class="iseeu highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">	real x[<span class="number">8</span>]</span><br><span class="line">	integer i,j;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 = 68</em> ，以此类推。</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">名字</th>
-<th style="text-align: center;">相对地址</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">x</td>
-<td style="text-align: center;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">i</td>
-<td style="text-align: center;">64</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">j</td>
-<td style="text-align: center;">68</td>
-</tr>
-</tbody>
-</table>
-<p>|:-:|:-:| |0|x[0]| |8|x[1]| | | | | |……| |56|x[7]| |64|i| |68|j|</p>
-<h4 id="对过程语义分析的任务">对过程语义分析的任务</h4>
-<p>对于过程来说，作用有 0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
-<h4 id="符号表-symbol-table">符号表 (Symbol Table)</h4>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">NAME</th>
-<th style="text-align: center;">TYPE</th>
-<th style="text-align: center;">KIND</th>
-<th style="text-align: center;">VAL</th>
-<th style="text-align: center;">ADDR</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">SIMPLE</td>
-<td style="text-align: center;">整</td>
-<td style="text-align: center;">简变</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">SYMBLE</td>
-<td style="text-align: center;">实</td>
-<td style="text-align: center;">数组</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">TABLE</td>
-<td style="text-align: center;">字符</td>
-<td style="text-align: center;">常数</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
-<p>语义分析中收集的标识符的信息都会存放在符号表里，每一个标识符都对应着一条记录，每个字段对应着一个属性，比如说 <code>类型 (TYPE)</code>、<code>种属 (KIND)</code>、<code>值 (VALUE)</code> 和 <code>地址 (ADDRESS)</code>等等。</p>
-<p>符号表中通常带有一个字符串表，用来存放程序中标识符的名称和字符常数，这样的话 <code>NAME</code> 字段就会被分割成两个部分，一个用来存放标识符在字符串表中的起始位置，另一个存放标识符的长度，这里由于 Markdown 的限制不能将其表现出来。符号表中设计字符串表的作用是节省内存空间。</p>
-<h4 id="语义分析的另一个任务语义检查">语义分析的另一个任务：语义检查</h4>
-<p>常见的语义错误有： 1. 变量或过程<strong>未经声明就使用</strong> 0. 变量或过程名<strong>重复声明</strong> 0. <strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换 0. <strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配 + <strong>数组下标</strong> 不是整数 + 对<strong>非数组变量</strong>使用数组访问操作符 + 对<strong>非过程名</strong>使用过程调用操作符 + 过程调用的<strong>参数类型或数目</strong>不匹配 + 函数<strong>返回类型</strong>有误</p>
-<hr />
-<pre class="mermaid">
-graph TD
-    Start-- 字符流 -->词法分析器
-    词法分析器-- 词法字节流 -->语法分析器
-    语法分析器-- 语法树 -->语义分析器
-    语义分析器-- 语法树 -->中间代码生成器
-    中间代码生成器-- 中间表示形式 -->机器无关代码优化器
-    机器无关代码优化器-- 中间表示形式 -->目标代码生成器
-    目标代码生成器-- 目标机器语言 -->机器相关代码优化器
-    机器相关代码优化器-- 目标机器语言 -->Fin
-</pre>
-]]></content>
-      <tags>
-        <tag>Compiler</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>实现一个自己的脚本语言（绪）</title>
     <url>/compiler/own-one/</url>
     <content><![CDATA[<p>说实话很久以前我就有这个想法了，不过近几个月才开始动工。先写篇占坑吧，也提醒自己。</p>
@@ -632,127 +632,6 @@ graph TD
       <categories>
         <category>教程</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Dev-C++ OpenCV 环境搭建</title>
-    <url>/cxx/opencv-env/</url>
-    <content><![CDATA[<blockquote>
-<p>该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev</p>
-</blockquote>
-<p>用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。</p>
-<p>用 Visual Studio 的话网上全是教程，直接百度就行。</p>
-<h2 id="需要准备的软件">需要准备的软件</h2>
-<ul>
-<li>Dev-C++ 或 RedPanda C++</li>
-<li>MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时安装)</li>
-<li><a class="link"   href="https://opencv.org/releases" >OpenCV Source <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li><a class="link"   href="https://cmake.org/download/" >CMake <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-</ul>
-<h2 id="步骤">步骤</h2>
-<ol type="1">
-<li>下载 OpenCV 源代码</li>
-</ol>
-<p>由于新版的 OpenCV 不提供 gcc 的编译，而 Dev-C++ 只能使用 gcc 编译器，所以我们需要自行使用 gcc 编译 OpenCV</p>
-<p>从 <a class="link"   href="https://opencv.org/releases/" >OpenCV Releases Page <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 下载源代码，注意选择 Source</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="src.png"
-                      
-                ></p>
-<p>下载完成后进行解压（这里解压到 <code>D:\Code\opencv\opencv-4.6.0</code> )</p>
-<ol start="2" type="1">
-<li>配置 OpenCV 编译环境</li>
-</ol>
-<p>在 <code>Dev-C++</code> 的安装目录找到 <code>MinGW</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="mingw.png"
-                      
-                ></p>
-<p>将 <code>MinGW\bin</code> 添加到 Path 环境变量中（具体方法参考百度）</p>
-<ol start="3" type="1">
-<li>编译 OpenCV</li>
-</ol>
-<p>打开命令行，进入 opencv 的代码文件夹</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="pwd.png"
-                      
-                ></p>
-<p>依次执行下列命令 <div class="highlight-container" data-rel="Pwsh"><figure class="iseeu highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir build <span class="comment">#创建 build 文件夹</span></span><br><span class="line"><span class="built_in">cd</span> build <span class="comment">#进入 build 文件夹</span></span><br><span class="line">cmake <span class="literal">-G</span> <span class="string">&quot;MinGW Makefiles&quot;</span> .. <span class="comment">#生成 makefile</span></span><br><span class="line">mingw32<span class="literal">-make</span> <span class="comment">#根据 makefile 编译</span></span><br><span class="line">mingw32<span class="literal">-make</span> install</span><br></pre></td></tr></table></figure></div></p>
-<p>在执行 cmake 的时候可能会下载其他依赖，这个过程比较慢，<del>有科技手段的话可以用点科技手段</del> 执行 <code>mingw-make</code> 时可以使用 <code>-j</code> 参数指定进程数量</p>
-<p>最终编译后的文件将保存在代码目录下的 <code>build/install</code> 下 <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="done.png"
-                      
-                ></p>
-<ol start="4" type="1">
-<li>配置 IDE</li>
-</ol>
-<p>在 Dev-C++ 中编译器配置里</p>
-<ul>
-<li>如果你是RedPanda，那么编译器配置在<code>菜单栏-Tools-Options-Compiler-Compiler Set</code> 中</li>
-<li>如果你是Dev-C++，那么编译器配置在 <code>菜单栏-Tools-Compiler Tools</code> 中</li>
-</ul>
-<p>打开编译器配置，在 <code>Binary</code> 中添加 <code>build\install\x64\mingw\bin</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="bin.png"
-                      
-                ></p>
-<p>在 <code>Library</code> 中添加 <code>build\install\x64\mingw\lib</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="lib.png"
-                      
-                ></p>
-<p>在 <code>C++ Include</code> 中添加 <code>build\install\include</code> 目录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="inc.png"
-                      
-                ></p>
-<p>在 Linker 参数中加入以下链接库</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">-lopencv_highgui460.dll -lopencv_calib3d460.dll -lopencv_core460.dll -lopencv_dnn460.dll -lopencv_features2d460.dll -lopencv_flann460.dll -lopencv_gapi460.dll -lopencv_imgcodecs460.dll -lopencv_imgproc460.dll -lopencv_ml460.dll -lopencv_objdetect460.dll -lopencv_photo460.dll -lopencv_stitching460.dll -lopencv_video460.dll -lopencv_videoio460.dll</span><br></pre></td></tr></table></figure></div>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="linker.png"
-                      
-                ></p>
-<p>至此，OpenCV 环境配置完成</p>
-<p><strong>需注意</strong>，以上配置应对同一组编译器配置，而且使用的编译器配置应当和设置的编译器配置一致。 <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="set.png"
-                      
-                ></p>
-<ol start="5" type="1">
-<li>测试</li>
-</ol>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;opencv2/highgui.hpp&quot;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cv::namedWindow(&quot;Test Windows&quot;);</span><br><span class="line">	cv::waitKey();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<p>试试这个段代码，这段代码将会创建一个空白窗口</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="prev.png"
-                      
-                ></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>OpenCV</tag>
-        <tag>C++</tag>
-      </tags>
   </entry>
   <entry>
     <title>2020-2021 ACM ICPC Asia Nanjing Regional Contest</title>
@@ -2183,6 +2062,127 @@ f(i,H,S) = \begin{cases}
       <tags>
         <tag>Competitive Programming</tag>
         <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dev-C++ OpenCV 环境搭建</title>
+    <url>/cxx/opencv-env/</url>
+    <content><![CDATA[<blockquote>
+<p>该文章写于 2022 年十月，部分内容可能已经过时 此文目的为实验室同学参考，个人还是推荐尽早换下 Dev</p>
+</blockquote>
+<p>用 CodeBlock(MinGW-make) 理论上配置差别不大，可以参考下。</p>
+<p>用 Visual Studio 的话网上全是教程，直接百度就行。</p>
+<h2 id="需要准备的软件">需要准备的软件</h2>
+<ul>
+<li>Dev-C++ 或 RedPanda C++</li>
+<li>MinGW 或 msys2-mingw32 (一般安装 Dev-C++ 时会同时安装)</li>
+<li><a class="link"   href="https://opencv.org/releases" >OpenCV Source <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://cmake.org/download/" >CMake <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<h2 id="步骤">步骤</h2>
+<ol type="1">
+<li>下载 OpenCV 源代码</li>
+</ol>
+<p>由于新版的 OpenCV 不提供 gcc 的编译，而 Dev-C++ 只能使用 gcc 编译器，所以我们需要自行使用 gcc 编译 OpenCV</p>
+<p>从 <a class="link"   href="https://opencv.org/releases/" >OpenCV Releases Page <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 下载源代码，注意选择 Source</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="src.png"
+                      
+                ></p>
+<p>下载完成后进行解压（这里解压到 <code>D:\Code\opencv\opencv-4.6.0</code> )</p>
+<ol start="2" type="1">
+<li>配置 OpenCV 编译环境</li>
+</ol>
+<p>在 <code>Dev-C++</code> 的安装目录找到 <code>MinGW</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="mingw.png"
+                      
+                ></p>
+<p>将 <code>MinGW\bin</code> 添加到 Path 环境变量中（具体方法参考百度）</p>
+<ol start="3" type="1">
+<li>编译 OpenCV</li>
+</ol>
+<p>打开命令行，进入 opencv 的代码文件夹</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="pwd.png"
+                      
+                ></p>
+<p>依次执行下列命令 <div class="highlight-container" data-rel="Pwsh"><figure class="iseeu highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir build <span class="comment">#创建 build 文件夹</span></span><br><span class="line"><span class="built_in">cd</span> build <span class="comment">#进入 build 文件夹</span></span><br><span class="line">cmake <span class="literal">-G</span> <span class="string">&quot;MinGW Makefiles&quot;</span> .. <span class="comment">#生成 makefile</span></span><br><span class="line">mingw32<span class="literal">-make</span> <span class="comment">#根据 makefile 编译</span></span><br><span class="line">mingw32<span class="literal">-make</span> install</span><br></pre></td></tr></table></figure></div></p>
+<p>在执行 cmake 的时候可能会下载其他依赖，这个过程比较慢，<del>有科技手段的话可以用点科技手段</del> 执行 <code>mingw-make</code> 时可以使用 <code>-j</code> 参数指定进程数量</p>
+<p>最终编译后的文件将保存在代码目录下的 <code>build/install</code> 下 <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="done.png"
+                      
+                ></p>
+<ol start="4" type="1">
+<li>配置 IDE</li>
+</ol>
+<p>在 Dev-C++ 中编译器配置里</p>
+<ul>
+<li>如果你是RedPanda，那么编译器配置在<code>菜单栏-Tools-Options-Compiler-Compiler Set</code> 中</li>
+<li>如果你是Dev-C++，那么编译器配置在 <code>菜单栏-Tools-Compiler Tools</code> 中</li>
+</ul>
+<p>打开编译器配置，在 <code>Binary</code> 中添加 <code>build\install\x64\mingw\bin</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="bin.png"
+                      
+                ></p>
+<p>在 <code>Library</code> 中添加 <code>build\install\x64\mingw\lib</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="lib.png"
+                      
+                ></p>
+<p>在 <code>C++ Include</code> 中添加 <code>build\install\include</code> 目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="inc.png"
+                      
+                ></p>
+<p>在 Linker 参数中加入以下链接库</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">-lopencv_highgui460.dll -lopencv_calib3d460.dll -lopencv_core460.dll -lopencv_dnn460.dll -lopencv_features2d460.dll -lopencv_flann460.dll -lopencv_gapi460.dll -lopencv_imgcodecs460.dll -lopencv_imgproc460.dll -lopencv_ml460.dll -lopencv_objdetect460.dll -lopencv_photo460.dll -lopencv_stitching460.dll -lopencv_video460.dll -lopencv_videoio460.dll</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="linker.png"
+                      
+                ></p>
+<p>至此，OpenCV 环境配置完成</p>
+<p><strong>需注意</strong>，以上配置应对同一组编译器配置，而且使用的编译器配置应当和设置的编译器配置一致。 <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="set.png"
+                      
+                ></p>
+<ol start="5" type="1">
+<li>测试</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;opencv2/highgui.hpp&quot;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cv::namedWindow(&quot;Test Windows&quot;);</span><br><span class="line">	cv::waitKey();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>试试这个段代码，这段代码将会创建一个空白窗口</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="prev.png"
+                      
+                ></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
