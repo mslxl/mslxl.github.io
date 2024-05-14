@@ -381,6 +381,7 @@ inject:
   # Inject custom head html code
   head: 
     - '<script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>'
+    - '<style> a.footnote-back{ display: none; } </style>'
   # Inject custom footer html code
   footer:
     - '<script>document.addEventListener("DOMContentLoaded", () => {pangu.autoSpacingPage();});</script>'
