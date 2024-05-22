@@ -23,6 +23,8 @@
               pandoc
               nodejs
               nodejs.pkgs.pnpm
+
+              just
             ];
             shellHook = ''
               pnpm install
