@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Mslxl">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.mslxl.com/archives/2024/05/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta property="og:type" content="website">
+<meta property="og:title" content="Mslxl&#39;s blog">
+<meta property="og:url" content="https://blog.mslxl.com/archives/2024/05/index.html">
+<meta property="og:site_name" content="Mslxl&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Mslxl">
+<meta name="twitter:card" content="summary">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-Q6N8MGDECT"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q6N8MGDECT');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/11132880?v=4" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/11132880?v=4">
+    <!--- Page Info-->
+    
+    <title>
+        
+            归档: 2024/5 -
+        
+        Mslxl&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <script data-swup-reload-script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
+                
+    
+            
+                
+                    <style> a.footnote-back{ display: none; } </style>
+                
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/anime.min.js"></script>
+    <h1 class="ml13">
+        Mslxl&#39;s Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fonts/fonts.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fonts/Satoshi/satoshi.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.mslxl.com","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":"https://cn.vercount.one/js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":true,"id":"G-Q6N8MGDECT"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/assets/bg-light.webp","dark":"/assets/bg-dark.webp"},"title":"Mslxl's Blog","subtitle":{"text":["Living in Gensokyo","Participated ICPC and CCPC, but got nothing except precious memory","Hi there 👋","A no stack developer"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/mslxl","instagram":null,"zhihu":null,"twitter":null,"email":"i@mslxl.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":true,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/links"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":false,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2018/3/27 23:49:42"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Mslxl's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Mslxl&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="active"
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/links">
+                                                    友情链接
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/links">友情链接</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">22</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">41</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="archive-container shadow-none hover:shadow-none sm:shadow-redefine sm:hover:shadow-redefine-hover">
+    
+
+<div class="archive-list-container">
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2024</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">4</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='05-22'>
+                
+                    
+                        <a href="/cp/cf1974/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Codeforces Round 946 (Div. 3) (A-G)</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='04-27'>
+                
+                    
+                        <a href="/tex/sdufe-thesis-in-latex/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">使用 LaTeX 完成毕业论文——SDUFE thesis 开发记录</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='02-10'>
+                
+                    
+                        <a href="/daily/2024-new-start/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">新春快乐</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-21'>
+                
+                    
+                        <a href="/tran/reliable-udp-translation/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">可靠 UDP 协议(RUDP协议)</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2023</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">20</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='11-25'>
+                
+                    
+                        <a href="/cp/cf1901/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Educational Codeforces Round 158 (Rated for Div. 2)</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='09-21'>
+                
+                    
+                        <a href="/project/mit6.824/gfs/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">MIT6.824 分布式系统 GFS 笔记</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='09-15'>
+                
+                    
+                        <a href="/project/mit6.824/mr/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">MIT6.824 分布式系统 MapReduce</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='09-14'>
+                
+                    
+                        <a href="/nixos/convert/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">皈依 NixOS</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='09-12'>
+                
+                    
+                        <a href="/cp/cf1867/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Codeforces Round 897 (Div. 2)</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='09-08'>
+                
+                    
+                        <a href="/project/go/go-speedrun/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">速通 Go 语言基础</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-31'>
+                
+                    
+                        <a href="/cp/cf1863/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Pinely Round 2 (Div. 1 + Div. 2) A-E</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-30'>
+                
+                    
+                        <a href="/cp/games-logs1/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Game tag 板刷网瘾记录</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-27'>
+                
+                    
+                        <a href="/cp/cf1864/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Harbour.Space Scholarship Contest 2023-2024 (Div. 1 + Div. 2) A-E 二进制拆分 组合数学</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-25'>
+                
+                    
+                        <a href="/cp/cf1862/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Codeforces Round 894 (Div. 3) A-G</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-21'>
+                
+                    
+                        <a href="/cp/leetcode-wc359/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">LeetCode 周赛 359</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-18'>
+                
+                    
+                        <a href="/cp/cf1860/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Educational Codeforces Round 153 A-E (博弈论 DP 拆点)</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-08'>
+                
+                    
+                        <a href="/cp/cf1853/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Codeforces Round 891 (Div. 3) A-G</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='06-04'>
+                
+                    
+                        <a href="/cp/2023SDCPC/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">2023 SDCPC 赛后回顾</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='03-04'>
+                
+                    
+                        <a href="/cp/2021%20Shandong%20Provincial%20Collegiate%20Programming%20Contest/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">2021 Shandong Provincial Collegiate Programming Contest</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-28'>
+                
+                    
+                        <a href="/cp/2022%20International%20Collegiate%20Programming%20Contest%20Jinan%20Site/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">2022 International Collegiate Programming Contest Jinan Site</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-18'>
+                
+                    
+                        <a href="/cp/TreeDP/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">树形 DP 练习</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-16'>
+                
+                    
+                        <a href="/cp/The%202021%20ICPC%20Asia%20Shanghai%20Regional%20Programming%20Contest/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">The 2021 ICPC Asia Shanghai Regional Programming Contest</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-14'>
+                
+                    
+                        <a href="/cp/2020-2021-ICPC-Nanjing/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">2020-2021 ACM ICPC Asia Nanjing Regional Contest</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-10'>
+                
+                    
+                        <a href="/cp/2020-2021-ICPC-Shenyang/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">The 2020 ICPC Asia Shenyang Regional Programming Contest</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2022</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">7</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='12-31'>
+                
+                    
+                        <a href="/cp/cf1731/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Codeforces Round 841 (Div. 2) and Divide by Zero 2022 - ABCD</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='12-29'>
+                
+                    
+                        <a href="/cp/2022%205th%20ChuanZhi%20Region/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">2022 第五届传智杯初赛</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='12-13'>
+                
+                    
+                        <a href="/cp/2022-ICPC%20Asia%20Xi'an%20Regional%20Contest/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">The 2022 ICPC Asia Xian Regional Contest (CHGJ)</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='11-01'>
+                
+                    
+                        <a href="/compiler/own-one/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">实现一个自己的脚本语言（绪）</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='10-14'>
+                
+                    
+                        <a href="/cxx/opencv-env/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Dev-C++ OpenCV 环境搭建</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='10-07'>
+                
+                    
+                        <a href="/compiler/ts-combinator/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">使用 ts 实现 Parser 组合子</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='07-22'>
+                
+                    
+                        <a href="/daily/recent/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">关于消失的页面</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2021</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">1</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-30'>
+                
+                    
+                        <a href="/tran/doom_emacs/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">使用 Doom Emacs 工作</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2020</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">1</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='01-19'>
+                
+                    
+                        <a href="/daily/v2ray/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">V2Ray Setup</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2019</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">1</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='09-20'>
+                
+                    
+                        <a href="/daily/epub/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">Epub 文件结构</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+        <section class="archive-item mb-spacing-unit last:mb-0">
+            <div class="archive-item-header flex flex-row items-center mb-2">
+                <span class="archive-year font-semibold text-3xl mr-2">2018</span>
+                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">7</span>
+            </div>
+            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-24'>
+                
+                    
+                        <a href="/tran/i3wm-tree/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">i3 User&#39;s Guide 进阶操作篇（对应第 3 节）</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='08-23'>
+                
+                    
+                        <a href="/tran/i3wm-guide/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">i3 User&#39;s Guide 操作篇</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='06-26'>
+                
+                    
+                        <a href="/compiler/n5/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">编译原理：绪论 —— 中间代码生成和编译器后端</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='06-25'>
+                
+                    
+                        <a href="/compiler/n4/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">编译原理：绪论 —— 语义分析</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='06-24'>
+                
+                    
+                        <a href="/compiler/n3/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">编译原理：绪论 —— 语法分析</span>
+                        </a>
+                    
+              
+                
+                    
+                    <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='06-23'>
+                
+                    
+                        <a href="/compiler/n2/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">编译原理：绪论 —— 词法分析</span>
+                        </a>
+                    
+              
+                
+                    
+                        <a href="/compiler/n1/" class="block overflow-hidden w-fit">
+                            <span class="article-title mb-0.5 text-2xl">编译原理：绪论</span>
+                        </a>
+                    
+              
+            </ul>
+        </section>
+    
+</div>
+
+</div>
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2018</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Mslxl</a>
+            
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+                
+        
+                
+        
+                
+
+                    
+                        <script data-swup-reload-script>document.addEventListener("DOMContentLoaded", () => {pangu.autoSpacingPage();});</script>
+                    
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="right-bottom-tools rss flex justify-center items-center">
+                <a class="flex justify-center items-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                <i class="fa-regular fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/Swup.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/SwupSlideTheme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/SwupProgressPlugin.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/SwupScrollPlugin.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/imageViewer.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/utils.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/main.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/layouts/navbarShrink.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/scrollTopBottom.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/runtime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/plugins/typed.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/libs/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/plugins/mermaid.js"></script>
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/tools/tocToggle.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/layouts/toc.js"></script><script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-redefine/2.6.1/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+</body>
+</html>
