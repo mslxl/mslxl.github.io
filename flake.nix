@@ -7,7 +7,7 @@
   outputs = inputs@ { self, nixpkgs }:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
+      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f rec {
         pkgs = import nixpkgs { inherit system; };
       });
     in
@@ -18,14 +18,16 @@
             buildInputs = [
               pkgs.nixpkgs-fmt
             ];
-            packages = with pkgs; [
+            packages = (with pkgs; [
+              typst-lsp
+
               pkgs.shellcheck
               pandoc
               nodejs
               nodejs.pkgs.pnpm
 
               just
-            ];
+            ]);
             shellHook = ''
               pnpm install
             '';

@@ -54,11 +54,16 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0
   hexo-theme-redefine:
-    specifier: ^2.6.1
-    version: 2.6.1
+    specifier: ^2.6.2
+    version: 2.6.2
   hexo-typora-image:
     specifier: ^0.1.2
     version: 0.1.2
+
+devDependencies:
+  pangu:
+    specifier: ^4.0.7
+    version: 4.0.7
 
 packages:
 
@@ -667,8 +672,8 @@ packages:
       - supports-color
     dev: false
 
-  /hexo-theme-redefine@2.6.1:
-    resolution: {integrity: sha512-Ebn3/6dr0j9Tt9MmI2jD7EOyMQuxY0wc67S9JyGp/W2pTTC363NxTUKgHU8RHXWXhYGDG/bbYFttK/Actpnnaw==}
+  /hexo-theme-redefine@2.6.2:
+    resolution: {integrity: sha512-6DwfYNHzEAfQ/MICneiy2zc+Bj3NKzAt+NfUjStKaJUm1xm0MpyNNQWUXxkflkDIeP8xL+ckrFDj/8xdQrKdNA==}
     dependencies:
       postcss: 8.4.31
     dev: false
@@ -1051,6 +1056,11 @@ packages:
       is-docker: 2.2.1
       is-wsl: 2.2.0
     dev: false
+
+  /pangu@4.0.7:
+    resolution: {integrity: sha512-weZKJIwwy5gjt4STGVUH9bix3BGk7wZ2ahtIypwe3e/mllsrIZIvtfLx1dPX56GcpZFOCFKmeqI1qVuB9enRzA==}
+    hasBin: true
+    dev: true
 
   /parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}

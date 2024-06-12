@@ -29,7 +29,10 @@
     "hexo-renderer-pandoc": "^0.4.0",
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
-    "hexo-theme-redefine": "^2.6.1",
+    "hexo-theme-redefine": "^2.6.2",
     "hexo-typora-image": "^0.1.2"
+  },
+  "devDependencies": {
+    "pangu": "^4.0.7"
   }
 }

@@ -121,7 +121,6 @@ home_banner:
   subtitle:
     text: [
       "Living in Gensokyo",
-      "Participated ICPC and CCPC, but got nothing except precious memory",
       "Hi there 👋",
       "A no stack developer"
     ] # subtitle text, array
@@ -185,6 +184,10 @@ navbar:
     left: "#f78736" #left side 
     right: "#367df7"  #right side
     transparency: 35 #percent (10-99)
+  # Navbar width (usually no need to modify)
+  width:
+    home: 1200px #home page
+    pages: 1000px #other pages
   # Navbar links
   links:
     Home: 
@@ -196,16 +199,19 @@ navbar:
     # Categories:
     #   path: /categories/
     #   icon: fa-regular fa-folder
-    Archives: 
-      path: /archives 
-      icon: fa-regular fa-archive # can be empty
+    # Archives: 
+    #   path: /archives 
+    #   icon: fa-regular fa-archive # can be empty
+    此刻:
+      path: /ima
+      icon: fa-regular fa-timeline
     # Status: 
     #   path: https://status.evanluo.top/
     #   icon: fa-regular fa-chart-bar
     About: 
       icon: fa-regular fa-user
       submenus:
-        Me: /about
+        我: /about
         Friends: /links
     # Links: 
     #   icon: fa-regular fa-link
@@ -232,6 +238,7 @@ home:
     position: left # Sidebar position. left, right
     first_item: menu # First item in sidebar. menu, info
     announcement: # Announcement text
+    show_on_mobile: false # Whether to show sidebar navigation on mobile sheet menu
     links:
       # Archives: 
       #   path: /archives 
@@ -268,6 +275,13 @@ articles:
     image_caption: false # Whether to display image caption
     link_icon: true # Whether to display link icon
     title_alignment: left # Title alignment. left, center
+    headings_top_spacing: # Top spacing for headings from h1-h6
+      h1: 5rem
+      h2: 4rem
+      h3: 2.8rem
+      h4: 2.5rem
+      h5: 2.2rem
+      h6: 2rem
   # Word count. Requires hexo-wordcount (npm install hexo-wordcount). See https://github.com/willin/hexo-wordcount
   word_count:
     enable: true # Whether to enable
@@ -281,7 +295,7 @@ articles:
   # Code block settings
   code_block:
     copy: true # Whether to enable code block copy button
-    style: simple # mac | simple
+    style: mac # mac | simple
     font: # Custom font
       enable: false # Whether to enable
       family: # Font family
@@ -386,7 +400,7 @@ inject:
   enable: true
   # Inject custom head html code
   head: 
-    - '<script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>'
+    - '<script src="/assets/pangu.min.js"></script>'
     - '<style> a.footnote-back{ display: none; } </style>'
   # Inject custom footer html code
   footer:
@@ -427,7 +441,7 @@ page_templates:
   # Friend Links page column number
   friends_column: 2
   # Tags page style
-  tags_style: cloud # blur, cloud
+  tags_style: blur # blur, cloud
 # PAGE TEMPLATES <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -437,10 +451,10 @@ cdn:
   # Whether to enable CDN
   enable: true
   # CDN Provider
-  provider: cdnjs # staticfile, bootcdn, cdnjs, jsdelivr, unpkg, custom
+  provider: zstatic # zstatic, sustech, staticfile, bootcdn, cdnjs, jsdelivr, unpkg, aliyun, custom
   # Custom CDN URL
   # format example: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
-  # The ${path} must be in the source folder of the theme
+  # The ${path} must leads to the root of the "source" folder of the theme
   custom_url: 
 # CDN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
