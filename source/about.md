@@ -52,7 +52,6 @@ searchHidden: true
 - `unsafe impl !PoliticalCorrectness for Me {}`
 - 鸽子
 - 屎山
-- 社会主义
 
 ---
 
