@@ -16,7 +16,6 @@ layout: page
 - 每天去跑跑步
 - Leetcode 每日一题
     + 题目还是相当简单的
-- ~~Codeforces 上 1600~~ 真的能做到吗(?)
 
 
 ## 1. 我在搞这些东西
@@ -24,8 +23,9 @@ layout: page
 按优先级排序
 
 - 11408
-- 面向算法竞赛的编辑器 ~~Provlegisto 设计不良导致一坨屎山，计划重写了~~ Koakuma
-    + 参考 VSCode 的架构，先要把它的代码结构过一遍
+- 一堆学校任务
+- 面向算法竞赛的编辑器 ~~Provlegisto 设计不良导致一坨屎山，计划重写了~~ 重命名为 Koakuma
+    + 参考 VSCode 的架构，先把代码结构过一遍
     + ...
 - 深度学习入门
 - [《高效学习法》](https://book.douban.com/subject/36614599/)
