@@ -29,25 +29,7 @@
   </url>
   
   <url>
-    <loc>https://blog.mslxl.com/categories/index.html</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.mslxl.com/tags/index.html</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/tex/sdufe-thesis-in-latex/</loc>
     
     <lastmod>2024-07-17</lastmod>
     
@@ -101,6 +83,24 @@
   </url>
   
   <url>
+    <loc>https://blog.mslxl.com/categories/index.html</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/tex/sdufe-thesis-in-latex/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.mslxl.com/project/mit6.824/gfs/</loc>
     
     <lastmod>2024-07-17</lastmod>
@@ -111,6 +111,15 @@
   
   <url>
     <loc>https://blog.mslxl.com/project/mit6.824/mr/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/project/go/go-speedrun/</loc>
     
     <lastmod>2024-07-17</lastmod>
     
@@ -164,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://blog.mslxl.com/project/go/go-speedrun/</loc>
+    <loc>https://blog.mslxl.com/cp/2020-2021-ICPC-Shenyang/</loc>
     
     <lastmod>2024-07-17</lastmod>
     
@@ -173,7 +182,88 @@
   </url>
   
   <url>
-    <loc>https://blog.mslxl.com/cp/cf1862/</loc>
+    <loc>https://blog.mslxl.com/cp/2021%20Shandong%20Provincial%20Collegiate%20Programming%20Contest/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/2022%205th%20ChuanZhi%20Region/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/2022%20International%20Collegiate%20Programming%20Contest%20Jinan%20Site/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/2022-ICPC%20Asia%20Xi'an%20Regional%20Contest/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/2023SDCPC/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/The%202021%20ICPC%20Asia%20Shanghai%20Regional%20Programming%20Contest/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/cf1731/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/TreeDP/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/cf1853/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/cf1860/</loc>
     
     <lastmod>2024-07-17</lastmod>
     
@@ -183,6 +273,15 @@
   
   <url>
     <loc>https://blog.mslxl.com/cp/cf1863/</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/cp/cf1862/</loc>
     
     <lastmod>2024-07-17</lastmod>
     
@@ -325,105 +424,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://blog.mslxl.com/cp/2020-2021-ICPC-Shenyang/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/2021%20Shandong%20Provincial%20Collegiate%20Programming%20Contest/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/2022%205th%20ChuanZhi%20Region/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/2022-ICPC%20Asia%20Xi'an%20Regional%20Contest/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/2022%20International%20Collegiate%20Programming%20Contest%20Jinan%20Site/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/2023SDCPC/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/The%202021%20ICPC%20Asia%20Shanghai%20Regional%20Programming%20Contest/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/TreeDP/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/cf1731/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/cf1853/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/cp/cf1860/</loc>
-    
-    <lastmod>2024-07-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://blog.mslxl.com/</loc>
@@ -518,20 +518,6 @@
   </url>
   
   <url>
-    <loc>https://blog.mslxl.com/tags/LaTeX/</loc>
-    <lastmod>2024-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.mslxl.com/tags/%E5%B1%B1%E4%B8%9C%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6/</loc>
-    <lastmod>2024-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.mslxl.com/tags/emacs/</loc>
     <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -568,6 +554,20 @@
   
   <url>
     <loc>https://blog.mslxl.com/tags/Go/</loc>
+    <lastmod>2024-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/tags/LaTeX/</loc>
+    <lastmod>2024-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.mslxl.com/tags/%E5%B1%B1%E4%B8%9C%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6/</loc>
     <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
