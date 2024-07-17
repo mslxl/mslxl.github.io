@@ -17,10 +17,7 @@ https://blog.mslxl.com/daily/recent/
 https://blog.mslxl.com/daily/v2ray/
 https://blog.mslxl.com/nixos/convert/
 https://blog.mslxl.com/project/go/go-speedrun/
-https://blog.mslxl.com/cp/cf1731/
-https://blog.mslxl.com/cp/cf1853/
 https://blog.mslxl.com/cp/cf1862/
-https://blog.mslxl.com/cp/cf1860/
 https://blog.mslxl.com/cp/cf1863/
 https://blog.mslxl.com/cp/cf1864/
 https://blog.mslxl.com/cp/cf1867/
@@ -40,11 +37,14 @@ https://blog.mslxl.com/cp/2020-2021-ICPC-Nanjing/
 https://blog.mslxl.com/cp/2020-2021-ICPC-Shenyang/
 https://blog.mslxl.com/cp/2021%20Shandong%20Provincial%20Collegiate%20Programming%20Contest/
 https://blog.mslxl.com/cp/2022%205th%20ChuanZhi%20Region/
-https://blog.mslxl.com/cp/2022%20International%20Collegiate%20Programming%20Contest%20Jinan%20Site/
 https://blog.mslxl.com/cp/2022-ICPC%20Asia%20Xi'an%20Regional%20Contest/
+https://blog.mslxl.com/cp/2022%20International%20Collegiate%20Programming%20Contest%20Jinan%20Site/
 https://blog.mslxl.com/cp/2023SDCPC/
 https://blog.mslxl.com/cp/The%202021%20ICPC%20Asia%20Shanghai%20Regional%20Programming%20Contest/
 https://blog.mslxl.com/cp/TreeDP/
+https://blog.mslxl.com/cp/cf1731/
+https://blog.mslxl.com/cp/cf1853/
+https://blog.mslxl.com/cp/cf1860/
 https://blog.mslxl.com/
 https://blog.mslxl.com/tags/Compiler/
 https://blog.mslxl.com/tags/Competitive-Programming/
