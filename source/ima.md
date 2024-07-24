@@ -12,10 +12,9 @@ layout: page
     + 学习任务还是挺重的，但是我觉得每天晚上还能抽出1个小时来做点自己的东西
 - 整理 Nix 配置 (100%)
 - 算竞退役 (1/1)
-    + 没保住晚节哈哈哈，从来没想过会出这种事
+    + 没保住晚节
 - 每天去跑跑步
 - Leetcode 每日一题
-    + 题目还是相当简单的
 
 
 ## 1. 我在搞这些东西
@@ -24,7 +23,7 @@ layout: page
 
 - 11408
 - 一堆学校任务
-- 面向算法竞赛的编辑器 ~~Provlegisto 设计不良导致一坨屎山，计划重写了~~ 重命名为 Koakuma
+- 面向算法竞赛的编辑器 ~~Provlegisto 设计不良导致一坨屎山，计划重写并重命名为 Koakuma~~ 
     + 参考 VSCode 的架构，先把代码结构过一遍
     + ...
 - 深度学习入门
@@ -39,18 +38,17 @@ layout: page
 
 - [表情包管理 Sticky Bucket](https://github.com/mslxl/sticky-bucket)
     + ~~网上冲浪怎么能没有表情包呢~~
-    + 计划是能集成一些智能算法，做到能自动推断标签，建立语言和图片的联系，从而做到易于添加和翻找。为了做到这个目标还需要研究不少东西
+    + 集成一些智能算法，比如自动推断标签，建立语言和图片的联系，从而做到易于添加和翻找。
         * 也许相关的项目
         * [hv0905/NekoImageGallery](https://github.com/hv0905/NekoImageGallery): An AI-powered natural language & reverse Image Search Engine powered by CLIP & qdrant. 
         * [RimoChan/waifu-sensor](https://github.com/RimoChan/waifu-sensor): 【老婆探测器】1个可解释的动漫角色分类模型！ 
         * [MeetWq/meme-generator](https://github.com/MeetWq/meme-generator): 表情包生成器，用于制作各种沙雕表情包 
-- English Grammar In Use
-- Majo no Tabitabi
+- *English Grammar In Use*
+- *Majo no Tabitabi*
     + 其实我也不清楚日语能不能读懂
 - 更换博客到 Astro.js
-    + 说实话改 Hexo 的模板有一种10年前的PHP的味道，有些太顶了。我需要一个现代的静态页面生成器！
+    + 改 Hexo 的模板有一种10年前的PHP的味道，我更需要一个现代的静态页面生成器
     + ~~如果能在博客里面写 Typst，不觉得很酷吗~~
-    + 这个工作量也不小，看看时间够吗
 
 ## 3. 感兴趣的
 
