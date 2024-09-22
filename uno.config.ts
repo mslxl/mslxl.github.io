@@ -1,97 +1,60 @@
-import presetAttributify from '@unocss/preset-attributify'
-import transformerDirectives from '@unocss/transformer-directives'
 import {
   defineConfig,
-  presetIcons,
-  presetTypography,
   presetUno,
-  presetWebFonts,
-  transformerVariantGroup,
-} from 'unocss'
-import { themeConfig } from './src/.config'
+  presetAttributify,
+  presetIcons,
+} from "unocss";
+import transformerDirectives from "@unocss/transformer-directives";
+import { THEME_CONFIG } from "./src/theme.config";
 
-const { theme, colorsDark, colorsLight, fonts } = themeConfig.appearance
+const {socials, themeStyle} = THEME_CONFIG;
 
-const colors = theme === 'dark' ? colorsDark : colorsLight
+let foreground = "#2e405b";
+let background = "#ffffff";
 
-const cssExtend = {
-  ':root': {
-    '--prose-borders': '#eee',
-  },
-
-  'code::before,code::after': {
-    content: 'none',
-  },
-
-  ':where(:not(pre):not(a) > code)': {
-    'padding': '2px 4px',
-    'color': '#c7254e',
-    'font-size': '90%',
-    'background-color': '#f9f2f4',
-    'border-radius': '4px',
-  },
+if(THEME_CONFIG.themeStyle === 'dark') {
+  foreground = "#ffffff";
+  background = "#2e405b";
 }
 
 export default defineConfig({
-  rules: [
-    [
-      /^row-(\d+)-(\d)$/,
-      ([, start, end]) => ({ 'grid-row': `${start}/${end}` }),
-    ],
-    [
-      /^col-(\d+)-(\d)$/,
-      ([, start, end]) => ({ 'grid-column': `${start}/${end}` }),
-    ],
-    [
-      /^scrollbar-hide$/,
-      ([_]) => `.scrollbar-hide { scrollbar-width:none;-ms-overflow-style: none; }
-      .scrollbar-hide::-webkit-scrollbar {display:none;}`,
-    ],
-  ],
   presets: [
-    presetUno(),
-    presetTypography({ cssExtend }),
-    presetAttributify(),
-    presetIcons({ scale: 1.2, warn: true }),
-    presetWebFonts({
-      provider: 'google',
-      fonts: {
-        Noto: [
-          {
-            name: 'Noto Sans HK',
-            weights: ['400','600'],
-            italic: true,
-          },
-          {
-            name: 'Noto Sans SC',
-            weights: ['400','600'],
-            italic: true,
-          },
-          {
-            name: 'Noto Serif HK',
-            weights: ['400','700'],
-            italic: true,
-          },
-          {
-            name: 'Noto Serif SC',
-            weights: ['400','700'],
-            italic: true,
-          },
-        ],
-      },
-    })
+    presetUno({
+      dark: themeStyle === 'auto' ? 'media' : 'class',
+    }),
+    presetAttributify({ nonValuedAttribute: true }),
+    presetIcons({
+      scale: 1.2,
+      warn: true,
+    }),
   ],
   theme: {
-    colors,
-    fontFamily: fonts,
+    colors: {
+      foreground,
+      background
+    },
+    fontFamily: {
+      sans: '"Source Sans Pro","Roboto","Helvetica","Helvetica Neue","Source Han Sans SC","Source Han Sans TC","PingFang SC","PingFang HK","PingFang TC",sans-serif',
+      serif: '"HiraMinProN-W6","Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
+    },
+    animation: {
+      keyframes: {
+        "fadein-down":
+          "{from {opacity: 0.1;transform: translateY(-20px);}to {opacity: 1;transform: translateY(0);}}",
+        "fadein-left":
+          "{from {opacity: 0.1;transform: translateX(20px);}to {opacity: 1;transform: translateX(0);}}",
+      },
+    },
   },
   shortcuts: [
+    ['icon', 'inline-block '],
     ['post-title', 'text-5 font-bold lh-7.5 m-0'],
-    ['underline-hover', 'p-0.5 underline decoration-2 underline-offset-4 hover:decoration-none hover:color-background hover:bg-foreground'],
   ],
-  transformers: [transformerDirectives(), transformerVariantGroup()],
+  transformers: [
+    transformerDirectives(),
+  ],
   safelist: [
-    ...themeConfig.site.socialLinks.map(social => `i-mdi-${social.name}`),
+    ...socials.map((social) => `i-mdi-${social.name}`),
     'i-mdi-content-copy',
     'i-mdi-check',
   ],

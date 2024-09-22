@@ -1,13 +1,11 @@
 ---
-import { themeConfig } from '~/.config'
+const { comments } = Astro.locals.config
 
-const { comment } = themeConfig
-
-if (!comment || !comment.giscus) {
+if (!comments || !comments.giscus) {
   throw new Error('Giscus comments are not configured')
 }
 
-const giscus = comment.giscus
+const giscus = comments.giscus
 ---
 
 <giscus-widget

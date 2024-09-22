@@ -1,14 +1,12 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
-import Comments from '~/components/Comments/index.astro'
-import Pagination from '~/components/Pagination.astro'
-import SiteSeo from '~/components/SiteSeo.astro'
+import Post from '~/components/Post.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import LayoutPost from '~/layouts/LayoutPost.astro'
-import type { Post } from '~/types'
 import { getPosts } from '~/utils'
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
+import Pagination from '~/components/Pagination.astro'
+import Comments from '~/components/Comments.astro'
 
-export const getStaticPaths = (async () => {
+export const getStaticPaths = (async ({}) => {
   const posts = await getPosts()
   return posts.map((post: Post, idx: number) => {
     const prev = posts[idx - 1]
@@ -32,13 +30,12 @@ function getUrl(slug: string) {
 }
 ---
 
-<LayoutDefault>
-  <SiteSeo slot="seo" title={entry.data.title} desc={entry.data.description} banner={entry.data.banner} />
-
-  <LayoutPost post={entry}>
-    <Content />
-  </LayoutPost>
-
+<LayoutDefault title={entry.data.title} desc={entry.data.description} banner={entry.data.banner}>
+  <Post post={entry}>
+    <div class="pt-8">
+      <Content />
+    </div>
+  </Post>
   <Pagination
     showLeft={Boolean(prev)}
     leftTitle={`${t('prev_post')}: ${prev?.data.title}`}
@@ -49,13 +46,13 @@ function getUrl(slug: string) {
     showPageCount={false}
   />
   <!-- BUG 这里使用 client:visible 会导致构建失败。ref: https://github.com/withastro/astro/issues/7329 -->
-  <Comments post={entry} />
+    <Comments post={entry} />
 </LayoutDefault>
 
 <script>
   import '@github/clipboard-copy-element'
 
-  document.addEventListener('clipboard-copy', (event) => {
+  document.addEventListener('clipboard-copy', function (event) {
     const target = event.target as HTMLElement
     const icon = target.querySelector('.icon') as HTMLElement
     icon.classList.replace('i-mdi-content-copy', 'i-mdi-check')
@@ -66,13 +63,13 @@ function getUrl(slug: string) {
 
   const codeBlocks = Array.from(document.querySelectorAll('pre'))
   const icon = "<div class='i-mdi-content-copy icon text-white'></div>"
-  for (const codeBlock of codeBlocks) {
-    const wrapper = document.createElement('div')
+  for (let codeBlock of codeBlocks) {
+    let wrapper = document.createElement('div')
     wrapper.className = 'code-container'
 
-    const copyButton = document.createElement('clipboard-copy')
-    const code = codeBlock.querySelector('code')
-    copyButton.value = code?.textContent ?? ''
+    let copyButton = document.createElement('clipboard-copy')
+    let code = codeBlock.querySelector('code')
+    copyButton.value = code?.innerText ?? ''
     copyButton.className = 'clipboard-copy'
     copyButton.innerHTML = icon
 
@@ -89,8 +86,8 @@ function getUrl(slug: string) {
   }
   .clipboard-copy {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: .5rem;
+    right: .5rem;
     width: 1.75rem;
     height: 1.75rem;
     display: flex;

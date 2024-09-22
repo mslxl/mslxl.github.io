@@ -1,18 +1,67 @@
 ---
-import { themeConfig } from '~/.config'
-import SiteSeo from '~/components/SiteSeo.astro'
-import '~/styles/global.css'
+import '~/styles/index.css'
+// https://sivan.github.io/heti
+import '~/styles/heti.min.css'
 import 'katex/dist/katex.min.css'
+import { ViewTransitions } from 'astro:transitions';
+import { SEO } from 'astro-seo'
+import { getImage } from 'astro:assets'
 
-const lang = themeConfig.appearance.locale ?? 'en-us'
+interface Props {
+  title?: string
+  desc?: string
+  banner?: ImageMetadata
+}
+
+const props = Astro.props
+const themeConfig = Astro.locals.config
+const { header } = Astro.locals.config
+
+const title = props.title ?? themeConfig.title
+const desc = props.desc ?? themeConfig.desc
+const canonical = themeConfig.website
+
+const image =
+  props.banner &&
+  (await getImage({
+    src: props.banner,
+    format: "jpeg"
+  }))
+const optimizedImage = new URL(image?.src??"/placeholder.png", Astro.url).toString()
 ---
 
-<html lang={lang} class="animation-prepared">
+<html lang="en">
   <head>
-    <slot name="seo"> <SiteSeo /> </slot>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
+    <SEO
+      charset="utf-8"
+      title={title}
+      description={desc}
+      extend={{
+        link: [{ rel: 'icon', href: '/favicon.jpg', type: 'image/jpg' }],
+        meta: [
+          { name: "twitter:image:src", content: optimizedImage },
+          { name: "twitter:image:alt", content: desc },
+          { name: "twitter:creator", content: header.twitter },
+          { name: "twitter:site", content: header.twitter },
+          { name: "twitter:card", content: "summary_large_image" },
+          { name: "twitter:title", content: title },
+          { name: "twitter:description", content: desc },
+        ],
+      }}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "article",
+          image: optimizedImage,
+          url: canonical,
+        }
+      }}
+    />
   </head>
-
   <body>
-    <slot />
+      <slot />
   </body>
 </html>

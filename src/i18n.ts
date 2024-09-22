@@ -95,3 +95,4 @@ export const LANGUAGES = {
     next_post: '次の投稿',
   },
 }
+
