@@ -1,0 +1,27 @@
+---
+import LayoutDefault from "~/layouts/LayoutDefault.astro";
+import Comments from "~/components/Comments/index.astro";
+import type { MarkdownLayoutProps } from "astro";
+
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  comment: boolean;
+}>;
+
+const { entry } = Astro.props as any
+
+const { title, comment = true } = Astro.props.frontmatter;
+
+---
+
+
+<LayoutDefault title={title}>
+    <article class="prose">
+        <header class="post-title">
+          <a class="not-prose" href="#">{title}</a>
+        </header>
+        <slot />
+    </article>
+  {comment && <Comments post={entry} />}
+</LayoutDefault>

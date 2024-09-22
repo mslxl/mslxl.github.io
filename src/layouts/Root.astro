@@ -1,0 +1,18 @@
+---
+import { themeConfig } from '~/.config'
+import SiteSeo from '~/components/SiteSeo.astro'
+import '~/styles/global.css'
+import 'katex/dist/katex.min.css'
+
+const lang = themeConfig.appearance.locale ?? 'en-us'
+---
+
+<html lang={lang} class="animation-prepared">
+  <head>
+    <slot name="seo"> <SiteSeo /> </slot>
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

@@ -5,6 +5,7 @@ import {
   presetIcons,
   presetTypography,
   presetUno,
+  presetWebFonts,
   transformerVariantGroup,
 } from 'unocss'
 import { themeConfig } from './src/.config'
@@ -52,6 +53,33 @@ export default defineConfig({
     presetTypography({ cssExtend }),
     presetAttributify(),
     presetIcons({ scale: 1.2, warn: true }),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        Noto: [
+          {
+            name: 'Noto Sans HK',
+            weights: ['400','600'],
+            italic: true,
+          },
+          {
+            name: 'Noto Sans SC',
+            weights: ['400','600'],
+            italic: true,
+          },
+          {
+            name: 'Noto Serif HK',
+            weights: ['400','700'],
+            italic: true,
+          },
+          {
+            name: 'Noto Serif SC',
+            weights: ['400','700'],
+            italic: true,
+          },
+        ],
+      },
+    })
   ],
   theme: {
     colors,

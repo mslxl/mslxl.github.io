@@ -4,6 +4,7 @@ date: 2023-09-15
 categories:
   - "MIT6.824"
   - 分布式系统
+description: 很经典的并行计算模型，MapReduce 也就是 map 和 reduce
 ---
 
 ## MapReduce 模型

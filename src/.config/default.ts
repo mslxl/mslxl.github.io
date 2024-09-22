@@ -5,48 +5,53 @@ import type { ThemeConfig } from '~/types'
 
 export const defaultConfig: ThemeConfig = {
   site: {
-    title: '活版印字',
-    subtitle: 'Typography',
-    author: 'Typography',
-    description: 'Rediscory the beauty of typography',
-    website: 'https://astro-theme-typography.vercel.app/',
+    title: 'Integrate Life',
+    subtitle: 'Mslxl\'s Blog',
+    author: 'Mslxl',
+    description: 'My story of discovery',
+    website: 'https://blog.mslxl.com',
     socialLinks: [
       {
         name: 'github',
-        href: 'https://github.com/moeyua/astro-theme-typography',
+        href: 'https://github.com/mslxl/',
       },
       {
         name: 'rss',
         href: '/atom.xml',
       },
-      {
-        name: 'twitter',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
-      {
-        name: 'mastodon',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
+      // {
+      //   name: 'twitter',
+      //   href: 'https://github.com/moeyua/astro-theme-typography',
+      // },
+      // {
+      //   name: 'mastodon',
+      //   href: 'https://github.com/moeyua/astro-theme-typography',
+      // },
     ],
     navLinks: [
       {
-        name: 'Posts',
-        href: '/posts/page/1',
+        name: "Posts",
+        href: "/posts/page/1",
       },
       {
-        name: 'Archive',
-        href: '/archive',
+        name: "Archive",
+        href: "/archive",
       },
       {
-        name: 'Categories',
-        href: '/categories',
+        name: "Categories",
+        href: "/categories"
       },
       {
-        name: 'About',
-        href: '/about',
+        name: "Friends",
+        href: "/tomodachi",
+      },
+      {
+        name: "About",
+        href: "/about",
       },
     ],
-    categoryMap: [{ name: '胡适', path: 'hu-shi' }],
+
+    categoryMap: [],
   },
   appearance: {
     theme: 'light',
@@ -60,18 +65,30 @@ export const defaultConfig: ThemeConfig = {
       background: '#2e405b',
     },
     fonts: {
-      header:
-        '"HiraMinProN-W6","Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
-      ui: '"Source Sans Pro","Roboto","Helvetica","Helvetica Neue","Source Han Sans SC","Source Han Sans TC","PingFang SC","PingFang HK","PingFang TC",sans-serif',
+      header:'"Noto Serif HK","Noto Serif SC",HiraMinProN-W6,"Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
+      ui: 'Noto Sans HK,Noto Sans SC,PingFang SC,PingFang HK,PingFang TC,Source Sans Pro,Roboto,Helvetica,Helvetica Neue,Source Han Sans SC,Source Han Sans TC,sans-serif',
     },
   },
   seo: {
-    twitter: '@moeyua13',
+    twitter: "@mslxl_bak",
     meta: [],
     link: [],
   },
   comment: {
-    // disqus: { shortname: "typography-astro" },
+    giscus: {
+      repo: 'mslxl/mslxl.github.io',
+      repoId: 'MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=',
+      category: 'Show and tell',
+      categoryId: 'DIC_kwDOB5IIzs4CfW4f',
+      mapping: 'title',
+      strict: '0',
+      reactionsEnabled: '1',
+      emitMetadata: '1',
+      inputPosition: 'top',
+      theme: 'light',
+      lang: 'zh-CN',
+      loading: 'lazy',
+    },
   },
   rss: {
     fullText: true,

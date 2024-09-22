@@ -4,7 +4,7 @@ date: 2024-06-28
 categories:
   - 逆向
   - Cheat Engine
-mathjax: true
+description: 尝试写了点汇编，大概是只有开发者才能看懂
 ---
 
 此文又称《只有开发者能看懂的CE教程》

@@ -10,6 +10,9 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import expressiveCode from "astro-expressive-code";
 import remarkMermaid from 'remark-mermaidjs'
+import vue from '@astrojs/vue';
+import react from '@astrojs/react';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,6 +38,8 @@ export default defineConfig({
     expressiveCode(),
     typst(),
     mdx(),
+    vue(),
+    react(),
     swup({
       theme: false,
       animationClass: 'transition-swup-',

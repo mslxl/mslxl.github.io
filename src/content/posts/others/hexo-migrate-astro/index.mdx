@@ -1,10 +1,19 @@
 ---
 title: 从 Hexo 到 Astro
 date: 2024-09-04
-categories: ['Hexo', 'Astro']
-description: 'Typst SSG 测试'
+categories: ['Hexo', 'Astro', 'Typst']
+description: '从 Hexo 到 Astro 的迁移体验'
 ---
 
 import { Typst } from 'astro-typst/src/components'
+
+
+该页面出于实验性质使用 Typst 书写，其显示效果、界面风格一致性与交互性可能不如预期。
+
+<div data-orientation="horizontal" role="separator" label="Or" class="shrink-0 bg-foreground relative h-px w-full my-4">
+    <span class="text-xs text-foreground bg-background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center h-[1px] py-1 px-2">
+    以下内容使用 Typst 生成并通过 SVG 嵌入
+    </span>
+</div>
 
 <Typst width="100%" height="auto" src="src/content/posts/others/hexo-migrate-astro/content.typ" />

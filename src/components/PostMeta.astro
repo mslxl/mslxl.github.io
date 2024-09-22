@@ -13,7 +13,7 @@ const { translate: t } = Astro.locals
 const categoryList = post.data.categories ?? []
 ---
 
-<header flex="~ col gap-2">
+<header flex="~ col">
   <h1 class="post-title">
     <a class="not-prose" href={`/posts/${post.slug}/`}>{post.data.title}</a>
   </h1>
