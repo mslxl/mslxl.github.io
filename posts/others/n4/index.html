@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="en"> <head><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><title>编译原理：绪论 —— 语义分析</title><meta charset="utf-8"><link rel="canonical" href="https://blog.mslxl.com/posts/others/n4/"><meta name="description" content="My story of discovering"><meta name="robots" content="index, follow"><meta property="og:title" content="编译原理：绪论 —— 语义分析"><meta property="og:type" content="article"><meta property="og:image" content="https://blog.mslxl.com/placeholder.png"><meta property="og:url" content="https://blog.mslxl.com"><link rel="icon" href="/favicon.jpg" type="image/jpg"><meta name="twitter:image:src" content="https://blog.mslxl.com/placeholder.png"><meta name="twitter:image:alt" content="My story of discovering"><meta name="twitter:creator"><meta name="twitter:site"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="编译原理：绪论 —— 语义分析"><meta name="twitter:description" content="My story of discovering"><link rel="stylesheet" href="/_astro/index.DJturBb8.css">
+<link rel="stylesheet" href="/_astro/index.irxhXuQK.css">
+<style>.code-container{position:relative}.clipboard-copy{position:absolute;top:.5rem;right:.5rem;width:1.75rem;height:1.75rem;display:flex;justify-content:center;align-items:center;border-radius:.25rem}.clipboard-copy:hover{background-color:#30363d}
+</style><script type="module" src="/_astro/hoisted.zpUdL6BH.js"></script>
+<script type="module" src="/_astro/page.CPvyyiTs.js"></script></head> <body>  <div un-max-lg="animate-fadein-down" un-lg="flex flex-row-reverse justify-between gap-4 px-8 mx-auto max-w-6xl" class="container contain-layout m-a"> <div un-lg="sticky top-0 h-screen py-20 animate-fadein-left gap-8" un-lg:flex="~ col justify-between items-start gap-4" class="p-7.5"> <header un-lg="grow-1 justify-between items-start" un-flex="~ col gap-2.5" class="text-center"> <hgroup un-hover:lg="bg-foreground color-background pt-3.75 pb-8.75 " un-lg=" write-vertical-right items-start px-2.5 pb-12 b-l-2px b-l-foreground-solid text-left" un-flex="~ col gap-2.5" class="cursor-pointer transition-[padding,background] duration-800 ease-in-out"> <a class="normal" href="/"> <h3 class="text-5 font-extrabold font-serif">Mslxl</h3> <h1 class="text-8 font-extrabold font-serif">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" un-flex="~ col gap-2"> <ul un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center"> <li> <a href="/posts/page/1">Posts</a> </li><li> <a href="/archive">Archive</a> </li><li> <a href="/categories">Categories</a> </li><li> <a href="/tomodachi">Friends</a> </li><li> <a href="/about">About</a> </li> </ul> <ul un-flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl" target="_blank" title="github" class="icon i-mdi-github"></a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="icon i-mdi-rss"></a> </li> </ul> </nav> </header> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="max-lg:hidden"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div> <main un-lg="py-20 min-w-3xl animate-fadein-down" class="p-7.5">  <article class="heti"> <header> <h1 class="post-title!"> <a href="/posts/others/n4/">编译原理：绪论 —— 语义分析</a> </h1> <div class="mt-2 text-3.5"> <span>Posted at</span> <time>2018-06-26</time> <a class="ml-2.5" href="/categories/Compiler">
+# Compiler </a> </div> </header>  <div class="pt-8"> <h2 id="语义分析">语义分析</h2>
+<h3 id="语义分析的任务">语义分析的任务</h3>
+<p>语义分析是编译过程的第三个阶段，高级语言中的语句大多数分为两类，一类是声明语句，一类是可执行语句，在声明语句中会声明一些数据对象或过程，并且为他们分别起一个名字 <code>标识符 (id)</code>，对于声明语句来说，语义分析的主要任务就是收集标识符的属性信息，一般有这些属性信息</p>
+<h4 id="对声明语句语义分析的任务">对声明语句语义分析的任务</h4>
+<ol>
+<li>种属 （Kind） : 它说明了这个标识符对应的是简单变量，还是一个复合变量（数组、记录、…），还是过程、…</li>
+<li>类型 （Type） : 这个我相信都不用说了把</li>
+<li>储存位置、长度 : 比如说我们写了一个对象或过程，我们都要在内存中给他分配一段空间，这样存储位置和所占用的空间的大小（长度）就成为标识符重要的属性</li>
+<li>值</li>
+<li>作用域</li>
+</ol>
+<h5 id="关于-3-举个例子">关于 3 举个例子：</h5>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.0niu6.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="pascal"><code><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">begin</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#BF3441">real</span><span style="--0:#E1E4E8;--1:#24292E"> x[</span><span style="--0:#79B8FF;--1:#005CC5">8</span><span style="--0:#E1E4E8;--1:#24292E">]</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#BF3441">integer</span><span style="--0:#E1E4E8;--1:#24292E"> i,j;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">  </span></span><span style="--0:#E1E4E8;--1:#24292E">...</span></div></div><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">end</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="begin  real x[8]  integer i,j;  ...end"><div></div></button></div></figure></div>
+<p>首先声明了一个实型数组<code>x</code> ，因此 <code>x</code> 的相对地址就是 <code>0</code>。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 <code>i</code> 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 <code>j</code> 的相对地址就是 <em>64 + 4 = 68</em> ，以此类推。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">名字</th><th align="center">相对地址</th></tr></thead><tbody><tr><td align="center">x</td><td align="center">0</td></tr><tr><td align="center">i</td><td align="center">64</td></tr><tr><td align="center">j</td><td align="center">68</td></tr></tbody></table>
+<p>|:-:|:-:|
+|0|x[0]|
+|8|x[1]|
+| | |
+| |…|
+|56|x[7]|
+|64|i|
+|68|j|</p>
+<h4 id="对过程语义分析的任务">对过程语义分析的任务</h4>
+<p>对于过程来说，作用有
+0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等</p>
+<h4 id="符号表-symbol-table">符号表 (Symbol Table)</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">NAME</th><th align="center">TYPE</th><th align="center">KIND</th><th align="center">VAL</th><th align="center">ADDR</th></tr></thead><tbody><tr><td align="center">SIMPLE</td><td align="center">整</td><td align="center">简变</td><td align="center"></td><td align="center"></td></tr><tr><td align="center">SYMBLE</td><td align="center">实</td><td align="center">数组</td><td align="center"></td><td align="center"></td></tr><tr><td align="center">TABLE</td><td align="center">字符</td><td align="center">常数</td><td align="center"></td><td align="center"></td></tr><tr><td align="center">.</td><td align="center">.</td><td align="center">.</td><td align="center">.</td><td align="center">.</td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr></tbody></table>
+<p>语义分析中收集的标识符的信息都会存放在符号表里，每一个标识符都对应着一条记录，每个字段对应着一个属性，比如说 <code>类型 (TYPE)</code>、<code>种属 (KIND)</code>、<code>值 (VALUE)</code> 和 <code>地址 (ADDRESS)</code>等等。</p>
+<p>符号表中通常带有一个字符串表，用来存放程序中标识符的名称和字符常数，这样的话 <code>NAME</code> 字段就会被分割成两个部分，一个用来存放标识符在字符串表中的起始位置，另一个存放标识符的长度，这里由于 Markdown 的限制不能将其表现出来。符号表中设计字符串表的作用是节省内存空间。</p>
+<h4 id="语义分析的另一个任务语义检查">语义分析的另一个任务：语义检查</h4>
+<p>常见的语义错误有：</p>
+<ol>
+<li>变量或过程<strong>未经声明就使用</strong></li>
+<li>变量或过程名<strong>重复声明</strong></li>
+<li><strong>运算分量</strong>类型不匹配:其中需要判断是否运算无意义（比如将一个数组与数字相加）和是否需要隐式转换</li>
+<li><strong>操作符</strong>与<strong>操作数</strong>之间类型不匹配
+<ul>
+<li><strong>数组下标</strong> 不是整数</li>
+<li>对<strong>非数组变量</strong>使用数组访问操作符</li>
+<li>对<strong>非过程名</strong>使用过程调用操作符</li>
+<li>过程调用的<strong>参数类型或数目</strong>不匹配</li>
+<li>函数<strong>返回类型</strong>有误</li>
+</ul>
+</li>
+</ol>
+<hr>
+<pre class="mermaid">graph TD
+	Start-- 字符流 -->词法分析器
+	词法分析器-- 词法字节流 -->语法分析器
+	语法分析器-- 语法树 -->语义分析器
+	语义分析器-- 语法树 -->中间代码生成器
+	中间代码生成器-- 中间表示形式 -->机器无关代码优化器
+	机器无关代码优化器-- 中间表示形式 -->目标代码生成器
+	目标代码生成器-- 目标机器语言 -->机器相关代码优化器
+	机器相关代码优化器-- 目标机器语言 -->Fin
+</pre> </div>  </article> <footer class="mt-5">  <p class="flex items-center gap-2"> <span class="inline-flex items-center"> <i class="i-mdi-chevron-double-left icon"></i> <a href="/posts/others/n5">Previous post: 编译原理：绪论 —— 中间代码生成和编译器后端</a> </span> <span class="inline-flex items-center"> <a href="/posts/others/n3">Next post: 编译原理：绪论 —— 语法分析</a> <i class="i-mdi-chevron-double-right icon"></i> </span> </p> </footer> <!-- <footer class="mt-5">
+  <p class="mb-2.5">{t('page_number', page.currentPage)} / {t('page_count', page.lastPage)}</p>
+  <p class="flex items-center gap-2">
+    <span class="inline-flex items-center">
+      <i class="i-mdi-chevron-double-left icon"></i>
+      {page.url.prev ? <a href={page.url.prev}> {t('prev')} </a> : <span>{t('prev')}</span>}
+    </span>
+
+    <span class="inline-flex items-center">
+      {page.url.next ? <a href={page.url.next}>{t('next')}</a> : <span>{t('next')}</span>}
+      <i class="i-mdi-chevron-double-right icon"></i>
+    </span>
+  </p>
+</footer> -->  <div py-16> <giscus-widget id="comments" repo="mslxl/mslxl.github.io" repoId="MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=" category="Show and tell" categoryId="DIC_kwDOB5IIzs4CfW4f" mapping="title" strict="0" reactionsEnabled="1" emitMetadata="1" inputPosition="top" theme="light" lang="zh-CN" loading="lazy"></giscus-widget>  </div>  <div class="p-10"> <div> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter"> <p class="text-sm text-gray-500 text-center">统计自 2024 年 9 月</p> </div> </div> </main> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="lg:hidden p-7.5"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div>  </body></html>  

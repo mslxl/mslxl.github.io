@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"> <head><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><title>ChectEngine（一）：基本使用——以官方小游戏为例</title><meta charset="utf-8"><link rel="canonical" href="https://blog.mslxl.com/posts/fun/ce-tutor-offical/"><meta name="description" content="尝试写了点汇编，大概是只有开发者才能看懂"><meta name="robots" content="index, follow"><meta property="og:title" content="ChectEngine（一）：基本使用——以官方小游戏为例"><meta property="og:type" content="article"><meta property="og:image" content="https://blog.mslxl.com/placeholder.png"><meta property="og:url" content="https://blog.mslxl.com"><link rel="icon" href="/favicon.jpg" type="image/jpg"><meta name="twitter:image:src" content="https://blog.mslxl.com/placeholder.png"><meta name="twitter:image:alt" content="尝试写了点汇编，大概是只有开发者才能看懂"><meta name="twitter:creator"><meta name="twitter:site"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ChectEngine（一）：基本使用——以官方小游戏为例"><meta name="twitter:description" content="尝试写了点汇编，大概是只有开发者才能看懂"><link rel="stylesheet" href="/_astro/index.DJturBb8.css">
+<link rel="stylesheet" href="/_astro/index.irxhXuQK.css">
+<style>.code-container{position:relative}.clipboard-copy{position:absolute;top:.5rem;right:.5rem;width:1.75rem;height:1.75rem;display:flex;justify-content:center;align-items:center;border-radius:.25rem}.clipboard-copy:hover{background-color:#30363d}
+</style><script type="module" src="/_astro/hoisted.zpUdL6BH.js"></script>
+<script type="module" src="/_astro/page.CPvyyiTs.js"></script></head> <body>  <div un-max-lg="animate-fadein-down" un-lg="flex flex-row-reverse justify-between gap-4 px-8 mx-auto max-w-6xl" class="container contain-layout m-a"> <div un-lg="sticky top-0 h-screen py-20 animate-fadein-left gap-8" un-lg:flex="~ col justify-between items-start gap-4" class="p-7.5"> <header un-lg="grow-1 justify-between items-start" un-flex="~ col gap-2.5" class="text-center"> <hgroup un-hover:lg="bg-foreground color-background pt-3.75 pb-8.75 " un-lg=" write-vertical-right items-start px-2.5 pb-12 b-l-2px b-l-foreground-solid text-left" un-flex="~ col gap-2.5" class="cursor-pointer transition-[padding,background] duration-800 ease-in-out"> <a class="normal" href="/"> <h3 class="text-5 font-extrabold font-serif">Mslxl</h3> <h1 class="text-8 font-extrabold font-serif">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" un-flex="~ col gap-2"> <ul un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center"> <li> <a href="/posts/page/1">Posts</a> </li><li> <a href="/archive">Archive</a> </li><li> <a href="/categories">Categories</a> </li><li> <a href="/tomodachi">Friends</a> </li><li> <a href="/about">About</a> </li> </ul> <ul un-flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl" target="_blank" title="github" class="icon i-mdi-github"></a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="icon i-mdi-rss"></a> </li> </ul> </nav> </header> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="max-lg:hidden"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div> <main un-lg="py-20 min-w-3xl animate-fadein-down" class="p-7.5">  <article class="heti"> <header> <h1 class="post-title!"> <a href="/posts/fun/ce-tutor-offical/">ChectEngine（一）：基本使用——以官方小游戏为例</a> </h1> <div class="mt-2 text-3.5"> <span>Posted at</span> <time>2024-06-28</time> <a class="ml-2.5" href="/categories/nixiang">
+# 逆向 </a><a class="ml-2.5" href="/categories/Cheat Engine">
+# Cheat Engine </a> </div> </header>  <div class="pt-8"> <p>此文又称《只有开发者能看懂的CE教程》</p>
+<p><del>CheatEngine 想必大家懂的都懂。但 CheatEngine  是怎么回事呢？ CheatEngine 相信大家都很熟悉，但是 CheatEngine  是怎么回事呢，下面就让小编带大家一起了解吧</del></p>
+<h2 id="捆绑软件警告">捆绑软件警告</h2>
+<p>在安装过程中，不要无脑下一步，小心被老外来一个中国式<strong>捆绑软件</strong>震撼（如下图）。</p>
+<p><img  src="/_astro/image-20240731101103030.BaRcz5ve_v3HLS.webp" alt="image-20240731101103030" width="823" height="625" loading="lazy" decoding="async"></p>
+<p>如果你无脑点了接受，那么恭喜你了兄弟，去控制面板找到 RAV 杀毒并卸载吧。</p>
+<p>Cheat Engine 通过提供安装广告软件的选项来实现这一点，目前（7.5）也只在安装向导里安装广告软件，还算可以接受吧。</p>
+<p>此称为永远不要进行自动安装或盲目安装任何东西的教训。</p>
+<h2 id="使用-ceshare">使用 CEShare</h2>
+<p><img  src="/_astro/image-20240731101200942.CWzU9t4V_ZhF0ty.webp" alt="image-20240731101200942" width="866" height="368" loading="lazy" decoding="async"></p>
+<p>CEShare 是一个 CheatEngineTable 分享接口。通过 CEShare，用户可以直接从 CheatEngine 中通过进程名来检索其他用户分享的 CheatEngineTable（如下图）。</p>
+<p><img  src="/_astro/image-20240731101908326.BeCDIEIQ_ZdJedQ.webp" alt="image-20240731101908326" width="1299" height="896" loading="lazy" decoding="async"></p>
+<p>不过其实对于大多数游戏来说都找不到。此外如果需要现成的修改器，为什么不使用风灵月隐呢？</p>
+<p>用 CE 还是自己动手的时候比较多。</p>
+<h2 id="值扫描">值扫描</h2>
+<p>所有操作均需要从 CE 中打开进程。</p>
+<p>通过点击主界面左上角的图标，即可轻松打开对应进程。</p>
+<p><img  src="/_astro/image-20240731102216267.etxh8IwL_1RXcQp.webp" alt="image-20240731102216267" width="692" height="891" loading="lazy" decoding="async"></p>
+<p>在右侧面板中，可以通过值扫描对应的变量地址，该过程称为值扫描。</p>
+<p>值扫描可以指定扫描的方式，在第一次扫描时可以是</p>
+<ul>
+<li>
+<p><code>确定值</code></p>
+</li>
+<li>
+<p>“大于x`</p>
+</li>
+<li>
+<p><code>小于x</code></p>
+</li>
+<li>
+<p><code>在两数之间</code></p>
+</li>
+<li>
+<p><code>未知初始值</code></p>
+</li>
+</ul>
+<p>之后的扫描中可以是</p>
+<ul>
+<li>
+<p><code>确定值</code></p>
+</li>
+<li>
+<p><code>大于x</code></p>
+</li>
+<li>
+<p><code>小于x</code></p>
+</li>
+<li>
+<p><code>在两数之间</code></p>
+</li>
+<li>
+<p><code>增加的数</code></p>
+</li>
+<li>
+<p><code>增加x的数</code></p>
+</li>
+<li>
+<p><code>减少的数</code></p>
+</li>
+<li>
+<p><code>减少x的数</code></p>
+</li>
+<li>
+<p><code>未变化的值</code></p>
+</li>
+<li>
+<p><code>变化的值</code></p>
+</li>
+</ul>
+<p><img  src="/_astro/image-20240731103127198.o5bgt3hK_ZnCJfS.webp" alt="image-20240731103127198" width="549" height="568" loading="lazy" decoding="async"></p>
+<p>用户可以进行多次扫描以确定变量的地址。在扫描时可以情况不同选择不同的方式进行扫描。例如游戏中有一个血条，玩家并不知道血条的具体数值，此时可以采用后4种方式来进行扫描。比如说先进行 <code>大于0</code>、<code>小于25565</code>、<code>未变化的值</code>，然后想办法让血量下降，并重新扫描 <code>减少 x 的数</code>（或者减少的数）。多次重复一般即可找到对应地址。</p>
+<p>如果要扫描的值在扫描过程中可能会发生变化，可以勾选 <code>Memory Scan Options</code> 中的 <code>Pause the game while scanning</code>。该选项会再扫描时将对应进程挂起。</p>
+<h2 id="内存模型">内存模型</h2>
+<p>在 Windows 系统中，内存是被虚拟化的。应用程序不能直接访问内存地址，这使得 windows 可以移动物理内存，或者将内存块与虚拟存储器交换。</p>
+<p>对于应用程序的开发者而言， Windows 提供的是一种平面内存模型。内存地址从 0 开始增长，对于应用程序来说，内存是连续的。应用程序可以选择对自己的内存进行分段。但实际上这些内存在存储器中的分布是离散的，这一点可以通过 <a href="https://en.wikipedia.org/w/index.php?title=Memory_dump&#x26;redirect=no">Memory dump</a> 文件来知晓。同时，一个进程不能去访问另一个进程的内存，这会引发 Segment Fault。实际上对于不同的应用程序来说，因为 Windows 虚拟化内存的原因，一个相同的内存地址对于不同的应用程序对应的其实是不同的物理内存地址，双方是不能互相访问的。如果需要相互访问，则需要通过系统提供的其他API进行显式的修改，而不能简单的通过裸指针，这也是为什么 CE 需要打开进程的原因。对于访问其他进程的进程来说，这段空间也并不是连续的。</p>
+<p>更多有关内容可以查看<a href="https://learn.microsoft.com/en-us/windows/win32/memory/memory-management">Memory Management</a></p>
+<h2 id="官方教程">官方教程</h2>
+<p><img  src="/_astro/image-20240803172331274.Dpqk1mhG_11Fy5h.webp" alt="image-20240803172331274" width="449" height="71" loading="lazy" decoding="async"></p>
+<h2 id="第-2-关确定值扫描pw090453">第 2 关：确定值扫描（PW=090453）</h2>
+<p><em>TIP：你可以通过输入标题中的 PW 来跳转到对应的关卡</em></p>
+<p><img  src="/_astro/recording.Dl50_Yeq_Z1yO4dg.webp" alt="recording" width="2114" height="880" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>目标：将血量修改到 1000</p>
+</blockquote>
+<p>一切的开始。</p>
+<p>很简单的一关，只需要扫描当前血量，减少血量。重复一轮即可。</p>
+<p>在拿到想要的内存地址后，可以通过双击将该条目加入到下面的列表中，或者之间通过右键修改。</p>
+<h2 id="第-3-关未知值扫描pw419482">第 3 关：未知值扫描（PW=419482）</h2>
+<p><img  src="/_astro/recording-1722395577866-2.ps90huAn_2sK8x8.webp" alt="recording" width="1297" height="1017" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>目标：将血量修改到 5000</p>
+</blockquote>
+<p>因为下面有个血条，可以猜测这个值是大于0，且不是很大。</p>
+<p>我们可以上来猜测这个血量在 0-1000 之间（实际上这个血量在 0-500 之间），然后再通过<code>减少了x</code>来找到血量。</p>
+<h2 id="第-4-关浮点数pw089124">第 4 关：浮点数（PW=089124）</h2>
+<p><img  src="/_astro/recording-1722395794808-4.DLmlVrXB_Z1F9G3p.webp" alt="recording" width="2022" height="989" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>目标：将血量和弹药修改到 5000</p>
+</blockquote>
+<p>同上，甚至因为浮点数位比较长，比上面都好找。</p>
+<p>注意这里的浮点数并不是说小数，而是 IEEE 754 标准浮点数。如果游戏中的浮点数并不是 IEEE 754 标准，那么该扫描并不能找到对应的值。</p>
+<h2 id="第-5-关代码查找器pw888899">第 5 关：代码查找器（PW=888899）</h2>
+<p><img  src="/_astro/recording-1722396606509-6.D-yZ9RlE_Z1C9BS7.webp" alt="recording" width="2014" height="1016" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>目标：每次点击 Change Value 都会改变值，现需要将其更改为点击 <code>Change Value</code> 后值不变</p>
+</blockquote>
+<p>思路：找到修改值的汇编代码，用空指令填充</p>
+<p>在教程中，可以很容易的利用 CheatEngine 找到修改数值的代码</p>
+<p><img  src="/_astro/image-20240803002535206.Bg0Z1t14_12rbaQ.webp" alt="image-20240803002535206" width="2019" height="1467" loading="lazy" decoding="async"></p>
+<p>将该指令替换为 <code>nop</code> 即可</p>
+<p><img  src="/_astro/image-20240803002605767.B0kHFLIm_Z1Co6KQ.webp" alt="image-20240803002605767" width="951" height="272" loading="lazy" decoding="async"></p>
+<p>替换结束后，<code>rax</code> 寄存器所指向的内存地址将不再被修改为 <code>edx</code>中的值。此时点击 Change Value 按钮，数值将不再更新</p>
+<p><img  src="/_astro/image-20240803002627982.BsW9oTtQ_2vj85g.webp" alt="image-20240803002627982" width="707" height="203" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>[!tip]</p>
+<p>此处可以使用</p>
+<p><img  src="/_astro/image-20240731145853760.D70NNyez_red0d.webp" alt="image-20240731145853760" width="889" height="814" loading="lazy" decoding="async"></p>
+<p>在自动汇编器中加入以下代码：</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.0niu6.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="assembly"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">[ENABLE]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">//code from here till the end of the code will be used to disable the cheat</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">"Tutorial-x86_64.exe"+2CB88:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">nop</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">nop</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">[DISABLE]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">"Tutorial-x86_64.exe"+2CB88:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">mov [rax],edx</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="[ENABLE]//code from here till the end of the code will be used to disable the cheat&#x22;Tutorial-x86_64.exe&#x22;+2CB88:nopnop[DISABLE]&#x22;Tutorial-x86_64.exe&#x22;+2CB88:mov [rax],edx"><div></div></button></div></figure></div>
+<p>即在 <code>Enanble</code> 时将 <code>2CB88</code> 地址替换为两个 <code>nop</code>，<code>Disable</code> 时同理。
+修改之后将其添加到 Table 中，即可通过选择框快速修改相应代码</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Enable</th><th>Disable</th></tr></thead><tbody><tr><td><img  src="/_astro/image-20240731145947831.B-Upp8bg_ZW7OXJ.webp" alt="image-20240731145947831" width="1106" height="337" loading="lazy" decoding="async"></td><td><img  src="/_astro/image-20240731145923835.wLIVIkyD_1zrKoN.webp" alt="image-20240731145923835" width="1190" height="559" loading="lazy" decoding="async"></td></tr></tbody></table>
+</blockquote>
+<h2 id="第-6-关指针pw098712">第 6 关：指针（PW=098712）</h2>
+<blockquote>
+<p>目标：将值修改为 5000，冻结此值后修改指针，使值不会发生变化。</p>
+</blockquote>
+<p>当点击修改指针后，原本的数值所在的内存位置会发生移动，而对应的指针也会被修改，因此简单的记录这个值所在的内存地址不可行。</p>
+<p>幸好，大多数情况下这种移动都是有迹可寻的。如果一个变量在代码中是静态的，那么它的内存空间是固定不变的。如果这个变量在函数的调用栈中，或者是在运行时被 <code>new</code> 出来的，那么它的地址则会在程序重启，甚至是运行时发生变化。但是程序总是需要找到这些动态的变量，那么此时就会存在一个指针，可能是二级，也可能更多级的指针，指向这个变量。我们可以通过从一个静态的地址出发，通过访问指针来找到所需的地址。</p>
+<blockquote>
+<p>[!tip]</p>
+<p>该过程类似于“间接寻址”</p>
+</blockquote>
+<p>首先还是通过扫描器找到值的地址：</p>
+<p><img  src="/_astro/image-20240803005635229.D6F6QTxj_2tA2TH.webp" alt="image-20240803005635229" width="938" height="519" loading="lazy" decoding="async"></p>
+<p>可以看到，这是一个动态的地址（静态地址在CE中以绿色字体显示）。我们需要找到从静态区域指向它这指针，使用 Cheat Engine 的 Pointer scan 可以偷懒找到这个区域</p>
+<p><img  src="/_astro/image-20240803005842272.BHSWduXl_Z2hAhMo.webp" alt="image-20240803005842272" width="500" height="500" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-20240803005923349.3vIdHxnw_ZMb7hC.webp" alt="image-20240803005923349" width="793" height="416" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-20240803005934630.DXcCP1uK_uThwF.webp" alt="image-20240803005934630" width="499" height="348" loading="lazy" decoding="async"></p>
+<p>在漫长的扫描后，我们可以得到这样的一串指向制定地址的指针：</p>
+<p><img  src="/_astro/image-20240803010025897.IKtG2uRX_ZjUnHd.webp" alt="image-20240803010025897" width="898" height="730" loading="lazy" decoding="async"></p>
+<p>但是这些指针并不都是正确的，我们还需要多扫描几次来找到真正的正确指针。</p>
+<p>点击 Change pointer 更改指针，然后在现有基础上再重新进行一次扫描</p>
+<p><img  src="/_astro/image-20240803010159993.C6EubWuz_1tGf9G.webp" alt="image-20240803010159993" width="864" height="249" loading="lazy" decoding="async"></p>
+<p>更改后值为7，我们在重扫描时使用值扫描7而不是地址扫描</p>
+<p><img  src="/_astro/image-20240803010313192.DDw-RJxe_ZRNYpA.webp" alt="image-20240803010313192" width="1202" height="473" loading="lazy" decoding="async"></p>
+<p>之后我们就拿到了一串更可信的指针</p>
+<p><img  src="/_astro/image-20240803010355006.aM-MVjRw_1j2aRB.webp" alt="image-20240803010355006" width="990" height="963" loading="lazy" decoding="async"></p>
+<p>重复上述过程，有可能还需要重启程序，找到无论进行什么操作都始终正确的指针即可。</p>
+<p>将正确的指针加入 Table 中，修改值为 5000 并进行冻结，即可过关。</p>
+<p><img  src="/_astro/image-20240803010529289.COMbzr-0_21sUhp.webp" alt="image-20240803010529289" width="799" height="47" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>[!tip]</p>
+<p>上述过程也可通过汇编器手动进行。</p>
+<p>方法为：</p>
+<ol>
+<li>通过值扫描器找到值地址</li>
+<li>找到谁修改了这个地址<img  src="/_astro/image-20240803011038286.E-cZCA_D_jcRti.webp" alt="image-20240803011038286" width="563" height="546" loading="lazy" decoding="async"></li>
+<li>分析得知上级地址可能值 <img  src="/_astro/image-20240803011116129.ZIYDUAQB_1YMPDE.webp" alt="image-20240803011116129" width="805" height="466" loading="lazy" decoding="async"></li>
+<li>使用值扫描器寻找地址</li>
+<li>寻找谁访问了这个地址</li>
+<li>重复过程 4 和 5，直到找到静态地址区域</li>
+</ol>
+<p><strong>注意</strong>：过程4中可能有多个地址指向这个目标地址，这些地址不一定都正确</p>
+<p>找到地址后，将基值和偏移值输入 Cheat Engine 即可</p>
+<p><img  src="/_astro/image-20240803011420120.Cn4K852T_29wzGG.webp" alt="image-20240803011420120" width="563" height="447" loading="lazy" decoding="async"></p>
+</blockquote>
+<h2 id="第-7-关代码注入pw013370">第 7 关：代码注入（PW=013370）</h2>
+<p><img  src="/_astro/image-20240803011456099.B8q_oxzu_yiso5.webp" alt="image-20240803011456099" width="840" height="401" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>目标：使每次遭到攻击时，血量+2</p>
+</blockquote>
+<p>先通过值扫描器找到修改这个地址的指令</p>
+<p><img  src="/_astro/image-20240803011619002.BFR08gCK_Zicnnr.webp" alt="image-20240803011619002" width="1685" height="351" loading="lazy" decoding="async"></p>
+<p>可以看到，使血量减少的代码是 <code>sub dword ptr [rsi+000007E0],01</code>，即将 32 位的 rsi+7E0 指向的内存区域的值减1。</p>
+<p><img  src="/_astro/image-20240803011653066.Bd7tNfzY_Z2pKWOU.webp" alt="image-20240803011653066" width="872" height="122" loading="lazy" decoding="async"></p>
+<p>我们将代码修改为减去-2，或者将减法指令替换为加法指令，均可过关。此处将减法指令修改为加法指令</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="assembly"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">add dword ptr [rsi+000007E0],02</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="add dword ptr [rsi+000007E0],02"><div></div></button></div></figure></div>
+<h2 id="第-8-关多级指针pw525927">第 8 关：多级指针（PW=525927）</h2>
+<p>过关方式同第6关，略。</p>
+<p><img  src="/_astro/image-20240803012401773.Bis1AA99_Z2x5Wtc.webp" alt="image-20240803012401773" width="563" height="552" loading="lazy" decoding="async"></p>
+<h2 id="第-9-关共享代码pw31337157">第 9 关：共享代码（PW=31337157）</h2>
+<p><img  src="/_astro/image-20240803122323859.gYmxAT26_Zy5471.webp" alt="image-20240803122323859" width="840" height="447" loading="lazy" decoding="async"></p>
+<blockquote>
+<p>目标：正常情况下，Player1 和 Player2 会输掉这场比赛。</p>
+<p><img  src="/_astro/recording-1722659320801-1.BdKCmP1p_Z2gE3xN.webp" alt="recording" width="840" height="155" loading="lazy" decoding="async"></p>
+<p>不使用冻结，使 Player 所在的队伍赢得比赛。</p>
+</blockquote>
+<p>很容易想到，这关最简单的思路还是锁血，即删除扣除玩家血量的代码。</p>
+<p>首先使用第7关的方式找到修改血量的代码</p>
+<p><img  src="/_astro/image-20240803123252106.CZe7vooQ_21DB5T.webp" alt="image-20240803123252106" width="1063" height="611" loading="lazy" decoding="async"></p>
+<p>首先尝试将 <code>2F</code> 处的代码替换为 <code>nop</code></p>
+<p><img  src="/_astro/image-20240803123348275.D-NdtOJu_U5oe6.webp" alt="image-20240803123348275" width="913" height="230" loading="lazy" decoding="async"></p>
+<p>结果敌人也不扣血，证明敌我双方共用了相同的代码（如下图）</p>
+<p><img  src="/_astro/recording-1722659726163-3.DplfVUvg_2wVmm5.webp" alt="recording" width="945" height="164" loading="lazy" decoding="async"></p>
+<p>这种情况下，为了区分不同的玩家，一定会有其他字段用于区分不同的血量。结合反汇编器的代码上下存在判断代码，我们大胆猜测它的代码中有以下结构体和函数：</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="rust"><code><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">struct</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">Player</span><span style="--0:#E1E4E8;--1:#24292E">{</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">    </span></span><span style="--0:#E1E4E8;--1:#24292E">id</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">i32</span><span style="--0:#E1E4E8;--1:#24292E">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#99A0A6;--1:#616972">// 有可能是 is_cpu: bool</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#99A0A6;--1:#616972">// 甚至有可能是 name: String 或者 name: &#x26;str</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">     </span></span><span style="--0:#E1E4E8;--1:#24292E">health</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">f32</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8;--1:#24292E">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">impl</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">Player</span><span style="--0:#E1E4E8;--1:#24292E">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#F97583;--1:#BF3441">fn</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">attack</span><span style="--0:#E1E4E8;--1:#24292E">(</span><span style="--0:#F97583;--1:#BF3441">&#x26;mut</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">self</span><span style="--0:#E1E4E8;--1:#24292E">, atk</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">f32</span><span style="--0:#E1E4E8;--1:#24292E">){</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#99A0A6;--1:#616972">// unknown code</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#79B8FF;--1:#005CC5">self</span><span style="--0:#F97583;--1:#BF3441">.</span><span style="--0:#E1E4E8;--1:#24292E">health </span><span style="--0:#F97583;--1:#BF3441">-=</span><span style="--0:#E1E4E8;--1:#24292E"> atk;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#F97583;--1:#BF3441">if</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">self</span><span style="--0:#F97583;--1:#BF3441">.</span><span style="--0:#E1E4E8;--1:#24292E">health </span><span style="--0:#F97583;--1:#BF3441">&#x3C;</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">0</span><span style="--0:#E1E4E8;--1:#24292E"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#79B8FF;--1:#005CC5">self</span><span style="--0:#F97583;--1:#BF3441">.</span><span style="--0:#B392F0;--1:#6F42C1">die</span><span style="--0:#E1E4E8;--1:#24292E">();</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">        </span></span><span style="--0:#E1E4E8;--1:#24292E">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#99A0A6;--1:#616972">// somethings else</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">    </span></span><span style="--0:#E1E4E8;--1:#24292E">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8;--1:#24292E">}</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="struct Player{    id: i32,    // 有可能是 is_cpu: bool    // 甚至有可能是 name: String 或者 name: &#x26;str     health: f32}impl Player{    fn attack(&#x26;mut self, atk: f32){        // unknown code        self.health -= atk;        if self.health < 0 {            self.die();        }        // somethings else    }}"><div></div></button></div></figure></div>
+<p>我们的目标就是在扣血之前判断身份，如果是电脑则正常执行扣血指令，否则什么也不做。也就是说我们需要修改添加一个判断语句。</p>
+<p>首先我们寻找如何判定是玩家。如果像是上图的结构，那么玩家的标识一定就在血量旁边，稍微偏移一点就能找到身份标识。</p>
+<p>我们使用 Memory Viewer 中的 `Dissect data/s</p>
+<p><img  src="/_astro/image-20240803125527892.DKljG9Gr_Z1RcBDz.webp" alt="image-20240803125527892" width="680" height="322" loading="lazy" decoding="async"></p>
+<p>将血量的地址填入，结果可以在下面发现了一串字符串可以用于判断。另外这里甚至还有一个字符用来表示字符串的长度。</p>
+<p><img  src="/_astro/image-20240803130333986.BwoNx9Ln_ZN2AhB.webp" alt="image-20240803130333986" width="1464" height="563" loading="lazy" decoding="async"></p>
+<p>道理上，我们可以通过判断字符串来通过此关（如果不追求重启重开的可复现，甚至可以拿偏移 <code>0004</code> 地址的数字做判断）。但是比较字符串比较复杂，我们还是往上找一找有没有简单的判断方式。</p>
+<p>向上偏移 128 位看看有没有可以利用的字段</p>
+<p><img  src="/_astro/image-20240803131816712.Cxq2uJfj_Z1OlpBj.webp" alt="image-20240803131816712" width="899" height="168" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-20240803132148914.Cg4c-Yvi_Z1pecIX.webp" alt="image-20240803132148914" width="1677" height="626" loading="lazy" decoding="async"></p>
+<p>好吧，没找到。那就只能去判断字符串了，如果只是通过此关的话只需要判断第一个字母的 ascii 码即可，但是对于其他游戏可能需要全部判断一次（可以利用C语言标准库）</p>
+<p>在 <code>2F25D</code> 位置，血量的内存被修改。也就是说 <code>rbx+08</code> 位置为血量的内存地址，而再偏移11位，即<code>rbx+19</code> 位置为字符串的首字母。</p>
+<p><img  src="/_astro/image-20240803164957156.CG6HBNyM_H0bOu.webp" alt="image-20240803164957156" width="1063" height="575" loading="lazy" decoding="async"></p>
+<p>明确了判断目标，我们需要一块新内存来存放我们的代码。使用 Tools-Allocate Memory 来申请一块新内存来存放我们的代码。</p>
+<p><img  src="/_astro/image-20240803165335587.uaUIjOvL_Z2g0zwQ.webp" alt="image-20240803165335587" width="500" height="500" loading="lazy" decoding="async"></p>
+<p>在新开辟的内存处输入</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="assembly"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">cmp [rbx+19], 65766144 # Dave 按位表示为 HEX</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">je 02E60010</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">movss [rbx+08], xmm0</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">jmp 10002F262</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="cmp [rbx+19], 65766144 # Dave 按位表示为 HEXje 02E60010movss [rbx+08], xmm0jmp 10002F262"><div></div></button></div></figure></div>
+<p>将原 <code>movss [rbx+08], xmm0</code> 修改为 <code>jmp 02E60000</code>，形成以下代码</p>
+<p><img  src="/_astro/image-20240803170631807.pifVxIXc_ZB98Pn.webp" alt="image-20240803170631807" width="1862" height="509" loading="lazy" decoding="async"></p>
+<p>这样即可过关</p>
+<p><img  src="/_astro/recording-1722676715677-5.DW70rSkh_Z1NMuRK.webp" alt="recording" width="842" height="447" loading="lazy" decoding="async"></p>
+<h3 id="自动汇编">自动汇编</h3>
+<p>一行一行手操汇编太麻烦了？</p>
+<p>其实CheatEngine 提供了自动汇编功能</p>
+<p><img  src="/_astro/image-20240803171935530.BK3NKEIN_2qsQ8n.webp" alt="image-20240803171935530" width="530" height="782" loading="lazy" decoding="async"></p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="assembly"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">[ENABLE]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">//code from here to '[DISABLE]' will be used to enable the cheat</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">alloc(newmem,2048,"Tutorial-x86_64.exe"+2F25D)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">label(returnhere)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">label(originalcode)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">label(exit)</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">newmem:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">cmp [rbx+19], 'Dave'</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">je exit</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">originalcode:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">movss [rbx+08],xmm0</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">exit:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">jmp returnhere</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">"Tutorial-x86_64.exe"+2F25D:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">jmp newmem</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">returnhere:</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">[DISABLE]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">//code from here till the end of the code will be used to disable the cheat</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">dealloc(newmem)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">"Tutorial-x86_64.exe"+2F25D:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">db F3 0F 11 43 08</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">//movss [rbx+08],xmm0</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="[ENABLE]//code from here to &#x27;[DISABLE]&#x27; will be used to enable the cheatalloc(newmem,2048,&#x22;Tutorial-x86_64.exe&#x22;+2F25D)label(returnhere)label(originalcode)label(exit)newmem:cmp [rbx+19], &#x27;Dave&#x27;je exitoriginalcode:movss [rbx+08],xmm0exit:jmp returnhere&#x22;Tutorial-x86_64.exe&#x22;+2F25D:jmp newmemreturnhere:[DISABLE]//code from here till the end of the code will be used to disable the cheatdealloc(newmem)&#x22;Tutorial-x86_64.exe&#x22;+2F25D:db F3 0F 11 43 08//movss [rbx+08],xmm0"><div></div></button></div></figure></div>
+<p><img  src="/_astro/image-20240803172650541.DQfXtLQF_1aaQTs.webp" alt="image-20240803172650541" width="500" height="500" loading="lazy" decoding="async"></p>
+<p>将其加入 Table，即可实现快速修改。</p>
+<p>通过自动汇编，可以使用 label 来进行跳转，不需要纠结 nop 对齐，也不需要考虑跳转的内存地址。CheatEngine 会自动处理这些行为。</p> </div>  </article> <footer class="mt-5">  <p class="flex items-center gap-2"> <span class="inline-flex items-center"> <i class="i-mdi-chevron-double-left icon"></i> <a href="/posts/fun/ce-gtutor">Previous post: ChectEngine（二）：常见用例——以官方图形游戏为例</a> </span> <span class="inline-flex items-center"> <a href="/posts/cp/cf1974">Next post: Codeforces Round 946 (Div. 3) (A-G)</a> <i class="i-mdi-chevron-double-right icon"></i> </span> </p> </footer> <!-- <footer class="mt-5">
+  <p class="mb-2.5">{t('page_number', page.currentPage)} / {t('page_count', page.lastPage)}</p>
+  <p class="flex items-center gap-2">
+    <span class="inline-flex items-center">
+      <i class="i-mdi-chevron-double-left icon"></i>
+      {page.url.prev ? <a href={page.url.prev}> {t('prev')} </a> : <span>{t('prev')}</span>}
+    </span>
+
+    <span class="inline-flex items-center">
+      {page.url.next ? <a href={page.url.next}>{t('next')}</a> : <span>{t('next')}</span>}
+      <i class="i-mdi-chevron-double-right icon"></i>
+    </span>
+  </p>
+</footer> -->  <div py-16> <giscus-widget id="comments" repo="mslxl/mslxl.github.io" repoId="MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=" category="Show and tell" categoryId="DIC_kwDOB5IIzs4CfW4f" mapping="title" strict="0" reactionsEnabled="1" emitMetadata="1" inputPosition="top" theme="light" lang="zh-CN" loading="lazy"></giscus-widget>  </div>  <div class="p-10"> <div> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter"> <p class="text-sm text-gray-500 text-center">统计自 2024 年 9 月</p> </div> </div> </main> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="lg:hidden p-7.5"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div>  </body></html>  

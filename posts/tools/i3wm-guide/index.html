@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"> <head><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><title>i3 User's Guide 操作篇</title><meta charset="utf-8"><link rel="canonical" href="https://blog.mslxl.com/posts/tools/i3wm-guide/"><meta name="description" content="My story of discovering"><meta name="robots" content="index, follow"><meta property="og:title" content="i3 User's Guide 操作篇"><meta property="og:type" content="article"><meta property="og:image" content="https://blog.mslxl.com/placeholder.png"><meta property="og:url" content="https://blog.mslxl.com"><link rel="icon" href="/favicon.jpg" type="image/jpg"><meta name="twitter:image:src" content="https://blog.mslxl.com/placeholder.png"><meta name="twitter:image:alt" content="My story of discovering"><meta name="twitter:creator"><meta name="twitter:site"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="i3 User's Guide 操作篇"><meta name="twitter:description" content="My story of discovering"><link rel="stylesheet" href="/_astro/index.DJturBb8.css">
+<link rel="stylesheet" href="/_astro/index.irxhXuQK.css">
+<style>.code-container{position:relative}.clipboard-copy{position:absolute;top:.5rem;right:.5rem;width:1.75rem;height:1.75rem;display:flex;justify-content:center;align-items:center;border-radius:.25rem}.clipboard-copy:hover{background-color:#30363d}
+</style><script type="module" src="/_astro/hoisted.zpUdL6BH.js"></script>
+<script type="module" src="/_astro/page.CPvyyiTs.js"></script></head> <body>  <div un-max-lg="animate-fadein-down" un-lg="flex flex-row-reverse justify-between gap-4 px-8 mx-auto max-w-6xl" class="container contain-layout m-a"> <div un-lg="sticky top-0 h-screen py-20 animate-fadein-left gap-8" un-lg:flex="~ col justify-between items-start gap-4" class="p-7.5"> <header un-lg="grow-1 justify-between items-start" un-flex="~ col gap-2.5" class="text-center"> <hgroup un-hover:lg="bg-foreground color-background pt-3.75 pb-8.75 " un-lg=" write-vertical-right items-start px-2.5 pb-12 b-l-2px b-l-foreground-solid text-left" un-flex="~ col gap-2.5" class="cursor-pointer transition-[padding,background] duration-800 ease-in-out"> <a class="normal" href="/"> <h3 class="text-5 font-extrabold font-serif">Mslxl</h3> <h1 class="text-8 font-extrabold font-serif">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" un-flex="~ col gap-2"> <ul un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center"> <li> <a href="/posts/page/1">Posts</a> </li><li> <a href="/archive">Archive</a> </li><li> <a href="/categories">Categories</a> </li><li> <a href="/tomodachi">Friends</a> </li><li> <a href="/about">About</a> </li> </ul> <ul un-flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl" target="_blank" title="github" class="icon i-mdi-github"></a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="icon i-mdi-rss"></a> </li> </ul> </nav> </header> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="max-lg:hidden"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div> <main un-lg="py-20 min-w-3xl animate-fadein-down" class="p-7.5">  <article class="heti"> <header> <h1 class="post-title!"> <a href="/posts/tools/i3wm-guide/">i3 User&#39;s Guide 操作篇</a> </h1> <div class="mt-2 text-3.5"> <span>Posted at</span> <time>2018-08-23</time> <a class="ml-2.5" href="/categories/yi">
+# 译 </a><a class="ml-2.5" href="/categories/i3wm">
+# i3wm </a><a class="ml-2.5" href="/categories/Linux">
+# Linux </a> </div> </header>  <div class="pt-8"> <p><a href="https://i3wm.org/docs/userguide.html">原页面</a></p>
+<p>该文档包含了配置和使用 i3 的所有信息。如果没有您所需要的信息，请先检查<a href="https://www.reddit.com/r/i3wm/"></a><a href="https://www.reddit.com/r/i3wm/">https://www.reddit.com/r/i3wm/</a> 是否已包含您所需要的内容，然后再通过 IRC （推荐）或者电子邮件咨询。</p>
+<h2 id="1默认键位">1.默认键位</h2>
+<p>这是为那些“太长，不读”的用户准备的默认键位的一览</p>
+<p><em>按下 $mod 键 ( Alt 键 )</em></p>
+<p><img  src="/_astro/keyboard-layer1.DZneEzye_ZEAQDn.webp" alt="keyboard-layer1" width="900" height="300" loading="lazy" decoding="async"></p>
+<p><em>按下 Shift + $mod 键</em></p>
+<p><img  src="/_astro/keyboard-layer2.DHC0ullq_JJiUo.webp" alt="keyboard-layer2" width="900" height="300" loading="lazy" decoding="async"></p>
+<p>注意在启动 i3 时如果没有配置文件，i3-config-wizard 将会为你提供一份像上图一样的键位，不管你使用什么键盘布局，如果你想使用自己的配置文件，那么只需要取消掉 i3-config-wizard 的提示，然后配置 <code>/etc/i3/config</code>。</p>
+<h2 id="2-使用-i3">2. 使用 i3</h2>
+<p>整篇导航中的 <code>$mod</code> 都指的是配置文件中配置的修饰键。默认是 Alt 键 (<code>Mod1</code>)，不过 Windows 键 (<code>Mod4</code>) 也是一个十分流行的<code>$mod</code>键，可以有效的防止与应用程序之间的快捷键发生冲突。</p>
+<h3 id="21-打开终端并四处移动">2.1. 打开终端并四处移动</h3>
+<p>打开一个新终端窗口是非常基础的操作，默认快捷键下为 <code>$mod + Enter</code>，也就是说在使用默认配置文件时的 <code>Mod1 + Enter</code>，通过按下 <code>$mod + Enter</code> 打开一个新终端，他将会占据屏幕上所有可用空间。</p>
+<p><img  src="/_astro/single_terminal.Dgj0gjWW_Z1fHIsc.webp" alt="POI" width="400" height="200" loading="lazy" decoding="async"></p>
+<p>如果再打开另一个终端，i3 会把它放到当前窗口之后，把屏幕一分为二，分割方向依赖于显示器，I3 将创建的窗口放在现有窗口旁（在宽显示器上）或现有窗口之下（旋转显示）。</p>
+<p><img  src="/_astro/two_terminals.RXDK_Yft_1sGYBp.webp" alt="Nanodesu" width="400" height="200" loading="lazy" decoding="async"></p>
+<p>你可以使用像 <code>vi</code> 上的方式移动焦点，但是在 i3 中你需要按住 <code>$mod</code> 键再按这些按键（在<code>vi</code>中，这些按键为了兼容大多数键盘布局都被向左移动了一个键）。因此，<code>$mod + j</code>是向左，<code>$mod + k</code> 是向下，<code>$mod + l</code>是向上，<code>$mod + ;</code>是向右，所以，在两个终端之前切换只需要 <code>$mod + k</code> 和 <code>$mod + l</code>，当然，你也可以使用方向键。</p>
+<p>此时，你包含两个终端的工作空间是被指定的方向分割的（默认为横向），每个窗口都可以像工作空间一样重新横向或纵向分割。术语是 “window”，用于包含 X11 窗口（如终端或浏览器）的容器，以及“split container” 用于由一个或多个窗口组成的容器。</p>
+<blockquote>
+<p>TODO: picture of the tree</p>
+<p>原文中就是 TODO 我也很绝望啊</p>
+</blockquote>
+<p>要垂直分割窗口，请在创建新窗口之前按 <code>$mod+v</code>。要水平拆分，按 <code>$mod+h</code>。</p>
+<h3 id="22-改变容器布局">2.2. 改变容器布局</h3>
+<p>split container 可以有一下几种布局：</p>
+<ul>
+<li>splith/splitv
+<ul>
+<li>相同容器内的每个窗口获得相等的空间</li>
+<li>splith ：横向布局</li>
+<li>splitv ：纵向布局</li>
+</ul>
+</li>
+<li>stacking：堆叠
+<ul>
+<li>只显示容器内具有焦点的窗口，在容器的顶部会显示所有窗口的列表</li>
+</ul>
+</li>
+<li>tabbed：选项卡
+<ul>
+<li>与 stacking 相同，但是容器顶部的窗口列表是横向显示</li>
+</ul>
+</li>
+</ul>
+<p>使用 <code>$mod + e</code> 切换 splith 和 splitv 模式，按<code>$mod + s</code> 切换到 stacking 模式，按 <code>$mod + w</code> 切换到 tabbed 模式</p>
+<p><img  src="/_astro/modes.DOM3xG4G_PJ2yx.webp" alt="up white ze smart voice" width="600" height="200" loading="lazy" decoding="async"></p>
+<h3 id="23-窗口全屏">2.3. 窗口全屏</h3>
+<p>对当前窗口开关全屏模式，请按 <code>$mod+f</code> 键。</p>
+<p>在 I3 中还有一个全局全屏模式，命令为 <code>fullscreen toggle global</code></p>
+<h3 id="24-打开其他应用程序">2.4. 打开其他应用程序</h3>
+<p>除了打开终端外，默认也可以按 <code>$mod + d</code> 来打开 <code>dmenu</code> 的菜单。只需要键入你要打开的程序名称就可以打开该应用。<code>dmenu</code> 将在  <code>$PATH</code> 中寻找应用程序。</p>
+<p>此外，如果您的应用程序非常频繁地打开，则可以创建用于直接启动应用程序的键绑定。详情请参阅章节 <a href="https://i3wm.org/docs/userguide.html#configuring">配置</a>。</p>
+<h3 id="25-关闭窗口">2.5. 关闭窗口</h3>
+<p>如果一个应用程序不提供关闭机制（大多数应用提供一个菜单或者像是 <code>Control + w </code> 的快捷键），你可以按 <code>$mod + Shift + q</code> 来关闭窗口。对于支持 WM_DELETE 协议的应用程序，这将正确地关闭应用程序（保存或执行其他清理操作）。如果应用程序不支持 WM_DELETE 协议，则 X 服务器将关闭窗口，并且之后的行为取决于应用程序。</p>
+<h3 id="26-使用工作空间">2.6. 使用工作空间</h3>
+<p>工作空间是一个可以把窗口组合起来的简单方式。默认情况下你位于第一工作空间，在左下角的指示条上会显示。若要切换到其他工作空间，请按 <code>$mod + num</code>，<code>num</code>是要打开的工作空间的序号，如果这个工作空间不存在将会被创建。</p>
+<h3 id="27-在工作空间中移动窗口">2.7. 在工作空间中移动窗口</h3>
+<p>要将窗口移动到另一个工作区，只需按 <code>$mod+Shift+num</code>，其中 <code>num</code> 是目标工作区的序号。和切换工作空间相似，目标工作空间如果不存在将会被创建。</p>
+<h3 id="28-调整大小">2.8. 调整大小</h3>
+<p>调整容器大小的最最最简单方法是使用鼠标：拖住边框并将其移动到所需大小。</p>
+<p>你也可以使用 <a href="https://i3wm.org/docs/userguide.html#binding_modes">模式绑定</a>来定义一个模式，以供使用键盘移动和调整大小。举个栗子，由 i3 提供的<a href="https://github.com/i3/i3/blob/next/etc/config.keycodes">默认配置</a></p>
+<h3 id="29-重启-i3">2.9. 重启 i3</h3>
+<p>如果你遇到了什么 bug 或者要升级高版本，没有必要重启电脑，只需要<code>$mod + Shift + r</code>。</p>
+<h3 id="210-退出-i3">2.10. 退出 i3</h3>
+<p>使用 <code>$mod + Shift + e</code>可以不关闭 X 服务退出 i3。默认会有一个弹窗来讯问你是否退出。</p>
+<h3 id="211-浮动模式">2.11. 浮动模式</h3>
+<p>浮动模式和平铺模式是两个截然相反的模式。窗口的位置和大小不是由 i3 自动管理，而是由您手动管理。使用此模式违反了平铺标准，但对于某些特殊情况（如 “另存为” 对话框窗口或工具栏窗口（GIMP 等））非常有用。这些窗口通常设置适当的提示，默认情况下以浮动模式打开。</p>
+<p>你可以通过 <code>$mod + Shift + Space</code> 来开关浮动模式。使用你的鼠标拖动窗口的标题可以任意移动该窗口。拖动窗口边框可以重设大小。你也可以使用 <a href="https://i3wm.org/docs/userguide.html#floating_modifier">floating_modifier</a>。右键标题并拖动也是调整窗口大小的另一种方式。</p>
+<p>使用键盘在浮动模式调整窗口大小可以参见 <a href="https://github.com/i3/i3/blob/next/etc/config.keycodes">i3 默认配置</a></p>
+<p>浮动窗口始终位于平铺窗口上。</p> </div>  </article> <footer class="mt-5">  <p class="flex items-center gap-2"> <span class="inline-flex items-center"> <i class="i-mdi-chevron-double-left icon"></i> <a href="/posts/tools/i3wm-tree">Previous post: i3 User&#39;s Guide 进阶操作篇（对应第 3 节）</a> </span> <span class="inline-flex items-center"> <a href="/posts/others/nogamenolifezero">Next post: No Game No Life Zero</a> <i class="i-mdi-chevron-double-right icon"></i> </span> </p> </footer> <!-- <footer class="mt-5">
+  <p class="mb-2.5">{t('page_number', page.currentPage)} / {t('page_count', page.lastPage)}</p>
+  <p class="flex items-center gap-2">
+    <span class="inline-flex items-center">
+      <i class="i-mdi-chevron-double-left icon"></i>
+      {page.url.prev ? <a href={page.url.prev}> {t('prev')} </a> : <span>{t('prev')}</span>}
+    </span>
+
+    <span class="inline-flex items-center">
+      {page.url.next ? <a href={page.url.next}>{t('next')}</a> : <span>{t('next')}</span>}
+      <i class="i-mdi-chevron-double-right icon"></i>
+    </span>
+  </p>
+</footer> -->  <div py-16> <giscus-widget id="comments" repo="mslxl/mslxl.github.io" repoId="MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=" category="Show and tell" categoryId="DIC_kwDOB5IIzs4CfW4f" mapping="title" strict="0" reactionsEnabled="1" emitMetadata="1" inputPosition="top" theme="light" lang="zh-CN" loading="lazy"></giscus-widget>  </div>  <div class="p-10"> <div> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter"> <p class="text-sm text-gray-500 text-center">统计自 2024 年 9 月</p> </div> </div> </main> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="lg:hidden p-7.5"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div>  </body></html>  

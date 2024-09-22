@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"> <head><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><title>编译原理：绪论 —— 词法分析</title><meta charset="utf-8"><link rel="canonical" href="https://blog.mslxl.com/posts/others/n2/"><meta name="description" content="My story of discovering"><meta name="robots" content="index, follow"><meta property="og:title" content="编译原理：绪论 —— 词法分析"><meta property="og:type" content="article"><meta property="og:image" content="https://blog.mslxl.com/placeholder.png"><meta property="og:url" content="https://blog.mslxl.com"><link rel="icon" href="/favicon.jpg" type="image/jpg"><meta name="twitter:image:src" content="https://blog.mslxl.com/placeholder.png"><meta name="twitter:image:alt" content="My story of discovering"><meta name="twitter:creator"><meta name="twitter:site"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="编译原理：绪论 —— 词法分析"><meta name="twitter:description" content="My story of discovering"><link rel="stylesheet" href="/_astro/index.DJturBb8.css">
+<link rel="stylesheet" href="/_astro/index.irxhXuQK.css">
+<style>.code-container{position:relative}.clipboard-copy{position:absolute;top:.5rem;right:.5rem;width:1.75rem;height:1.75rem;display:flex;justify-content:center;align-items:center;border-radius:.25rem}.clipboard-copy:hover{background-color:#30363d}
+</style><script type="module" src="/_astro/hoisted.zpUdL6BH.js"></script>
+<script type="module" src="/_astro/page.CPvyyiTs.js"></script></head> <body>  <div un-max-lg="animate-fadein-down" un-lg="flex flex-row-reverse justify-between gap-4 px-8 mx-auto max-w-6xl" class="container contain-layout m-a"> <div un-lg="sticky top-0 h-screen py-20 animate-fadein-left gap-8" un-lg:flex="~ col justify-between items-start gap-4" class="p-7.5"> <header un-lg="grow-1 justify-between items-start" un-flex="~ col gap-2.5" class="text-center"> <hgroup un-hover:lg="bg-foreground color-background pt-3.75 pb-8.75 " un-lg=" write-vertical-right items-start px-2.5 pb-12 b-l-2px b-l-foreground-solid text-left" un-flex="~ col gap-2.5" class="cursor-pointer transition-[padding,background] duration-800 ease-in-out"> <a class="normal" href="/"> <h3 class="text-5 font-extrabold font-serif">Mslxl</h3> <h1 class="text-8 font-extrabold font-serif">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" un-flex="~ col gap-2"> <ul un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center"> <li> <a href="/posts/page/1">Posts</a> </li><li> <a href="/archive">Archive</a> </li><li> <a href="/categories">Categories</a> </li><li> <a href="/tomodachi">Friends</a> </li><li> <a href="/about">About</a> </li> </ul> <ul un-flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl" target="_blank" title="github" class="icon i-mdi-github"></a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="icon i-mdi-rss"></a> </li> </ul> </nav> </header> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="max-lg:hidden"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div> <main un-lg="py-20 min-w-3xl animate-fadein-down" class="p-7.5">  <article class="heti"> <header> <h1 class="post-title!"> <a href="/posts/others/n2/">编译原理：绪论 —— 词法分析</a> </h1> <div class="mt-2 text-3.5"> <span>Posted at</span> <time>2018-06-24</time> <a class="ml-2.5" href="/categories/Compiler">
+# Compiler </a> </div> </header>  <div class="pt-8"> <h2 id="词法分析-scanning">词法分析 (Scanning)</h2>
+<p>词法分析是编译的第一个阶段。词法分析器的主要任务是从左向右逐行扫描 (Scanning) 源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元 (token) 形式。</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.0niu6.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">token: &#x3C;种别码,属性值></span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="token: <种别码,属性值>"><div></div></button></div></figure></div>
+<p>token 是一个二元组，其中第一个分量种别码用来表示单词的种别，就比如人说的自然语言中都有词性,程序设计语言也有这些东西，他们大体可分为五类:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center"></th><th align="center">单词类型</th><th align="center">种别</th><th align="center">种别码</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">关键字</td><td align="center">program、if、else、then、…</td><td align="center">一词一码</td></tr><tr><td align="center">2</td><td align="center">标识符</td><td align="center">变量名、数组名、记录名、过程名、…</td><td align="center">多词一码</td></tr><tr><td align="center">3</td><td align="center">常量</td><td align="center">整型、浮点型、字符型、布尔型、…</td><td align="center">一型一码</td></tr><tr><td align="center">4</td><td align="center">运算符</td><td align="center">算术 (+ - * / ++ —）<br>关系 ( > &#x3C; == != >= &#x3C;= ) <br> 逻辑 (&#x26;</td><td align="center">~ )</td></tr><tr><td align="center">5</td><td align="center">界限符</td><td align="center">; ( ) = { } …</td><td align="center">一词一码</td></tr></tbody></table>
+<p>在 <em>1</em> 中，因为我们每个关键字都是确定的，所以我们为每一个关键字分配一个种别码，也就是一词一码。</p>
+<p><em>2</em> 是标识符，他是程序员在编程中为对象等起的名字，由于标识符是一个开放的集合，我们在事先并不能确认到底有那些标识符，因此我们将所有的标识符都作为一个单词并分配同一个种别码，也就是多词一码，为了区分每个标识符，我们使用 token 的第二个分量属性值来储存不同标识符具体的字面值</p>
+<p><em>3</em> 是常量，常量与标识符类似，也是一个开放型集合，但是不同类型的常量他们的构成类型是不同的，因此我们可以给每个不同类型的常量分配一个种别码，也就是也就是一型一码，为了区分不同的常量，我们也是使用 token 的第二个分量来存放每个常量具体的值</p>
+<p><em>4</em> 和 <em>5</em> 与 <em>1</em> 类似，他们都是可以事先可以确定的，所以我们可以为每一个运算符和界限符分配一个种别码，也就是一词一码，当然我们也可以为每一个运算符分配一个种别码，为了区分他们具体的区别，同样我们也要使用 token 的第二个分量</p>
+<h3 id="example">Example</h3>
+<p>根据以上的分配原则，我们可以看一个例子</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">while</span><span style="--0:#E1E4E8;--1:#24292E"> (value </span><span style="--0:#F97583;--1:#BF3441">!=</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">100</span><span style="--0:#E1E4E8;--1:#24292E">){</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">  </span></span><span style="--0:#E1E4E8;--1:#24292E">num</span><span style="--0:#F97583;--1:#BF3441">++</span><span style="--0:#E1E4E8;--1:#24292E">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8;--1:#24292E">}</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="while (value != 100){  num++;}"><div></div></button></div></figure></div>
+<p>对以上代码进行分析，我们可以得到这样的一个 token 序列</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center"></th><th align="center">Code</th><th align="center">Token</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">while</td><td align="center">WHILE,-</td></tr><tr><td align="center">2</td><td align="center">(</td><td align="center">SLP,-</td></tr><tr><td align="center">3</td><td align="center">value</td><td align="center">IDN,value</td></tr><tr><td align="center">4</td><td align="center">!=</td><td align="center">NE,-</td></tr><tr><td align="center">5</td><td align="center">100</td><td align="center">CONST,100</td></tr><tr><td align="center">6</td><td align="center">)</td><td align="center">SPR,-</td></tr><tr><td align="center">7</td><td align="center">{</td><td align="center">LP,-</td></tr><tr><td align="center">8</td><td align="center">num</td><td align="center">IDN,num</td></tr><tr><td align="center">9</td><td align="center">++</td><td align="center">INC,-</td></tr><tr><td align="center">10</td><td align="center">;</td><td align="center">SEMI,-</td></tr><tr><td align="center">11</td><td align="center">}</td><td align="center">RP,-</td></tr></tbody></table>
+<p>种别码本身应该是一个整数，在这里为了直观起见，我们采取了宏定义的形式。</p>
+<p>我们先来看 <em>1</em> ，<code>while</code> 是一个关键字，因此我们采取一词一码，我们可以直接将他区分开，因此他的第二个分量是空的</p>
+<p>与 <em>1</em> 同样的道理 <code>(</code>、<code>!=</code>、<code>)</code>、<code>{</code>、<code>++</code>、<code>}</code>、<code>;</code> 我们都可以直接将他们区分，因此他们的属性值都是空的</p>
+<p>在 <em>3</em> 和 <em>8</em> 中，<code>value</code> 和 <code>num</code> 都是标识符，因此他们的种别码都是 <code>IDN (IDentifier)</code>,他们的第二个分量用来存放他们的字面值。</p>
+<p><em>5</em> <code>100</code> 是一个常量，那么属性值就是 100 本身。</p>
+<p>THE END</p>
+<hr>
+<pre class="mermaid">graph TD
+	Start-- 字符流 -->词法分析器
+	词法分析器-- 词法字节流 -->语法分析器
+	语法分析器-- 语法树 -->语义分析器
+	语义分析器-- 语法树 -->中间代码生成器
+	中间代码生成器-- 中间表示形式 -->机器无关代码优化器
+	机器无关代码优化器-- 中间表示形式 -->目标代码生成器
+	目标代码生成器-- 目标机器语言 -->机器相关代码优化器
+	机器相关代码优化器-- 目标机器语言 -->Fin
+</pre> </div>  </article> <footer class="mt-5">  <p class="flex items-center gap-2"> <span class="inline-flex items-center"> <i class="i-mdi-chevron-double-left icon"></i> <a href="/posts/others/n1">Previous post: 编译原理：绪论</a> </span>  </p> </footer> <!-- <footer class="mt-5">
+  <p class="mb-2.5">{t('page_number', page.currentPage)} / {t('page_count', page.lastPage)}</p>
+  <p class="flex items-center gap-2">
+    <span class="inline-flex items-center">
+      <i class="i-mdi-chevron-double-left icon"></i>
+      {page.url.prev ? <a href={page.url.prev}> {t('prev')} </a> : <span>{t('prev')}</span>}
+    </span>
+
+    <span class="inline-flex items-center">
+      {page.url.next ? <a href={page.url.next}>{t('next')}</a> : <span>{t('next')}</span>}
+      <i class="i-mdi-chevron-double-right icon"></i>
+    </span>
+  </p>
+</footer> -->  <div py-16> <giscus-widget id="comments" repo="mslxl/mslxl.github.io" repoId="MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=" category="Show and tell" categoryId="DIC_kwDOB5IIzs4CfW4f" mapping="title" strict="0" reactionsEnabled="1" emitMetadata="1" inputPosition="top" theme="light" lang="zh-CN" loading="lazy"></giscus-widget>  </div>  <div class="p-10"> <div> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter"> <p class="text-sm text-gray-500 text-center">统计自 2024 年 9 月</p> </div> </div> </main> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="lg:hidden p-7.5"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div>  </body></html>  

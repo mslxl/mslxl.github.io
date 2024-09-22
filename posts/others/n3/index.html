@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"> <head><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><title>编译原理：绪论 —— 语法分析</title><meta charset="utf-8"><link rel="canonical" href="https://blog.mslxl.com/posts/others/n3/"><meta name="description" content="My story of discovering"><meta name="robots" content="index, follow"><meta property="og:title" content="编译原理：绪论 —— 语法分析"><meta property="og:type" content="article"><meta property="og:image" content="https://blog.mslxl.com/placeholder.png"><meta property="og:url" content="https://blog.mslxl.com"><link rel="icon" href="/favicon.jpg" type="image/jpg"><meta name="twitter:image:src" content="https://blog.mslxl.com/placeholder.png"><meta name="twitter:image:alt" content="My story of discovering"><meta name="twitter:creator"><meta name="twitter:site"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="编译原理：绪论 —— 语法分析"><meta name="twitter:description" content="My story of discovering"><link rel="stylesheet" href="/_astro/index.DJturBb8.css">
+<link rel="stylesheet" href="/_astro/index.irxhXuQK.css">
+<style>.code-container{position:relative}.clipboard-copy{position:absolute;top:.5rem;right:.5rem;width:1.75rem;height:1.75rem;display:flex;justify-content:center;align-items:center;border-radius:.25rem}.clipboard-copy:hover{background-color:#30363d}
+</style><script type="module" src="/_astro/hoisted.zpUdL6BH.js"></script>
+<script type="module" src="/_astro/page.CPvyyiTs.js"></script></head> <body>  <div un-max-lg="animate-fadein-down" un-lg="flex flex-row-reverse justify-between gap-4 px-8 mx-auto max-w-6xl" class="container contain-layout m-a"> <div un-lg="sticky top-0 h-screen py-20 animate-fadein-left gap-8" un-lg:flex="~ col justify-between items-start gap-4" class="p-7.5"> <header un-lg="grow-1 justify-between items-start" un-flex="~ col gap-2.5" class="text-center"> <hgroup un-hover:lg="bg-foreground color-background pt-3.75 pb-8.75 " un-lg=" write-vertical-right items-start px-2.5 pb-12 b-l-2px b-l-foreground-solid text-left" un-flex="~ col gap-2.5" class="cursor-pointer transition-[padding,background] duration-800 ease-in-out"> <a class="normal" href="/"> <h3 class="text-5 font-extrabold font-serif">Mslxl</h3> <h1 class="text-8 font-extrabold font-serif">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" un-flex="~ col gap-2"> <ul un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center"> <li> <a href="/posts/page/1">Posts</a> </li><li> <a href="/archive">Archive</a> </li><li> <a href="/categories">Categories</a> </li><li> <a href="/tomodachi">Friends</a> </li><li> <a href="/about">About</a> </li> </ul> <ul un-flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl" target="_blank" title="github" class="icon i-mdi-github"></a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="icon i-mdi-rss"></a> </li> </ul> </nav> </header> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="max-lg:hidden"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div> <main un-lg="py-20 min-w-3xl animate-fadein-down" class="p-7.5">  <article class="heti"> <header> <h1 class="post-title!"> <a href="/posts/others/n3/">编译原理：绪论 —— 语法分析</a> </h1> <div class="mt-2 text-3.5"> <span>Posted at</span> <time>2018-06-25</time> <a class="ml-2.5" href="/categories/Compiler">
+# Compiler </a> </div> </header>  <div class="pt-8"> <h2 id="语法分析-parsing">语法分析 (Parsing)</h2>
+<p>语法分析是编译的第二个阶段，它的主要任务是从词法分析器输出的 <code>Token序列中</code> <strong>识别出各类短语</strong>，并<strong>构造语法分析树 （parse tree）</strong>，语法分析树描述了句子的语法结构。</p>
+<h3 id="example-1">Example 1</h3>
+<p>先来看一个赋值语句的分析</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.0niu6.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#E1E4E8;--1:#24292E">position </span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E"> initial </span><span style="--0:#F97583;--1:#BF3441">+</span><span style="--0:#E1E4E8;--1:#24292E"> rate </span><span style="--0:#F97583;--1:#BF3441">*</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">60</span><span style="--0:#E1E4E8;--1:#24292E">;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="position = initial + rate * 60;"><div></div></button></div></figure></div>
+<p>经过词法扫描后会得到这样的一个 Token 序列:</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">&#x3C;id,position> &#x3C;=> &#x3C;id,initial> &#x3C;+> &#x3C;id,rate> &#x3C;*> &#x3C;num,60> &#x3C;;></span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="<id,position> <=> <id,initial> <+> <id,rate> <*> <num,60> <;>"><div></div></button></div></figure></div>
+<p>它对应的分析树应该就是这样的:</p>
+<pre class="mermaid">graph TD
+	赋值语句---A["标识符 (position)"]
+	赋值语句---B["="]
+	赋值语句---C["表达式"]
+	赋值语句---D[";"]
+	C---E["表达式"]
+	C---F["+"]
+	C---G["表达式"]
+	E---H["标识符 (rate)"]
+	G---I["数字 (60) "]
+</pre>
+<p>从中我们可以看出，一个标识符，或者一个常数本身，都可以构成一个表达式，一个表达式加上另一个表达式，或者一个表达式乘上另一个表达式，都可以构成更大的表达式，一个标识符，连接上一个表达式，再连接一个表达式，最后跟上一个分号，可以构成一条赋值语句。</p>
+<h3 id="example-2变量声明语句的分析树">Example 2：变量声明语句的分析树</h3>
+<p>首先我们先来看变量声明语法分析树的文法：</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">&#x3C;D> → &#x3C;T> &#x3C;IDS> ;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">&#x3C;T> → int | real | char | bool</span></div></div><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">&#x3C;IDS> → id | &#x3C;IDS> , id</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="<D> → <T> <IDS> ;<T> → int | real | char | bool<IDS> → id | <IDS> , id"><div></div></button></div></figure></div>
+<p>这里的<code>&#x3C;D></code>是英文单词 <em>declaration</em> 的首字母，表示声明语句，<code>&#x3C;T></code> 是英文单词 <em>type</em> 的首字母，表示类型，<code>&#x3C;IDS></code>则是英文单词 <em>Identifier sequence</em> 的首字母，表示标识符序列。</p>
+<p>从中我们可以看出，一个声明语句 <code>&#x3C;D></code> 是由一个类型 <code>&#x3C;T></code> 连接上一个标识符序列 <code>&#x3C;IDS></code> 和一个分号构成。</p>
+<p>第二行则表示这里的 <code>&#x3C;T></code> 可以是 <code>int</code>，可以是 <code>real</code>，或者 <code>char</code>、<code>bool</code>，这里的竖线 <code>|</code> 表示的是<strong>或</strong>关系。</p>
+<p>根据第三行规则可以看出，一个标识符 <code>id</code> 本身可以构成一个标识符序列 <code>&#x3C;IDS></code>，或者一个标识符序列 <code>&#x3C;IDS></code> 连接上一个 <code>,</code> 和一个标识符 <code>id</code> 可以构成一个更大的标识符序列 <code>&#x3C;IDS></code>。</p>
+<p>根据这个文法，假如说我们输入了这样的一个声明语句:</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">int</span><span style="--0:#E1E4E8;--1:#24292E"> a,b,c;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int a,b,c;"><div></div></button></div></figure></div>
+<p>那么它的语法分析树就是这样的</p>
+<pre class="mermaid">graph TD
+	A["&#x3C; D >"] ---  B["&#x3C; T >"]
+	B---int
+	A---C["&#x3C; IDS >"]
+	C---D["&#x3C; IDS >"]
+	C---E[","]
+	C---G["id (c)"]
+	A---F[";"]
+	D---H["&#x3C; IDS >"]
+	D---J[","]
+	D---K["id (b)"]
+	H---L["id (a)"]
+</pre>
+<p>从中我们可以发现，一个 <code>id (a)</code> 本身可以构成一个 <code>&#x3C;IDS></code>，
+一个 <code>&#x3C;IDS></code> 连接上 <code>,</code> 和 <code>id (b)</code> 又可以构成一个更大的 <code>&#x3C;IDS></code>,一个类型 <code>&#x3C;T></code> 连接这个 <code>&#x3C;IDS></code> 和 <code>;</code> 就构成了声明语句 <code>&#x3C;D></code></p>
+<hr>
+<pre class="mermaid">graph TD
+	Start-- 字符流 -->词法分析器
+	词法分析器-- 词法字节流 -->语法分析器
+	语法分析器-- 语法树 -->语义分析器
+	语义分析器-- 语法树 -->中间代码生成器
+	中间代码生成器-- 中间表示形式 -->机器无关代码优化器
+	机器无关代码优化器-- 中间表示形式 -->目标代码生成器
+	目标代码生成器-- 目标机器语言 -->机器相关代码优化器
+	机器相关代码优化器-- 目标机器语言 -->Fin
+</pre> </div>  </article> <footer class="mt-5">  <p class="flex items-center gap-2"> <span class="inline-flex items-center"> <i class="i-mdi-chevron-double-left icon"></i> <a href="/posts/others/n4">Previous post: 编译原理：绪论 —— 语义分析</a> </span> <span class="inline-flex items-center"> <a href="/posts/others/n1">Next post: 编译原理：绪论</a> <i class="i-mdi-chevron-double-right icon"></i> </span> </p> </footer> <!-- <footer class="mt-5">
+  <p class="mb-2.5">{t('page_number', page.currentPage)} / {t('page_count', page.lastPage)}</p>
+  <p class="flex items-center gap-2">
+    <span class="inline-flex items-center">
+      <i class="i-mdi-chevron-double-left icon"></i>
+      {page.url.prev ? <a href={page.url.prev}> {t('prev')} </a> : <span>{t('prev')}</span>}
+    </span>
+
+    <span class="inline-flex items-center">
+      {page.url.next ? <a href={page.url.next}>{t('next')}</a> : <span>{t('next')}</span>}
+      <i class="i-mdi-chevron-double-right icon"></i>
+    </span>
+  </p>
+</footer> -->  <div py-16> <giscus-widget id="comments" repo="mslxl/mslxl.github.io" repoId="MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=" category="Show and tell" categoryId="DIC_kwDOB5IIzs4CfW4f" mapping="title" strict="0" reactionsEnabled="1" emitMetadata="1" inputPosition="top" theme="light" lang="zh-CN" loading="lazy"></giscus-widget>  </div>  <div class="p-10"> <div> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter"> <p class="text-sm text-gray-500 text-center">统计自 2024 年 9 月</p> </div> </div> </main> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="lg:hidden p-7.5"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div>  </body></html>  

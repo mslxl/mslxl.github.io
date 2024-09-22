@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en"> <head><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.8"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><title>编译原理：绪论 —— 中间代码生成和编译器后端</title><meta charset="utf-8"><link rel="canonical" href="https://blog.mslxl.com/posts/others/n5/"><meta name="description" content="My story of discovering"><meta name="robots" content="index, follow"><meta property="og:title" content="编译原理：绪论 —— 中间代码生成和编译器后端"><meta property="og:type" content="article"><meta property="og:image" content="https://blog.mslxl.com/placeholder.png"><meta property="og:url" content="https://blog.mslxl.com"><link rel="icon" href="/favicon.jpg" type="image/jpg"><meta name="twitter:image:src" content="https://blog.mslxl.com/placeholder.png"><meta name="twitter:image:alt" content="My story of discovering"><meta name="twitter:creator"><meta name="twitter:site"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="编译原理：绪论 —— 中间代码生成和编译器后端"><meta name="twitter:description" content="My story of discovering"><link rel="stylesheet" href="/_astro/index.DJturBb8.css">
+<link rel="stylesheet" href="/_astro/index.irxhXuQK.css">
+<style>.code-container{position:relative}.clipboard-copy{position:absolute;top:.5rem;right:.5rem;width:1.75rem;height:1.75rem;display:flex;justify-content:center;align-items:center;border-radius:.25rem}.clipboard-copy:hover{background-color:#30363d}
+</style><script type="module" src="/_astro/hoisted.zpUdL6BH.js"></script>
+<script type="module" src="/_astro/page.CPvyyiTs.js"></script></head> <body>  <div un-max-lg="animate-fadein-down" un-lg="flex flex-row-reverse justify-between gap-4 px-8 mx-auto max-w-6xl" class="container contain-layout m-a"> <div un-lg="sticky top-0 h-screen py-20 animate-fadein-left gap-8" un-lg:flex="~ col justify-between items-start gap-4" class="p-7.5"> <header un-lg="grow-1 justify-between items-start" un-flex="~ col gap-2.5" class="text-center"> <hgroup un-hover:lg="bg-foreground color-background pt-3.75 pb-8.75 " un-lg=" write-vertical-right items-start px-2.5 pb-12 b-l-2px b-l-foreground-solid text-left" un-flex="~ col gap-2.5" class="cursor-pointer transition-[padding,background] duration-800 ease-in-out"> <a class="normal" href="/"> <h3 class="text-5 font-extrabold font-serif">Mslxl</h3> <h1 class="text-8 font-extrabold font-serif">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" un-flex="~ col gap-2"> <ul un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center"> <li> <a href="/posts/page/1">Posts</a> </li><li> <a href="/archive">Archive</a> </li><li> <a href="/categories">Categories</a> </li><li> <a href="/tomodachi">Friends</a> </li><li> <a href="/about">About</a> </li> </ul> <ul un-flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl" target="_blank" title="github" class="icon i-mdi-github"></a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="icon i-mdi-rss"></a> </li> </ul> </nav> </header> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="max-lg:hidden"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div> <main un-lg="py-20 min-w-3xl animate-fadein-down" class="p-7.5">  <article class="heti"> <header> <h1 class="post-title!"> <a href="/posts/others/n5/">编译原理：绪论 —— 中间代码生成和编译器后端</a> </h1> <div class="mt-2 text-3.5"> <span>Posted at</span> <time>2018-06-27</time> <a class="ml-2.5" href="/categories/Compiler">
+# Compiler </a> </div> </header>  <div class="pt-8"> <h2 id="中间代码生成">中间代码生成</h2>
+<p>源程序的中间代码表现可以有多种形式，常见的是 <em>三地址码 (Three-address Code)</em> 和 <em>语法结构树 (Syntax Trees)</em>，语法结构树简称语法树。在这里我们只介绍一下三地址码。</p>
+<p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数 (operand)，因此叫三地址码。</p>
+<h3 id="常用的三地址指令">常用的三地址指令</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">序号</th><th align="center">指令类型</th><th align="center">指令形式</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">赋值指令</td><td align="center">x = y <code>op</code> z<br>x = <code>op</code> z</td></tr><tr><td align="center">2</td><td align="center">复制指令</td><td align="center">x <code>=</code> y</td></tr><tr><td align="center">3</td><td align="center">条件跳转</td><td align="center">if x <code>relop</code> y goto n</td></tr><tr><td align="center">4</td><td align="center">非条件跳转</td><td align="center"><code>goto</code> n</td></tr><tr><td align="center">5</td><td align="center">参数传递</td><td align="center"><code>param</code> x</td></tr><tr><td align="center">6</td><td align="center">过程调用</td><td align="center"><code>call</code> p , n</td></tr><tr><td align="center">7</td><td align="center">过程返回</td><td align="center"><code>return</code> x</td></tr><tr><td align="center">8</td><td align="center">数组引用</td><td align="center">x <code>=</code> y<code>[</code>i<code>]</code></td></tr><tr><td align="center">9</td><td align="center">数组赋值</td><td align="center">x<code>[</code>i<code>]</code> <code>=</code> y</td></tr><tr><td align="center">10</td><td align="center">地址<br>及<br>指针操作<br></td><td align="center">x <code>= &#x26;</code>y<br>x <code>= *</code>y<br><code>*</code>x <code>=</code> y</td></tr></tbody></table>
+<p>不解释，自己体会。</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.0niu6.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#99A0A6;--1:#616972">// x = op z 其实就是这一类一元运算符</span></div></div><div class="ec-line"><div class="code"><span style="--0:#E1E4E8;--1:#24292E">x </span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#F97583;--1:#BF3441">++</span><span style="--0:#E1E4E8;--1:#24292E">z</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="// x = op z 其实就是这一类一元运算符x = ++z"><div></div></button></div></figure></div>
+<p>在 <code>数组赋值</code> 和 <code>数组引用</code> 中，<code>i</code> 表示的是数组的偏移地址而不是数组的下标，而 x[i] 和 y[i] 中的 x 和 y 是数组的基地址。</p>
+<p>为了方便起见，像 <code>x</code> 、<code>y</code>、<code>z</code> 等之类的地址我们可以用源程序中的名字，也就是标识符，来作为三地址指令中的地址，因为标识符对应的地址都存放在符号表中，因此通过这些名字就可以找到对应的地址。另外，像是常量或者编译器生成的临时变量也可以作为三地址指令的地址。</p>
+<h3 id="三地址指令的表示">三地址指令的表示</h3>
+<p>三地址指令的表现形式有一下几种：</p>
+<ul>
+<li>四元式 (Quadruples)</li>
+<li>三元式 (Triples)</li>
+<li>间接三元式</li>
+</ul>
+<p>以四元式为例，它由四个分量构成，其中第一个分量表示三地址指令中的操作符，后边三个分量对应与三个操作数。</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="quadruple"><code><div class="ec-line"><div class="code"><span style="--0:#e1e4e8;--1:#24292e">(op,y,z,x)</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="(op,y,z,x)"><div></div></button></div></figure></div>
+<h4 id="三地址指令的四元式表示">三地址指令的四元式表示</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">三地址</th><th align="left">四元式</th></tr></thead><tbody><tr><td align="left">x = y <code>op</code> z</td><td align="left">(<code>op</code> , y , z , x )</td></tr><tr><td align="left">x = <code>op</code> y</td><td align="left">(<code>op</code> , y , _ , x )</td></tr><tr><td align="left">x  <code>=</code> y</td><td align="left">(<code>=</code> , y , _ , x )</td></tr><tr><td align="left">if x <code>relop</code> y goto n</td><td align="left">(<code>relop</code> , x , y , n )</td></tr><tr><td align="left"><code>goto</code> n</td><td align="left">(<code>goto</code> , n )</td></tr><tr><td align="left"><code>param</code> x</td><td align="left">(<code>param</code> , _ , _ , x )</td></tr><tr><td align="left"><code>call</code> p , n</td><td align="left">(<code>call</code> , p , n , _ )</td></tr><tr><td align="left"><code>return</code> x</td><td align="left">(<code>return</code> , _ , _ , x )</td></tr><tr><td align="left">x <code>=</code> y<code>[</code>i<code>]</code></td><td align="left">(<code>=[]</code> , y , i ,x )</td></tr><tr><td align="left">x <code>[</code>i<code>]</code> <code>=</code> y</td><td align="left">(<code>[]=</code>,y , x , i )</td></tr><tr><td align="left">x <code>= &#x26;</code> y</td><td align="left">(<code>&#x26;</code> , y , _ , x )</td></tr><tr><td align="left">x <code>= *</code> y</td><td align="left">(<code>=*</code> , y, _ , x )</td></tr><tr><td align="left"><code>*</code>x <code>=</code> y</td><td align="left">(<code>*=</code> , y , _ , x )</td></tr></tbody></table>
+<p>在四元式中，第二个分量和第三个分量为源操作数，第四个分量为目标操作数，如果第二个源操作数为空，那么第三个分量也为空。</p>
+<p><em><strong>三地址指令序列唯一确定了运算完成的顺序</strong></em></p>
+<h3 id="example--中间代码生成">Example : 中间代码生成</h3>
+<p>假入输入这样一个程序片段:</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#F97583;--1:#BF3441">while</span><span style="--0:#E1E4E8;--1:#24292E"> a </span><span style="--0:#F97583;--1:#BF3441">&#x3C;</span><span style="--0:#E1E4E8;--1:#24292E"> b do</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#BF3441">if</span><span style="--0:#E1E4E8;--1:#24292E"> c </span><span style="--0:#F97583;--1:#BF3441">&#x3C;</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">5</span><span style="--0:#E1E4E8;--1:#24292E"> then</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#F97583;--1:#BF3441">while</span><span style="--0:#E1E4E8;--1:#24292E"> x </span><span style="--0:#F97583;--1:#BF3441">></span><span style="--0:#E1E4E8;--1:#24292E"> y do</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#24292E">      </span></span><span style="--0:#E1E4E8;--1:#24292E">z </span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E"> x </span><span style="--0:#F97583;--1:#BF3441">+</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#79B8FF;--1:#005CC5">1</span><span style="--0:#FDAEB7;--0fs:italic;--1:#B31D28;--1fs:italic">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#BF3441">else</span><span style="--0:#E1E4E8;--1:#24292E"> x </span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E"> y</span><span style="--0:#FDAEB7;--0fs:italic;--1:#B31D28;--1fs:italic">;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="while a < b do  if c < 5 then    while x > y do      z = x + 1;  else x = y;"><div></div></button></div></figure></div>
+<p>那么它对应的分析树就是这样的(敲这棵树累死我了):</p>
+<pre class="mermaid">graph TD
+	S --- Text7[while]
+	S --- B1[B]
+	S --- do
+	S --- S1[S]
+	B1 --- E1[E]
+	E1 --- Text1["id ( a )"]
+	B1 --- Text2["relop ( &#x3C; )"]
+	B1 --- E2[E]
+	E2 --- Text3["id ( b )"]
+	S1 --- if
+	S1 --- B2[B]
+	S1 --- then
+	S1 --- S2[S]
+	S1 --- else
+	S1 --- S3[S]
+	B2 --- E3[E]
+	E3 --- Text4["id ( e )"]
+	B2 --- Text5["relop ( &#x3C; )"]
+	B2 --- E4[E]
+	E4 --- Text6["num ( 5 )"]
+	S2 --- Text8[while]
+	S2 --- B3[B]
+	S2 --- Text9[do]
+	S2 --- S4[S]
+	B3 --- E5[E]
+	E5 --- Text10["id ( x )"]
+	B3 --- Text11["relop ( > )"]
+	B3 --- E6[E]
+	E6 --- Text12["id ( y )"]
+	S4 --- Text13["id ( z )"]
+	S4 --- Text14[=]
+	S4 --- E7[E]
+	S4 --- Text15[";"]
+	E7 --- E8[E]
+	E7 --- Text16["+"]
+	E7 --- E9[E]
+	E8 --- Text17["id ( x )"]
+	E9 --- Text18["num ( 1 )"]
+	S3 --- Text19["id ( x )"]
+	S3 --- Text20["="]
+	S3 --- E10[E]
+	S3 --- Text21[";"]
+	E10 --- Text22["id ( y )"]
+</pre>
+<p>他对应的中间代码应该是这样的:</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="scala"><code><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">100</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j</span><span style="--0:#F97583;--1:#BF3441">&#x3C;</span><span style="--0:#E1E4E8;--1:#24292E"> , a  , b , </span><span style="--0:#79B8FF;--1:#005CC5">102</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">101</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">112</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">102</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j</span><span style="--0:#F97583;--1:#BF3441">&#x3C;</span><span style="--0:#E1E4E8;--1:#24292E"> , c  , </span><span style="--0:#79B8FF;--1:#005CC5">5</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">104</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">103</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">110</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">104</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j</span><span style="--0:#F97583;--1:#BF3441">></span><span style="--0:#E1E4E8;--1:#24292E"> , x  , y , </span><span style="--0:#79B8FF;--1:#005CC5">106</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">105</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">100</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">106</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( </span><span style="--0:#F97583;--1:#BF3441">+</span><span style="--0:#E1E4E8;--1:#24292E">  , x  , </span><span style="--0:#79B8FF;--1:#005CC5">1</span><span style="--0:#E1E4E8;--1:#24292E"> , t1  )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">107</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( </span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E">  , t1 , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , z   )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">108</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">104</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">109</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">100</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">110</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( </span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E">  , y  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , x   )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">111</span><span style="--0:#F97583;--1:#BF3441">:</span><span style="--0:#E1E4E8;--1:#24292E"> ( j  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">  , </span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E"> , </span><span style="--0:#79B8FF;--1:#005CC5">100</span><span style="--0:#E1E4E8;--1:#24292E"> )</span></div></div><div class="ec-line"><div class="code"><span style="--0:#79B8FF;--1:#005CC5">112</span><span style="--0:#F97583;--1:#BF3441">:</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="100: ( j< , a  , b , 102 )101: ( j  , -  , - , 112 )102: ( j< , c  , 5 , 104 )103: ( j  , -  , - , 110 )104: ( j> , x  , y , 106 )105: ( j  , -  , - , 100 )106: ( +  , x  , 1 , t1  )107: ( =  , t1 , - , z   )108: ( j  , -  , - , 104 )109: ( j  , -  , - , 100 )110: ( =  , y  , - , x   )111: ( j  , -  , - , 100 )112:"><div></div></button></div></figure></div>
+<p>这里，冒号前面的数字表示代码的标号，这里我们从 100 取到 112。</p>
+<p>第 <code>100</code> 条指令是条件跳转指令，这条指令表示如果 <code>a</code> 小于 <code>b</code> 就跳转到 <code>102</code> 号指令，否则的话就继续执行 <code>101</code> 行指令，<code>101</code> 号指令是一条无条件跳转指令，也就是跳转到 <code>112</code> 号指令，也就是跳出整个 while 循环。</p>
+<p>按照上面给出的伪代码，对照四元式，试着分析这段三地址指令的操作。</p>
+<h2 id="目标代码生成">目标代码生成</h2>
+<p>目标代码生成以源程序的<strong>中间表示形式</strong>作为输入，并把它映射到目标语言。</p>
+<p>目标代码生成的一个重要任务就是为程序中使用的变量<strong>合理分配寄存器</strong></p>
+<h2 id="代码优化">代码优化</h2>
+<p>代码优化就是为改进代码所进行的<strong>等价的程序变换</strong>，使其拥有更好的时空占用。</p>
+<p>代码优化分为<strong>机器无关代码优化</strong>和<strong>机器相关代码优化</strong>，前者是在中间代码中优化，后者是对目标语言进行优化，优化的内容包括很多方面，比如说自动识别代码中的重复运算，并将他们删除，再比如将代价较高的运算替换为代价较低的等价的运算等等。</p>
+<hr>
+<pre class="mermaid">graph TD
+	Start-- 字符流 -->词法分析器
+	词法分析器-- 词法字节流 -->语法分析器
+	语法分析器-- 语法树 -->语义分析器
+	语义分析器-- 语法树 -->中间代码生成器
+	中间代码生成器-- 中间表示形式 -->机器无关代码优化器
+	机器无关代码优化器-- 中间表示形式 -->目标代码生成器
+	目标代码生成器-- 目标机器语言 -->机器相关代码优化器
+	机器相关代码优化器-- 目标机器语言 -->Fin
+</pre>
+<hr>
+<h1 id="第一章-结束">第一章 结束</h1> </div>  </article> <footer class="mt-5">  <p class="flex items-center gap-2"> <span class="inline-flex items-center"> <i class="i-mdi-chevron-double-left icon"></i> <a href="/posts/others/nogamenolifezero">Previous post: No Game No Life Zero</a> </span> <span class="inline-flex items-center"> <a href="/posts/others/n4">Next post: 编译原理：绪论 —— 语义分析</a> <i class="i-mdi-chevron-double-right icon"></i> </span> </p> </footer> <!-- <footer class="mt-5">
+  <p class="mb-2.5">{t('page_number', page.currentPage)} / {t('page_count', page.lastPage)}</p>
+  <p class="flex items-center gap-2">
+    <span class="inline-flex items-center">
+      <i class="i-mdi-chevron-double-left icon"></i>
+      {page.url.prev ? <a href={page.url.prev}> {t('prev')} </a> : <span>{t('prev')}</span>}
+    </span>
+
+    <span class="inline-flex items-center">
+      {page.url.next ? <a href={page.url.next}>{t('next')}</a> : <span>{t('next')}</span>}
+      <i class="i-mdi-chevron-double-right icon"></i>
+    </span>
+  </p>
+</footer> -->  <div py-16> <giscus-widget id="comments" repo="mslxl/mslxl.github.io" repoId="MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=" category="Show and tell" categoryId="DIC_kwDOB5IIzs4CfW4f" mapping="title" strict="0" reactionsEnabled="1" emitMetadata="1" inputPosition="top" theme="light" lang="zh-CN" loading="lazy"></giscus-widget>  </div>  <div class="p-10"> <div> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter"> <p class="text-sm text-gray-500 text-center">统计自 2024 年 9 月</p> </div> </div> </main> <footer font-bold text-3 un-flex="~ col gap-1" un-lg="gap-3.5" class="lg:hidden p-7.5"> <p>
+© 2024 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer">Mslxl</a> </p> <p>
+Modified from <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer">Typography</a> </p> <p>
+Proudly published with <a target="_blank" href="https://astro.build" rel="noopener noreferrer">Astro</a> </p> </footer> </div>  </body></html>  
