@@ -35,7 +35,7 @@ function getPostItem(post: Post) {
     author: post.data.author ?? author,
     content: getPostContent(post),
     title: post.data.title,
-    pubDate: post.data.pubDate,
+    pubDate: post.data.date,
     description: post.data.description,
     customData: post.data.customData,
     categories: post.data.categories,

@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
 import type { Post } from '~/types'
+import { pinyin } from '@napi-rs/pinyin'
 
 export async function getCategories() {
   const posts = await getPosts()
@@ -23,8 +24,8 @@ export async function getCategories() {
 
 export async function getPosts() {
   const posts = await getCollection('posts')
-  posts.sort((a, b) => {
-    return dayjs(a.data.pubDate).isBefore(dayjs(b.data.pubDate)) ? 1 : -1
+  posts.sort((a: Post, b: Post) => {
+    return dayjs(a.data.date).isBefore(dayjs(b.data.date)) ? 1 : -1
   })
   return posts
 }
@@ -44,10 +45,9 @@ export function formatDate(date: Date, format: string = 'YYYY-MM-DD') {
   return dayjs(date).format(format)
 }
 
-export function getPathFromCategory(
-  category: string,
-  category_map: { name: string, path: string }[],
-) {
-  const mappingPath = category_map.find(l => l.name === category)
-  return mappingPath ? mappingPath.path : category
+export function getPathFromCategory(category: string) {
+  return pinyin(category, {
+    segment: false,
+    style: 0,
+  }).join('')
 }

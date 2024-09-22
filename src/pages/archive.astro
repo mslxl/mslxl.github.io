@@ -16,7 +16,7 @@ interface ListItem {
 function getYearMap(posts: Post[]) {
   const result = new Map<number, ListItem[]>()
   for (const post of posts) {
-    const year = (post.data.pubDate ?? new Date()).getFullYear()
+    const year = (post.data.date ?? new Date()).getFullYear()
     const posts = result.get(year) ?? []
     posts.push(getListItem(post))
     result.set(year, posts)
@@ -28,7 +28,7 @@ function getListItem(post: Post): ListItem {
   return {
     title: post.data.title,
     href: `/posts/${post.slug}/`,
-    date: formatDate(post.data.pubDate, 'MM-DD'),
+    date: formatDate(post.data.date, 'MM-DD'),
   }
 }
 ---

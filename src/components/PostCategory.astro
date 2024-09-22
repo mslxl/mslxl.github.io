@@ -9,7 +9,7 @@ interface Props {
 const { category } = Astro.props
 
 function getCategoryUrl(category: string) {
-  return `/categories/${getPathFromCategory(category, themeConfig.site.categoryMap)}`
+  return `/categories/${getPathFromCategory(category)}`
 }
 ---
 

@@ -1,5 +1,4 @@
 ---
-import { themeConfig } from '~/.config'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import type { Post } from '~/types'
 import { formatDate, getCategories, getPathFromCategory } from '~/utils'
@@ -7,7 +6,7 @@ import { formatDate, getCategories, getPathFromCategory } from '~/utils'
 export async function getStaticPaths() {
   const categoryMap = await getCategories()
   return Array.from(categoryMap).map(([key, value]) => {
-    const path = getPathFromCategory(key, themeConfig.site.categoryMap)
+    const path = getPathFromCategory(key)
     return {
       params: { category: path },
       props: { posts: value, name: key },
@@ -21,7 +20,7 @@ function getListItems(posts: Post[]) {
   const result = posts.map((post) => ({
     title: post.data.title,
     href: `/posts/${post.slug}/`,
-    date: formatDate(post.data.pubDate),
+    date: formatDate(post.data.date),
   }))
   return result
 }

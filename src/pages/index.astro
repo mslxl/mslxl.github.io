@@ -2,6 +2,7 @@
 import Pagination from '~/components/Pagination.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import LayoutPost from '~/layouts/LayoutPost.astro'
+import type { Post } from '~/types'
 import { getPostDescription, getPosts } from '~/utils'
 
 const posts = (await getPosts()).slice(0, 5)
@@ -12,7 +13,7 @@ const { translate: t } = Astro.locals
 <LayoutDefault>
   <section contain-layout flex="~ col gap-7.5">
     {
-      posts.map((post) => (
+      posts.map((post:Post) => (
         <LayoutPost post={post}>
           <p class="line-clamp-4">{getPostDescription(post)}</p>
         </LayoutPost>
