@@ -9,7 +9,6 @@ categories:
 
 在网上找了个树形DP专项
 
-
 # [P1352: 没有上司的舞会](https://www.luogu.com.cn/problem/P1352)
 
 热个身
@@ -21,16 +20,15 @@ f[i][1] = \sum_{son}{\text{ReLU}(f[son][0])}
 \end{cases}
 $$
 
-其中 $f[i][j]$ 中的$i$表示当前节点编号，$j$表示是否参加舞会
+其中 $f[i][j]$ 中的$i$表示当前节点编号，$j$ 表示是否参加舞会
 
 ~~加**ReLU**是因为怎么有人去了还不高兴啊~~
 
 54 行后才是代码主体
 
-
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 #include <limits>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
@@ -143,7 +141,7 @@ $$
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -222,29 +220,29 @@ void solve(const std::size_t testcase) {
 
 ```
 
-
 # [ABC259F Select Edges](https://atcoder.jp/contests/abc259/tasks/abc259_f?lang=en)
 
 写不出来状态转移方程
 
-使用 $dp[i][j]$ 表示第 $i$ 个节点是否与父节点相连，当$j=0$时表示不相连，当$j=1$时表示相连。
+使用 $dp[i][j]$ 表示第 $i$ 个节点是否与父节点相连，当 $j=0$ 时表示不相连，当 $j=1$ 时表示相连。
 
 在 dfs 时进行讨论，首先肯定要优先选择 $dp[son][1] +w[i] - dp[son][0]$ 大的边进行加边。
+
 - 当 $d[son] =0$ 或 $w[i] \le 0$ 时，不进行加边，此时
-  + $dp[i][0] += dp[son][0]$
-  + $dp[i][1] += dp[son][0]$
+  - $dp[i][0] += dp[son][0]$
+  - $dp[i][1] += dp[son][0]$
 - 当与父节点连接时
-  + $dp[i][1] += \max (dp[v][0]， dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]-1$次
-  + $dp[i][1] += dp[v][0]$ 不能进行上述操作后
+
+  - $dp[i][1] += \max (dp[v][0], dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]-1$次
+  - $dp[i][1] += dp[v][0]$ 不能进行上述操作后
 
 - 当不与父节点相连时
-  + $dp[i][0] += \max (dp[v][0]， dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]$次
-  + $dp[i][0] += dp[v][0]$ 不能进行上述操作后
-
+  - $dp[i][0] += \max (dp[v][0], dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]$次
+  - $dp[i][0] += dp[v][0]$ 不能进行上述操作后
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -376,11 +374,10 @@ void solve(const std::size_t testcase) {
 
 $dp[son] = dp[fa] + (n - dp[son]) - dp[son]$
 
-
 ```cpp
 // clang-format off
 #include <algorithm>
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -464,4 +461,3 @@ void solve(const std::size_t testcase) {
   std::cout << (std::max_element(dp+1, dp+1+n) - dp);
 }
 ```
-

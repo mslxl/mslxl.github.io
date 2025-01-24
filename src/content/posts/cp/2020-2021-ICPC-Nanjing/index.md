@@ -21,7 +21,6 @@ categories:
 </tr>
 </table>
 
-
 # A - Ah, It’s Yesterday Once More
 
 > 构造一张二维地图，仅有墙壁和空白组成。在每个空白处都有一个人，每个人在接下来的 50000 步中将向一个方向随机移动。
@@ -60,7 +59,7 @@ categories:
 11110111110111110111
 ```
 
-# D - Drgree of Spanning Tree 
+# D - Drgree of Spanning Tree
 
 > 给一个无向联通图，有$n$个定点$m$条边。找到一颗生成树，使得这个生成树的每个顶点的度数不大于$\frac{n}{2}$
 >
@@ -78,14 +77,12 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 我们想要降低顶点 $1$ 的度
 
-
-
-
 <center>
 
 ![](2020njd1.png)
 
 ![](2020njd2.png)
+
 </center>
 
 太难看了，我们重新整理一下
@@ -98,11 +95,9 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 之后我们将$1$作为根，使用并查集标记它的所有子树
 
-
 <center>
 
 ![](2020njd4.png)
-
 
 </center>
 
@@ -110,11 +105,9 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 这里我们选择$(2,4)$边
 
-
 <center>
 
 ![](2020njd5.png)
-
 
 </center>
 
@@ -122,32 +115,25 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 
 我们连接$(2,4)$时，不再断开$(1,2)$，而是断开$(1,4)$
 
-
 <center>
 
-
 ![](2020njd6.png)
-
 
 </center>
 
 连接$(2,4)$边的两种方式都不符合要求，现在应该恢复到未连接$2-4$前的状态，继续尝试选择其他边
 
-
 <center>
 
 ![](2020njd4.png)
-
 
 </center>
 
 接下来尝试$(3,4)$也不行，直到我们选择$(2,3)$
 
-
 <center>
 
 ![](2020njd7.png)
-
 
 </center>
 
@@ -156,10 +142,11 @@ CF上有一道相似的题目（还更麻烦点）[Codeforces 1133F2](https://co
 类似的，这道题我们也可以采用这种方式。树我们可以随便生成一个，而其中度数大于$\frac{n}{2}$的定点只会有一个。
 
 我们只需要将这个顶点作为根，重复上面的操作即可。
+
 ```cpp
 // clang-format off
 #include <algorithm>
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -349,8 +336,8 @@ void solve(const std::size_t testcase) {
 
 ```
 
+# E - Evil Coordinate
 
-# E - Evil Coordinate 
 > 机器人从$(0,0)$ 出发，地图上在 $(m_x,m_y)$ 位置有地雷。问机器人完成所有指定指令后，是否不会踩到地雷。
 > 所有的指令顺序可以打乱。
 
@@ -470,8 +457,8 @@ int main() {
 
 ```
 
-
 # F - Fireworks
+
 > Kotori $n$ 分钟能制作一个烟花，每个烟花只有 $p \times 10^{-4}$的可能性成功。当她制作完一个烟花后可以选择再做一个，或者消耗$m$分钟将之前制作的烟花燃放。
 > 如果燃放的烟花中有一个成功， Kotori 就会停止燃放，否则她就会继续燃放。求最优策略下塔停止燃放眼花的最小期望时间，
 
@@ -488,7 +475,6 @@ int main() {
 
 using ld =  double;
 using ll =  long;
-
 
 ld qpow(ld a, ll b)
 {
@@ -535,7 +521,9 @@ int main() {
 ```
 
 # H - Harmonious Rectangle
+
 > 定义一个和谐矩阵为存在以下任意一种染色的矩阵 $1\le x_1 \lt x_2 \le n, 1 \le y_1 $
+>
 > $$
 > \begin{cases}
 > color(x_1, y_1) = color(x_1, y_2) \\\\
@@ -577,13 +565,10 @@ def check(map) -> bool:
                         return True
     return False
 
-
 map = [[None for i in range(9)] for j in range(9)]
-
 
 def zero(n, m):
     return [[0 for i in range(n)] for j in range(m)]
-
 
 def is_end(map) -> bool:
     for y in map:
@@ -591,7 +576,6 @@ def is_end(map) -> bool:
             if x != 2:
                 return False
     return True
-
 
 def inc(map):
     map[0][0] += 1
@@ -604,7 +588,6 @@ def inc(map):
                         map[i+1][0] += 1
                 else:
                     map[i][j+1] += 1
-
 
 with open("H.txt", "w") as f:
     f.write("{")
@@ -619,7 +602,7 @@ with open("H.txt", "w") as f:
             while True:
                 inc(map)
                 if check(map):
-                    ans += 1 
+                    ans += 1
                 if is_end(map):
                     break
             print(ans)
@@ -751,7 +734,6 @@ int map[][9] = {
 };
 #define int ll
 
-
 const int modd = 1e9 + 7;
 void solve() {
   int n, m;
@@ -764,7 +746,7 @@ void solve() {
   }
   if(m > 9){
     int result = qpow(3LL, n * m, modd);
-    std::cout << result << "\n"; 
+    std::cout << result << "\n";
   }else{
     std::cout << map[n-1][m-1]%modd << "\n";
   }
@@ -784,8 +766,6 @@ int main() {
 }
 ```
 
-
-
 # K - K Co-prime Permutation
 
 > $k$ co-prime 排列是指排列中有 $k$ 个数字 $a_i$ 和 $i$ 互质。
@@ -794,11 +774,9 @@ int main() {
 
 `思维` `签到`
 
-
 一个数和他相邻的数互质，我们只需要将$k$个数错开一位就行。
 
 直接调库
-
 
 ```cpp
 #include <bits/stdc++.h>
@@ -829,6 +807,7 @@ int main() {
 ```
 
 # L - Let's Play Curling
+
 > 红队 n 个冰壶、蓝队 m 个冰壶，给出所有冰壶的坐标，找到一个位置 c 使得红队能赢且得分尽可能多，若红队能赢输出最多能得到的分数，若红队不能赢输出 Impossible。
 
 `思维`
@@ -904,18 +883,19 @@ void solve(const std::size_t testcase) {
 # M - Monster Hunter
 
 > 在一个根节点为 $1$ 的有$n$个定点的有根树，每个顶点都有一个怪物，第$i$个顶点上的怪物有$hp_i$滴血。现在要按照下列规则杀死所有怪物
+>
 > - 当一个顶点的直接父节点上的怪物被杀死时，这个节点上的怪物才能被杀死
 > - 杀死第 $i$ 个节点上的怪物需要消耗的能量为第$i$个节点上的怪物$hp_i$和这个节点的所有直接子节点上的存活的怪物的$hp$总和，即消耗的能量为
 >
 > $$
 > hp_i + \sum_{\begin{array}{c}\text{顶点} j \text{上的怪物是\textbf{存活}状态} \\\\ \text{且} i \text{的直接子节点是} j \end{array}} hp_j
 > $$
+>
 > - 使用魔咒消耗$0$能量，且无视上述限制，杀死选择的怪物。
-> 
+>
 > 当符卡数量 $m=0,1,2,\ldots,n$ 时，输出杀死所有怪物所需消耗的最小能量
 
 `树形背包`
-
 
 > 很喜欢yrh说过的一句话，“不会dp”
 
@@ -997,7 +977,6 @@ void dfs(int x){
         temp[j+k] = std::min(temp[j+k], dp[x][j][0] + std::min(dp[v][k][0], dp[v][k][1]));
       }
     }
-
 
     for(int j = 0; j <= size[x] + size[v]; j++){
       dp[x][j][0] = temp[j];

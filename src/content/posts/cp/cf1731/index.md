@@ -11,16 +11,16 @@ categories:
 # A - Joey Takes Money
 
 > 给一个长度为 n 的整数序列 $a_i \ge 1$
-> 
-> 选择两个数 $a_i$ 和 $b_i$，将其替换为 $x$, $y$，其中 $x * y = a_i * a_j $，这个操作可以进行无数次
-> 
+>
+> 选择两个数 $a_i$ 和 $b_i$，将其替换为 $x$, $y$，其中 $x _ y = a_i _ a_j $，这个操作可以进行无数次
+>
 > 输出这个序列的和乘以$2022$
 
 直接暴力就行:
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 #include <functional>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
@@ -62,7 +62,7 @@ void solve(const std::size_t testcase) {
 # B - Kill Demodogs
 
 > 一个矩阵，从 $(1,1)$ 出发走到 $(n,n)$，每经过$(i,i)$可得分$i*i$。 只能向下或者向右走
-> 
+>
 > 问全程最大积分是多少？
 
 首先根据 $a+b\ge 2\sqrt{ab}$，当 $a=b$时，$a*b$取最大，所以移动路线应该是这样的:
@@ -81,7 +81,7 @@ void solve(const std::size_t testcase) {
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 void solve(const std::size_t testcase);
 #define rep(NAME, MAX) for(decltype(MAX) NAME = 0; NAME < MAX; NAME++)
@@ -113,7 +113,7 @@ void solve(const std::size_t testcase) {
 # C - Even Subarrays
 
 > 给一段长度为 n 的序列 $a_i$，从中找到他的连续子序列，并且这个连续子序列的因数个数为偶数。
-> 
+>
 > 问这样的子序列个数为多少
 
 首先一个数的因子都是成对出现的，当这个数是平方数的时候会出现两个一样的因子，也就是说当
@@ -125,7 +125,7 @@ void solve(const std::size_t testcase) {
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -178,7 +178,7 @@ void solve(const std::size_t testcase) {
 ~~能卡着时间跑过。~~
 
 ```cpp
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);

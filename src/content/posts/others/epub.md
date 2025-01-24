@@ -17,11 +17,11 @@ epub 文件的实质其实是一个固定格式的 zip 压缩包，文件名以 
 
 </details>
 
-epub 主要由三部分组成 
+epub 主要由三部分组成
 
-* mimetype
-* META-INF
-* OEBPS
+- mimetype
+- META-INF
+- OEBPS
 
 注意大小写敏感，这主要是针对 linux 平台上的诸多软件。
 
@@ -29,7 +29,7 @@ epub 主要由三部分组成
 
 mimetype 主要是标记文件的格式，内容恒定，为
 
-```mime
+```text
 application/epub+zip
 ```
 
@@ -89,7 +89,8 @@ application/epub+zip
 </container>
 ```
 
-重新压缩后打开后显示的章节名只有  `OEBPS/content.opf` 指向的 ncx 的章节名称，没有`OEBPS/content1.opf`中指向的 ncx 的章节名称
+重新压缩后打开后显示的章节名只有 `OEBPS/content.opf` 指向的 ncx 的章节名称，没有`OEBPS/content1.opf`中指向的 ncx 的章节名称
+
 </li>
 <li>
 创建了一个新文件夹 `Test`
@@ -144,13 +145,13 @@ application/epub+zip
 
 注意，以下为不可加密的文件：
 
-* mimetype
-* META-INF/container.xml
-* META-INF/encryption.xml
-* META-INF/manifest.xml
-* META-INF/metadata.xml
-* META-INF/rights.xml
-* META-INF/signatures.xml
+- mimetype
+- META-INF/container.xml
+- META-INF/encryption.xml
+- META-INF/manifest.xml
+- META-INF/metadata.xml
+- META-INF/rights.xml
+- META-INF/signatures.xml
 
 ### manifest.xml (可选)
 
@@ -169,13 +170,13 @@ OCF 并没有规定清单格式
 ### rights.xml (可选)
 
 该文件用于数字版权管理（DRM），用于在权利人，中间人和用户之间信任交换EPUB出版物的信息。
-3.1 版的 OCF 标准中并未规定 DRM 细细的特殊格式，但未来也许有。`rights.xml` 的命名空间应当被显式的声明为  [[XMLNS]](https://www.w3.org/TR/2009/REC-xml-names-20091208/) 来避免以后的冲突。
+3.1 版的 OCF 标准中并未规定 DRM 细细的特殊格式，但未来也许有。`rights.xml` 的命名空间应当被显式的声明为 [[XMLNS]](https://www.w3.org/TR/2009/REC-xml-names-20091208/) 来避免以后的冲突。
 
 当 rights.xml 不存在时，版权信息可能位于其他位置。
 
 ### signatures.xml (可选)
 
-该文件存有 epub 的数组签名。它的内容必须符合 [signatures.xml](https://www.w3.org/Submission/epub-ocf/#app-schema-signatures)  schema.
+该文件存有 epub 的数组签名。它的内容必须符合 [signatures.xml](https://www.w3.org/Submission/epub-ocf/#app-schema-signatures) schema.
 
 `signatures.xml` 的根节点为 `signatures`，子节点为定义在 [XML DSIG Core](https://www.w3.org/Submission/epub-ocf/#refXMLDSIGCORE) 中的 `Signature`。签名可以部分应用，也可以应用到 epub 整体，它可以使任何形式的签名数据，也就是说，不仅仅是 XML。
 
@@ -185,7 +186,7 @@ OCF 并没有规定清单格式
 <signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
     <Signature Id="sig" xmlns="http://www.w3.org/2000/09/xmldsig#">
         <SignedInfo>
-            <CanonicalizationMethod 
+            <CanonicalizationMethod
                 Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
             <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/>
             <Reference URI="#Manifest1">
@@ -197,31 +198,31 @@ OCF 并没有规定清单格式
         <KeyInfo>
             <KeyValue>
                 <DSAKeyValue>
-                    <P>…</P><Q>…</Q><G>…</G><Y>…</Y> 
+                    <P>…</P><Q>…</Q><G>…</G><Y>…</Y>
                 </DSAKeyValue>
             </KeyValue>
         </KeyInfo>
         <Object>
             <Manifest Id="Manifest1">
-                <Reference URI="EPUB/book.xhtml">                    
-                    <Transforms>                                                
+                <Reference URI="EPUB/book.xhtml">
+                    <Transforms>
                         <Transform
-                            Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>                        
+                            Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
                     </Transforms>
                     <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
                     <DigestValue></DigestValue>
                 </Reference>
                 <Reference URI="EPUB/images/cover.jpeg">
-                    <Transforms>                                                
+                    <Transforms>
                         <Transform
-                            Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>                        
+                            Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
                     </Transforms>
                     <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
                     <DigestValue></DigestValue>
                 </Reference>
             </Manifest>
         </Object>
-    </Signature> 
+    </Signature>
 </signatures>
 ```
 
@@ -243,12 +244,12 @@ OCF 并没有规定清单格式
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE package PUBLIC "+//ISBN 978-7-308-05831-5//DTD OEB 1.2 Package//EN" "http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd">
-<package unique-identifier="bookid" 
-    xmlns:opf="http://www.idpf.org/2007/opf" 
+<package unique-identifier="bookid"
+    xmlns:opf="http://www.idpf.org/2007/opf"
     xmlns="http://www.idpf.org/2007/opf" version="2.0">
     <metadata>
-        <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" 
-            xmlns:dcterms="http://purl.org/dc/terms/" 
+        <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:dcterms="http://purl.org/dc/terms/"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dc:title>龙族 I</dc:title>
             <dc:creator>江南老贼</dc:creator>
@@ -410,15 +411,13 @@ ncx文件用来描述电子书的目录结构，一般来说，opf 中 spine 一
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>第二章</title>
-</head>
-<body>
-    <div>
-        正文
-    </div>
-</body>
+  </head>
+  <body>
+    <div>正文</div>
+  </body>
 </html>
 ```
 

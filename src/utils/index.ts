@@ -1,9 +1,9 @@
+import type { Post } from '~/types'
+import { pinyin } from '@napi-rs/pinyin'
 import { getCollection } from 'astro:content'
 import dayjs from 'dayjs'
 import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
-import type { Post } from '~/types'
-import { pinyin } from '@napi-rs/pinyin'
 
 export async function getCategories() {
   const posts = await getPosts()

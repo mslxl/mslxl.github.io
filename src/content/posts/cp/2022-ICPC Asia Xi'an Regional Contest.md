@@ -13,7 +13,9 @@ date: 2022-12-13
 听说今年要七道题才能铜 😂
 
 ## [C - Clone Ranran](https://codeforces.com/gym/104077/problem/C)
+
 #### 题目大意
+
 然然要准备 $c$ 道题，它可以进行两种操作：
 
 - 克隆一个自己，使自己的数量变为原来的二倍，这需要消耗 $a$ 分钟时间
@@ -32,6 +34,7 @@ date: 2022-12-13
 确定了这两点，代码就不难写了
 
 #### 代码
+
 ```cpp
 #include <bits/stdc++.h>
 #define rep(NAME, MAX) for (int NAME = 0; NAME < MAX; i++)
@@ -100,7 +103,6 @@ int main() {
 
 单人间的花费为 $c_1$，双人间的花费为 $c_2$ ，问安置所有的队伍最小花费多少钱。
 
-
 ### 思路
 
 按照性别数量贪就行了
@@ -122,7 +124,6 @@ int main() {
 using ll = long long;
 using ul = unsigned long long;
 using ld = long double;
-
 
 int main() {
 #ifdef ONLINE_JUDGE
@@ -171,7 +172,6 @@ int main() {
 继续，若字符串长度为$4$，由于我们之前判断了 $s[0,2]$合法，因此现在我们只需要判断$s[1:3]$合法即可。
 
 一旦所有长度为$t$的字符串判断失败时，答案即为$t-1$
-
 
 #### 代码
 
@@ -247,7 +247,6 @@ int main(){
 }
 ```
 
-
 # J - Strange Sum
 
 ```cpp
@@ -289,6 +288,6 @@ int main(){
   rep(i, n) read(seq[i]);
   std::sort(seq.begin(), seq.end());
   std::cout << std::max(0LL, std::max(seq[n-1], n >= 2? seq[n-1] + seq[n-2]: 0LL));
-	return 0;
+    return 0;
 }
 ```

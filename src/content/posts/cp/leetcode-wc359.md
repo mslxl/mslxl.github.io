@@ -10,7 +10,8 @@ categories:
 
 > 给你一个字符串数组 words 和一个字符串 s ，请你判断 s 是不是 words 的 首字母缩略词 。
 >
-> 如果可以按顺序串联 words 中每个字符串的第一个字符形成字符串 s ，则认为 s 是 words 的首字母缩略词。例如，"ab" 可以由 ["apple", "banana"] 形成，但是无法从 ["bear", "aardvark"] 形成。
+> 如果可以按顺序串联 words 中每个字符串的第一个字符形成字符串 s ，则认为 s 是 words 的首字母缩略词。
+> 例如，"ab" 可以由 ["apple", "banana"] 形成，但是无法从 ["bear", "aardvark"] 形成。
 >
 > 如果 s 是 words 的首字母缩略词，返回 true ；否则，返回 false 。
 
@@ -70,7 +71,8 @@ class Solution {
 
 > 给你一个整数 `n` 表示数轴上的房屋数量，编号从 `0` 到 `n - 1` 。
 >
-> 另给你一个二维整数数组 `offers` ，其中 `offers[i] = [starti, endi, goldi]` 表示第 `i` 个买家想要以 `goldi` 枚金币的价格购买从 `starti` 到 `endi` 的所有房屋。
+> 另给你一个二维整数数组 `offers` ，其中 `offers[i] = [starti, endi, goldi]` 表示第 `i` 个买家想要以
+>  `goldi` 枚金币的价格购买从 `starti` 到 `endi` 的所有房屋。
 >
 > 作为一名销售，你需要有策略地选择并销售房屋使自己的收入最大化。
 >
@@ -112,11 +114,11 @@ class Solution {
 ## 找出最长等值子数组
 
 > 给你一个下标从 **0** 开始的整数数组 `nums` 和一个整数 `k` 。
-> 
+>
 > 如果子数组中所有元素都相等，则认为子数组是一个 **等值子数组** 。注意，空数组是 **等值子数组** 。
-> 
+>
 > 从 `nums` 中删除最多 `k` 个元素后，返回可能的最长等值子数组的长度。
-> 
+>
 > **子数组** 是数组中一个连续且可能为空的元素序列。
 
 `分组` `双指针`
@@ -125,40 +127,40 @@ class Solution {
 
 选择子区间中相同的数比较麻烦，我们可以直接将相同的数分为一组，将下标保存在数组中。
 
-剩下的问题就是在所有组中找到一个区间，他们的下标中相隔的数字的数量不超过$k$。可以使用前缀和，区间$[l,r]$中需要删除的数字数量为 $pos[r] - pos[l] + (r-l)$。也可以直接算 $(pos[r] - pos[l]) - (r-l)$（区间的总长度减去不需要删除的数字数量）
+剩下的问题就是在所有组中找到一个区间，他们的下标中相隔的数字的数量不超过$k$。可以使用前缀和，
+区间$[l,r]$中需要删除的数字数量为 $pos[r] - pos[l] + (r-l)$。也可以直接算 $(pos[r] - pos[l]) - (r-l)$（区间的总长度减去不需要删除的数字数量）
 
 写写 GO 玩玩
 
 ```go
 func longestEqualSubarray(nums []int, k int) int {
-	maxValue := 0
-	for _, v := range nums {
-		maxValue = max(maxValue, v)
-	}
-	pos := make([][]int, maxValue+1)
-	for i, v := range nums {
-		pos[v] = append(pos[v], i)
-	}
+    maxValue := 0
+    for _, v := range nums {
+        maxValue = max(maxValue, v)
+    }
+    pos := make([][]int, maxValue+1)
+    for i, v := range nums {
+        pos[v] = append(pos[v], i)
+    }
 
-	ans := 0
-	for _, ps := range pos {
-		left := 0
-		for right, p := range ps {
-			for p-ps[left]-(right-left) > k { //删除的数字数量大于了 k
-				left++
-			}
-			ans = max(ans, right-left+1)
-		}
-	}
-	return ans
+    ans := 0
+    for _, ps := range pos {
+        left := 0
+        for right, p := range ps {
+            for p-ps[left]-(right-left) > k { //删除的数字数量大于了 k
+                left++
+            }
+            ans = max(ans, right-left+1)
+        }
+    }
+    return ans
 }
 
 func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+    if a > b {
+        return a
+    }
+    return b
 }
-
 
 ```

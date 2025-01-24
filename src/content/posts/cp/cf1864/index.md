@@ -9,9 +9,8 @@ categories:
 ## A.Increasing and Decreasing
 
 > 制造一个序列，序列从 $x$ 开始，到 $y$ 结束，一共 $n$ 个数。满足
-> 
+>
 > - 序列是严格递增的
-> 
 > - 序列相邻两项的值是严格递减的
 
 `构造` `*579`
@@ -26,11 +25,11 @@ void solve(){
     std::vector<int> d(n);
     d[n-1] = y;
     for(int i = 2; i <= d.size(); i++){
-        d[d.size() - i] = d[d.size() - i + 1] - (i - 1);   
+        d[d.size() - i] = d[d.size() - i + 1] - (i - 1);
     }
     if(x > d[0]){
         std::cout << -1;
-        return;        
+        return;
     }
     std::cout << x;
     for(int i = 1; i < n; i++) std::cout << " " << d[i];
@@ -40,11 +39,10 @@ void solve(){
 ## B. Swap and Reverse
 
 > 有一个长度为 $n$ 的字符串 $s$，可以进行以下任一操作无限次:
-> 
+>
 > 1. 交换相隔一位的字符，即交换 $s_i$ 和 $s_{i+2}$ 的字符
-> 
 > 2. 反转一段长度为 $k$ 的区间
-> 
+>
 > 输出通过上述操作所能获得的最小字典序的字符串
 
 `思维` `*1067`
@@ -84,11 +82,11 @@ void solve() {
 ## C. Divisor Chain
 
 > 给一个数 $x$，通过下列操作将 $x$ 变为 $1$
-> 
+>
 > - 选择一个数 $d$ 满足 $d$ 是 $x$ 的因数，令 $x = x - d$
-> 
+>
 > 注意不能使用同一个 $d$ 多于两次
-> 
+>
 > 输出操作中的中间过程
 
 `二进制拆分` `*1294`
@@ -97,7 +95,7 @@ void solve() {
 
 因为 x 的 lowbit 总是 x 的因数，且二进制中的每一位只需要操作一次，所以可以
 
-- 当 $lowbit(x) \ne x$，令 $x \leftarrow x - lowbit(x)$  
+- 当 $lowbit(x) \ne x$，令 $x \leftarrow x - lowbit(x)$
 
 - 当 $lowbit(x) = x$，令 $x \leftarrow x - \frac{x}{2}$，直到 $x = 1$
 
@@ -122,8 +120,8 @@ main = (read <$> getLine) >>= (flip replicateM_ $ ((read <$> getLine) >>= solve)
 
 ## D. Matrix Cascade
 
-> 有一个大小为 $n \times m$  的01矩阵。将矩阵中所有的元素变为 0。每次操作可以将 $(i, j)$ 和 $(x, y) \quad x > i, x - i \ge\mid y - j\mid$ 中的元素反转
-> 
+> 有一个大小为 $n \times m$ 的01矩阵。将矩阵中所有的元素变为 0。每次操作可以将 $(i, j)$ 和 $(x, y) \quad x > i, x - i \ge\mid y - j\mid$ 中的元素反转
+>
 > 输入一个矩阵，问最小需要操作几次才能将矩阵变为全 $0$
 
 `二维差分` `1620`
@@ -143,15 +141,14 @@ main = (read <$> getLine) >>= (flip replicateM_ $ ((read <$> getLine) >>= solve)
 之后需要判断当前位置对之后的影响
 
 - 如果当前位置 $(i,j)$ 存在影响（$d[i][j] = 1$）时
-  
+
   - 当 $a[i][j] = 1$ 时，由于需要进行一次反转使 $a[i][j]=0$，因此也会使 $d[i][j]=0$
-  
+
   - 当 $a[i][j] = 0$ 时，$d[i][j]$保持不边，仍为 $1$
 
 - 如果当前位置 $(i,j)$ 不存在影响 ($d[i][j] = 0$) 时
-  
+
   - 当 $a[i][j] = 1$时，由于需要进行一次反转使 $a[i][j] = 0$，因此 $d[i][j] = 1$
-  
   - 当 $a[i][j] = 0$ 时， $d[i][j] = 0$ 保持不变
 
 很容易发现这可以通过 $d[i][j] \leftarrow d[i][j] \oplus a[i][j]$
@@ -185,14 +182,14 @@ void solve() {
   int ans = 0;
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-      a[i][j] ^= b[i][j];                  
-      ans += a[i][j];                      
-      b[i][j] ^= a[i][j];                  
+      a[i][j] ^= b[i][j];
+      ans += a[i][j];
+      b[i][j] ^= a[i][j];
 
-      a[i][j] ^= b[i][j];                 
-      if (i + 1 < n) {                     
-        a[i + 1][j] ^= b[i][j];             
-        if (j - 1 >= 0) {                  
+      a[i][j] ^= b[i][j];
+      if (i + 1 < n) {
+        a[i + 1][j] ^= b[i][j];
+        if (j - 1 >= 0) {
           b[i + 1][j - 1] ^= b[i][j];
         } else if (i + 2 < n) {
           b[i + 2][j] ^= b[i][j];
@@ -215,49 +212,46 @@ void solve() {
 ## E. Guess Game
 
 > Carol 有一个由非负整数组成的序列 $s$，她要和 Alice 和 Bob 玩 Guess Game
-> 
+>
 > 在游戏中，Carol 将随机选两个下标 $i_a$ 和 $i_b$，并令 $a = s_{i_a}$, $b = s_{i_b}$，$i_a$ 和 $i_b$ 可能重合
-> 
+>
 > Carol 将：
-> 
+>
 > - 告诉 Alice $a$ 的值
-> 
 > - 告诉 Bob $b$ 的值
-> 
-> - 告诉 Alice 和 Bob $a \mid b$ 的值，其中  `|`是位或运算
-> 
+> - 告诉 Alice 和 Bob $a \mid b$ 的值，其中 `|`是位或运算
+>
 > Carol 不会告诉 Alice 和 Bob 任何有关 $s$ 的信息
-> 
+>
 > 游戏开始后，Alice 和 Bob 轮流进行猜测。Alice 先手。他们的目标都是找到 $a < b, a > b$ 或 $a=b$ 公式哪个是正确的
-> 
+>
 > 在每轮猜测中，每个玩家可以进行以下一种操作:
-> 
+>
 > - 回答 `不知道`，然后下一个玩家继续游戏
-> 
 > - 回答 `知道`, 并给出游戏的答案(`a<b`, `a>b` 或者 `a=b`)，游戏结束
-> 
+>
 > Alice 和 Bob 都能听到对方的回答，并根据回答作出自己的判断。Alice 和 Bob 足够聪明，且只会在完全确定答案的时候回答 `知道`
-> 
+>
 > 要求计算游戏所进行回合数的期望值，输出答案对 `998244353` 取模
 
-`*2113` `二进制拆分`  `分治`
+`*2113` `二进制拆分` `分治`
 
 很奇妙的一道题
 
 先来看样例的几种情况
 
-| $A$ | $A \mid B$ | $B$                                      |
-| --- | ---------- | ---------------------------------------- |
-| 11  | 11         | 10                                       |
-| IDK |            |                                          |
+| $A$ | $A \mid B$ | $B$                                                          |
+| --- | ---------- | ------------------------------------------------------------ |
+| 11  | 11         | 10                                                           |
+| IDK |            |                                                              |
 |     |            | A 的最高位是 $1$，B 的最高位也是 $1$。第二位小，所以 $A > B$ |
 
-| $A$                       | $A \mid B$ | $B$                                                 |
-| ------------------------- | ---------- | --------------------------------------------------- |
-| 11                        | 11         | 11                                                  |
-| IDK                       |            |                                                     |
-|                           |            | A 的最高位是 $1$，B 的最高位也是 $1$。B 的次高位仍是 $1$，不能判断大小关系, IDK |
-| B 的最高位和次高位都是 $1$，因此 $A=B$ |            |                                                     |
+| $A$                                    | $A \mid B$ | $B$                                                                             |
+| -------------------------------------- | ---------- | ------------------------------------------------------------------------------- |
+| 11                                     | 11         | 11                                                                              |
+| IDK                                    |            |                                                                                 |
+|                                        |            | A 的最高位是 $1$，B 的最高位也是 $1$。B 的次高位仍是 $1$，不能判断大小关系, IDK |
+| B 的最高位和次高位都是 $1$，因此 $A=B$ |            |                                                                                 |
 
 也就是说如果先手具有最高位，它就无法判断大小关系（因为他无法判断对方最高位是否为 $1$），这时候先手回答 `不知道`。后手如果这一位是 `0`，则大小关系可判断。如果这一位是1，可以先把先手和后手的最高位都删掉，交换先后手重新判断。
 
@@ -286,7 +280,7 @@ int pk(int a, int b, int round = 1) {
 ```cpp
 #pragma GCC optimize(2)
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using i16 = short; using i32 = int; using i64 = long long; using u16= unsigned short; using u32 = unsigned int; using u64 = unsigned long long;using f32 = float; using f64 = double; using f128 = long double;
 using pii = std::pair<i32, i32>; using pll = std::pair<i64, i64>; using pil = std::pair<i32, i64>; using pli = std::pair<i64, i32>;
 template<class T> using V = std::vector<T>;

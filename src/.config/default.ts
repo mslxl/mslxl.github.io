@@ -30,24 +30,24 @@ export const defaultConfig: ThemeConfig = {
     ],
     navLinks: [
       {
-        name: "Posts",
-        href: "/posts/page/1",
+        name: 'Posts',
+        href: '/posts/page/1',
       },
       {
-        name: "Archive",
-        href: "/archive",
+        name: 'Archive',
+        href: '/archive',
       },
       {
-        name: "Categories",
-        href: "/categories"
+        name: 'Categories',
+        href: '/categories',
       },
       {
-        name: "Friends",
-        href: "/tomodachi",
+        name: 'Friends',
+        href: '/tomodachi',
       },
       {
-        name: "About",
-        href: "/about",
+        name: 'About',
+        href: '/about',
       },
     ],
 
@@ -65,12 +65,12 @@ export const defaultConfig: ThemeConfig = {
       background: '#2e405b',
     },
     fonts: {
-      header:'"Noto Serif HK","Noto Serif SC",HiraMinProN-W6,"Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
+      header: '"Noto Serif HK","Noto Serif SC",HiraMinProN-W6,"Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
       ui: 'Noto Sans HK,Noto Sans SC,PingFang SC,PingFang HK,PingFang TC,Source Sans Pro,Roboto,Helvetica,Helvetica Neue,Source Han Sans SC,Source Han Sans TC,sans-serif',
     },
   },
   seo: {
-    twitter: "@mslxl_bak",
+    twitter: '@mslxl_bak',
     meta: [],
     link: [],
   },

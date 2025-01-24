@@ -59,27 +59,27 @@ export default defineConfig({
         Noto: [
           {
             name: 'Noto Sans HK',
-            weights: ['400','600'],
+            weights: ['400', '600'],
             italic: true,
           },
           {
             name: 'Noto Sans SC',
-            weights: ['400','600'],
+            weights: ['400', '600'],
             italic: true,
           },
           {
             name: 'Noto Serif HK',
-            weights: ['400','700'],
+            weights: ['400', '700'],
             italic: true,
           },
           {
             name: 'Noto Serif SC',
-            weights: ['400','700'],
+            weights: ['400', '700'],
             italic: true,
           },
         ],
       },
-    })
+    }),
   ],
   theme: {
     colors,

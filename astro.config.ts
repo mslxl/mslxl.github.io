@@ -1,18 +1,18 @@
 import mdx from '@astrojs/mdx'
+import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
+import vue from '@astrojs/vue'
 import swup from '@swup/astro'
-import { defineConfig, sharpImageService } from 'astro/config'
+import expressiveCode from 'astro-expressive-code'
 import robotsTxt from 'astro-robots-txt'
+import { typst } from 'astro-typst'
+import { defineConfig, sharpImageService } from 'astro/config'
+import { firefox } from 'playwright'
+import rehypeKatex from 'rehype-katex'
+import remarkMath from 'remark-math'
+import remarkMermaid from 'remark-mermaidjs'
 import UnoCSS from 'unocss/astro'
 import { themeConfig } from './src/.config'
-import { typst } from 'astro-typst';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import expressiveCode from "astro-expressive-code";
-import remarkMermaid from 'remark-mermaidjs'
-import vue from '@astrojs/vue';
-import react from '@astrojs/react';
-
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,12 +26,14 @@ export default defineConfig({
       theme: 'dracula',
       wrap: true,
     },
-    remarkPlugins: [remarkMath, remarkMermaid],
+    remarkPlugins: [remarkMath, [remarkMermaid, {
+      browser: firefox,
+    }]],
     rehypePlugins: [rehypeKatex],
   },
   integrations: [
     UnoCSS({
-      injectReset: true
+      injectReset: true,
     }),
     robotsTxt(),
     sitemap(),
@@ -53,10 +55,10 @@ export default defineConfig({
   ],
   vite: {
     ssr: {
-      external: ["@myriaddreamin/typst-ts-node-compiler"]
-    }
+      external: ['@myriaddreamin/typst-ts-node-compiler'],
+    },
   },
   server: {
-    host: '0.0.0.0'
-  }
+    host: '0.0.0.0',
+  },
 })

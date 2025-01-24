@@ -50,7 +50,7 @@ GFS 集群包含可以被客户端访问到的一个 master 的复数个 Chunk S
 在 master 中维护有以下内容：
 
 1. 文件名与 chunk handle 数组的对应关系
-2. chunk handle 和 chunk  版本号的对应关系
+2. chunk handle 和 chunk 版本号的对应关系
 3. chunk handle 和 chunk server 地址、primary chunk server、租约的对应关系
 4. 日志
 5. 检查点
@@ -71,12 +71,12 @@ Master 不存储 chunk handle 和 chunk server 的对应关系，这些信息只
 
 ```mermaid
 sequenceDiagram
-	Client->>+Master: 发送文件名和要读取的位置(Offset)
-	Master-->>-Client: 返回 chunk server, handle, 版本号（一般返回3条）
-	Client->>Client: 缓存
-	Client->>+Chunk Server: 读取 Chunk
-	Chunk Server->>Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
-	Chunk Server-->>Client: 返回 Chunk 内容
+    Client->>+Master: 发送文件名和要读取的位置(Offset)
+    Master-->>-Client: 返回 chunk server, handle, 版本号（一般返回3条）
+    Client->>Client: 缓存
+    Client->>+Chunk Server: 读取 Chunk
+    Chunk Server->>Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
+    Chunk Server-->>Client: 返回 Chunk 内容
 ```
 
 如果在读取 Chunk 时，Client 未能正常连接 Chunk Server，或者 Chunk Server 校验失败，那么 Client 会去请求另一个 Chunk Server。
@@ -111,35 +111,35 @@ flowchart LR
     SCS -->|6. 返回操作结果| PCS
     PCS -->|7. 返回操作结果| Client
 ```
-在操作3中，Chunk 数据的发送与同步并不是等待文件全部接受后再向下一个服务器进行同步，而是一遍接受一遍发送。每个 Chunk Server向其最新的 Chunk Server 发送数据
 
+在操作3中，Chunk 数据的发送与同步并不是等待文件全部接受后再向下一个服务器进行同步，而是一遍接受一遍发送。每个 Chunk Server向其最新的 Chunk Server 发送数据
 
 ```mermaid
 sequenceDiagram
-	participant Master
-	participant Client
-	participant Nearest Chunk Server
-	participant Primary Chunk Server
-	participant Secondary Chunk Server
-	Client ->>+Master: 请求写操作
-	Master ->>Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
-	Master ->>-Client: 返回 Chunk Server 信息
-	par
-		Client ->> Nearest Chunk Server:同步 Chunk 数据
-	and
-		Nearest Chunk Server ->> Primary Chunk Server:同步 Chunk 数据
-	and
-		Primary Chunk Server ->> Secondary Chunk Server:同步 Chunk 数据
-	end
-	Client ->> Primary Chunk Server: 发送指令
-	par
-		Primary Chunk Server ->> Nearest Chunk Server: 发送指令
-		Nearest Chunk Server ->> Primary Chunk Server: 返回结果
-	and
-		Primary Chunk Server ->> Secondary Chunk Server: 发送指令
-		Secondary Chunk Server ->> Primary Chunk Server: 返回结果
-	end
-	Primary Chunk Server ->> Client: 返回结果
+    participant Master
+    participant Client
+    participant Nearest Chunk Server
+    participant Primary Chunk Server
+    participant Secondary Chunk Server
+    Client ->>+Master: 请求写操作
+    Master ->>Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
+    Master ->>-Client: 返回 Chunk Server 信息
+    par
+        Client ->> Nearest Chunk Server:同步 Chunk 数据
+    and
+        Nearest Chunk Server ->> Primary Chunk Server:同步 Chunk 数据
+    and
+        Primary Chunk Server ->> Secondary Chunk Server:同步 Chunk 数据
+    end
+    Client ->> Primary Chunk Server: 发送指令
+    par
+        Primary Chunk Server ->> Nearest Chunk Server: 发送指令
+        Nearest Chunk Server ->> Primary Chunk Server: 返回结果
+    and
+        Primary Chunk Server ->> Secondary Chunk Server: 发送指令
+        Secondary Chunk Server ->> Primary Chunk Server: 返回结果
+    end
+    Primary Chunk Server ->> Client: 返回结果
 ```
 
 ## 追加
@@ -147,8 +147,6 @@ sequenceDiagram
 追加在 GFS 中是一个常用的操作。GFS 中的追加不是在文件末尾进行追加，而是在文件后添加一个新的 Chunk。如果原本文件的最后一个 Chunk 未满也不会在后面追加。每次文件的追加都是在写一个全新的 Chunk，GFS 通过这种方式保证了数据的正确
 
 在一致性模型中，只有追加是定义但不一致的：其原因是如果有 Chunk Server 在追加过程中失败，Client 会重试此操作，在最终成功之前可能会有多次追加操作，会产生很多不一致的数据，但这些数据是无用且不影响的
-
-
 
 ## 文件快照
 
@@ -173,4 +171,3 @@ GFS 通过类似 COW 的方式建立文件的快照，以减少文件的复制�
 但也有劣势
 
 1.  可能会形成热点，导致大量的客户端请求集中在某几个chunkserver上。（可以通过客户端请求的次数和频率加副本减缓）
-

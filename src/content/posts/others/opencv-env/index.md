@@ -46,7 +46,7 @@ categories: ['C++', 'OpenCV']
 
 依次执行下列命令
 
-```pwsh
+```powershell
 mkdir build #创建 build 文件夹
 cd build #进入 build 文件夹
 cmake -G "MinGW Makefiles" .. #生成 makefile
@@ -82,7 +82,7 @@ mingw32-make install
 
 在 Linker 参数中加入以下链接库
 
-```raw
+```bash
 -lopencv_highgui460.dll -lopencv_calib3d460.dll -lopencv_core460.dll -lopencv_dnn460.dll -lopencv_features2d460.dll -lopencv_flann460.dll -lopencv_gapi460.dll -lopencv_imgcodecs460.dll -lopencv_imgproc460.dll -lopencv_ml460.dll -lopencv_objdetect460.dll -lopencv_photo460.dll -lopencv_stitching460.dll -lopencv_video460.dll -lopencv_videoio460.dll
 ```
 
@@ -96,12 +96,12 @@ mingw32-make install
 
 5. 测试
 
-```raw
+```cpp
 #include "opencv2/highgui.hpp"
 int main(){
-	cv::namedWindow("Test Windows");
-	cv::waitKey();
-	return 0;
+    cv::namedWindow("Test Windows");
+    cv::waitKey();
+    return 0;
 }
 ```
 

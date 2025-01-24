@@ -25,7 +25,7 @@ categories:
 在读入数字的时候首先将所有可能取的值存入 `std::set div2`, 然后对每个数 $i \in div2$,求出数 $a_i$ 到 $i$ 的所需的变化次数.找到最小的即可
 
 ```cpp
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 #include <limits>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
@@ -42,11 +42,11 @@ int main() {
   return 0;
 }
 // clang-format on
- 
+
 #define int ll
 std::vector<int> seq;
 std::set<int> div2;
- 
+
 int gain_op_times(int num, int target){
   if(num == target){
     return 0;
@@ -63,16 +63,16 @@ int gain_op_times(int num, int target){
   if(num / 2 > 0){
       res = std::min(res, (target - num/2) + 1 + times) ;
   }
- 
+
   return res;
 }
- 
+
 void solve(const std::size_t testcase) {
   int n, m;
   read(n, m);
   seq.resize(n);
   div2.clear();
- 
+
   rep(i, n) {
     int a;
     read(a);
@@ -82,7 +82,7 @@ void solve(const std::size_t testcase) {
       a/=2;
     }
   }
- 
+
   ll ans = std::numeric_limits<ll>::max();
   for(auto target: div2) {
     std::vector<int> diff(n);
@@ -96,6 +96,7 @@ void solve(const std::size_t testcase) {
 ```
 
 ## E - Identical Parity
+
 > 定义序列的 value 为该序列所有数字的和
 >
 > 判断是否存在长度为 $n$ 的排列, 他们所有长度为 $k$ 的子段的 value 具有相同的奇偶性.
@@ -112,9 +113,8 @@ void solve(const std::size_t testcase) {
 
 `签到`
 
-
 ```cpp
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -130,7 +130,7 @@ int main() {
   return 0;
 }
 // clang-format on
- 
+
 // clang-format off
 // ------------ Minify with Regex "^\s*(?!#)(.*)\n" -> " " ------------
 template <class A, class B> std::ostream &operator<<(std::ostream &s, std::pair<A, B> const &a) { return s << "(" << std::get<0>(a) << ", " << std::get<1>(a) << ")"; } template <size_t n, typename... T> typename std::enable_if<(n >= sizeof...(T))>::type print_tuple(std::ostream &, const std::tuple<T...> &) {} template <size_t n, typename... T> typename std::enable_if<(n < sizeof...(T))>::type print_tuple(std::ostream &os, const std::tuple<T...> &tup) { if (n != 0) os << ", "; os << std::get<n>(tup); print_tuple<n + 1>(os, tup); } template <typename... T> std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup) { os << "("; print_tuple<0>(os, tup); return os << ")"; } template <class T> std::ostream &print_collection(std::ostream &s, T const &a) { s << '['; for (auto it = std::begin(a); it != std::end(a); ++it) { s << *it; if (it != std::prev(end(a))) s << ", "; } return s << ']'; } template <class T, class U> std::ostream &operator<<(std::ostream &s, std::map<T, U> const &a) { return print_collection(s, a); } template <class T> std::ostream &operator<<(std::ostream &s, std::set<T> const &a) { return print_collection(s, a); } template <class T> std::ostream &operator<<(std::ostream &s, std::vector<T> const &a) { return print_collection(s, a); } void __debug_out() { std::cerr << std::endl; } template <typename T, class = typename std::enable_if<std::is_pointer<T>::value>::type> void __debug_out(T beg, T end) { std::cerr << '['; for (auto it = beg; it != end; it++) { std::cerr << *it; if (it != std::prev(end)) { std::cerr << ", "; } } std::cerr << ']' << std::endl; } template <typename H, typename... Tail> void __debug_out(H h, Tail... T) { std::cerr << " " << h; __debug_out(T...); }
@@ -149,7 +149,7 @@ void solve(const std::size_t testcase) {
     std::cin >> seq[i];
     std::reverse(seq[i].begin(), seq[i].end());
   }
- 
+
   ll ans = 0;
   auto mappend = [&ans](const std::string lhs,
                         const std::string rhs) -> std::string {
@@ -175,7 +175,7 @@ void solve(const std::size_t testcase) {
   };
   std::string mempty("");
   std::reduce(seq.begin(), seq.end(), mempty, mappend);
- 
+
   std::cout << ans << "\n";
 }
 ```

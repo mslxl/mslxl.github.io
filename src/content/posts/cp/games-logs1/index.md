@@ -9,9 +9,9 @@ categories:
 ## CF1844A. Subtraction Game
 
 > 输入两个数组 $a,b$
-> 
+>
 > 两个玩家将一摞$n$个石子堆上进行游戏，玩家一轮可以从石堆中移除 $a$ 个石子或 $b$ 个石子，不能行动的玩家输。
-> 
+>
 > 寻找石子堆的石子数量 $n$，使得无论第一个玩家如何行动，第二个玩家总能获胜
 
 `*800`
@@ -29,9 +29,9 @@ void solve() {
 ## CF1842A. Tenzing and Tsondu
 
 > Tsondu 和 Tenzing 正在玩纸牌游戏。Tsondu 有 $n$ 个能量为 $a_1, a_2, \ldots,a_n$ 怪物，Tenzing 有 $m$ 个能量为 $b_1, b_2, \ldots, b_m$的怪物
-> 
+>
 > Tsondu 和 Tenzing 轮流行动，Tsondu 先手。当能量为 $x$ 的怪物选择攻击能量为 $y$ 的怪物时，两个怪物的能量变为 $x-y$和$y-x$，当能量小于 0 时怪物死亡
-> 
+>
 > 怪物全部死亡的一方输。问 Tsondu 和 Tenzing 在最优决策下谁获胜（或平局）
 
 `*800`
@@ -59,7 +59,7 @@ void solve() {
 ## CF1841A. Game with Board
 
 > 黑板上有 $n$ 个数字 $1$，Alice 和 Bob 轮流从黑板上选择大于等于 $2$ 个元素进行合并（相加）
-> 
+>
 > Alice 先手，双方轮流行动，不能行动的人输。假设两人行动最优，输出最终谁获胜
 
 `*800`
@@ -84,13 +84,12 @@ main = (read <$> getLine) >>= ((flip replicateM_) solve)
 ## CF1834C. Game with Revesing
 
 > Alice 和 Bob 正在玩游戏，他们共有两个长度为 $n$ 的由小写字母组成的字符串 $S$ 和 $T$。Alice 和 Bob 轮流行动。
-> 
-> - Alice 每回合选择 $i \in [1,n]$ 和一个字符串 $S$ 或 $T$  和一个小写字母 $c$，并将选择的字符串中第 $i$ 个符号替换成 $c$
-> 
+>
+> - Alice 每回合选择 $i \in [1,n]$ 和一个字符串 $S$ 或 $T$ 和一个小写字母 $c$，并将选择的字符串中第 $i$ 个符号替换成 $c$
 > - Bob 选择一个字符串 $S$ 或 $T$，并将其反转
-> 
-> 游戏将进行到  $S = T$为止。
-> 
+>
+> 游戏将进行到 $S = T$为止。
+>
 > 定义游戏的持续时间为 Alice 和 Bob 行动的总次数。Alice 想最小化游戏时间，但 Bob 要最大化时间。当双方都最优行动时，游戏将在多少回合后结束
 
 `*1200`
@@ -131,18 +130,15 @@ void solve() {
 ## CF768E. Game of Stones
 
 > Sam 教 Jon 打游戏。游戏规则如下：
-> 
+>
 > - 游戏从 $n$ 推石子堆开始，编号 $1$ 到 $n$。第 $i$ 堆石子包含 $s_i$ 个石子
-> 
 > - 玩家轮流行动。每次行动必须从石子中移除到一些石子($>0$)
-> 
 > - 不能行动的人输
-> 
 > - 在每堆石子上移除的石子数量不能重复
-> 
+>
 > Sam 先手。请判断如果双方都最优决策，Jon 是否可以获胜
 
-`SG`  `Nim-Game` `*2100`
+`SG` `Nim-Game` `*2100`
 
 SG 函数为 `0 1 1 2 2 2 3 3 3 3...`
 
@@ -159,9 +155,8 @@ mex x = iter x 1 2 1
         iter i l r row | l <= i && i <= r = row
                        | otherwise = iter i (r + 1) (r + 2 + (r - l)) (row + 1)
 
-
 solve:: [Integer] -> Bool
-solve = (==) 0 . foldl1 xor . map mex 
+solve = (==) 0 . foldl1 xor . map mex
 
 main = do
     n <- read <$> getLine
@@ -206,7 +201,7 @@ int main(){
 ## CF197A. Plate Games
 
 > 两个玩家在一个长 $a$ 宽 $b$ 的桌子上轮流摆放半径为 $r$ 的盘子。盘子之间不能重叠，不能超过桌子边界。不能行动的人输
-> 
+>
 > 回答先手获胜或者后手获胜
 
 `对称博弈` `*1600`
@@ -241,7 +236,7 @@ void solve() {
     assert(i < 4 && j < 4);
     return m[i][j] + m[i + 1][j] + m[i][j + 1] + m[i + 1][j + 1];
   };
-  
+
   auto fwd = [&m](int i, int j) {
     assert(i < 3 && j < 3);
     int tmp =m[i][j];
@@ -250,7 +245,7 @@ void solve() {
     m[i + 1][j + 1] = m[i+1][j];
     m[i+1][j] = tmp;
   };
-  
+
   auto bck = [&m](int i, int j){
     int tmp = m[i][j];
     m[i][j] = m[i+1][j];

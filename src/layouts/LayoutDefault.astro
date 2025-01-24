@@ -5,11 +5,16 @@ import SiteNavigation from '~/components/SiteNavigation.astro'
 import SiteTitle from '~/components/SiteTitle.astro'
 import Root from './Root.astro'
 ---
+
 <Root>
-  <slot name="seo" slot="seo" >
+  <slot name="seo" slot="seo">
     <SiteSeo />
   </slot>
-  <div  class="h-100vh max-w-6xl min-w-390px mx-a grid-gap-x-28" p="7.5 lg:(y-0 x-20)" lg="grid cols-[3fr_1fr] rows-[1fr_9rem]">
+  <div
+    class="h-100vh max-w-6xl min-w-390px mx-a grid-gap-x-28"
+    p="7.5 lg:(y-0 x-20)"
+    lg="grid cols-[3fr_1fr] rows-[1fr_9rem]"
+  >
     <header
       class="transition-swup-header flex flex-col gap-2.5"
       m="7.5 lg:(x-0 t-20 b-4)"

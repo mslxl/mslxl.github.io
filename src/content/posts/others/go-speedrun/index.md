@@ -38,7 +38,7 @@ import (
 
 ```go
 func add(x int, y int) int {
-	return x + y
+    return x + y
 }
 // 缩写
 func minus(x, y int) int {
@@ -53,7 +53,7 @@ func swap(x, y string) (string, string) {
 func split10(sum int) (x, y int) {
     x = sum / 10
     y = sum % 10
-	return
+    return
 }
 
 ```
@@ -80,10 +80,10 @@ func main(){
     var value int
     var pi float64
     // 声明并赋值
-    e := 2.71828 
-    
+    e := 2.71828
+
     sqrt2 := math.Sqrt(float64(sqrt()))
-    
+
     var g complex64 = 3 + 2i;
 }
 ```
@@ -107,24 +107,24 @@ func main(){
 ```go
 package main
 func main(){
-    
+
     if x > 10 {}
-    
+
     if x > 10 {}
     else {}
-    
-    if x > 10 {} 
+
+    if x > 10 {}
     else if x < 10 {}
     else {}
 
-	// 使用简短语句
+    // 使用简短语句
     if v:= LoadSth(); v > 10 {
-        
+
     }
 }
 ```
 
-#### 分支 
+#### 分支
 
 ```go
 package main
@@ -156,8 +156,6 @@ func main(){
 }
 ```
 
-
-
 #### 循环
 
 ```go
@@ -171,7 +169,7 @@ func main(){
     for false {
         fmt.Println("Unreachable")
     }
-    
+
     // 相当于 C/C++ 中的 while true
     for {
         fmt.Println("Unstopable")
@@ -181,7 +179,7 @@ func main(){
 
 #### 推迟
 
-使用  `defer` 会将后面的语句放在当前作用域结束时执行
+使用 `defer` 会将后面的语句放在当前作用域结束时执行
 
 执行顺序如栈，总是先进后执行
 
@@ -210,10 +208,10 @@ package main
 import "fmt"
 func main(){
     var p *int // 指向 int 的指针 *int
-    
+
     num := 42
     ptr := &num // 通过 & 计算地址
-    
+
     fmt.Println(*ptr)
 }
 ```
@@ -222,13 +220,13 @@ func main(){
 
 ```go
 type Vertex struct {
-	X int
-	Y int
+    X int
+    Y int
 }
 
 var (
     v1 = Vertex{1, 2}
-    
+
     p = &Vertex{1, 2} // 这是一个指针
 )
 ```
@@ -247,16 +245,16 @@ var s []int = a[1:4] //行为像 python 中的切片
 
 r := []bool{true, false, true, true, false, true}
 s := []struct {
-		i int
-		b bool
-	}{
-		{2, true},
-		{3, false},
-		{5, true},
-		{7, true},
-		{11, false},
-		{13, true},
-	}
+        i int
+        b bool
+    }{
+        {2, true},
+        {3, false},
+        {5, true},
+        {7, true},
+        {11, false},
+        {13, true},
+    }
 ```
 
 #### 容量与长度
@@ -316,12 +314,12 @@ for _, v := range pow {
 var m map[string]Vertex
 
 var m = map[string]Vertex{
-	"Bell Labs": Vertex{
-		40.68433, -74.39967,
-	},
-	"Google": { // 若顶级类型只是一个类型名，你可以在文法的元素中省略它
-		37.42202, -122.08408,
-	},
+    "Bell Labs": Vertex{
+        40.68433, -74.39967,
+    },
+    "Google": { // 若顶级类型只是一个类型名，你可以在文法的元素中省略它
+        37.42202, -122.08408,
+    },
 }
 
 ```
@@ -344,11 +342,11 @@ elem, ok = m[key]
 
 ```go
 type Vertex struct {
-	X, Y float64
+    X, Y float64
 }
 
 func (v Vertex) Abs() float64 {
-	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 ```
 
@@ -356,8 +354,8 @@ func (v Vertex) Abs() float64 {
 
 ```go
 func (v *Vertex) Scale(f float64) {
-	v.X = v.X * f
-	v.Y = v.Y * f
+    v.X = v.X * f
+    v.Y = v.Y * f
 }
 ```
 
@@ -365,7 +363,7 @@ func (v *Vertex) Scale(f float64) {
 
 ```go
 type Abser interface {
-	Abs() float64
+    Abs() float64
 }
 ```
 
@@ -375,7 +373,7 @@ type Abser interface {
 
 #### 空接口
 
-指定了零个方法的接口值被称为 *空接口：*
+指定了零个方法的接口值被称为 _空接口：_
 
 ```go
 interface{}
@@ -446,7 +444,7 @@ type WowStruct[T int | float32, S []T] struct {
 }
 
 type NewType[T interface{*int}] []T //通过 interface 消歧义
-type NewType2[T interface{*int|*float64}] []T 
+type NewType2[T interface{*int|*float64}] []T
 
 func Add[T int | float32 | float64](a T, b T) T {
     return a + b
@@ -454,7 +452,7 @@ func Add[T int | float32 | float64](a T, b T) T {
 ```
 
 ```go
-var a Slice[int] = []int{1, 2, 3}  
+var a Slice[int] = []int{1, 2, 3}
 ```
 
 匿名结构体不支持泛型
@@ -493,15 +491,12 @@ type Float interface {
     ~float32 | ~float64
 }
 
-type Slice[T Int | Uint | Float] []T 
-
+type Slice[T Int | Uint | Float] []T
 
 type MyInt int
 var s2 Slice[MyInt]  // MyInt 底层类型是 int，所以可以用于实例化
 
 ```
-
-
 
 ## 并发
 
@@ -539,7 +534,7 @@ func main(){
 
 #### 带缓冲
 
-如果 Channel 没用缓冲，那么在 Channel 放入数据后，下一次读取线，放入数据是堵塞的 
+如果 Channel 没用缓冲，那么在 Channel 放入数据后，下一次读取线，放入数据是堵塞的
 
 ```go
 package main
@@ -563,8 +558,6 @@ v, ok := <-ch
 
 之后 `ok` 会被设置为 `false`。
 
-
-
 只有发送者才能关闭 Channel，关闭后将不可再发送数据。Channel 一般情况下不需要关闭
 
 #### range
@@ -581,16 +574,16 @@ v, ok := <-ch
 
 ```go
 func fibonacci(c, quit chan int) {
-	x, y := 0, 1
-	for {
-		select {
-		case c <- x:
-			x, y = y, x+y
-		case <-quit:
-			fmt.Println("quit")
-			return
-		}
-	}
+    x, y := 0, 1
+    for {
+        select {
+        case c <- x:
+            x, y = y, x+y
+        case <-quit:
+            fmt.Println("quit")
+            return
+        }
+    }
 }
 ```
 
@@ -604,8 +597,6 @@ Go 标准库中提供了 [`sync.Mutex`](https://go-zh.org/pkg/sync/#Mutex) 互�
 ### WaitGroup
 
 WaitGroup 可以通过`Add(int)` 的方式添加任务，在所有任务调用 `Done()`之前，调用 `Wait()` 函数都会导致堵塞
-
-
 
 ## 依赖管理
 
@@ -649,10 +640,10 @@ WaitGroup 可以通过`Add(int)` 的方式添加任务，在所有任务调用 `
 
 - 通过 `go get/go mod` 指令工具管理依赖包
 
-`go.mod` 文件并不是在项目中唯一。如果一个包需要被单独引用，它就应该创建一个  `go.mod` 文件。其内容如下
+`go.mod` 文件并不是在项目中唯一。如果一个包需要被单独引用，它就应该创建一个 `go.mod` 文件。其内容如下
 
-```go-mod
-module example/project/app 
+```go
+module example/project/app
 
 go 1.16
 

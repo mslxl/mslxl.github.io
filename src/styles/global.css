@@ -20,7 +20,9 @@ html {
 
 :where(a):not(.not-underline-hover) {
   --at-apply: 'underline-hover';
-  transition: color .3s ease 0s, background-color .3s ease 0s;
+  transition:
+    color 0.3s ease 0s,
+    background-color 0.3s ease 0s;
 }
 
 .prose {

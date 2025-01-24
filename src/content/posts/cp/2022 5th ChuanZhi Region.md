@@ -1,11 +1,10 @@
 ---
 title: 2022 第五届传智杯初赛
-date: 2022-12-29 
+date: 2022-12-29
 categories:
   - Competitive Programming
   - 传智杯
 ---
-
 
 # [A-莲子的软件工程学](https://www.luogu.com.cn/problem/P8869?contestId=92638)
 
@@ -149,7 +148,7 @@ int main() {
 
 值得一提的是如果想要统计数字 x 是几位数字，可以用 $\lg{(x)} + 1$ 计算。
 
-如果不愿意自己对齐空格，可以动态构造格式化字符串，然后用  `std::vformat` 或者 `printf`
+如果不愿意自己对齐空格，可以动态构造格式化字符串，然后用 `std::vformat` 或者 `printf`
 
 ```cpp
 
@@ -226,11 +225,12 @@ v &= m - 2u & 3u \le m \cr
 v &= \frac{m-u}{2} & 3u \gt m
 \end{cases}
 $$
+
 当我们枚举 $u$ 时，即可算出 $v$ 的取值，每次枚举都能求出一个极差，枚举所有值，找出极差的最小值即可。
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -298,10 +298,9 @@ void solve(const std::size_t testcase) {
 
 接下来就是简单的数学题了：
 
-
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -370,6 +369,7 @@ void solve(const std::size_t testcase) {
 ```
 
 # [F-二人的大富翁游戏](https://www.luogu.com.cn/problem/P8874)
+
 大模拟，不想写
 
 # [E-二人的花纹纸游戏](https://www.luogu.com.cn/problem/P8875)
@@ -382,7 +382,7 @@ void solve(const std::size_t testcase) {
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -471,5 +471,3 @@ void solve(const std::size_t testcase) {
   }
 }
 ```
-
-

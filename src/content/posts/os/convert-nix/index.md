@@ -6,8 +6,6 @@ categories:
   - NixOS
 ---
 
-
-
 用了几天时间折腾 NixOS，现在大概是能满足日常日常使用了，几天使用下来体验还算不错。这也不是我第一次使用 Linux 发行版了，但如果不是因为事先了解，初次使用肯定也是发愣的。
 
 不同于其他 Linux 发行版，NixOS 并没有遵守 FHS 标准，也就是说其他发行版的经验很难在 NixOS 同用。在刚安装时最明显的特点有两个：
@@ -17,9 +15,9 @@ categories:
 
 NixOS 几乎将所有的文件存储在 `/nix/store` 下，而后通过链接的方式放到对应的文件夹下，而 `/nix/store` 又是通过 `/etc/nixos/configuration.nix` 配置获得的。用户也是通过修改 `configuration.nix` 文件来修改系统配置甚至是单个用户的配置，在修改后使用 `nixos-rebuild switch` 命令应用新配置。这条命令实际上重新“构建“了一个新生代的系统，但之前的老年代并不会删除，用户仍然可以随时切换到之前配置的系统。因此 NixOS 也被称为滚不挂的系统（不作死的情况）。
 
-实际上 NixOS 经常被人诟病占用硬盘，上手难度高，软件打包困难等。这些问题确实存在，可能这也是  NixOS 使用人数少的原因。另一方面 NixOS 的配置非常依赖于查阅文档，但官方 Wiki 的部分条目其实是过时的，有时候不得不去一些论坛或者 Issue 去找解决方案。
+实际上 NixOS 经常被人诟病占用硬盘，上手难度高，软件打包困难等。这些问题确实存在，可能这也是 NixOS 使用人数少的原因。另一方面 NixOS 的配置非常依赖于查阅文档，但官方 Wiki 的部分条目其实是过时的，有时候不得不去一些论坛或者 Issue 去找解决方案。
 
-NixOS  的优点主要就是集中在可重复性和软件隔离上。可重复性即如果 `configuratoin.nix` 中的内容是相同的且为 pure 的，那么同一份配置文件会产生完全一样的系统。而软件隔离则是因为 NixOS 将几乎所有的软件都存放在 `/etc/nixos`中，这些软件可能是同一个程序的不同版本，他们可以在系统中同时存在，同时选择地依赖其他软件的某个特定版本，不会像其他系统一样发生冲突。
+NixOS 的优点主要就是集中在可重复性和软件隔离上。可重复性即如果 `configuratoin.nix` 中的内容是相同的且为 pure 的，那么同一份配置文件会产生完全一样的系统。而软件隔离则是因为 NixOS 将几乎所有的软件都存放在 `/etc/nixos`中，这些软件可能是同一个程序的不同版本，他们可以在系统中同时存在，同时选择地依赖其他软件的某个特定版本，不会像其他系统一样发生冲突。
 
 ## Nix
 
@@ -81,11 +79,11 @@ nixpkgs 的实现依赖 Nix 中的 derivation，在安装软件的时候可以�
 {stdenv,
  dpkg,
  wrapGAppsHook,
- fetchurl, 
+ fetchurl,
 
  lib,
  glib,
- electron, 
+ electron,
  gsettings-desktop-schemas,
  makeWrapper,
  gtk3,
@@ -159,7 +157,7 @@ in stdenv.mkDerivation  {
 use flake
 ```
 
- `flake.nix` 文件:
+`flake.nix` 文件:
 
 ```nix
 {
@@ -195,8 +193,6 @@ use flake
 每次在进入这个环境时都会自动应用 go1.20 的环境，而退出时会自动卸载环境，全过程十分的方便
 
 ![shot_1694711757](shot_1694711757.png)
-
-
 
 ---
 

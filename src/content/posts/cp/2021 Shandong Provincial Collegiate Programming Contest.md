@@ -30,7 +30,7 @@ categories:
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -133,7 +133,7 @@ int read(){
     int x=0,f=1; char ch=getchar();
     while(ch>'9'||ch<'0'){ if(ch=='-'){ f=-1; } ch=getchar(); }
     while(ch>='0'&&ch<='9'){ x=(x<<3)+(x<<1)+(ch^48); ch=getchar(); }
-    return x*f; 
+    return x*f;
 }
 
 int n,k;
@@ -222,13 +222,13 @@ int main(){
 }
 ```
 
-
 ## M - Matrix Problem
+
 > 给出一个 01 矩阵 C, 构造矩阵 A 和 B. 要求矩阵 A 和 B 的与运算结果为 C, 且 A 和 B 中的 1 互相联通
 
 `思维`
 
-如果在 C 的对应位置为 1, 则填充1,否则 A 填充奇数行和最左侧一列, B 填充偶数行和最右侧一列. 
+如果在 C 的对应位置为 1, 则填充1,否则 A 填充奇数行和最左侧一列, B 填充偶数行和最右侧一列.
 
 ```cpp
 #include<bits/stdc++.h>
@@ -237,7 +237,7 @@ int read(){
     int x=0,f=1; char ch=getchar();
     while(ch>'9'||ch<'0'){ if(ch=='-'){ f=-1; } ch=getchar(); }
     while(ch>='0'&&ch<='9'){ x=(x<<3)+(x<<1)+(ch^48); ch=getchar(); }
-    return x*f; 
+    return x*f;
 }
 
 const int maxn = 511;
@@ -247,7 +247,7 @@ int b[maxn][maxn];
 int c[maxn][maxn];
 
 int main(){
-    int n=read(),m=read(); 
+    int n=read(),m=read();
     for(int i=1;i<=n;i++){
         for(int j=1;j<=m;j++){
             a[i][j]=b[i][j]=c[i][j]=getchar()^48;

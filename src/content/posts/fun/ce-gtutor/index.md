@@ -45,9 +45,7 @@ description: 另一个自带的图形游戏，破解方式更自由
 
 发现在血量偏移$0010$的位置有一个疑似 bool 的字段，玩家是 0 ，敌人是 1。通过自动汇编判断该内存，使得当该字段为 1 时将 $(RAX+60)$ 修改为 0 ，否则不做修改。
 
-
-
-```assembly
+```text
 [ENABLE]
 // 该选项被启用时执行
 alloc(newmem,2048,"gtutorial-x86_64.exe"+400E3)  //申请一块新内存
@@ -55,7 +53,7 @@ label(returnhere) // 注册 3 个 label（类似于汇编中的 label）
 label(originalcode)
 label(exit)
 
-newmem: 
+newmem:
 cmp [rax+60+10],0
 je exit
 // 如果 [rax + 60 + 10] 等于 0， 跳转到 exit。否则继续向下执行 originalcode
@@ -74,7 +72,6 @@ jmp newmem // 跳转到 newmem 标签
 nop
 returnhere:
 
-
 [DISABLE]
 // 当该选项被禁用时，释放申请的内存，并将修改的指令回复。
 dealloc(newmem)
@@ -90,22 +87,20 @@ db 29 50 60 C3 00 00
 
 我们可以通过通过下述代码进行实验：
 
-```assembly
+```text
 [ENABLE]
 alloc(newmem,2048,"gtutorial-x86_64.exe"+400E3)
 label(returnhere)
 label(originalcode)
 label(exit)
 
-newmem: 
+newmem:
 sub [rax+60],edx
 cmp [rax+60+10],0
 je exit
 
-
 originalcode:
 mov [rax+60],0
-
 
 exit:
 ret
@@ -116,7 +111,6 @@ jmp returnhere
 jmp newmem
 nop
 returnhere:
-
 
 [DISABLE]
 dealloc(newmem)
@@ -139,15 +133,14 @@ db 29 50 60 C3 00 00
 ![image-20240815000050219](image-20240815000050219.png)
 
 ### 传送敌人
+
 使用扫描器，寻找敌人的坐标
 
 > [!tip]
 >
 > 合理利用游戏赠送的暂停功能
 
-
-
-通过 `What writes this memory`  发现有3个指令写了这个地址。
+通过 `What writes this memory` 发现有3个指令写了这个地址。
 
 ![image-20240815003756240](image-20240815003756240.png)
 
@@ -209,9 +202,7 @@ db 29 50 60 C3 00 00
 
 因此将这两条全部填充为 nop 可以删除重力。有关这两条代码究竟是怎么搭配的，还希望有了解的人讲解一下。因此现在我们有一种飞行思路：
 
-
-
-```assembly
+```text
 [ENABLE]
 "gtutorial-x86_64.exe"+410FE:
 db 90 90 90 90 90
@@ -233,4 +224,3 @@ movss [rax+28],xmm9
 ![ ](recording-1723657217223-6.gif)
 
 ![image-20240815014156224](image-20240815014156224.png)
-

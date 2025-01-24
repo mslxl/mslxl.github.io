@@ -25,7 +25,6 @@ categories:
 > - You will be tempted to take shortcuts, such as leaving out some of the $\epsilon$ transitions
 > - Do not do it. Memorize these four patterns. They will keep you out of trouble.
 
-
 如果预先将题目中的 BNF 处理成 LL(1) 类型的文法，可以进一步优化速度，但是训练的时候推了一下，没写。
 附当时的推导结果:
 
@@ -52,7 +51,6 @@ const int INF = std::numeric_limits<int>::max();
 
 using PII = std::pair<int, int>; // pair of <int,int>
 using State = std::vector<std::pair<int, int>>;
-
 
 const int epsilonEdge = 0;
 
@@ -149,7 +147,6 @@ public:
 };
 #pragma clang diagnostic pop
 
-
 int main(){
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
@@ -164,7 +161,6 @@ int main(){
     std::deque<PII> deq;
     dis[0][0] = 0;
     deq.emplace_back(0,0);
-
 
     const auto m = str.length();
     while(!deq.empty()){
@@ -207,14 +203,14 @@ int main(){
     }
     std::cout << dis[nfaSize - 1][m];
 
-
     return 0;
 }
 ```
 
 # D - Journey to Un'Goro
+
 > 路线中仅包含红蓝两种颜色。输入一个整数，构造一个这样的路线，使的从 $i$ 出发到达$j$经过的红色数量为奇数的路径的数量最大。
-> 
+>
 > $1 \le i \le j \le n$
 >
 > 输出满足要求的$(i,j)$的最大数量和这些路线。当路线数量大于100个时，仅输出字典序小的前100个。
@@ -237,7 +233,7 @@ int main(){
 
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -306,8 +302,6 @@ void solve(const std::size_t testcase) {
   dfs(0, 0, 1, false);
 }
 ```
-
-
 
 # F - Kobolds and Catacombs
 
@@ -391,10 +385,9 @@ int main() {
 
 ![](/assets/meme/neko_brains_overloaded.jpg)
 
-
 ```cpp
 // clang-format off
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 #include <limits>
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template <typename T> inline typename std::enable_if<std::is_integral<T>::value>::type read(T &x){ char c;T f=1; while(!isdigit(c=getchar())) if(c=='-')f=-1; x=(c&15); while(isdigit(c=getchar())) x= (x<<1) + (x<<3) + (c&15); x*=f; } template <typename T, typename... A> inline void read(T &value, A &..._t) { read(value), read(_t...); }
@@ -483,6 +476,7 @@ void solve(const std::size_t testcase) {
 加起来即可。
 
 **先看第一个式子(其中 $[P]$ 表示艾弗森括号)**
+
 $$
 \sum^{HM}_{T=0} [T(H-1) \mod HM \le A]
 $$
@@ -496,7 +490,6 @@ $\sum^{HM}_{T=0}[\frac{T(H-1)}{G} \mod \frac{HM}{G} \le \lfloor \frac{A}{G}\rflo
 
 也就是相当于把 $[0, HM)$ 平均分成 $G$ 段，每一段的 $T$ 都模一个 $\frac{HM}{G}$ 的完全剩余系，，
 每一段的答案都是$\lfloor \frac{A}{G} \rfloor + 1$。即第一个式子的所有答案之和为 $G * (\lfloor \frac{A}{G} \rfloor + 1)$
-
 
 同理，我们处理第二个式子，得到答案为 $G * (2\lfloor \frac{A}{G} \rfloor + 1)$
 
@@ -516,9 +509,9 @@ int main(){
 }
 ```
 
-*~~吐槽一下我队友在计算过程中把向下取整掉了~~*
+_~~吐槽一下我队友在计算过程中把向下取整掉了~~_
 
-*~~不过这位现场百度5分钟内就把完全剩余系学会了，他就是我的神，tql~~*
+_~~不过这位现场百度5分钟内就把完全剩余系学会了，他就是我的神，tql~~_
 
 # K - Scholomance Academ
 
@@ -529,7 +522,6 @@ int main(){
 **以下翻译的术语可能并不正确**
 
 > 二元分类是一种对已有实例进行分类的算法，分类结果只能是 `positive(+)` 或 `negative(-)`。
->
 >
 > 典型的二元分类算法用一个函数 $S$ 和一个阈值 $\theta$ 进行，当实例的分数 $S(x)\ \ge \theta$ 时，实例x被分类为 `positive`，否则就是 `negative`
 > 显然不同的阈值 $\theta$ 会产生不同的分类结果。
@@ -545,7 +537,7 @@ int main(){
 > 你现在需要评估一个分类器的性能，这个分类器在不同的阈值 $\theta$ 下表现的 $TPR$ 与 $FPR$ 不同。记阈值为 $\theta$ 时 TPR 和 FPR 为 $TPR(\theta)$ 和 $FPR(\theta)$。那么 area under curve(AUC) 为
 >
 > $$AUC=\int^1_0 \max_{\theta \in R}\\{TPR(\theta)\mid FPR(\theta) \le r\\}dr$$
-> 
+>
 > 式子中被积函数称为 receiver operating characteristic(ROC)，意为当 $FPR(\theta) \le r$ 时 $TPR$的最大值。
 >
 > 例如现在有三个测试数据，当阈值取值为$\theta=30$时，有3个 TP, 2个 FP,2个TN，1个 FN。
@@ -594,7 +586,6 @@ struct Rect{
 ll FalseNegative=0, TrueNegative=0;
 ll TruePositive=0, FalsePositive=0;
 ld ans = 0, LastX;
-
 
 int main(){
     ll n;

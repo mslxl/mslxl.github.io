@@ -15,7 +15,7 @@ description: 为了准备课程论文和毕业论文，我决定魔改一份 LaT
 
 ## 创建 Logger
 
-首先 whu 为 `\msg_new`  等函数创建了一个别名
+首先 whu 为 `\msg_new` 等函数创建了一个别名
 
 ```tex
 %tag 简化-msg-模块的函数
@@ -190,8 +190,6 @@ description: 为了准备课程论文和毕业论文，我决定魔改一份 LaT
 
 `\__whu_spread_box_with_end_spaces` 同理，只是在最后重新添加了 `0.19cm` 的空白
 
-
-
 ### 带圈数字
 
 ```tex
@@ -205,8 +203,6 @@ description: 为了准备课程论文和毕业论文，我决定魔改一份 LaT
 ```
 
 为用户创建 `circlenumber` 命令，可创建带圈数字。如果第一个参数为 true 则使用 tikz 创建;否则使用 Unicode
-
-
 
 ```tex
 \cs_new:Npn \__whu_circled_number:n #1
@@ -276,37 +272,37 @@ if51 -->|"Y"| add32b0 --> finish
     % 根据数字大小设置压缩系数
     \fp_set:Nn \l__whu_tikz_circled_number_xscale_fp
       {
-        \int_compare:nNnTF {#1} < { 10 } 
+        \int_compare:nNnTF {#1} < { 10 }
           { 0.9 }
           {
             \int_compare:nNnTF {#1} < { 100 }
               { 0.7 }
               { 0.5 }
-          } 
+          }
       }
     \fp_set:Nn \l__whu_tikz_circled_number_yscale_fp
       {
-        \int_compare:nNnTF {#1} < { 10 } 
+        \int_compare:nNnTF {#1} < { 10 }
           { 0.9 }
           {
             \int_compare:nNnTF {#1} < { 100 }
               { 0.8 }
               { 0.6 }
-          } 
+          }
       }
     % 获取数字的高度
     \hbox_set:Nn \l_tmpa_box {#1}
     \dim_set:Nn \l__whu_tikz_circled_number_total_hegiht_dim
       { \box_ht:N \l_tmpa_box + \box_dp:N \l_tmpa_box  }
     % 设置圆的半径
-    \dim_set:Nn \l__whu_tikz_circled_number_radius_dim 
+    \dim_set:Nn \l__whu_tikz_circled_number_radius_dim
       { \dim_eval:n { \l__whu_tikz_circled_number_total_hegiht_dim / 2 + 0.34 ex } }
     % 绘制
     \tikz [ baseline ]
       {
         \node
           [ inner~sep = 0pt, outer~sep = 0pt ]
-          at (0, \dim_use:N \l__whu_tikz_circled_number_total_hegiht_dim / 2 ) 
+          at (0, \dim_use:N \l__whu_tikz_circled_number_total_hegiht_dim / 2 )
           {
             \hbox_set:Nn \l_tmpa_box
               {
@@ -315,10 +311,10 @@ if51 -->|"Y"| add32b0 --> finish
                   {#1}
               }
             \makebox[0.35em][c]
-              { 
+              {
                 \box_scale:Nnn \l_tmpa_box
                   { \fp_use:N \l__whu_tikz_circled_number_xscale_fp }
-                  { \fp_use:N \l__whu_tikz_circled_number_yscale_fp } 
+                  { \fp_use:N \l__whu_tikz_circled_number_yscale_fp }
                 \box_use_drop:N \l_tmpa_box
               }
           };
@@ -338,7 +334,7 @@ tikz 画图硬汉
     \hbox_set:Nn \l__whu_tmpa_box {#2}
     \dim_set:Nn #1 { \box_wd:N \l__whu_tmpa_box }
   }
-  
+
 \cs_generate_variant:Nn \__whu_get_text_width:Nn { NV }
 
 \cs_new:Npn \__whu_get_max_text_width:NN #1#2
@@ -529,6 +525,7 @@ tikz 画图硬汉
 ![issue-geometry-origin](61171943-ded48a00-a56d-11e9-8d03-e1dfd52e742c.png)
 
 [^2]: [LaTeX系列笔记(5)-行距](https://zhuanlan.zhihu.com/p/138408387)
+
 [^3]: [中文版心设计的疑难与最佳实践](https://github.com/CTeX-org/forum/issues/47#issuecomment-511120397)
 
 ### 给预加载的宏包传递选项
@@ -555,11 +552,11 @@ tikz 画图硬汉
 \AtEndOfPackageFile* { xeCJK }
   {
     \msg_redirect_name:nnn { xeCJK } { CJKfamily-redef } { none }
-    \defaultCJKfontfeatures { Script  = CJK }   
+    \defaultCJKfontfeatures { Script  = CJK }
   }
 ```
 
- 在包执行结束后进行消息重定向，以达到丢弃消息的目的
+在包执行结束后进行消息重定向，以达到丢弃消息的目的
 
 ### 加载包
 
@@ -592,8 +589,6 @@ tikz 画图硬汉
     \RequirePackage { hyperref }
   }
 ```
-
-
 
 ## 页面尺寸设置
 
@@ -654,7 +649,7 @@ tikz 画图硬汉
       }
   }
 
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 开题报告
     {1} { \__whu_proposal_set_paper_size: }
@@ -693,7 +688,6 @@ tikz 画图硬汉
 `\cleardouble` 和 `\clearpage` 在大部分时间是一致的，但 `\cleardoublepage` 同时还会检查页码。如果当前的页码是奇数并且 typesettings 是 `twosided` 时，`\cleardoublepage` 还会再多插入一页，使新的一页仍是奇数页[^5]。如果启用了 `library` 选项，则不会再新插入一页
 
 [^5]: [Comparison between \newpage, \clearpage and \pagebreak, etc.?](https://tex.stackexchange.com/questions/497746/comparison-between-newpage-clearpage-and-pagebreak-etc)
-
 
 ## 字体配置
 
@@ -742,9 +736,7 @@ tikz 画图硬汉
 
 用于设置字体
 
-
-
- ### 字体配置项
+### 字体配置项
 
 ```tex
 %tag 定义键
@@ -756,7 +748,7 @@ tikz 画图硬汉
     font .value_required:n = true,
     math-font .choices:nn =
       { xits, termes, default }
-      { 
+      {
         \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : }
         \tl_gset_eq:NN \g__whu_style_math_font_choice_tl \l_keys_choice_tl
       },
@@ -772,7 +764,7 @@ tikz 画图硬汉
 
 在 `whu/style` 中添加了多个与字体相关的项，在设置该项时会调阅[前面的](#字体配置预备函数)配置语句
 
-[^4]:[xeCJK](http://mirrors.ibiblio.org/CTAN/macros/xetex/latex/xecjk/xeCJK.pdf)
+[^4]: [xeCJK](http://mirrors.ibiblio.org/CTAN/macros/xetex/latex/xecjk/xeCJK.pdf)
 
 ### 西文字体配置预备函数
 
@@ -790,7 +782,7 @@ tikz 画图硬汉
 %tag xits
 \cs_new_protected:Npn \__whu_style_font_set_xits:
   {
-    \setmainfont { XITS } 
+    \setmainfont { XITS }
       [
         Extension      = .otf,
         UprightFont    = *-Regular,
@@ -829,11 +821,11 @@ tikz 画图硬汉
 %tag 数学字体设置 (math font setting)
 \cs_new_protected:Npn \__whu_style_math_font_set_xits:
   {
-    \setmathfont { XITSMath-Regular.otf } 
-      [ 
+    \setmathfont { XITSMath-Regular.otf }
+      [
         BoldFont     = XITSMath-Bold.otf,
       ]
-    \setmathfont { XITSMath-Regular.otf } 
+    \setmathfont { XITSMath-Regular.otf }
       [
         range        = {cal, bfcal},
         StylisticSet = 01
@@ -868,7 +860,7 @@ tikz 画图硬汉
       }
       {
         \__whu_set_cjk_main_font:nn { SimSun }
-          { 
+          {
             BoldFont       = SimHei,
             ItalicFont     = KaiTi,
             SlantedFont    = KaiTi,
@@ -900,8 +892,8 @@ tikz 画图硬汉
         \__whu_set_cjk_mono_font:nn { STFangsong }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
         \__whu_set_cjk_font_kaishu:nn { Kaiti~ SC~ Regular }
-          { 
-            BoldFont      = Kaiti~ SC~ Bold, 
+          {
+            BoldFont      = Kaiti~ SC~ Bold,
             AutoFakeSlant = 0.167
           }
       }
@@ -923,10 +915,10 @@ tikz 画图硬汉
         \__whu_set_cjk_mono_font:nn { STFangsong }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
         \__whu_set_cjk_font_kaishu:nn { Kaiti~ SC~ Regular }
-          { 
-            BoldFont       = Kaiti~ SC~ Bold, 
-            ItalicFont     = *, 
-            SlantedFont    = *, 
+          {
+            BoldFont       = Kaiti~ SC~ Bold,
+            ItalicFont     = *,
+            SlantedFont    = *,
             BoldItalicFont = Kaiti~ SC~ Bold
           }
       }
@@ -999,7 +991,7 @@ tikz 画图硬汉
           }
         \__whu_set_cjk_font_kaishu:nn { FZKai-Z03 }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 } 
+        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
       }
       {
@@ -1023,7 +1015,7 @@ tikz 画图硬汉
             ItalicFont     = *,
             BoldItalicFont = *
           }
-        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 } 
+        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 }
           {
             BoldFont       = *,
             ItalicFont     = *,
@@ -1079,7 +1071,7 @@ tikz 画图硬汉
 
 [^6]: [etoolbox book](http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/etoolbox/etoolbox.pdf)
 
- 在 preamble 的最后（`\documentclass` 命令和 `\begin{document}` 命令之间）添加字体使用语句
+在 preamble 的最后（`\documentclass` 命令和 `\begin{document}` 命令之间）添加字体使用语句
 
 当 `\g__whu_style_math_font_choice_tl` 为 `default` 时使用 `Ralph Smith's Formal Script` 字体。接下来声明了一个名为 `rsfs` 的字体族（font family），并设置了其 skew 字符（倾斜字符）为 127。这个设置可以确保字体在倾斜时不会出现问题。
 
@@ -1109,7 +1101,7 @@ tikz 画图硬汉
   {
     \keys_set:nn { ctex }
       {
-        chapter = 
+        chapter =
           {
             numbering   = false,
             format      = \zihao{2}\bfseries\centering,
@@ -1118,7 +1110,7 @@ tikz 画图硬汉
             pagestyle   = empty,
             titleformat = \__whu_spread_box_with_quad:n
           },
-        section = 
+        section =
           {
             number      = \chinese{section},
             name        = {,、},
@@ -1133,7 +1125,7 @@ tikz 画图硬汉
   {
     \keys_set:nn { ctex }
       {
-        chapter = 
+        chapter =
           {
             numbering   = false,
             format      = \zihao{3}\bfseries\centering,
@@ -1141,7 +1133,7 @@ tikz 画图硬汉
             afterskip   = 7.5ex,
             pagestyle   = empty
           },
-        section = 
+        section =
           {
             number      = \chinese{section},
             name        = {,、},
@@ -1158,7 +1150,7 @@ tikz 画图硬汉
       {
         % 编号到 subsubsection
         secnumdepth = 3,
-        chapter = 
+        chapter =
           {
             format       = \zihao{-2}\sffamily\centering,
             number       = \arabic{chapter},
@@ -1169,7 +1161,7 @@ tikz 画图硬汉
             fixskip      = true,
             pagestyle    = bachelor-mainmatter
           },
-        section = 
+        section =
           {
             format       = \zihao{4}\sffamily,
             numberformat = \rmfamily,
@@ -1177,7 +1169,7 @@ tikz 画图硬汉
             afterskip    = 0.5 \baselineskip,
             fixskip      = true,
           },
-        subsection = 
+        subsection =
           {
             format       = \zihao{-4}\sffamily,
             numberformat = \rmfamily,
@@ -1185,7 +1177,7 @@ tikz 画图硬汉
             afterskip    = 0.5 \baselineskip,
             fixskip      = true,
           },
-        subsubsection = 
+        subsubsection =
           {
             format       = \zihao{-4}\sffamily,
             numberformat = \rmfamily,
@@ -1223,7 +1215,7 @@ tikz 画图硬汉
       {
         % 编号到 subsubsection
         secnumdepth = 3,
-        chapter = 
+        chapter =
           {
             format      = \zihao{-2}\sffamily\raggedright,
             number      = \arabic{chapter},
@@ -1232,21 +1224,21 @@ tikz 画图硬汉
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
           },
-        section = 
+        section =
           {
             format      = \zihao{4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsection = 
+        subsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsubsection = 
+        subsubsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
@@ -1283,7 +1275,7 @@ tikz 画图硬汉
       {
         % 编号到 subsubsection
         secnumdepth = 3,
-        chapter = 
+        chapter =
           {
             format      = \zihao{-2}\sffamily\raggedright,
             number      = \arabic{chapter},
@@ -1292,21 +1284,21 @@ tikz 画图硬汉
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
           },
-        section = 
+        section =
           {
             format      = \zihao{4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsection = 
+        subsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsubsection = 
+        subsubsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
@@ -1341,17 +1333,17 @@ tikz 画图硬汉
 
 创建不同的函数用于适配不同的用途，主要包含以下属性:
 
-| Key                  | Desc                                                         |
-| -------------------- | ------------------------------------------------------------ |
-| chapter/numbering    | 章节编号                                                     |
-| chapter/format       | 章节标题格式                                                 |
-| chapter/number       | 章编号内容，例如阿拉伯数字、罗马数字等                       |
-| chapter/numberformat | 章编号格式                                                   |
-| chapter/beforeskip   | 章节标题之前的垂直间距，设置为负数即向上移动                 |
+| Key                  | Desc                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| chapter/numbering    | 章节编号                                                                                       |
+| chapter/format       | 章节标题格式                                                                                   |
+| chapter/number       | 章编号内容，例如阿拉伯数字、罗马数字等                                                         |
+| chapter/numberformat | 章编号格式                                                                                     |
+| chapter/beforeskip   | 章节标题之前的垂直间距，设置为负数即向上移动                                                   |
 | chapter/afterskip    | 章节标题之后的垂直间距。 `5ex plus 1ex minus 1ex` 意为5 行高，最多扩展 1 行高，最少减少 1 行高 |
-| chapter/pagestyle    | 章节页眉页脚样式设置为空白                                   |
-| chapter/titleformat  | 章节标题的格式                                               |
-| chapter/fixskip      | 调整章标题前后的垂直间距                                     |
+| chapter/pagestyle    | 章节页眉页脚样式设置为空白                                                                     |
+| chapter/titleformat  | 章节标题的格式                                                                                 |
+| chapter/fixskip      | 调整章标题前后的垂直间距                                                                       |
 
 对于 `section`、`subsection`、`subsubsection` 等同理
 
@@ -1385,25 +1377,25 @@ tikz 画图硬汉
 ### 判断论文种类
 
 ```tex
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2}
       {
         \__whu_bachelor_set_enumerate_format:
-        \__whu_bachelor_set_ctex_format: 
+        \__whu_bachelor_set_ctex_format:
       }
     % 硕士
     {3}
       {
         \__whu_master_set_enumerate_format:
-        \__whu_master_set_ctex_format: 
+        \__whu_master_set_ctex_format:
       }
     % 博士
     {4}
       {
         \__whu_doctor_set_enumerate_format:
-        \__whu_doctor_set_ctex_format: 
+        \__whu_doctor_set_ctex_format:
       }
   }
 
@@ -1432,14 +1424,14 @@ tikz 画图硬汉
   {
     \fancyhf { }
     \fancyfoot[C] { \zihao{5} \Roman{page} }
-    \renewcommand \headrulewidth { 0pt } 
+    \renewcommand \headrulewidth { 0pt }
   }
 \fancypagestyle { bachelor-mainmatter }
   {
     \fancyhf { }
     \fancyfoot[C] { \zihao{5} \arabic{page} }
     \fancyhead[C] { \zihao{5} \__whu_spread_box:nn {8cm} {武汉大学本科毕业论文（设计）}}
-    \renewcommand \headrulewidth { 0.5pt } 
+    \renewcommand \headrulewidth { 0.5pt }
     \setlength{\headheight}{13pt}
   }
 %tag 硕士
@@ -1484,7 +1476,7 @@ tikz 画图硬汉
 
 其中 `\fancyhf` 用于清除当前的页眉页脚设置，然后调用 `\fancyhead` 设置页眉也页脚。在页眉和页脚的设置中，`C` 表示居中，类似的有 `L` 和 `R`。`E` 和 `O` 表示 even 和 odd
 
-在最后使用 `\AddToHook`在 `cmd/mainmatter/after`之后执行 `\pagestyle` 设置相关样式，其目的是统一后记 (backmatter) 的样式与 mainmatter 
+在最后使用 `\AddToHook`在 `cmd/mainmatter/after`之后执行 `\pagestyle` 设置相关样式，其目的是统一后记 (backmatter) 的样式与 mainmatter
 
 ## 个人信息配置项
 
@@ -1668,7 +1660,7 @@ tikz 画图硬汉
       }
   }
 %tag 执行初始化
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2} { \__whu_bachelor_info_initial: }
@@ -1694,45 +1686,45 @@ tikz 画图硬汉
 %tag 本科任务书个人信息
 \NewDocumentCommand \ProposalTasksinformation { }
   {
-    \par \noindent 
+    \par \noindent
     毕业论文（设计）题目：\CJKunderline*{ \l__whu_info_title_tl }\\[5pt]
-    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl 
-    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl 
-    姓名：\CJKunderline*{ \l__whu_info_author_tl } 
+    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl
+    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl
+    姓名：\CJKunderline*{ \l__whu_info_author_tl }
   }
 % 本科开题报告个人信息
 \NewDocumentCommand \ProposalReportinformation { }
   {
-    \par \noindent 
+    \par \noindent
     论文题目：\CJKunderline*{ \l__whu_info_title_tl }\\[10pt]
-    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl 
-    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl 
-    姓名：\CJKunderline*{ \l__whu_info_author_tl } 
+    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl
+    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl
+    姓名：\CJKunderline*{ \l__whu_info_author_tl }
   }
 % 本科任务书落款
 \NewDocumentCommand \ProposalTasksSignature { }
   {
-    \dim_compare:nNnTF 
+    \dim_compare:nNnTF
       { \pagetotal } < { .5 \textheight }
       { \vfil \null \vfil }
       {
-        \dim_compare:nNnTF 
+        \dim_compare:nNnTF
           { \pagegoal - \pagetotal } < { 8em }
           { \vfill }
           { \vfil \null \vfil }
       }
     \noindent
-    指导老师签名：\CJKunderline*{\hspace*{10em}}  \hfill 
+    指导老师签名：\CJKunderline*{\hspace*{10em}}  \hfill
     年 \hspace*{2em} 月 \hspace*{2em} 日
   }
 % 本科任务书落款
 \NewDocumentCommand \ProposalReportSignature { }
   {
-    \dim_compare:nNnTF 
+    \dim_compare:nNnTF
       { \pagetotal } < { .5 \textheight }
       { \vfil }
       {
-        \dim_compare:nNnTF 
+        \dim_compare:nNnTF
           { \pagegoal - \pagetotal } < { 8em }
           { \vfill }
           { \vfil \null \vfil }
@@ -1740,7 +1732,7 @@ tikz 画图硬汉
     \begin{flushright}
       指导老师签名：\hspace*{8em} \null\\[5pt]
       年 \hspace*{2em} 月 \hspace*{2em} 日
-    \end{flushright} 
+    \end{flushright}
   }
 
 ```
@@ -1760,7 +1752,6 @@ haft -->|N| em -->|Y| fill
 em -->|N| fnf
 fill -->endd
 fnf --> endd
-
 
 ```
 
@@ -1785,7 +1776,6 @@ fnf --> endd
     \__whu_bachelor_cover_i_date_zh:
     \restoregeometry
   }
-
 
 %tag logo-and-type
 \cs_new_protected:Npn \__whu_bachelor_cover_i_logo_and_type:
@@ -1918,7 +1908,7 @@ fnf --> endd
       \centering
       \includegraphics [ width = 5 cm ] { logo / whu-name.pdf }
       \skip_vertical:n { 0.57cm }
-      { \zihao{2} \bfseries 
+      { \zihao{2} \bfseries
         \__whu_spread_box_with_quad:n { \c__whu_name_type_tl } }
       \vfil
     \end{minipage}\par
@@ -2046,7 +2036,7 @@ fnf --> endd
 ### 博士
 
 ```tex
-%region 博士 
+%region 博士
 \cs_set_eq:NN \__whu_doctor_cover_i: \__whu_master_cover_i:
 %endregion 博士
 %endregion 中文封面
@@ -2088,8 +2078,8 @@ fnf --> endd
   {
     \node [ anchor = north ] at
       ( [ shift = { ( 0 , -0.07\textheight ) } ] current~page~text~area.north )
-      { 
-        \bfseries 
+      {
+        \bfseries
         \parbox { 0.6\textwidth }
           {
             \centering \large \linespread{1.4}\selectfont
@@ -2103,7 +2093,7 @@ fnf --> endd
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.29\textheight ) } ] current~page~text~area.north )
-      { 
+      {
         \begin{minipage}{\textwidth}
           \zihao{2} \centering \linespread{1.2}\selectfont
           \l__whu_info_title_en_tl
@@ -2123,7 +2113,7 @@ fnf --> endd
           \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl\\
           \c__whu_name_author_en_tl : & \textsc{ \l__whu_info_author_en_tl } \\
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
-        \end{tabular}       
+        \end{tabular}
       };
   }
 %tag 学校名和logo
@@ -2175,8 +2165,6 @@ fnf --> endd
 
 不太明白这里为什么要用 `tikzpicture` 环境，WHU 这么干一定有它的道理
 
-
-
 ### 硕士
 
 ```tex
@@ -2209,7 +2197,7 @@ fnf --> endd
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.1\textheight ) } ] current~page~text~area.north )
-      { 
+      {
         \begin{minipage}{\textwidth}
           \zihao{2} \centering \linespread{1.2}\selectfont
           \l__whu_info_title_en_tl
@@ -2233,7 +2221,7 @@ fnf --> endd
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
           \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl \\
           \c__whu_name_research_area_en_tl : & \l__whu_info_research_area_en_tl
-        \end{tabular}       
+        \end{tabular}
       };
   }
 %tag 学校名和 logo
@@ -2264,7 +2252,7 @@ fnf --> endd
   {
     \begin{tikzpicture}[ remember~picture, overlay, align=center ]
       \node at ([shift = {(0,-4.16cm)}]current~page~text~area.north)
-        { 
+        {
           \begin{minipage}{\textwidth}
             \zihao{2} \centering \linespread{1.2}\selectfont
             \l__whu_info_title_en_tl
@@ -2274,11 +2262,11 @@ fnf --> endd
         { \zihao{4} By \\ \l__whu_info_author_en_tl };
       \node at ([shift={(0,-2.75cm)}]current~page~text~area.center)
         { \zihao{4} Supervised~by \\
-          \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl 
+          \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl
           \l__whu_info_supervisor_en_tl };
       \node [anchor=south] at ([shift={(0,1.45cm)}]current~page~text~area.south)
-        { \zihao{4} Wuhan~University \\ 
-          \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
+        { \zihao{4} Wuhan~University \\
+          \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl
           \int_use:N \l__whu_info_year_int };
       % 用于对比测试
       % \node at (current~page.center)
@@ -2311,7 +2299,7 @@ fnf --> endd
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.1\textheight ) } ] current~page~text~area.north )
-      { 
+      {
         \begin{minipage}{\textwidth}
           \zihao{2} \centering \linespread{1.2}\selectfont
           \l__whu_info_title_en_tl
@@ -2334,7 +2322,7 @@ fnf --> endd
           \c__whu_name_supervisor_en_tl : & \textsc{ \l__whu_info_supervisor_en_tl } \\
           \c__whu_name_major_en_tl : & \l__whu_info_major_en_tl \\
           \c__whu_name_research_area_en_tl : & \l__whu_info_research_area_en_tl
-        \end{tabular}       
+        \end{tabular}
       };
   }
 %tag 学校名和logo
@@ -2413,7 +2401,7 @@ fnf --> endd
   }
 ```
 
->  4.653cm 是用尺子量出来的吗
+> 4.653cm 是用尺子量出来的吗
 >
 > ![image-20240507210727123](image-20240507210727123.png)
 
@@ -2439,7 +2427,7 @@ fnf --> endd
       \linespread{1}
       \fontsize{14bp}{28bp}\selectfont
       本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已经发表或撰写过的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
-      
+
       \vspace*{3em}
       \begin{flushright}
         学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
@@ -2449,7 +2437,7 @@ fnf --> endd
   }
 ```
 
-###  博士原创性声明
+### 博士原创性声明
 
 ```tex
 %tag 博士原创性声明
@@ -2470,7 +2458,7 @@ fnf --> endd
       \linespread{1}
       \fontsize{14bp}{28bp}\selectfont
       本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已发表或撰写的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
-      
+
       \vspace*{3em}
       \begin{flushright}
         学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
@@ -2504,13 +2492,13 @@ fnf --> endd
       本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
       \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
       \textbf{二、}在本论文提交 $\square$ 当年／$\square$一年／$\square$ 两年／$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
-      
+
       \vspace*{3em}
       \begin{minipage}{0.5\textwidth}
         论文作者（签名）：\CJKunderline*{\hfill}\\[12pt]
         学号：\CJKunderline*{\hfill}\\[12pt]
         学院：\CJKunderline*{\hfill}\\[12pt]
-      \end{minipage} \par 
+      \end{minipage} \par
       \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
     \group_end:
   }
@@ -2523,7 +2511,7 @@ fnf --> endd
 \cs_new_protected:Npn \__whu_doctor_innovation:
   {
     \group_begin:
-    \keys_set:nn { ctex } 
+    \keys_set:nn { ctex }
       {
         chapter =
           {
@@ -2580,7 +2568,7 @@ fnf --> endd
 \cs_new:Npn \__whu_bachelor_abstract_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -2607,7 +2595,7 @@ fnf --> endd
 \cs_new:Npn \__whu_bachelor_abstract_en_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -2660,7 +2648,7 @@ fnf --> endd
 \cs_new:Npn \__whu_master_abstract_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -2684,7 +2672,7 @@ fnf --> endd
 \cs_new:Npn \__whu_master_abstract_en_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -2714,7 +2702,7 @@ fnf --> endd
 \cs_new:Npn \__whu_doctor_abstract_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -2738,7 +2726,7 @@ fnf --> endd
 \cs_new:Npn \__whu_doctor_abstract_en_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -2769,10 +2757,10 @@ fnf --> endd
     \ctex_after_end_preamble:n
     {
       \pdfbookmark{中文封面}{titlepage}
-      \int_case:Vn \g__whu_thesis_type_int  
+      \int_case:Vn \g__whu_thesis_type_int
         {
           % 本科
-          {2} 
+          {2}
             {
               \pagestyle{empty}
               \__whu_bachelor_cover_i:
@@ -2794,7 +2782,7 @@ fnf --> endd
               \newpage
             }
           % 硕士
-          {3} 
+          {3}
             {
               \pagestyle{empty}
               \__whu_master_cover_i:
@@ -2812,7 +2800,7 @@ fnf --> endd
               \newpage
             }
           % 博士
-          {4} 
+          {4}
             {
               \pagestyle{empty}
               \__whu_doctor_cover_i:
@@ -2836,8 +2824,6 @@ fnf --> endd
     }
   }
 ```
-
-
 
 ## 目录
 
@@ -2880,7 +2866,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   }
 \AddToHook { begindocument }
   {
-    \int_case:Vn \g__whu_thesis_type_int  
+    \int_case:Vn \g__whu_thesis_type_int
       {
         % 本科
         {2} { \__whu_bachelor_chapter_cmds_no_optional_argument: }
@@ -2921,8 +2907,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   }
 ```
 
-
-
 ### 硕士设置
 
 ```tex
@@ -2950,8 +2934,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
     % \dim_set:Nn \cftbeforesubsecskip { 0pt }
   }
 ```
-
-
 
 ### 博士设置
 
@@ -2981,14 +2963,13 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
     % % subsection前的额外垂直间距
     % \dim_set:Nn \cftbeforesubsecskip { 0.1\baselineskip }
   }
-  
-  
+
 ```
 
 ### 输出配置
 
 ```tex
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2} { \__whu_bachelor_set_tocline: }
@@ -2999,8 +2980,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   }
 ```
 
-
-
 ### 重定义目录
 
 ```tex
@@ -3009,7 +2988,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   {
     \group_begin:
     \keys_set:nn { ctex }
-      { 
+      {
         chapter / format += \centering,
         chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
@@ -3019,8 +2998,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
 ```
 
 首先配置目录的 chapter 应当是居中的（注意不是目录内容中的 chapter，而是目录两个字），且该页的页眉页脚应当是 frontmatter 的样式。配置结束后调用旧的 `\tableofcontents`
-
-
 
 ### 插图目录和表格目录
 
@@ -3035,7 +3012,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   {
     \group_begin:
     \keys_set:nn { ctex }
-      { 
+      {
         chapter / format += \centering,
         chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
@@ -3047,7 +3024,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   {
     \group_begin:
     \keys_set:nn { ctex }
-      { 
+      {
         chapter / format += \centering,
         chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
@@ -3088,7 +3065,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   {
     \AddToHook { cmd / appendix / after }
       {
-        \renewcommand{ \theequation }{ \thechapter \arabic{equation} } 
+        \renewcommand{ \theequation }{ \thechapter \arabic{equation} }
         \keys_set:nn { ctex }
           {
             section/number = \Alph{chapter}\arabic{section},
@@ -3097,7 +3074,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
           }
       }
   }
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2} { \__whu_bachelor_set_appendix: }
@@ -3256,13 +3233,11 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   {\kern-3\p@ \hrule \@width 2in \@height 1pt \kern 2.6\p@ }
 ```
 
-`\cs_set:Npn \thefootnote {\whu_footnote_number:N}`重新定义了脚注的编号格式。默认情况下，LaTeX 中脚注的编号是阿拉伯数字，但这里通过 `\cs_set:Npn` 命令将其重新定义为调用 `\whu_footnote_number:N` 函数，并传递当前脚注计数器的值。 
+`\cs_set:Npn \thefootnote {\whu_footnote_number:N}`重新定义了脚注的编号格式。默认情况下，LaTeX 中脚注的编号是阿拉伯数字，但这里通过 `\cs_set:Npn` 命令将其重新定义为调用 `\whu_footnote_number:N` 函数，并传递当前脚注计数器的值。
 
 在`\whu_fontnote_number` 中会对 `\l__whu_fn_style_tl` 的值进行判断，并依据其 token list 的值生成对应的数字
 
 ---
-
-
 
 `\cs_set:Npn \@makefntext` 设置了脚注文本的格式的命令 `\@makefntext`。其保证了:
 
@@ -3317,7 +3292,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
 
 在 notation 环境中，会先创建一个居中不带标号且有frontmatter样式页眉的章节，内容为第一个参数（默认是“符号表”），然后创建一个居中的表格，其内容为第二个参数。
 
-这也意味着在这个环境中，需要用 tabular  环境中的语言来进行书写
+这也意味着在这个环境中，需要用 tabular 环境中的语言来进行书写
 
 比如说官方示例给出的用法：
 
@@ -3363,11 +3338,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
 
 这里通过这种方式设置了 figure,table和 tabular 的字体样式
 
-
-
 ### 定理环境
-
-
 
 ```tex
 % 去掉 . 号，但只能通过新定义 style 的方式进行
@@ -3401,7 +3372,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
       { \clist_item:nn {#1} {4} }
   }
 
-
 \clist_map_function:nN
   {
     { 定理, 定理, section, theorem },
@@ -3419,7 +3389,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
     { 注, 注, section, remark }
   }
   \__whu_declare_theorem_with_counter_within:n
-
 
 \NewDocumentCommand { \whunewtheorem } { s O{} m m }
   {
@@ -3467,8 +3436,7 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
   {
     \popQED \endtrivlist \@endpefalse
   } +
-  
-  
+
 ```
 
 `\declaretheoremstyle` 是用于声明定理环境样式的命令。在这个例子中，一个名为 `whustyle` 的定理样式被声明。
@@ -3477,13 +3445,9 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
 - `postheadspace = {0.5em}` 表示在定理标题和定理内容之间添加 0.5em 的额外空间。
 - `headindent = 2\ccwd` 表示定理标题的缩进量为 2 个“当前字宽”的长度。
 
-
-
 接下来通过 `\clist_map_function:nN` 依次将不同环境的标题参数传入 `\__whu_declare_theorem_with_counter_within` 来创建对应的定理环境。
 
 ~~不过我没看到 `\__whu_declare_theorem_with_counter_sibling`在哪里用到了~~
-
-
 
 `\RenewDocumentEnvironment { proof } { O{\proofname} +b }`: 这一行声明了一个名为 `proof` 的环境，并接受两个参数。第一个参数是可选的，用于指定证明环境的名称，默认值为 `\proofname`（通常是“证明”）。第二个参数是必选的，用于指定证明环境的内容。
 
@@ -3504,8 +3468,6 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
    - `\popQED`：弹出证明结束的标志，以便在证明环境结束时不再添加。
    - `\endtrivlist`：结束列表环境。
    - `\@endpefalse`：确保不在环境结束时在段落后插入额外的垂直空白。
-
-
 
 效果：
 
@@ -3753,6 +3715,3 @@ __whu_msg_new:nn { bachelor-no-optional-argument }
       { \tl_set_rescan:Nno ##1 { } {##1} }
   }
 ```
-
-
-

@@ -32,7 +32,7 @@ reduce :: (IntermediateKey, [IntermediateValue]) -> [Value]
 1. 用户程序将输入数据分割为 $M$ 份，并在 worker 上启动程序的副本
 2. 将其中一个 worker 作为 Master，其他的 worker 负责执行 map 和 reduce 操作。全过程需要指定 $M$ 个 map 任务和 $R$ 个 reduce 任务
 3. 执行 map 的 worker 从读入输入数据的部分文件，并将结果保留在内存中
-4.  worker 周期性将内存中的数据写到本地硬盘中，并将其分为 $R$ 组。输出数据的位置将被传回 Master，Master将数据的位置转发给另一个空闲的 worker（指派 reduce 任务）
+4. worker 周期性将内存中的数据写到本地硬盘中，并将其分为 $R$ 组。输出数据的位置将被传回 Master，Master将数据的位置转发给另一个空闲的 worker（指派 reduce 任务）
 5. 执行 reduce 任务的 worker 通过 RPC从执行 map 的 worker 的本地硬盘中读入数据到缓冲区中。当读入结束后，worker 会对键进行排序，具有相同 key 的将会被分为一组。这个过程有可能要进行外排序
 6. 执行 reduce 任务的 worker 将遍历排序后的中间数据，对于每个唯一的 key，worker 将会对其执行对应的 reduce 操作，操作结果将会被存储在最终文件中。当操作结束后，更改文件名为最终文件名
 7. 当所有的 map 和 reduce 任务结束后，重新唤醒用户程序
@@ -110,7 +110,7 @@ $ cat mr-out-* | sort | more
 - `mr-out-X` 文件应该将 Reduce 函数的每个输出保存在一行中。每一行以 `%v %v` 的方式输出。可以参考 `main/mrsequential.go` 文件。
 - 可以修改 `mr/worker.go` 、`mr/coordinator.go` 和 `mr/rpc.go` 文件，可以临时修改其他文件来进行测试，但是最终提交时请保证代码在文件的原始版本可以正常执行
 - worker 应该将 Map 输出的临时文件存放在当前目录下，Reduce 之后可以直接收入
-- 在 MapReduce 工作完全结束后，`mr/coordinator.go`  中的 `Done()` 方法应该返回 true 给 `main/mrcoordinator.go`
+- 在 MapReduce 工作完全结束后，`mr/coordinator.go` 中的 `Done()` 方法应该返回 true 给 `main/mrcoordinator.go`
 - 当任务彻底完成后，worker进程应当退出，比较简单的实现方式为使用 `call()` 函数的返回值：如果 worker 与 coordinator 通信失败，就可以假定 coordinator 因为工作完成而退出了，所以 worker 进程也可以终止。
 
 ### 提示
@@ -147,7 +147,7 @@ $ cat mr-out-* | sort | more
       kva = append(kva, kv)
   }
   ```
-  
+
 - worker 的 map 部分可以使用在 `worker.go` 中定义的 `ihash(key)` 函数来根据给出的键选择对应的 reduce 任务
 
 - 可以参考 `mrsequential.go` 中的一些读取 Map 输入文件、对中间键值对进行排序、存储Reduce输出的代码
@@ -195,7 +195,7 @@ $ cat mr-out-* | sort | more
 
 在一个 map 的 worker 中，不同 key 的 `hash % nReduce` 相同的会被分到一组，并存放在一个文件中。另一个 map 中同理。不同 worker 的相同 `hash % nReduce` 的值会被送到同一个 reduce 任务中。
 
-也就是说  map 任务接受一个文件，返回 $nReduce$ 个文件。reduce 任务接受 $len(files)$ 个文件，返回一个文件。
+也就是说 map 任务接受一个文件，返回 $nReduce$ 个文件。reduce 任务接受 $len(files)$ 个文件，返回一个文件。
 
 根据以上信息，我们可以总结出 Map 和 Reduce 两种任务的类型
 
@@ -203,34 +203,32 @@ $ cat mr-out-* | sort | more
 type TaskStatus int
 
 const (
-	TaskStatus_Idle      TaskStatus = 0
-	TaskStatus_Running   TaskStatus = 1
-	TaskStatus_Completed TaskStatus = 2
+    TaskStatus_Idle      TaskStatus = 0
+    TaskStatus_Running   TaskStatus = 1
+    TaskStatus_Completed TaskStatus = 2
 )
 
 type WorkerIdent string
 
 type MapTask struct {
-	id            int
-	status        TaskStatus
-	inputFilename string
-	
-	startTime    int64
-	worker       WorkerIdent
+    id            int
+    status        TaskStatus
+    inputFilename string
+
+    startTime    int64
+    worker       WorkerIdent
 }
 
 type ReduceTask struct {
-	id            int
-	status        TaskStatus
-	inputFilename []string
+    id            int
+    status        TaskStatus
+    inputFilename []string
 
-	startTime    int64
-	worker       WorkerIdent
-	resultHandle string
+    startTime    int64
+    worker       WorkerIdent
+    resultHandle string
 }
 ```
-
-
 
 再来设计 Coordinator 的类型。
 
@@ -240,12 +238,12 @@ type ReduceTask struct {
 
 ```go
 type Coordinator struct {
-	mapTasks    []MapTask
-	reduceTasks []ReduceTask
+    mapTasks    []MapTask
+    reduceTasks []ReduceTask
 
-	completedMapTask    int
-	completedReduceTask int
-	mu                  sync.Mutex
+    completedMapTask    int
+    completedReduceTask int
+    mu                  sync.Mutex
 }
 ```
 
@@ -255,41 +253,41 @@ type Coordinator struct {
 
 ```go
 const (
-	TaskTy_Map    = 1
-	TaskTy_Reduce = 2
-	TaskTy_None   = 3
+    TaskTy_Map    = 1
+    TaskTy_Reduce = 2
+    TaskTy_None   = 3
 )
 
 type GainTaskArgs struct {
-	WorkName string
+    WorkName string
 }
 type GainTaskReply struct {
-	TaskId          int
-	TaskTy          TaskType
-	ReduceNumber    int
-	InputFileHandle []string
+    TaskId          int
+    TaskTy          TaskType
+    ReduceNumber    int
+    InputFileHandle []string
 }
 type SubmitMapTaskArgs struct {
-	TaskId           int
-	WorkerName       WorkerIdent
-	ResultFileHandle []string
+    TaskId           int
+    WorkerName       WorkerIdent
+    ResultFileHandle []string
 }
 type SubmitMapTaskReply struct {
-	Accept bool
+    Accept bool
 }
 type SubmitReduceTaskArgs struct {
-	TaskId     int
-	WorkerName WorkerIdent
-	ResultFile string
+    TaskId     int
+    WorkerName WorkerIdent
+    ResultFile string
 }
 type SubmitReduceTaskReply struct {
-	Accept bool
+    Accept bool
 }
 ```
 
 ### 检查失败任务
 
- Coordinator 应该检查 Worker 是否失败（故障）。这里使用判断10s 内任务是否结束，如果任务未结束，则表示任务可能停滞（故障），应该将任务标记为 IEDL 状态。
+Coordinator 应该检查 Worker 是否失败（故障）。这里使用判断10s 内任务是否结束，如果任务未结束，则表示任务可能停滞（故障），应该将任务标记为 IEDL 状态。
 
 由于 10s 的判断是实时的，不能在收到 Worker 信息的时候判断，否则如果所有的 Worker 都滞后时 Coordinator 也会滞后。这里采用开启一个线程每隔一段时间对所有的 Task 进行一次检查，并顺手更新所有任务的完成状态。
 
@@ -297,9 +295,7 @@ type SubmitReduceTaskReply struct {
 
 ### 备份任务
 
-这实际上是一个坑点。由于测试数据中会检测 map 任务的执行数量，使用 Backup Task 可能会导致任务数量执行过多。在该 Lab 中应该按照要求，当任务超过 10s 后才应该启动备份任务，而非立刻执行。 
-
-
+这实际上是一个坑点。由于测试数据中会检测 map 任务的执行数量，使用 Backup Task 可能会导致任务数量执行过多。在该 Lab 中应该按照要求，当任务超过 10s 后才应该启动备份任务，而非立刻执行。
 
 ## 完整代码
 
@@ -311,9 +307,9 @@ type SubmitReduceTaskReply struct {
 package mr
 
 import (
-	"log"
-	"sync"
-	"time"
+    "log"
+    "sync"
+    "time"
 )
 import "net"
 import "os"
@@ -323,9 +319,9 @@ import "net/http"
 type TaskStatus int
 
 const (
-	TaskStatus_Idle      TaskStatus = 0
-	TaskStatus_Running   TaskStatus = 1
-	TaskStatus_Completed TaskStatus = 2
+    TaskStatus_Idle      TaskStatus = 0
+    TaskStatus_Running   TaskStatus = 1
+    TaskStatus_Completed TaskStatus = 2
 )
 
 type WorkerIdent string
@@ -333,241 +329,241 @@ type WorkerIdent string
 type GroupedIntermediaKV []KeyValue
 
 type MapTask struct {
-	id            int
-	inputFileName string
-	status        TaskStatus
+    id            int
+    inputFileName string
+    status        TaskStatus
 
-	startTime    int64
-	worker       WorkerIdent
-	resultHandle []GroupedIntermediaKV
+    startTime    int64
+    worker       WorkerIdent
+    resultHandle []GroupedIntermediaKV
 }
 
 type ReduceTask struct {
-	id            int
-	status        TaskStatus
-	inputFileName []string
+    id            int
+    status        TaskStatus
+    inputFileName []string
 
-	startTime    int64
-	worker       WorkerIdent
-	resultHandle string
+    startTime    int64
+    worker       WorkerIdent
+    resultHandle string
 }
 
 type Coordinator struct {
-	mapTasks    []MapTask
-	reduceTasks []ReduceTask
+    mapTasks    []MapTask
+    reduceTasks []ReduceTask
 
-	completedMapTask    int
-	completedReduceTask int
-	mu                  sync.Mutex
+    completedMapTask    int
+    completedReduceTask int
+    mu                  sync.Mutex
 }
 
 // start a thread that listens for RPCs from worker.go
 func (c *Coordinator) server() {
-	rpc.Register(c)
-	rpc.HandleHTTP()
-	//l, e := net.Listen("tcp", ":1234")
-	sockname := coordinatorSock()
-	os.Remove(sockname)
-	l, e := net.Listen("unix", sockname)
-	if e != nil {
-		log.Fatal("listen error:", e)
-	}
-	go http.Serve(l, nil)
+    rpc.Register(c)
+    rpc.HandleHTTP()
+    //l, e := net.Listen("tcp", ":1234")
+    sockname := coordinatorSock()
+    os.Remove(sockname)
+    l, e := net.Listen("unix", sockname)
+    if e != nil {
+        log.Fatal("listen error:", e)
+    }
+    go http.Serve(l, nil)
 }
 
 func (c *Coordinator) maintainTask() {
-	c.mu.Lock()
-	currentTime := time.Now().Unix()
-	log.Printf("Check tasks on %d", currentTime)
-	completedMap := 0
-	completedReduce := 0
+    c.mu.Lock()
+    currentTime := time.Now().Unix()
+    log.Printf("Check tasks on %d", currentTime)
+    completedMap := 0
+    completedReduce := 0
 
-	defer c.mu.Unlock()
+    defer c.mu.Unlock()
 
-	for i := 0; i < len(c.mapTasks); i++ {
-		if c.mapTasks[i].status == TaskStatus_Running && currentTime-c.mapTasks[i].startTime > 10 {
-			// mark as failure
-			log.Printf("Mark map task %d fail", c.mapTasks[i].id, c.mapTasks[i].worker)
-			c.mapTasks[i].startTime = 0
-			c.mapTasks[i].status = TaskStatus_Idle
-		} else if c.mapTasks[i].status == TaskStatus_Completed {
-			completedMap++
-		}
-	}
+    for i := 0; i < len(c.mapTasks); i++ {
+        if c.mapTasks[i].status == TaskStatus_Running && currentTime-c.mapTasks[i].startTime > 10 {
+            // mark as failure
+            log.Printf("Mark map task %d fail", c.mapTasks[i].id, c.mapTasks[i].worker)
+            c.mapTasks[i].startTime = 0
+            c.mapTasks[i].status = TaskStatus_Idle
+        } else if c.mapTasks[i].status == TaskStatus_Completed {
+            completedMap++
+        }
+    }
 
-	for i := 0; i < len(c.reduceTasks); i++ {
-		if c.reduceTasks[i].status == TaskStatus_Running && currentTime-c.reduceTasks[i].startTime > 10 {
-			// mark as failure
-			log.Printf("Mark reduce task%d fail", c.reduceTasks[i].id, c.reduceTasks[i].worker)
-			c.reduceTasks[i].startTime = 0
-			c.reduceTasks[i].status = TaskStatus_Idle
-		} else if c.reduceTasks[i].status == TaskStatus_Completed {
-			completedReduce++
-		}
-	}
+    for i := 0; i < len(c.reduceTasks); i++ {
+        if c.reduceTasks[i].status == TaskStatus_Running && currentTime-c.reduceTasks[i].startTime > 10 {
+            // mark as failure
+            log.Printf("Mark reduce task%d fail", c.reduceTasks[i].id, c.reduceTasks[i].worker)
+            c.reduceTasks[i].startTime = 0
+            c.reduceTasks[i].status = TaskStatus_Idle
+        } else if c.reduceTasks[i].status == TaskStatus_Completed {
+            completedReduce++
+        }
+    }
 
-	if completedMap != c.completedMapTask {
-		c.completedMapTask = completedMap
-	}
-	if completedReduce != c.completedReduceTask {
-		c.completedReduceTask = completedReduce
-	}
+    if completedMap != c.completedMapTask {
+        c.completedMapTask = completedMap
+    }
+    if completedReduce != c.completedReduceTask {
+        c.completedReduceTask = completedReduce
+    }
 }
 
 func (c *Coordinator) GainTask(args *GainTaskArgs, reply *GainTaskReply) error {
-	c.maintainTask()
-	c.mu.Lock()
-	defer c.mu.Unlock()
+    c.maintainTask()
+    c.mu.Lock()
+    defer c.mu.Unlock()
 
-	reply.ReduceNumber = len(c.reduceTasks)
-	reply.TaskTy = TaskTy_None
+    reply.ReduceNumber = len(c.reduceTasks)
+    reply.TaskTy = TaskTy_None
 
-	distributeMapTask := func(task *MapTask) {
-		log.Printf("Distribute map task %d to worker %s", task.id, args.WorkName)
-		reply.TaskTy = TaskTy_Map
-		reply.TaskId = task.id
-		reply.InputFileHandle = []string{task.inputFileName}
+    distributeMapTask := func(task *MapTask) {
+        log.Printf("Distribute map task %d to worker %s", task.id, args.WorkName)
+        reply.TaskTy = TaskTy_Map
+        reply.TaskId = task.id
+        reply.InputFileHandle = []string{task.inputFileName}
 
-		task.status = TaskStatus_Running
-		task.startTime = time.Now().Unix()
-		task.worker = WorkerIdent(args.WorkName)
-	}
-	distributeReduceTask := func(task *ReduceTask) {
-		log.Printf("Distribute reduce task %d to worker %s", task.id, args.WorkName)
-		reply.TaskTy = TaskTy_Reduce
-		reply.TaskId = task.id
-		reply.InputFileHandle = task.inputFileName
+        task.status = TaskStatus_Running
+        task.startTime = time.Now().Unix()
+        task.worker = WorkerIdent(args.WorkName)
+    }
+    distributeReduceTask := func(task *ReduceTask) {
+        log.Printf("Distribute reduce task %d to worker %s", task.id, args.WorkName)
+        reply.TaskTy = TaskTy_Reduce
+        reply.TaskId = task.id
+        reply.InputFileHandle = task.inputFileName
 
-		task.status = TaskStatus_Running
-		task.startTime = time.Now().Unix()
-		task.worker = WorkerIdent(args.WorkName)
-	}
+        task.status = TaskStatus_Running
+        task.startTime = time.Now().Unix()
+        task.worker = WorkerIdent(args.WorkName)
+    }
 
-	if c.completedMapTask < len(c.mapTasks) {
-		// distribute map task
-		for i := range c.mapTasks {
-			var task = &c.mapTasks[i]
-			if task.status == TaskStatus_Idle {
-				distributeMapTask(task)
-				return nil
-			}
-		}
-	}
-	for c.completedMapTask < len(c.mapTasks) {
-		// distribute map task
-		currentTime := time.Now().Unix()
-		for i := range c.mapTasks {
-			var task = &c.mapTasks[i]
-			if task.status != TaskStatus_Completed && currentTime-task.startTime > 10 {
-				distributeMapTask(task)
-				return nil
-			}
-		}
-		c.mu.Unlock()
-		time.Sleep(1 * time.Second)
-		c.mu.Lock()
-	}
+    if c.completedMapTask < len(c.mapTasks) {
+        // distribute map task
+        for i := range c.mapTasks {
+            var task = &c.mapTasks[i]
+            if task.status == TaskStatus_Idle {
+                distributeMapTask(task)
+                return nil
+            }
+        }
+    }
+    for c.completedMapTask < len(c.mapTasks) {
+        // distribute map task
+        currentTime := time.Now().Unix()
+        for i := range c.mapTasks {
+            var task = &c.mapTasks[i]
+            if task.status != TaskStatus_Completed && currentTime-task.startTime > 10 {
+                distributeMapTask(task)
+                return nil
+            }
+        }
+        c.mu.Unlock()
+        time.Sleep(1 * time.Second)
+        c.mu.Lock()
+    }
 
-	if c.completedReduceTask < len(c.reduceTasks) {
-		// distribute reduce task
-		for i := range c.reduceTasks {
-			var task = &c.reduceTasks[i]
-			if task.status == TaskStatus_Idle {
-				distributeReduceTask(task)
-				return nil
-			}
-		}
-	}
-	for c.completedReduceTask < len(c.reduceTasks) {
-		// distribute reduce task
-		currentTime := time.Now().Unix()
-		for i := range c.reduceTasks {
-			var task = &c.reduceTasks[i]
-			if task.status != TaskStatus_Completed && currentTime-task.startTime > 10 {
-				distributeReduceTask(task)
-				return nil
-			}
-		}
-		c.mu.Unlock()
-		time.Sleep(1 * time.Second)
-		c.mu.Lock()
-	}
+    if c.completedReduceTask < len(c.reduceTasks) {
+        // distribute reduce task
+        for i := range c.reduceTasks {
+            var task = &c.reduceTasks[i]
+            if task.status == TaskStatus_Idle {
+                distributeReduceTask(task)
+                return nil
+            }
+        }
+    }
+    for c.completedReduceTask < len(c.reduceTasks) {
+        // distribute reduce task
+        currentTime := time.Now().Unix()
+        for i := range c.reduceTasks {
+            var task = &c.reduceTasks[i]
+            if task.status != TaskStatus_Completed && currentTime-task.startTime > 10 {
+                distributeReduceTask(task)
+                return nil
+            }
+        }
+        c.mu.Unlock()
+        time.Sleep(1 * time.Second)
+        c.mu.Lock()
+    }
 
-	return nil
+    return nil
 }
 
 func (c *Coordinator) SubmitMapTask(args *SubmitMapTaskArgs, reply *SubmitMapTaskReply) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	if c.mapTasks[args.TaskId].status != TaskStatus_Completed {
-		log.Printf("Accept map task %d from worker %v", args.TaskId, args.WorkerName)
-		reply.Accept = true
-		c.mapTasks[args.TaskId].status = TaskStatus_Completed
-		for rid, filename := range args.ResultFileHandle {
-			c.reduceTasks[rid].inputFileName = append(c.reduceTasks[rid].inputFileName, filename)
-		}
-	} else {
-		log.Printf("Refuse map task %d from worker %v", args.TaskId, args.WorkerName)
-		reply.Accept = false
-	}
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    if c.mapTasks[args.TaskId].status != TaskStatus_Completed {
+        log.Printf("Accept map task %d from worker %v", args.TaskId, args.WorkerName)
+        reply.Accept = true
+        c.mapTasks[args.TaskId].status = TaskStatus_Completed
+        for rid, filename := range args.ResultFileHandle {
+            c.reduceTasks[rid].inputFileName = append(c.reduceTasks[rid].inputFileName, filename)
+        }
+    } else {
+        log.Printf("Refuse map task %d from worker %v", args.TaskId, args.WorkerName)
+        reply.Accept = false
+    }
 
-	return nil
+    return nil
 }
 
 func (c *Coordinator) SubmitReduceTask(args *SubmitReduceTaskArgs, reply *SubmitReduceTaskReply) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	if c.reduceTasks[args.TaskId].status != TaskStatus_Completed {
-		log.Printf("Accept reduce task %d from worker %v", args.TaskId, args.WorkerName)
-		reply.Accept = true
-		c.reduceTasks[args.TaskId].status = TaskStatus_Completed
-		c.reduceTasks[args.TaskId].resultHandle = args.ResultFile
-	} else {
-		log.Printf("Refuse reduce task %d from worker %v", args.TaskId, args.WorkerName)
-		reply.Accept = false
-	}
-	return nil
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    if c.reduceTasks[args.TaskId].status != TaskStatus_Completed {
+        log.Printf("Accept reduce task %d from worker %v", args.TaskId, args.WorkerName)
+        reply.Accept = true
+        c.reduceTasks[args.TaskId].status = TaskStatus_Completed
+        c.reduceTasks[args.TaskId].resultHandle = args.ResultFile
+    } else {
+        log.Printf("Refuse reduce task %d from worker %v", args.TaskId, args.WorkerName)
+        reply.Accept = false
+    }
+    return nil
 }
 
 // main/mrcoordinator.go calls Done() periodically to find out
 // if the entire job has finished.
 func (c *Coordinator) Done() bool {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	return c.completedReduceTask == len(c.reduceTasks)
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    return c.completedReduceTask == len(c.reduceTasks)
 }
 
 // create a Coordinator.
 // main/mrcoordinator.go calls this function.
 // nReduce is the number of reduce tasks to use.
 func MakeCoordinator(files []string, nReduce int) *Coordinator {
-	c := Coordinator{}
+    c := Coordinator{}
 
-	c.reduceTasks = make([]ReduceTask, nReduce)
-	for i := 0; i < nReduce; i++ {
-		t := &c.reduceTasks[i]
-		t.id = i
-		t.status = TaskStatus_Idle
-	}
+    c.reduceTasks = make([]ReduceTask, nReduce)
+    for i := 0; i < nReduce; i++ {
+        t := &c.reduceTasks[i]
+        t.id = i
+        t.status = TaskStatus_Idle
+    }
 
-	for id, splitFile := range files {
-		c.mapTasks = append(c.mapTasks, MapTask{
-			id:            id,
-			status:        TaskStatus_Idle,
-			inputFileName: splitFile,
-		})
-		log.Printf("Schedule map task %d from %s", id, splitFile)
-	}
-	go func() {
-		for {
-			c.maintainTask()
-			time.Sleep(time.Second)
-		}
-	}()
+    for id, splitFile := range files {
+        c.mapTasks = append(c.mapTasks, MapTask{
+            id:            id,
+            status:        TaskStatus_Idle,
+            inputFileName: splitFile,
+        })
+        log.Printf("Schedule map task %d from %s", id, splitFile)
+    }
+    go func() {
+        for {
+            c.maintainTask()
+            time.Sleep(time.Second)
+        }
+    }()
 
-	log.Println("Coordinator tasks init finish")
-	c.server()
-	return &c
+    log.Println("Coordinator tasks init finish")
+    c.server()
+    return &c
 }
 
 ```
@@ -578,14 +574,14 @@ func MakeCoordinator(files []string, nReduce int) *Coordinator {
 package mr
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
-	"math/rand"
-	"os"
-	"os/exec"
-	"sort"
-	"time"
+    "encoding/json"
+    "fmt"
+    "io"
+    "math/rand"
+    "os"
+    "os/exec"
+    "sort"
+    "time"
 )
 import "log"
 import "net/rpc"
@@ -593,16 +589,16 @@ import "hash/fnv"
 
 // Map functions return a slice of KeyValue.
 type KeyValue struct {
-	Key   string
-	Value string
+    Key   string
+    Value string
 }
 
 // use ihash(key) % NReduce to choose the reduce
 // task number for each KeyValue emitted by Map.
 func ihash(key string) int {
-	h := fnv.New32a()
-	h.Write([]byte(key))
-	return int(h.Sum32() & 0x7fffffff)
+    h := fnv.New32a()
+    h.Write([]byte(key))
+    return int(h.Sum32() & 0x7fffffff)
 }
 
 // for sorting by key.
@@ -613,166 +609,166 @@ func (a ByKey) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByKey) Less(i, j int) bool { return a[i].Key < a[j].Key }
 
 func ExecuteMap(mapf func(string, string) []KeyValue, taskId int, inputFileHandle string, nReduce int, workerName WorkerIdent) {
-	log.Printf("Start map task %d", taskId)
+    log.Printf("Start map task %d", taskId)
 
-	file, err := os.Open(inputFileHandle)
-	if err != nil {
-		log.Fatal(err)
-	}
-	content, err := io.ReadAll(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-	kv := mapf(inputFileHandle, string(content))
+    file, err := os.Open(inputFileHandle)
+    if err != nil {
+        log.Fatal(err)
+    }
+    content, err := io.ReadAll(file)
+    if err != nil {
+        log.Fatal(err)
+    }
+    kv := mapf(inputFileHandle, string(content))
 
-	kva := make(map[int][]KeyValue)
-	for _, p := range kv {
-		rid := ihash(p.Key) % nReduce
-		kva[rid] = append(kva[rid], p)
-	}
+    kva := make(map[int][]KeyValue)
+    for _, p := range kv {
+        rid := ihash(p.Key) % nReduce
+        kva[rid] = append(kva[rid], p)
+    }
 
-	params := SubmitMapTaskArgs{TaskId: taskId, ResultFileHandle: make([]string, nReduce), WorkerName: workerName}
-	reply := SubmitMapTaskReply{}
+    params := SubmitMapTaskArgs{TaskId: taskId, ResultFileHandle: make([]string, nReduce), WorkerName: workerName}
+    reply := SubmitMapTaskReply{}
 
-	for rid, intermedia := range kva {
-		filename := fmt.Sprintf("mr-%d-%d", taskId, rid)
-		params.ResultFileHandle[rid] = filename
+    for rid, intermedia := range kva {
+        filename := fmt.Sprintf("mr-%d-%d", taskId, rid)
+        params.ResultFileHandle[rid] = filename
 
-		file, err := os.Create(filename)
-		defer file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-		enc := json.NewEncoder(file)
-		for _, kv := range intermedia {
-			err := enc.Encode(&kv)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
-	}
+        file, err := os.Create(filename)
+        defer file.Close()
+        if err != nil {
+            log.Fatal(err)
+        }
+        enc := json.NewEncoder(file)
+        for _, kv := range intermedia {
+            err := enc.Encode(&kv)
+            if err != nil {
+                log.Fatal(err)
+            }
+        }
+    }
 
-	if !call("Coordinator.SubmitMapTask", &params, &reply) {
-		log.Fatal("Coordinator is down?")
-	}
-	if reply.Accept {
-		log.Printf("Map task%d completed", taskId)
-	} else {
-		log.Printf("Map task%d unacceptable", taskId)
-	}
+    if !call("Coordinator.SubmitMapTask", &params, &reply) {
+        log.Fatal("Coordinator is down?")
+    }
+    if reply.Accept {
+        log.Printf("Map task%d completed", taskId)
+    } else {
+        log.Printf("Map task%d unacceptable", taskId)
+    }
 }
 
 func ExecuteReduce(reducef func(string, []string) string, taskId int, inputFileHandles []string, workerName WorkerIdent) {
-	log.Printf("Start reduce task %d", taskId)
+    log.Printf("Start reduce task %d", taskId)
 
-	kva := make([]KeyValue, 0)
-	for _, handle := range inputFileHandles {
-		if handle == "" {
-			continue
-		}
+    kva := make([]KeyValue, 0)
+    for _, handle := range inputFileHandles {
+        if handle == "" {
+            continue
+        }
 
-		file, err := os.Open(handle)
-		if err != nil {
-			log.Fatal(err)
-		}
-		dec := json.NewDecoder(file)
-		for {
-			var kv KeyValue
-			if err := dec.Decode(&kv); err != nil {
-				break
-			}
-			kva = append(kva, kv)
-		}
-	}
+        file, err := os.Open(handle)
+        if err != nil {
+            log.Fatal(err)
+        }
+        dec := json.NewDecoder(file)
+        for {
+            var kv KeyValue
+            if err := dec.Decode(&kv); err != nil {
+                break
+            }
+            kva = append(kva, kv)
+        }
+    }
 
-	sort.Sort(ByKey(kva))
+    sort.Sort(ByKey(kva))
 
-	oname := fmt.Sprintf("mr-out-%d", taskId)
-	ofile, _ := os.CreateTemp("", oname+"-*")
+    oname := fmt.Sprintf("mr-out-%d", taskId)
+    ofile, _ := os.CreateTemp("", oname+"-*")
 
-	i := 0
-	for i < len(kva) {
-		j := i + 1
-		for j < len(kva) && kva[j].Key == kva[i].Key {
-			j++
-		}
-		values := []string{}
-		for k := i; k < j; k++ {
-			values = append(values, kva[k].Value)
-		}
-		output := reducef(kva[i].Key, values)
+    i := 0
+    for i < len(kva) {
+        j := i + 1
+        for j < len(kva) && kva[j].Key == kva[i].Key {
+            j++
+        }
+        values := []string{}
+        for k := i; k < j; k++ {
+            values = append(values, kva[k].Value)
+        }
+        output := reducef(kva[i].Key, values)
 
-		// this is the correct format for each line of Reduce output.
-		fmt.Fprintf(ofile, "%v %v\n", kva[i].Key, output)
-		i = j
-	}
+        // this is the correct format for each line of Reduce output.
+        fmt.Fprintf(ofile, "%v %v\n", kva[i].Key, output)
+        i = j
+    }
 
-	err := os.Rename(ofile.Name(), oname)
-	if err != nil {
-		log.Fatal(err)
-	}
-	params := SubmitReduceTaskArgs{
-		TaskId:     taskId,
-		WorkerName: workerName,
-		ResultFile: oname,
-	}
-	reply := SubmitReduceTaskReply{}
-	if !call("Coordinator.SubmitReduceTask", &params, &reply) {
-		log.Fatal("Coordinator is down?")
-	}
-	if reply.Accept {
-		log.Printf("Reduce task%d completed", taskId)
-	} else {
-		log.Printf("Reduce task%d unacceptable", taskId)
-	}
+    err := os.Rename(ofile.Name(), oname)
+    if err != nil {
+        log.Fatal(err)
+    }
+    params := SubmitReduceTaskArgs{
+        TaskId:     taskId,
+        WorkerName: workerName,
+        ResultFile: oname,
+    }
+    reply := SubmitReduceTaskReply{}
+    if !call("Coordinator.SubmitReduceTask", &params, &reply) {
+        log.Fatal("Coordinator is down?")
+    }
+    if reply.Accept {
+        log.Printf("Reduce task%d completed", taskId)
+    } else {
+        log.Printf("Reduce task%d unacceptable", taskId)
+    }
 }
 
 // main/mrworker.go calls this function.
 func Worker(mapf func(string, string) []KeyValue,
-	reducef func(string, []string) string) {
-	rand.Seed(time.Now().UnixNano())
-	workerName, err := exec.Command("uuidgen").Output()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("Worker name: %s\n", workerName)
+    reducef func(string, []string) string) {
+    rand.Seed(time.Now().UnixNano())
+    workerName, err := exec.Command("uuidgen").Output()
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Printf("Worker name: %s\n", workerName)
 
-	for {
-		taskReply := GainTaskReply{}
-		call("Coordinator.GainTask", GainTaskArgs{WorkName: string(workerName)}, &taskReply)
+    for {
+        taskReply := GainTaskReply{}
+        call("Coordinator.GainTask", GainTaskArgs{WorkName: string(workerName)}, &taskReply)
 
-		if taskReply.TaskTy == TaskTy_Map {
-			ExecuteMap(mapf, taskReply.TaskId, taskReply.InputFileHandle[0], taskReply.ReduceNumber, WorkerIdent(workerName))
-		} else if taskReply.TaskTy == TaskTy_Reduce {
-			ExecuteReduce(reducef, taskReply.TaskId, taskReply.InputFileHandle, WorkerIdent(workerName))
-		} else if taskReply.TaskTy == TaskTy_None {
-			log.Printf("Receive exit signal")
-			os.Exit(0)
-		} else {
-			log.Printf("Unrecongized task type %d", taskReply.TaskTy)
-		}
-	}
+        if taskReply.TaskTy == TaskTy_Map {
+            ExecuteMap(mapf, taskReply.TaskId, taskReply.InputFileHandle[0], taskReply.ReduceNumber, WorkerIdent(workerName))
+        } else if taskReply.TaskTy == TaskTy_Reduce {
+            ExecuteReduce(reducef, taskReply.TaskId, taskReply.InputFileHandle, WorkerIdent(workerName))
+        } else if taskReply.TaskTy == TaskTy_None {
+            log.Printf("Receive exit signal")
+            os.Exit(0)
+        } else {
+            log.Printf("Unrecongized task type %d", taskReply.TaskTy)
+        }
+    }
 }
 
 // send an RPC request to the coordinator, wait for the response.
 // usually returns true.
 // returns false if something goes wrong.
 func call(rpcname string, args interface{}, reply interface{}) bool {
-	// c, err := rpc.DialHTTP("tcp", "127.0.0.1"+":1234")
-	sockname := coordinatorSock()
-	c, err := rpc.DialHTTP("unix", sockname)
-	if err != nil {
-		log.Fatal("dialing:", err)
-	}
-	defer c.Close()
+    // c, err := rpc.DialHTTP("tcp", "127.0.0.1"+":1234")
+    sockname := coordinatorSock()
+    c, err := rpc.DialHTTP("unix", sockname)
+    if err != nil {
+        log.Fatal("dialing:", err)
+    }
+    defer c.Close()
 
-	err = c.Call(rpcname, args, reply)
-	if err == nil {
-		return true
-	}
+    err = c.Call(rpcname, args, reply)
+    if err == nil {
+        return true
+    }
 
-	fmt.Println(err)
-	return false
+    fmt.Println(err)
+    return false
 }
 
 ```
@@ -794,36 +790,36 @@ import "strconv"
 type TaskType int
 
 const (
-	TaskTy_Map    = 1
-	TaskTy_Reduce = 2
-	TaskTy_None   = 3
+    TaskTy_Map    = 1
+    TaskTy_Reduce = 2
+    TaskTy_None   = 3
 )
 
 type GainTaskArgs struct {
-	WorkName string
+    WorkName string
 }
 type GainTaskReply struct {
-	TaskId          int
-	TaskTy          TaskType
-	ReduceNumber    int
-	InputFileHandle []string
+    TaskId          int
+    TaskTy          TaskType
+    ReduceNumber    int
+    InputFileHandle []string
 }
 
 type SubmitMapTaskArgs struct {
-	TaskId           int
-	WorkerName       WorkerIdent
-	ResultFileHandle []string
+    TaskId           int
+    WorkerName       WorkerIdent
+    ResultFileHandle []string
 }
 type SubmitMapTaskReply struct {
-	Accept bool
+    Accept bool
 }
 type SubmitReduceTaskArgs struct {
-	TaskId     int
-	WorkerName WorkerIdent
-	ResultFile string
+    TaskId     int
+    WorkerName WorkerIdent
+    ResultFile string
 }
 type SubmitReduceTaskReply struct {
-	Accept bool
+    Accept bool
 }
 
 // Cook up a unique-ish UNIX-domain socket name
@@ -831,9 +827,8 @@ type SubmitReduceTaskReply struct {
 // Can't use the current directory since
 // Athena AFS doesn't support UNIX-domain sockets.
 func coordinatorSock() string {
-	s := "/var/tmp/824-mr-"
-	s += strconv.Itoa(os.Getuid())
-	return s
+    s := "/var/tmp/824-mr-"
+    s += strconv.Itoa(os.Getuid())
+    return s
 }
 ```
-

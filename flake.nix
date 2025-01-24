@@ -7,7 +7,7 @@
   outputs = { self, nixpkgs }:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f rec {
+      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit system; };
       });
     in
@@ -23,19 +23,25 @@
             ];
             packages = (with pkgs; [
               typst-lsp
+              mdl
 
-              pkgs.shellcheck
+              shellcheck
              
               nodejs
               nodejs.pkgs.pnpm
-
-              just
             ]);
             shellHook = ''
               if [ ! -d "node_modules" ]; then pnpm install; fi
               export PROJ_NIX_ENV=1
+
               export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
-              export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
+              # export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
+
+              # playwright_chromium_revision="$(${pkgs.jq}/bin/jq --raw-output '.browsers[] | select(.name == "chromium").revision' ${pkgs.playwright-driver}/browsers.json)"
+              # export PLAYWRIGHT_LAUNCH_OPTIONS_EXECUTABLE_PATH=${pkgs.playwright-driver.browsers}/chromium-$playwright_chromium_revision/chrome-linux/chrome
+              # export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=$PLAYWRIGHT_LAUNCH_OPTIONS_EXECUTABLE_PATH
+
+              env | grep ^PLAYWRIGHT
             '';
           };
       });
