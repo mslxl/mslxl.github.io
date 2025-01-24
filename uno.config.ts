@@ -1,3 +1,4 @@
+import type { Theme } from 'unocss/preset-uno'
 import presetAttributify from '@unocss/preset-attributify'
 import transformerDirectives from '@unocss/transformer-directives'
 import {
@@ -8,11 +9,10 @@ import {
   presetWebFonts,
   transformerVariantGroup,
 } from 'unocss'
+import presetTheme from 'unocss-preset-theme'
 import { themeConfig } from './src/.config'
 
-const { theme, colorsDark, colorsLight, fonts } = themeConfig.appearance
-
-const colors = theme === 'dark' ? colorsDark : colorsLight
+const { colorsDark, colorsLight, fonts } = themeConfig.appearance
 
 const cssExtend = {
   ':root': {
@@ -24,11 +24,18 @@ const cssExtend = {
   },
 
   ':where(:not(pre):not(a) > code)': {
+    'white-space': 'normal',
+    'word-wrap': 'break-word',
     'padding': '2px 4px',
     'color': '#c7254e',
     'font-size': '90%',
     'background-color': '#f9f2f4',
     'border-radius': '4px',
+  },
+
+  'li': {
+    'white-space': 'normal',
+    'word-wrap': 'break-word',
   },
 }
 
@@ -80,14 +87,21 @@ export default defineConfig({
         ],
       },
     }),
+    presetTheme<Theme>({
+      theme: {
+        dark: {
+          colors: { ...colorsDark, shadow: '#FFFFFF0A' },
+          // TODO 需要配置代码块颜色
+        },
+      },
+    }),
   ],
   theme: {
-    colors,
+    colors: { ...colorsLight, shadow: '#0000000A' },
     fontFamily: fonts,
   },
   shortcuts: [
     ['post-title', 'text-5 font-bold lh-7.5 m-0'],
-    ['underline-hover', 'p-0.5 underline decoration-2 underline-offset-4 hover:decoration-none hover:color-background hover:bg-foreground'],
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   safelist: [

@@ -10,6 +10,7 @@ export const defaultConfig: ThemeConfig = {
     author: 'Mslxl',
     description: 'My story of discovery',
     website: 'https://blog.mslxl.com',
+    pageSize: 5,
     socialLinks: [
       {
         name: 'github',
@@ -23,15 +24,15 @@ export const defaultConfig: ThemeConfig = {
       //   name: 'twitter',
       //   href: 'https://github.com/moeyua/astro-theme-typography',
       // },
-      // {
-      //   name: 'mastodon',
-      //   href: 'https://github.com/moeyua/astro-theme-typography',
-      // },
+      {
+        name: 'mastodon',
+        href: 'https://mastodon.social/@mslxl',
+      },
     ],
     navLinks: [
       {
         name: 'Posts',
-        href: '/posts/page/1',
+        href: '/',
       },
       {
         name: 'Archive',
@@ -57,12 +58,12 @@ export const defaultConfig: ThemeConfig = {
     theme: 'light',
     locale: 'zh-cn',
     colorsLight: {
-      foreground: '#2e405b',
+      primary: '#2e405b',
       background: '#ffffff',
     },
     colorsDark: {
-      foreground: '#ffffff',
-      background: '#2e405b',
+      primary: '#ffffff',
+      background: '#232222',
     },
     fonts: {
       header: '"Noto Serif HK","Noto Serif SC",HiraMinProN-W6,"Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
@@ -73,6 +74,9 @@ export const defaultConfig: ThemeConfig = {
     twitter: '@mslxl_bak',
     meta: [],
     link: [],
+  },
+  rss: {
+    fullText: true,
   },
   comment: {
     giscus: {
@@ -90,7 +94,7 @@ export const defaultConfig: ThemeConfig = {
       loading: 'lazy',
     },
   },
-  rss: {
-    fullText: true,
+  analytics: {
+    googleAnalyticsId: 'G-Q6N8MGDECT',
   },
 }

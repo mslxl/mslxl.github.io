@@ -13,19 +13,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 支持配置字体。
 - 支持添加自定义 SEO 链接。
 - 添加 release 脚本与 CHANGELOG
+- 支持 Google Analytics 配置。
+- 添加自定义主题模块。
 
 ### Changed
-- 扩大标题点击区域
+- 扩大标题点击区域。
 - 重新设计配置文件。
 - 重新设计布局。
 - 调整组件结构。
 - 优化整体样式。
+- 设置文章分页为首页。
 
 ### Fixed
 - 修正在移动端时标题的动画错误。
 - 修正侧边栏抖动的问题。
 - 在主页滚动条错误展示的问题。
 - 代码块被添加背景色的问题。
+- 修复主题副标题错误取值的问题
+- 防止 Safari 中 main 元素自动获得焦点
 
 ### Chore
 - 使用 ESLint 格式化代码。

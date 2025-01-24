@@ -13,4 +13,4 @@ fi
 
 pnpm install
 echo "Build with playwright browser $PLAYWRIGHT_BROWSERS_PATH"
-pnpm build
+PROD=1 pnpm build

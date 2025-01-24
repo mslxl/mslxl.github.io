@@ -31,7 +31,7 @@ function getCustomData() {
 
 function getPostItem(post: Post) {
   const postItem = {
-    link: `/posts/${post.slug}/`,
+    link: `/posts/${post.id}/`,
     author: post.data.author ?? author,
     content: getPostContent(post),
     title: post.data.title,
@@ -51,5 +51,5 @@ function getPostContent(post: Post) {
   const isFullText = themeConfig.rss.fullText
   if (!isFullText)
     return post.data.description
-  return sanitizeHtml(parser.render(post.body), { allowedTags })
+  return sanitizeHtml(parser.render(post.body || ''), { allowedTags })
 }

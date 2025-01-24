@@ -5,9 +5,10 @@ import '~/styles/global.css'
 import 'katex/dist/katex.min.css'
 
 const lang = themeConfig.appearance.locale ?? 'en-us'
+const dark = themeConfig.appearance.theme === 'dark'
 ---
 
-<html lang={lang} class="animation-prepared">
+<html lang={lang} class:list={['animation-prepared', { dark }]}>
   <head>
     <slot name="seo"> <SiteSeo /> </slot>
   </head>

@@ -27,6 +27,9 @@ export async function getPosts() {
   posts.sort((a: Post, b: Post) => {
     return dayjs(a.data.date).isBefore(dayjs(b.data.date)) ? 1 : -1
   })
+  if (import.meta.env.PROD) {
+    return posts.filter(post => post.data.draft !== true)
+  }
   return posts
 }
 
@@ -36,7 +39,7 @@ export function getPostDescription(post: Post) {
     return post.data.description
   }
 
-  const html = parser.render(post.body)
+  const html = parser.render(post.body || '')
   const sanitized = sanitizeHtml(html, { allowedTags: [] })
   return sanitized.slice(0, 400)
 }
