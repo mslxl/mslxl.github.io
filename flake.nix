@@ -30,6 +30,14 @@
               nodejs
               nodejs.pkgs.pnpm
             ]);
+            # Fontconfig error: Cannot load default config file
+            FONTCONFIG_FILE = pkgs.makeFontsConf {
+              fontDirectories = with pkgs; [
+                nerd-fonts.iosevka
+                source-han-sans
+                source-han-serif
+              ];
+            };
             shellHook = ''
               if [ ! -d "node_modules" ]; then pnpm install; fi
               export PROJ_NIX_ENV=1

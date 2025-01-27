@@ -10,7 +10,7 @@ export const defaultConfig: ThemeConfig = {
     author: 'Mslxl',
     description: 'My story of discovery',
     website: 'https://blog.mslxl.com',
-    pageSize: 5,
+    pageSize: 10,
     socialLinks: [
       {
         name: 'github',
