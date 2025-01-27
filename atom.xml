@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integrate Life</title><description>My story of discovering</description><link>https://blog.mslxl.com/</link><item><title>从 Hexo 到 Astro</title><link>https://blog.mslxl.com/posts/others/hexo-migrate-astro/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/hexo-migrate-astro/</guid><description>从 Hexo 到 Astro 的迁移体验</description><pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Typst } from &apos;astro-typst/src/components&apos;&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integrate Life</title><description>My story of discovery</description><link>https://blog.mslxl.com/</link><item><title>从 Hexo 到 Astro</title><link>https://blog.mslxl.com/posts/others/hexo-migrate-astro/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/hexo-migrate-astro/</guid><description>从 Hexo 到 Astro 的迁移体验</description><pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Typst } from &apos;astro-typst/src/components&apos;&lt;/p&gt;
 &lt;p&gt;该页面出于实验性质使用 Typst 书写，其显示效果、界面风格一致性与交互性可能不如预期。&lt;/p&gt;
-&lt;p&gt;&amp;lt;div data-orientation=&quot;horizontal&quot; role=&quot;separator&quot; label=&quot;Or&quot; class=&quot;shrink-0 bg-foreground relative h-px w-full my-4&quot;&amp;gt;
+&lt;p&gt;&amp;lt;div data-orientation=&quot;horizontal&quot; role=&quot;separator&quot; label=&quot;Or&quot; class=&quot;shrink-0 bg-primary relative h-px w-full my-4&quot;&amp;gt;
 &amp;lt;span class=&quot;text-xs text-foreground bg-background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center h-[1px] py-1 px-2&quot;&amp;gt;
 以下内容使用 Typst 生成并通过 SVG 嵌入
 &amp;lt;/span&amp;gt;
@@ -32,7 +32,7 @@ label(returnhere) // 注册 3 个 label（类似于汇编中的 label）
 label(originalcode)
 label(exit)
 
-newmem: 
+newmem:
 cmp [rax+60+10],0
 je exit
 // 如果 [rax + 60 + 10] 等于 0， 跳转到 exit。否则继续向下执行 originalcode
@@ -51,7 +51,6 @@ jmp newmem // 跳转到 newmem 标签
 nop
 returnhere:
 
-
 [DISABLE]
 // 当该选项被禁用时，释放申请的内存，并将修改的指令回复。
 dealloc(newmem)
@@ -68,15 +67,13 @@ label(returnhere)
 label(originalcode)
 label(exit)
 
-newmem: 
+newmem:
 sub [rax+60],edx
 cmp [rax+60+10],0
 je exit
 
-
 originalcode:
 mov [rax+60],0
-
 
 exit:
 ret
@@ -87,7 +84,6 @@ jmp returnhere
 jmp newmem
 nop
 returnhere:
-
 
 [DISABLE]
 dealloc(newmem)
@@ -107,7 +103,7 @@ db 29 50 60 C3 00 00
 &lt;p&gt;[!tip]&lt;/p&gt;
 &lt;p&gt;合理利用游戏赠送的暂停功能&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;通过 &lt;code&gt;What writes this memory&lt;/code&gt;  发现有3个指令写了这个地址。&lt;/p&gt;
+&lt;p&gt;通过 &lt;code&gt;What writes this memory&lt;/code&gt; 发现有3个指令写了这个地址。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;image-20240815003756240.png&quot; alt=&quot;image-20240815003756240&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;image-20240815004217112.png&quot; alt=&quot;image-20240815004217112&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;通过 &lt;code&gt;Find out what addresses this instruction accesses&lt;/code&gt;，查看这个指令访问了哪些地址：&lt;/p&gt;
@@ -160,7 +156,7 @@ movss [rax+28],xmm9
 &lt;p&gt;&lt;img src=&quot;recording-1723657217223-6.gif&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;image-20240815014156224.png&quot; alt=&quot;image-20240815014156224&quot; /&gt;&lt;/p&gt;
 </content:encoded><category>逆向</category><category>Cheat Engine</category><author>Mslxl</author></item><item><title>ChectEngine（一）：基本使用——以官方小游戏为例</title><link>https://blog.mslxl.com/posts/fun/ce-tutor-offical/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/fun/ce-tutor-offical/</guid><description>尝试写了点汇编，大概是只有开发者才能看懂</description><pubDate>Fri, 28 Jun 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;此文又称《只有开发者能看懂的CE教程》&lt;/p&gt;
-&lt;p&gt;&lt;s&gt;CheatEngine 想必大家懂的都懂。但 CheatEngine  是怎么回事呢？ CheatEngine 相信大家都很熟悉，但是 CheatEngine  是怎么回事呢，下面就让小编带大家一起了解吧&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;CheatEngine 想必大家懂的都懂。但 CheatEngine 是怎么回事呢？ CheatEngine 相信大家都很熟悉，但是 CheatEngine 是怎么回事呢，下面就让小编带大家一起了解吧&lt;/s&gt;&lt;/p&gt;
 &lt;h2&gt;捆绑软件警告&lt;/h2&gt;
 &lt;p&gt;在安装过程中，不要无脑下一步，小心被老外来一个中国式&lt;strong&gt;捆绑软件&lt;/strong&gt;震撼（如下图）。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;image-20240731101103030.png&quot; alt=&quot;image-20240731101103030&quot; /&gt;&lt;/p&gt;
@@ -383,13 +379,13 @@ mov [rax],edx
     id: i32,
     // 有可能是 is_cpu: bool
     // 甚至有可能是 name: String 或者 name: &amp;amp;str
-   	health: f32
+       health: f32
 }
 impl Player{
     fn attack(&amp;amp;mut self, atk: f32){
         // unknown code
         self.health -= atk;
-        
+
         if self.health &amp;lt; 0 {
             self.die();
         }
@@ -428,7 +424,7 @@ jmp 10002F262
 &lt;p&gt;&lt;img src=&quot;image-20240803171935530.png&quot; alt=&quot;image-20240803171935530&quot; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[ENABLE]
 //code from here to &apos;[DISABLE]&apos; will be used to enable the cheat
-alloc(newmem,2048,&quot;Tutorial-x86_64.exe&quot;+2F25D) 
+alloc(newmem,2048,&quot;Tutorial-x86_64.exe&quot;+2F25D)
 label(returnhere)
 label(originalcode)
 label(exit)
@@ -576,10 +572,8 @@ db F3 0F 11 43 08
         flipChar = &apos;W&apos;;
     }
 
-
     std::string seq;
     int Hcnt = 0, Rcnt =0;
-
 
     for(auto ch: instr){
         if(p[ch] != 0) {
@@ -719,7 +713,7 @@ void solve(){
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;G. Money Buys Less Happiness Now&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在 $m$ 个月中每月收入 $x$ 元，每个月都可以花费 $c_i$  元购买 1 点幸福&lt;/p&gt;
+&lt;p&gt;在 $m$ 个月中每月收入 $x$ 元，每个月都可以花费 $c_i$ 元购买 1 点幸福&lt;/p&gt;
 &lt;p&gt;输出最大幸福&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;反悔贪心。由于每次购买的幸福都是1，所以在钱不够是反悔1次总能得到最优解&lt;/p&gt;
@@ -745,7 +739,7 @@ void solve(){
             rec.push(v);
             bag-=v;
         }
-        
+
         bag += x;
     }
     std::cout &amp;lt;&amp;lt; happ;
@@ -756,7 +750,7 @@ void solve(){
 &lt;p&gt;[^1]: &lt;a href=&quot;https://github.com/whutug/whu-thesis&quot;&gt;武汉大学毕业论文 LaTeX 模版 2024&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;那么，WHU-Thesis 做了什么?&lt;/p&gt;
 &lt;h2&gt;创建 Logger&lt;/h2&gt;
-&lt;p&gt;首先 whu 为 &lt;code&gt;\msg_new&lt;/code&gt;  等函数创建了一个别名&lt;/p&gt;
+&lt;p&gt;首先 whu 为 &lt;code&gt;\msg_new&lt;/code&gt; 等函数创建了一个别名&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;%tag 简化-msg-模块的函数
 \cs_new:Npn \__whu_msg_new:nn  { \msg_new:nnn      { whu-thesis } }
 \cs_new:Npn \__whu_warning:n   { \msg_warning:nn   { whu-thesis } }
@@ -959,37 +953,37 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
     % 根据数字大小设置压缩系数
     \fp_set:Nn \l__whu_tikz_circled_number_xscale_fp
       {
-        \int_compare:nNnTF {#1} &amp;lt; { 10 } 
+        \int_compare:nNnTF {#1} &amp;lt; { 10 }
           { 0.9 }
           {
             \int_compare:nNnTF {#1} &amp;lt; { 100 }
               { 0.7 }
               { 0.5 }
-          } 
+          }
       }
     \fp_set:Nn \l__whu_tikz_circled_number_yscale_fp
       {
-        \int_compare:nNnTF {#1} &amp;lt; { 10 } 
+        \int_compare:nNnTF {#1} &amp;lt; { 10 }
           { 0.9 }
           {
             \int_compare:nNnTF {#1} &amp;lt; { 100 }
               { 0.8 }
               { 0.6 }
-          } 
+          }
       }
     % 获取数字的高度
     \hbox_set:Nn \l_tmpa_box {#1}
     \dim_set:Nn \l__whu_tikz_circled_number_total_hegiht_dim
       { \box_ht:N \l_tmpa_box + \box_dp:N \l_tmpa_box  }
     % 设置圆的半径
-    \dim_set:Nn \l__whu_tikz_circled_number_radius_dim 
+    \dim_set:Nn \l__whu_tikz_circled_number_radius_dim
       { \dim_eval:n { \l__whu_tikz_circled_number_total_hegiht_dim / 2 + 0.34 ex } }
     % 绘制
     \tikz [ baseline ]
       {
         \node
           [ inner~sep = 0pt, outer~sep = 0pt ]
-          at (0, \dim_use:N \l__whu_tikz_circled_number_total_hegiht_dim / 2 ) 
+          at (0, \dim_use:N \l__whu_tikz_circled_number_total_hegiht_dim / 2 )
           {
             \hbox_set:Nn \l_tmpa_box
               {
@@ -998,10 +992,10 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
                   {#1}
               }
             \makebox[0.35em][c]
-              { 
+              {
                 \box_scale:Nnn \l_tmpa_box
                   { \fp_use:N \l__whu_tikz_circled_number_xscale_fp }
-                  { \fp_use:N \l__whu_tikz_circled_number_yscale_fp } 
+                  { \fp_use:N \l__whu_tikz_circled_number_yscale_fp }
                 \box_use_drop:N \l_tmpa_box
               }
           };
@@ -1017,7 +1011,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
     \hbox_set:Nn \l__whu_tmpa_box {#2}
     \dim_set:Nn #1 { \box_wd:N \l__whu_tmpa_box }
   }
-  
+
 \cs_generate_variant:Nn \__whu_get_text_width:Nn { NV }
 
 \cs_new:Npn \__whu_get_max_text_width:NN #1#2
@@ -1202,7 +1196,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
 \AtEndOfPackageFile* { xeCJK }
   {
     \msg_redirect_name:nnn { xeCJK } { CJKfamily-redef } { none }
-    \defaultCJKfontfeatures { Script  = CJK }   
+    \defaultCJKfontfeatures { Script  = CJK }
   }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;在包执行结束后进行消息重定向，以达到丢弃消息的目的&lt;/p&gt;
@@ -1292,7 +1286,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
       }
   }
 
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 开题报告
     {1} { \__whu_proposal_set_paper_size: }
@@ -1377,7 +1371,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
     font .value_required:n = true,
     math-font .choices:nn =
       { xits, termes, default }
-      { 
+      {
         \cs_gset_eq:Nc \__whu_style_math_font_use: { __whu_style_math_font_set_ \l_keys_choice_tl : }
         \tl_gset_eq:NN \g__whu_style_math_font_choice_tl \l_keys_choice_tl
       },
@@ -1405,7 +1399,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
 %tag xits
 \cs_new_protected:Npn \__whu_style_font_set_xits:
   {
-    \setmainfont { XITS } 
+    \setmainfont { XITS }
       [
         Extension      = .otf,
         UprightFont    = *-Regular,
@@ -1440,11 +1434,11 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
 &lt;pre&gt;&lt;code&gt;%tag 数学字体设置 (math font setting)
 \cs_new_protected:Npn \__whu_style_math_font_set_xits:
   {
-    \setmathfont { XITSMath-Regular.otf } 
-      [ 
+    \setmathfont { XITSMath-Regular.otf }
+      [
         BoldFont     = XITSMath-Bold.otf,
       ]
-    \setmathfont { XITSMath-Regular.otf } 
+    \setmathfont { XITSMath-Regular.otf }
       [
         range        = {cal, bfcal},
         StylisticSet = 01
@@ -1476,7 +1470,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
       }
       {
         \__whu_set_cjk_main_font:nn { SimSun }
-          { 
+          {
             BoldFont       = SimHei,
             ItalicFont     = KaiTi,
             SlantedFont    = KaiTi,
@@ -1508,8 +1502,8 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
         \__whu_set_cjk_mono_font:nn { STFangsong }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
         \__whu_set_cjk_font_kaishu:nn { Kaiti~ SC~ Regular }
-          { 
-            BoldFont      = Kaiti~ SC~ Bold, 
+          {
+            BoldFont      = Kaiti~ SC~ Bold,
             AutoFakeSlant = 0.167
           }
       }
@@ -1531,10 +1525,10 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
         \__whu_set_cjk_mono_font:nn { STFangsong }
           { BoldFont = *, ItalicFont = *, SlantedFont = *, BoldItalicFont = * }
         \__whu_set_cjk_font_kaishu:nn { Kaiti~ SC~ Regular }
-          { 
-            BoldFont       = Kaiti~ SC~ Bold, 
-            ItalicFont     = *, 
-            SlantedFont    = *, 
+          {
+            BoldFont       = Kaiti~ SC~ Bold,
+            ItalicFont     = *,
+            SlantedFont    = *,
             BoldItalicFont = Kaiti~ SC~ Bold
           }
       }
@@ -1607,7 +1601,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
           }
         \__whu_set_cjk_font_kaishu:nn { FZKai-Z03 }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
-        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 } 
+        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 }
           { AutoFakeBold = 4, AutoFakeSlant = 0.167 }
       }
       {
@@ -1631,7 +1625,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             ItalicFont     = *,
             BoldItalicFont = *
           }
-        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 } 
+        \__whu_set_cjk_mono_font:nn { FZFangSong-Z02 }
           {
             BoldFont       = *,
             ItalicFont     = *,
@@ -1702,7 +1696,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
   {
     \keys_set:nn { ctex }
       {
-        chapter = 
+        chapter =
           {
             numbering   = false,
             format      = \zihao{2}\bfseries\centering,
@@ -1711,7 +1705,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             pagestyle   = empty,
             titleformat = \__whu_spread_box_with_quad:n
           },
-        section = 
+        section =
           {
             number      = \chinese{section},
             name        = {,、},
@@ -1726,7 +1720,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
   {
     \keys_set:nn { ctex }
       {
-        chapter = 
+        chapter =
           {
             numbering   = false,
             format      = \zihao{3}\bfseries\centering,
@@ -1734,7 +1728,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             afterskip   = 7.5ex,
             pagestyle   = empty
           },
-        section = 
+        section =
           {
             number      = \chinese{section},
             name        = {,、},
@@ -1751,7 +1745,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
       {
         % 编号到 subsubsection
         secnumdepth = 3,
-        chapter = 
+        chapter =
           {
             format       = \zihao{-2}\sffamily\centering,
             number       = \arabic{chapter},
@@ -1762,7 +1756,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             fixskip      = true,
             pagestyle    = bachelor-mainmatter
           },
-        section = 
+        section =
           {
             format       = \zihao{4}\sffamily,
             numberformat = \rmfamily,
@@ -1770,7 +1764,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             afterskip    = 0.5 \baselineskip,
             fixskip      = true,
           },
-        subsection = 
+        subsection =
           {
             format       = \zihao{-4}\sffamily,
             numberformat = \rmfamily,
@@ -1778,7 +1772,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             afterskip    = 0.5 \baselineskip,
             fixskip      = true,
           },
-        subsubsection = 
+        subsubsection =
           {
             format       = \zihao{-4}\sffamily,
             numberformat = \rmfamily,
@@ -1816,7 +1810,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
       {
         % 编号到 subsubsection
         secnumdepth = 3,
-        chapter = 
+        chapter =
           {
             format      = \zihao{-2}\sffamily\raggedright,
             number      = \arabic{chapter},
@@ -1825,21 +1819,21 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
           },
-        section = 
+        section =
           {
             format      = \zihao{4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsection = 
+        subsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsubsection = 
+        subsubsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
@@ -1876,7 +1870,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
       {
         % 编号到 subsubsection
         secnumdepth = 3,
-        chapter = 
+        chapter =
           {
             format      = \zihao{-2}\sffamily\raggedright,
             number      = \arabic{chapter},
@@ -1885,21 +1879,21 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
             afterskip   = 4 ex plus 0.5 ex,
             fixskip     = true,
           },
-        section = 
+        section =
           {
             format      = \zihao{4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsection = 
+        subsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
             % afterskip   = 0.5 \baselineskip,
             fixskip     = true,
           },
-        subsubsection = 
+        subsubsection =
           {
             format      = \zihao{-4}\sffamily,
             % beforeskip  = 0.5 \baselineskip,
@@ -2068,25 +2062,25 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3&gt;判断论文种类&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;\int_case:Vn \g__whu_thesis_type_int  
+&lt;pre&gt;&lt;code&gt;\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2}
       {
         \__whu_bachelor_set_enumerate_format:
-        \__whu_bachelor_set_ctex_format: 
+        \__whu_bachelor_set_ctex_format:
       }
     % 硕士
     {3}
       {
         \__whu_master_set_enumerate_format:
-        \__whu_master_set_ctex_format: 
+        \__whu_master_set_ctex_format:
       }
     % 博士
     {4}
       {
         \__whu_doctor_set_enumerate_format:
-        \__whu_doctor_set_ctex_format: 
+        \__whu_doctor_set_ctex_format:
       }
   }
 
@@ -2111,14 +2105,14 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
   {
     \fancyhf { }
     \fancyfoot[C] { \zihao{5} \Roman{page} }
-    \renewcommand \headrulewidth { 0pt } 
+    \renewcommand \headrulewidth { 0pt }
   }
 \fancypagestyle { bachelor-mainmatter }
   {
     \fancyhf { }
     \fancyfoot[C] { \zihao{5} \arabic{page} }
     \fancyhead[C] { \zihao{5} \__whu_spread_box:nn {8cm} {武汉大学本科毕业论文（设计）}}
-    \renewcommand \headrulewidth { 0.5pt } 
+    \renewcommand \headrulewidth { 0.5pt }
     \setlength{\headheight}{13pt}
   }
 %tag 硕士
@@ -2342,7 +2336,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
       }
   }
 %tag 执行初始化
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2} { \__whu_bachelor_info_initial: }
@@ -2363,45 +2357,45 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
 %tag 本科任务书个人信息
 \NewDocumentCommand \ProposalTasksinformation { }
   {
-    \par \noindent 
+    \par \noindent
     毕业论文（设计）题目：\CJKunderline*{ \l__whu_info_title_tl }\\[5pt]
-    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl 
-    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl 
-    姓名：\CJKunderline*{ \l__whu_info_author_tl } 
+    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl
+    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl
+    姓名：\CJKunderline*{ \l__whu_info_author_tl }
   }
 % 本科开题报告个人信息
 \NewDocumentCommand \ProposalReportinformation { }
   {
-    \par \noindent 
+    \par \noindent
     论文题目：\CJKunderline*{ \l__whu_info_title_tl }\\[10pt]
-    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl 
-    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl 
-    姓名：\CJKunderline*{ \l__whu_info_author_tl } 
+    学院：\CJKunderline*{ \l__whu_info_department_tl } \c_space_tl
+    学号：\CJKunderline*{ \l__whu_info_student_id_tl } \c_space_tl
+    姓名：\CJKunderline*{ \l__whu_info_author_tl }
   }
 % 本科任务书落款
 \NewDocumentCommand \ProposalTasksSignature { }
   {
-    \dim_compare:nNnTF 
+    \dim_compare:nNnTF
       { \pagetotal } &amp;lt; { .5 \textheight }
       { \vfil \null \vfil }
       {
-        \dim_compare:nNnTF 
+        \dim_compare:nNnTF
           { \pagegoal - \pagetotal } &amp;lt; { 8em }
           { \vfill }
           { \vfil \null \vfil }
       }
     \noindent
-    指导老师签名：\CJKunderline*{\hspace*{10em}}  \hfill 
+    指导老师签名：\CJKunderline*{\hspace*{10em}}  \hfill
     年 \hspace*{2em} 月 \hspace*{2em} 日
   }
 % 本科任务书落款
 \NewDocumentCommand \ProposalReportSignature { }
   {
-    \dim_compare:nNnTF 
+    \dim_compare:nNnTF
       { \pagetotal } &amp;lt; { .5 \textheight }
       { \vfil }
       {
-        \dim_compare:nNnTF 
+        \dim_compare:nNnTF
           { \pagegoal - \pagetotal } &amp;lt; { 8em }
           { \vfill }
           { \vfil \null \vfil }
@@ -2409,7 +2403,7 @@ if51 --&amp;gt;|&quot;Y&quot;| add32b0 --&amp;gt; finish
     \begin{flushright}
       指导老师签名：\hspace*{8em} \null\\[5pt]
       年 \hspace*{2em} 月 \hspace*{2em} 日
-    \end{flushright} 
+    \end{flushright}
   }
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -2426,7 +2420,6 @@ haft --&amp;gt;|N| em --&amp;gt;|Y| fill
 em --&amp;gt;|N| fnf
 fill --&amp;gt;endd
 fnf --&amp;gt; endd
-
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;即将签名放到页面最下放&lt;/p&gt;
@@ -2446,7 +2439,6 @@ fnf --&amp;gt; endd
     \__whu_bachelor_cover_i_date_zh:
     \restoregeometry
   }
-
 
 %tag logo-and-type
 \cs_new_protected:Npn \__whu_bachelor_cover_i_logo_and_type:
@@ -2574,7 +2566,7 @@ fnf --&amp;gt; endd
       \centering
       \includegraphics [ width = 5 cm ] { logo / whu-name.pdf }
       \skip_vertical:n { 0.57cm }
-      { \zihao{2} \bfseries 
+      { \zihao{2} \bfseries
         \__whu_spread_box_with_quad:n { \c__whu_name_type_tl } }
       \vfil
     \end{minipage}\par
@@ -2699,7 +2691,7 @@ fnf --&amp;gt; endd
 %endregion 硕士
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;博士&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;%region 博士 
+&lt;pre&gt;&lt;code&gt;%region 博士
 \cs_set_eq:NN \__whu_doctor_cover_i: \__whu_master_cover_i:
 %endregion 博士
 %endregion 中文封面
@@ -2735,8 +2727,8 @@ fnf --&amp;gt; endd
   {
     \node [ anchor = north ] at
       ( [ shift = { ( 0 , -0.07\textheight ) } ] current~page~text~area.north )
-      { 
-        \bfseries 
+      {
+        \bfseries
         \parbox { 0.6\textwidth }
           {
             \centering \large \linespread{1.4}\selectfont
@@ -2750,7 +2742,7 @@ fnf --&amp;gt; endd
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.29\textheight ) } ] current~page~text~area.north )
-      { 
+      {
         \begin{minipage}{\textwidth}
           \zihao{2} \centering \linespread{1.2}\selectfont
           \l__whu_info_title_en_tl
@@ -2770,7 +2762,7 @@ fnf --&amp;gt; endd
           \c__whu_name_major_en_tl : &amp;amp; \l__whu_info_major_en_tl\\
           \c__whu_name_author_en_tl : &amp;amp; \textsc{ \l__whu_info_author_en_tl } \\
           \c__whu_name_supervisor_en_tl : &amp;amp; \textsc{ \l__whu_info_supervisor_en_tl } \\
-        \end{tabular}       
+        \end{tabular}
       };
   }
 %tag 学校名和logo
@@ -2849,7 +2841,7 @@ fnf --&amp;gt; endd
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.1\textheight ) } ] current~page~text~area.north )
-      { 
+      {
         \begin{minipage}{\textwidth}
           \zihao{2} \centering \linespread{1.2}\selectfont
           \l__whu_info_title_en_tl
@@ -2873,7 +2865,7 @@ fnf --&amp;gt; endd
           \c__whu_name_supervisor_en_tl : &amp;amp; \textsc{ \l__whu_info_supervisor_en_tl } \\
           \c__whu_name_major_en_tl : &amp;amp; \l__whu_info_major_en_tl \\
           \c__whu_name_research_area_en_tl : &amp;amp; \l__whu_info_research_area_en_tl
-        \end{tabular}       
+        \end{tabular}
       };
   }
 %tag 学校名和 logo
@@ -2904,7 +2896,7 @@ fnf --&amp;gt; endd
   {
     \begin{tikzpicture}[ remember~picture, overlay, align=center ]
       \node at ([shift = {(0,-4.16cm)}]current~page~text~area.north)
-        { 
+        {
           \begin{minipage}{\textwidth}
             \zihao{2} \centering \linespread{1.2}\selectfont
             \l__whu_info_title_en_tl
@@ -2914,11 +2906,11 @@ fnf --&amp;gt; endd
         { \zihao{4} By \\ \l__whu_info_author_en_tl };
       \node at ([shift={(0,-2.75cm)}]current~page~text~area.center)
         { \zihao{4} Supervised~by \\
-          \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl 
+          \l__whu_info_supervisor_academic_title_en_tl .\c_space_tl
           \l__whu_info_supervisor_en_tl };
       \node [anchor=south] at ([shift={(0,1.45cm)}]current~page~text~area.south)
-        { \zihao{4} Wuhan~University \\ 
-          \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl 
+        { \zihao{4} Wuhan~University \\
+          \__whu_month_cover_to_english_version:V \l__whu_info_month_int, \c_space_tl
           \int_use:N \l__whu_info_year_int };
       % 用于对比测试
       % \node at (current~page.center)
@@ -2948,7 +2940,7 @@ fnf --&amp;gt; endd
   {
     \node (title) at
       ( [ shift = { ( 0 , -0.1\textheight ) } ] current~page~text~area.north )
-      { 
+      {
         \begin{minipage}{\textwidth}
           \zihao{2} \centering \linespread{1.2}\selectfont
           \l__whu_info_title_en_tl
@@ -2971,7 +2963,7 @@ fnf --&amp;gt; endd
           \c__whu_name_supervisor_en_tl : &amp;amp; \textsc{ \l__whu_info_supervisor_en_tl } \\
           \c__whu_name_major_en_tl : &amp;amp; \l__whu_info_major_en_tl \\
           \c__whu_name_research_area_en_tl : &amp;amp; \l__whu_info_research_area_en_tl
-        \end{tabular}       
+        \end{tabular}
       };
   }
 %tag 学校名和logo
@@ -3066,7 +3058,7 @@ fnf --&amp;gt; endd
       \linespread{1}
       \fontsize{14bp}{28bp}\selectfont
       本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已经发表或撰写过的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
-      
+
       \vspace*{3em}
       \begin{flushright}
         学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
@@ -3094,7 +3086,7 @@ fnf --&amp;gt; endd
       \linespread{1}
       \fontsize{14bp}{28bp}\selectfont
       本人郑重声明：所呈交的学位论文，是本人在导师指导下，独立进行研究工作所取得的研究成果。除文中已经标明引用的内容外，本论文不包含任何其他个人或集体已发表或撰写的研究成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
-      
+
       \vspace*{3em}
       \begin{flushright}
         学位论文作者（签名）：\hspace*{4em}\mbox{}\\[12pt]
@@ -3125,13 +3117,13 @@ fnf --&amp;gt; endd
       本学位论文作者愿意遵守武汉大学关于保存、使用学位论文的管理办法及规定，即：学校有权保存学位论文的印刷本和电子版，并提供文献检索与阅览服务；学校可以采用影印、缩印、数字化或其它复制手段保存论文；在以教学与科研服务为目的前提下，学校可以在校园网内公布部分或全部内容。 \par
       \textbf{一、}在本论文提交当年，同意在校园网内以及中国高等教育文献保障系统（CALIS）、高校学位论文系统提供查询及前十六页浏览服务。 \par
       \textbf{二、}在本论文提交 $\square$ 当年／$\square$一年／$\square$ 两年／$\square$ 三年以后，同意在校园网内允许读者在线浏览并下载全文，学校可以为存在馆际合作关系的兄弟高校用户提供文献传递服务和交换服务。（保密论文解密后遵守此规定）\par
-      
+
       \vspace*{3em}
       \begin{minipage}{0.5\textwidth}
         论文作者（签名）：\CJKunderline*{\hfill}\\[12pt]
         学号：\CJKunderline*{\hfill}\\[12pt]
         学院：\CJKunderline*{\hfill}\\[12pt]
-      \end{minipage} \par 
+      \end{minipage} \par
       \hfill 日期：\hspace{3em} 年 \qquad 月 \qquad 日
     \group_end:
   }
@@ -3141,7 +3133,7 @@ fnf --&amp;gt; endd
 \cs_new_protected:Npn \__whu_doctor_innovation:
   {
     \group_begin:
-    \keys_set:nn { ctex } 
+    \keys_set:nn { ctex }
       {
         chapter =
           {
@@ -3188,7 +3180,7 @@ fnf --&amp;gt; endd
 &lt;pre&gt;&lt;code&gt;\cs_new:Npn \__whu_bachelor_abstract_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -3215,7 +3207,7 @@ fnf --&amp;gt; endd
 \cs_new:Npn \__whu_bachelor_abstract_en_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -3264,7 +3256,7 @@ fnf --&amp;gt; endd
 \cs_new:Npn \__whu_master_abstract_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -3288,7 +3280,7 @@ fnf --&amp;gt; endd
 \cs_new:Npn \__whu_master_abstract_en_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -3315,7 +3307,7 @@ fnf --&amp;gt; endd
 &lt;pre&gt;&lt;code&gt;\cs_new:Npn \__whu_doctor_abstract_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -3339,7 +3331,7 @@ fnf --&amp;gt; endd
 \cs_new:Npn \__whu_doctor_abstract_en_output:
   {
     \group_begin:
-      \keys_set:nn { ctex } 
+      \keys_set:nn { ctex }
         {
           chapter =
             {
@@ -3367,10 +3359,10 @@ fnf --&amp;gt; endd
     \ctex_after_end_preamble:n
     {
       \pdfbookmark{中文封面}{titlepage}
-      \int_case:Vn \g__whu_thesis_type_int  
+      \int_case:Vn \g__whu_thesis_type_int
         {
           % 本科
-          {2} 
+          {2}
             {
               \pagestyle{empty}
               \__whu_bachelor_cover_i:
@@ -3392,7 +3384,7 @@ fnf --&amp;gt; endd
               \newpage
             }
           % 硕士
-          {3} 
+          {3}
             {
               \pagestyle{empty}
               \__whu_master_cover_i:
@@ -3410,7 +3402,7 @@ fnf --&amp;gt; endd
               \newpage
             }
           % 博士
-          {4} 
+          {4}
             {
               \pagestyle{empty}
               \__whu_doctor_cover_i:
@@ -3472,7 +3464,7 @@ fnf --&amp;gt; endd
   }
 \AddToHook { begindocument }
   {
-    \int_case:Vn \g__whu_thesis_type_int  
+    \int_case:Vn \g__whu_thesis_type_int
       {
         % 本科
         {2} { \__whu_bachelor_chapter_cmds_no_optional_argument: }
@@ -3557,11 +3549,10 @@ fnf --&amp;gt; endd
     % % subsection前的额外垂直间距
     % \dim_set:Nn \cftbeforesubsecskip { 0.1\baselineskip }
   }
-  
-  
+
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;输出配置&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;\int_case:Vn \g__whu_thesis_type_int  
+&lt;pre&gt;&lt;code&gt;\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2} { \__whu_bachelor_set_tocline: }
@@ -3577,7 +3568,7 @@ fnf --&amp;gt; endd
   {
     \group_begin:
     \keys_set:nn { ctex }
-      { 
+      {
         chapter / format += \centering,
         chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
@@ -3597,7 +3588,7 @@ fnf --&amp;gt; endd
   {
     \group_begin:
     \keys_set:nn { ctex }
-      { 
+      {
         chapter / format += \centering,
         chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
@@ -3609,7 +3600,7 @@ fnf --&amp;gt; endd
   {
     \group_begin:
     \keys_set:nn { ctex }
-      { 
+      {
         chapter / format += \centering,
         chapter / pagestyle = \tl_use:N \g__whu_thesis_type_tl -frontmatter
       }
@@ -3641,7 +3632,7 @@ fnf --&amp;gt; endd
   {
     \AddToHook { cmd / appendix / after }
       {
-        \renewcommand{ \theequation }{ \thechapter \arabic{equation} } 
+        \renewcommand{ \theequation }{ \thechapter \arabic{equation} }
         \keys_set:nn { ctex }
           {
             section/number = \Alph{chapter}\arabic{section},
@@ -3650,7 +3641,7 @@ fnf --&amp;gt; endd
           }
       }
   }
-\int_case:Vn \g__whu_thesis_type_int  
+\int_case:Vn \g__whu_thesis_type_int
   {
     % 本科
     {2} { \__whu_bachelor_set_appendix: }
@@ -3852,7 +3843,7 @@ fnf --&amp;gt; endd
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;此处创建了一个 &lt;code&gt;notation&lt;/code&gt; 环境，这种操作和上面的致谢环境很类似。&lt;/p&gt;
 &lt;p&gt;在 notation 环境中，会先创建一个居中不带标号且有frontmatter样式页眉的章节，内容为第一个参数（默认是“符号表”），然后创建一个居中的表格，其内容为第二个参数。&lt;/p&gt;
-&lt;p&gt;这也意味着在这个环境中，需要用 tabular  环境中的语言来进行书写&lt;/p&gt;
+&lt;p&gt;这也意味着在这个环境中，需要用 tabular 环境中的语言来进行书写&lt;/p&gt;
 &lt;p&gt;比如说官方示例给出的用法：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;\begin{notation}
   $\omega_n$ &amp;amp; $n$-维欧氏空间中单位球的表面积 \\
@@ -3918,7 +3909,6 @@ fnf --&amp;gt; endd
       { \clist_item:nn {#1} {4} }
   }
 
-
 \clist_map_function:nN
   {
     { 定理, 定理, section, theorem },
@@ -3936,7 +3926,6 @@ fnf --&amp;gt; endd
     { 注, 注, section, remark }
   }
   \__whu_declare_theorem_with_counter_within:n
-
 
 \NewDocumentCommand { \whunewtheorem } { s O{} m m }
   {
@@ -3984,8 +3973,7 @@ fnf --&amp;gt; endd
   {
     \popQED \endtrivlist \@endpefalse
   } +
-  
-  
+
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;\declaretheoremstyle&lt;/code&gt; 是用于声明定理环境样式的命令。在这个例子中，一个名为 &lt;code&gt;whustyle&lt;/code&gt; 的定理样式被声明。&lt;/p&gt;
 &lt;ul&gt;
@@ -4425,7 +4413,7 @@ fnf --&amp;gt; endd
 
     Figure 3, Stand-alone ACK segment
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;4.  EACK 段&lt;/h4&gt;
+&lt;h4&gt;4. EACK 段&lt;/h4&gt;
 &lt;p&gt;EACK 段用于确认到达的失序段。它包含一个或多个接收到的失序序列号。 EACK 总是应该和 ACK 段进行组合，并给出未失序情况下应当接收到的序号。对于 EACK 段来说，头的长度是一个变量。它最小是 7，最大取决于于最大接收队列长度。图 4 反应了单独的 EACK 段&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    0 1 2 3 4 5 6 7 8            15
    +-+-+-+-+-+-+-+-+---------------+
@@ -4486,7 +4474,7 @@ fnf --&amp;gt; endd
    +---------------+---------------+
    | Seq Adj Factor|      Spare    |
    +---------------+---------------+
-   |      Connection Identifier    |                           
+   |      Connection Identifier    |
    |       (32 bits in length)     |
    +---------------+---------------+
    |            Checksum           |
@@ -4682,7 +4670,7 @@ int main(){
   int n;
   std::cin &amp;gt;&amp;gt; n;
   std::vector&amp;lt;int&amp;gt; s(n+2);
-  
+
   for(int i = 1; i &amp;lt;= n; i++){
     std::cin &amp;gt;&amp;gt; s[i];
   }
@@ -4690,12 +4678,12 @@ int main(){
   std::vector&amp;lt;int&amp;gt; pre(s.size()), suf(s.size());
   for(int i = 1; i &amp;lt;= n; i++){
     pre[i] = n - i + s[i];
-    suf[i] = i - 1 + s[i]; 
+    suf[i] = i - 1 + s[i];
   }
   for(int i = 1; i &amp;lt;= n; i++) pre[i] = std::max(pre[i], pre[i-1]);
   for(int i = n; i &amp;gt;= 1; i--) suf[i] = std::max(suf[i], suf[i+1]);
   int atk = 0x3f3f3f3f;
-  
+
   for(int i = 1; i &amp;lt;= n; i++){
     atk = mmin(
       atk,
@@ -4757,7 +4745,7 @@ int main(){
 &lt;p&gt;在 master 中维护有以下内容：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;文件名与 chunk handle 数组的对应关系&lt;/li&gt;
-&lt;li&gt;chunk handle 和 chunk  版本号的对应关系&lt;/li&gt;
+&lt;li&gt;chunk handle 和 chunk 版本号的对应关系&lt;/li&gt;
 &lt;li&gt;chunk handle 和 chunk server 地址、primary chunk server、租约的对应关系&lt;/li&gt;
 &lt;li&gt;日志&lt;/li&gt;
 &lt;li&gt;检查点&lt;/li&gt;
@@ -4770,12 +4758,12 @@ int main(){
 &lt;p&gt;为了保证数据的一致性，确保在并发操作中文件名不会冲突，需要对文件和路径进行加锁，每个文件和目录均有一个读写锁。GFS 会对每个文件和所属目录从根目录开始逐级加锁。&lt;/p&gt;
 &lt;h2&gt;读文件&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;sequenceDiagram
-	Client-&amp;gt;&amp;gt;+Master: 发送文件名和要读取的位置(Offset)
-	Master--&amp;gt;&amp;gt;-Client: 返回 chunk server, handle, 版本号（一般返回3条）
-	Client-&amp;gt;&amp;gt;Client: 缓存
-	Client-&amp;gt;&amp;gt;+Chunk Server: 读取 Chunk
-	Chunk Server-&amp;gt;&amp;gt;Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
-	Chunk Server--&amp;gt;&amp;gt;Client: 返回 Chunk 内容
+    Client-&amp;gt;&amp;gt;+Master: 发送文件名和要读取的位置(Offset)
+    Master--&amp;gt;&amp;gt;-Client: 返回 chunk server, handle, 版本号（一般返回3条）
+    Client-&amp;gt;&amp;gt;Client: 缓存
+    Client-&amp;gt;&amp;gt;+Chunk Server: 读取 Chunk
+    Chunk Server-&amp;gt;&amp;gt;Chunk Server: 校验本地版本号和需要是否一致、本地 checksum 和内容是否对应
+    Chunk Server--&amp;gt;&amp;gt;Client: 返回 Chunk 内容
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;如果在读取 Chunk 时，Client 未能正常连接 Chunk Server，或者 Chunk Server 校验失败，那么 Client 会去请求另一个 Chunk Server。&lt;/p&gt;
 &lt;p&gt;在读取过程中，如果请求的 Chunk Server 是 Primary，那么数据就是一致的。否则数据有可能就旧的。&lt;/p&gt;
@@ -4801,30 +4789,30 @@ int main(){
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;在操作3中，Chunk 数据的发送与同步并不是等待文件全部接受后再向下一个服务器进行同步，而是一遍接受一遍发送。每个 Chunk Server向其最新的 Chunk Server 发送数据&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sequenceDiagram
-	participant Master
-	participant Client
-	participant Nearest Chunk Server
-	participant Primary Chunk Server
-	participant Secondary Chunk Server
-	Client -&amp;gt;&amp;gt;+Master: 请求写操作
-	Master -&amp;gt;&amp;gt;Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
-	Master -&amp;gt;&amp;gt;-Client: 返回 Chunk Server 信息
-	par
-		Client -&amp;gt;&amp;gt; Nearest Chunk Server:同步 Chunk 数据
-	and
-		Nearest Chunk Server -&amp;gt;&amp;gt; Primary Chunk Server:同步 Chunk 数据
-	and
-		Primary Chunk Server -&amp;gt;&amp;gt; Secondary Chunk Server:同步 Chunk 数据
-	end
-	Client -&amp;gt;&amp;gt; Primary Chunk Server: 发送指令
-	par
-		Primary Chunk Server -&amp;gt;&amp;gt; Nearest Chunk Server: 发送指令
-		Nearest Chunk Server -&amp;gt;&amp;gt; Primary Chunk Server: 返回结果
-	and
-		Primary Chunk Server -&amp;gt;&amp;gt; Secondary Chunk Server: 发送指令
-		Secondary Chunk Server -&amp;gt;&amp;gt; Primary Chunk Server: 返回结果
-	end
-	Primary Chunk Server -&amp;gt;&amp;gt; Client: 返回结果
+    participant Master
+    participant Client
+    participant Nearest Chunk Server
+    participant Primary Chunk Server
+    participant Secondary Chunk Server
+    Client -&amp;gt;&amp;gt;+Master: 请求写操作
+    Master -&amp;gt;&amp;gt;Master: 查表检查该文件是否存在 Primary Chunk Server，如果不存在进行分配
+    Master -&amp;gt;&amp;gt;-Client: 返回 Chunk Server 信息
+    par
+        Client -&amp;gt;&amp;gt; Nearest Chunk Server:同步 Chunk 数据
+    and
+        Nearest Chunk Server -&amp;gt;&amp;gt; Primary Chunk Server:同步 Chunk 数据
+    and
+        Primary Chunk Server -&amp;gt;&amp;gt; Secondary Chunk Server:同步 Chunk 数据
+    end
+    Client -&amp;gt;&amp;gt; Primary Chunk Server: 发送指令
+    par
+        Primary Chunk Server -&amp;gt;&amp;gt; Nearest Chunk Server: 发送指令
+        Nearest Chunk Server -&amp;gt;&amp;gt; Primary Chunk Server: 返回结果
+    and
+        Primary Chunk Server -&amp;gt;&amp;gt; Secondary Chunk Server: 发送指令
+        Secondary Chunk Server -&amp;gt;&amp;gt; Primary Chunk Server: 返回结果
+    end
+    Primary Chunk Server -&amp;gt;&amp;gt; Client: 返回结果
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;追加&lt;/h2&gt;
 &lt;p&gt;追加在 GFS 中是一个常用的操作。GFS 中的追加不是在文件末尾进行追加，而是在文件后添加一个新的 Chunk。如果原本文件的最后一个 Chunk 未满也不会在后面追加。每次文件的追加都是在写一个全新的 Chunk，GFS 通过这种方式保证了数据的正确&lt;/p&gt;
@@ -4912,7 +4900,7 @@ $ go run -race mrcoordinator.go pg-*.txt
 &lt;li&gt;&lt;code&gt;mr-out-X&lt;/code&gt; 文件应该将 Reduce 函数的每个输出保存在一行中。每一行以 &lt;code&gt;%v %v&lt;/code&gt; 的方式输出。可以参考 &lt;code&gt;main/mrsequential.go&lt;/code&gt; 文件。&lt;/li&gt;
 &lt;li&gt;可以修改 &lt;code&gt;mr/worker.go&lt;/code&gt; 、&lt;code&gt;mr/coordinator.go&lt;/code&gt; 和 &lt;code&gt;mr/rpc.go&lt;/code&gt; 文件，可以临时修改其他文件来进行测试，但是最终提交时请保证代码在文件的原始版本可以正常执行&lt;/li&gt;
 &lt;li&gt;worker 应该将 Map 输出的临时文件存放在当前目录下，Reduce 之后可以直接收入&lt;/li&gt;
-&lt;li&gt;在 MapReduce 工作完全结束后，&lt;code&gt;mr/coordinator.go&lt;/code&gt;  中的 &lt;code&gt;Done()&lt;/code&gt; 方法应该返回 true 给 &lt;code&gt;main/mrcoordinator.go&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在 MapReduce 工作完全结束后，&lt;code&gt;mr/coordinator.go&lt;/code&gt; 中的 &lt;code&gt;Done()&lt;/code&gt; 方法应该返回 true 给 &lt;code&gt;main/mrcoordinator.go&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;当任务彻底完成后，worker进程应当退出，比较简单的实现方式为使用 &lt;code&gt;call()&lt;/code&gt; 函数的返回值：如果 worker 与 coordinator 通信失败，就可以假定 coordinator 因为工作完成而退出了，所以 worker 进程也可以终止。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;提示&lt;/h3&gt;
@@ -5003,35 +4991,35 @@ call(..., &amp;amp;reply)
 &lt;p&gt;全过程的数据变化如下&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;image-20230917013137080.png&quot; alt=&quot;image-20230917013137080&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;在一个 map 的 worker 中，不同 key 的 &lt;code&gt;hash % nReduce&lt;/code&gt; 相同的会被分到一组，并存放在一个文件中。另一个 map 中同理。不同 worker 的相同 &lt;code&gt;hash % nReduce&lt;/code&gt; 的值会被送到同一个 reduce 任务中。&lt;/p&gt;
-&lt;p&gt;也就是说  map 任务接受一个文件，返回 $nReduce$ 个文件。reduce 任务接受 $len(files)$ 个文件，返回一个文件。&lt;/p&gt;
+&lt;p&gt;也就是说 map 任务接受一个文件，返回 $nReduce$ 个文件。reduce 任务接受 $len(files)$ 个文件，返回一个文件。&lt;/p&gt;
 &lt;p&gt;根据以上信息，我们可以总结出 Map 和 Reduce 两种任务的类型&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;type TaskStatus int
 
 const (
-	TaskStatus_Idle      TaskStatus = 0
-	TaskStatus_Running   TaskStatus = 1
-	TaskStatus_Completed TaskStatus = 2
+    TaskStatus_Idle      TaskStatus = 0
+    TaskStatus_Running   TaskStatus = 1
+    TaskStatus_Completed TaskStatus = 2
 )
 
 type WorkerIdent string
 
 type MapTask struct {
-	id            int
-	status        TaskStatus
-	inputFilename string
-	
-	startTime    int64
-	worker       WorkerIdent
+    id            int
+    status        TaskStatus
+    inputFilename string
+
+    startTime    int64
+    worker       WorkerIdent
 }
 
 type ReduceTask struct {
-	id            int
-	status        TaskStatus
-	inputFilename []string
+    id            int
+    status        TaskStatus
+    inputFilename []string
 
-	startTime    int64
-	worker       WorkerIdent
-	resultHandle string
+    startTime    int64
+    worker       WorkerIdent
+    resultHandle string
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;再来设计 Coordinator 的类型。&lt;/p&gt;
@@ -5041,46 +5029,46 @@ type ReduceTask struct {
 &lt;li&gt;这是并行服务器，记得加锁&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;type Coordinator struct {
-	mapTasks    []MapTask
-	reduceTasks []ReduceTask
+    mapTasks    []MapTask
+    reduceTasks []ReduceTask
 
-	completedMapTask    int
-	completedReduceTask int
-	mu                  sync.Mutex
+    completedMapTask    int
+    completedReduceTask int
+    mu                  sync.Mutex
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;那么以上就是 Coordinator 内部所需要存储的所有状态。Coordinator 启动时应该初始化所有的 Map 任务，并在 Worker 启动后向其分配任务&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;image-20230917015927203.png&quot; alt=&quot;image-20230917015927203&quot; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;const (
-	TaskTy_Map    = 1
-	TaskTy_Reduce = 2
-	TaskTy_None   = 3
+    TaskTy_Map    = 1
+    TaskTy_Reduce = 2
+    TaskTy_None   = 3
 )
 
 type GainTaskArgs struct {
-	WorkName string
+    WorkName string
 }
 type GainTaskReply struct {
-	TaskId          int
-	TaskTy          TaskType
-	ReduceNumber    int
-	InputFileHandle []string
+    TaskId          int
+    TaskTy          TaskType
+    ReduceNumber    int
+    InputFileHandle []string
 }
 type SubmitMapTaskArgs struct {
-	TaskId           int
-	WorkerName       WorkerIdent
-	ResultFileHandle []string
+    TaskId           int
+    WorkerName       WorkerIdent
+    ResultFileHandle []string
 }
 type SubmitMapTaskReply struct {
-	Accept bool
+    Accept bool
 }
 type SubmitReduceTaskArgs struct {
-	TaskId     int
-	WorkerName WorkerIdent
-	ResultFile string
+    TaskId     int
+    WorkerName WorkerIdent
+    ResultFile string
 }
 type SubmitReduceTaskReply struct {
-	Accept bool
+    Accept bool
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;检查失败任务&lt;/h3&gt;
@@ -5095,9 +5083,9 @@ type SubmitReduceTaskReply struct {
 &lt;pre&gt;&lt;code&gt;package mr
 
 import (
-	&quot;log&quot;
-	&quot;sync&quot;
-	&quot;time&quot;
+    &quot;log&quot;
+    &quot;sync&quot;
+    &quot;time&quot;
 )
 import &quot;net&quot;
 import &quot;os&quot;
@@ -5107,9 +5095,9 @@ import &quot;net/http&quot;
 type TaskStatus int
 
 const (
-	TaskStatus_Idle      TaskStatus = 0
-	TaskStatus_Running   TaskStatus = 1
-	TaskStatus_Completed TaskStatus = 2
+    TaskStatus_Idle      TaskStatus = 0
+    TaskStatus_Running   TaskStatus = 1
+    TaskStatus_Completed TaskStatus = 2
 )
 
 type WorkerIdent string
@@ -5117,241 +5105,241 @@ type WorkerIdent string
 type GroupedIntermediaKV []KeyValue
 
 type MapTask struct {
-	id            int
-	inputFileName string
-	status        TaskStatus
+    id            int
+    inputFileName string
+    status        TaskStatus
 
-	startTime    int64
-	worker       WorkerIdent
-	resultHandle []GroupedIntermediaKV
+    startTime    int64
+    worker       WorkerIdent
+    resultHandle []GroupedIntermediaKV
 }
 
 type ReduceTask struct {
-	id            int
-	status        TaskStatus
-	inputFileName []string
+    id            int
+    status        TaskStatus
+    inputFileName []string
 
-	startTime    int64
-	worker       WorkerIdent
-	resultHandle string
+    startTime    int64
+    worker       WorkerIdent
+    resultHandle string
 }
 
 type Coordinator struct {
-	mapTasks    []MapTask
-	reduceTasks []ReduceTask
+    mapTasks    []MapTask
+    reduceTasks []ReduceTask
 
-	completedMapTask    int
-	completedReduceTask int
-	mu                  sync.Mutex
+    completedMapTask    int
+    completedReduceTask int
+    mu                  sync.Mutex
 }
 
 // start a thread that listens for RPCs from worker.go
 func (c *Coordinator) server() {
-	rpc.Register(c)
-	rpc.HandleHTTP()
-	//l, e := net.Listen(&quot;tcp&quot;, &quot;:1234&quot;)
-	sockname := coordinatorSock()
-	os.Remove(sockname)
-	l, e := net.Listen(&quot;unix&quot;, sockname)
-	if e != nil {
-		log.Fatal(&quot;listen error:&quot;, e)
-	}
-	go http.Serve(l, nil)
+    rpc.Register(c)
+    rpc.HandleHTTP()
+    //l, e := net.Listen(&quot;tcp&quot;, &quot;:1234&quot;)
+    sockname := coordinatorSock()
+    os.Remove(sockname)
+    l, e := net.Listen(&quot;unix&quot;, sockname)
+    if e != nil {
+        log.Fatal(&quot;listen error:&quot;, e)
+    }
+    go http.Serve(l, nil)
 }
 
 func (c *Coordinator) maintainTask() {
-	c.mu.Lock()
-	currentTime := time.Now().Unix()
-	log.Printf(&quot;Check tasks on %d&quot;, currentTime)
-	completedMap := 0
-	completedReduce := 0
+    c.mu.Lock()
+    currentTime := time.Now().Unix()
+    log.Printf(&quot;Check tasks on %d&quot;, currentTime)
+    completedMap := 0
+    completedReduce := 0
 
-	defer c.mu.Unlock()
+    defer c.mu.Unlock()
 
-	for i := 0; i &amp;lt; len(c.mapTasks); i++ {
-		if c.mapTasks[i].status == TaskStatus_Running &amp;amp;&amp;amp; currentTime-c.mapTasks[i].startTime &amp;gt; 10 {
-			// mark as failure
-			log.Printf(&quot;Mark map task %d fail&quot;, c.mapTasks[i].id, c.mapTasks[i].worker)
-			c.mapTasks[i].startTime = 0
-			c.mapTasks[i].status = TaskStatus_Idle
-		} else if c.mapTasks[i].status == TaskStatus_Completed {
-			completedMap++
-		}
-	}
+    for i := 0; i &amp;lt; len(c.mapTasks); i++ {
+        if c.mapTasks[i].status == TaskStatus_Running &amp;amp;&amp;amp; currentTime-c.mapTasks[i].startTime &amp;gt; 10 {
+            // mark as failure
+            log.Printf(&quot;Mark map task %d fail&quot;, c.mapTasks[i].id, c.mapTasks[i].worker)
+            c.mapTasks[i].startTime = 0
+            c.mapTasks[i].status = TaskStatus_Idle
+        } else if c.mapTasks[i].status == TaskStatus_Completed {
+            completedMap++
+        }
+    }
 
-	for i := 0; i &amp;lt; len(c.reduceTasks); i++ {
-		if c.reduceTasks[i].status == TaskStatus_Running &amp;amp;&amp;amp; currentTime-c.reduceTasks[i].startTime &amp;gt; 10 {
-			// mark as failure
-			log.Printf(&quot;Mark reduce task%d fail&quot;, c.reduceTasks[i].id, c.reduceTasks[i].worker)
-			c.reduceTasks[i].startTime = 0
-			c.reduceTasks[i].status = TaskStatus_Idle
-		} else if c.reduceTasks[i].status == TaskStatus_Completed {
-			completedReduce++
-		}
-	}
+    for i := 0; i &amp;lt; len(c.reduceTasks); i++ {
+        if c.reduceTasks[i].status == TaskStatus_Running &amp;amp;&amp;amp; currentTime-c.reduceTasks[i].startTime &amp;gt; 10 {
+            // mark as failure
+            log.Printf(&quot;Mark reduce task%d fail&quot;, c.reduceTasks[i].id, c.reduceTasks[i].worker)
+            c.reduceTasks[i].startTime = 0
+            c.reduceTasks[i].status = TaskStatus_Idle
+        } else if c.reduceTasks[i].status == TaskStatus_Completed {
+            completedReduce++
+        }
+    }
 
-	if completedMap != c.completedMapTask {
-		c.completedMapTask = completedMap
-	}
-	if completedReduce != c.completedReduceTask {
-		c.completedReduceTask = completedReduce
-	}
+    if completedMap != c.completedMapTask {
+        c.completedMapTask = completedMap
+    }
+    if completedReduce != c.completedReduceTask {
+        c.completedReduceTask = completedReduce
+    }
 }
 
 func (c *Coordinator) GainTask(args *GainTaskArgs, reply *GainTaskReply) error {
-	c.maintainTask()
-	c.mu.Lock()
-	defer c.mu.Unlock()
+    c.maintainTask()
+    c.mu.Lock()
+    defer c.mu.Unlock()
 
-	reply.ReduceNumber = len(c.reduceTasks)
-	reply.TaskTy = TaskTy_None
+    reply.ReduceNumber = len(c.reduceTasks)
+    reply.TaskTy = TaskTy_None
 
-	distributeMapTask := func(task *MapTask) {
-		log.Printf(&quot;Distribute map task %d to worker %s&quot;, task.id, args.WorkName)
-		reply.TaskTy = TaskTy_Map
-		reply.TaskId = task.id
-		reply.InputFileHandle = []string{task.inputFileName}
+    distributeMapTask := func(task *MapTask) {
+        log.Printf(&quot;Distribute map task %d to worker %s&quot;, task.id, args.WorkName)
+        reply.TaskTy = TaskTy_Map
+        reply.TaskId = task.id
+        reply.InputFileHandle = []string{task.inputFileName}
 
-		task.status = TaskStatus_Running
-		task.startTime = time.Now().Unix()
-		task.worker = WorkerIdent(args.WorkName)
-	}
-	distributeReduceTask := func(task *ReduceTask) {
-		log.Printf(&quot;Distribute reduce task %d to worker %s&quot;, task.id, args.WorkName)
-		reply.TaskTy = TaskTy_Reduce
-		reply.TaskId = task.id
-		reply.InputFileHandle = task.inputFileName
+        task.status = TaskStatus_Running
+        task.startTime = time.Now().Unix()
+        task.worker = WorkerIdent(args.WorkName)
+    }
+    distributeReduceTask := func(task *ReduceTask) {
+        log.Printf(&quot;Distribute reduce task %d to worker %s&quot;, task.id, args.WorkName)
+        reply.TaskTy = TaskTy_Reduce
+        reply.TaskId = task.id
+        reply.InputFileHandle = task.inputFileName
 
-		task.status = TaskStatus_Running
-		task.startTime = time.Now().Unix()
-		task.worker = WorkerIdent(args.WorkName)
-	}
+        task.status = TaskStatus_Running
+        task.startTime = time.Now().Unix()
+        task.worker = WorkerIdent(args.WorkName)
+    }
 
-	if c.completedMapTask &amp;lt; len(c.mapTasks) {
-		// distribute map task
-		for i := range c.mapTasks {
-			var task = &amp;amp;c.mapTasks[i]
-			if task.status == TaskStatus_Idle {
-				distributeMapTask(task)
-				return nil
-			}
-		}
-	}
-	for c.completedMapTask &amp;lt; len(c.mapTasks) {
-		// distribute map task
-		currentTime := time.Now().Unix()
-		for i := range c.mapTasks {
-			var task = &amp;amp;c.mapTasks[i]
-			if task.status != TaskStatus_Completed &amp;amp;&amp;amp; currentTime-task.startTime &amp;gt; 10 {
-				distributeMapTask(task)
-				return nil
-			}
-		}
-		c.mu.Unlock()
-		time.Sleep(1 * time.Second)
-		c.mu.Lock()
-	}
+    if c.completedMapTask &amp;lt; len(c.mapTasks) {
+        // distribute map task
+        for i := range c.mapTasks {
+            var task = &amp;amp;c.mapTasks[i]
+            if task.status == TaskStatus_Idle {
+                distributeMapTask(task)
+                return nil
+            }
+        }
+    }
+    for c.completedMapTask &amp;lt; len(c.mapTasks) {
+        // distribute map task
+        currentTime := time.Now().Unix()
+        for i := range c.mapTasks {
+            var task = &amp;amp;c.mapTasks[i]
+            if task.status != TaskStatus_Completed &amp;amp;&amp;amp; currentTime-task.startTime &amp;gt; 10 {
+                distributeMapTask(task)
+                return nil
+            }
+        }
+        c.mu.Unlock()
+        time.Sleep(1 * time.Second)
+        c.mu.Lock()
+    }
 
-	if c.completedReduceTask &amp;lt; len(c.reduceTasks) {
-		// distribute reduce task
-		for i := range c.reduceTasks {
-			var task = &amp;amp;c.reduceTasks[i]
-			if task.status == TaskStatus_Idle {
-				distributeReduceTask(task)
-				return nil
-			}
-		}
-	}
-	for c.completedReduceTask &amp;lt; len(c.reduceTasks) {
-		// distribute reduce task
-		currentTime := time.Now().Unix()
-		for i := range c.reduceTasks {
-			var task = &amp;amp;c.reduceTasks[i]
-			if task.status != TaskStatus_Completed &amp;amp;&amp;amp; currentTime-task.startTime &amp;gt; 10 {
-				distributeReduceTask(task)
-				return nil
-			}
-		}
-		c.mu.Unlock()
-		time.Sleep(1 * time.Second)
-		c.mu.Lock()
-	}
+    if c.completedReduceTask &amp;lt; len(c.reduceTasks) {
+        // distribute reduce task
+        for i := range c.reduceTasks {
+            var task = &amp;amp;c.reduceTasks[i]
+            if task.status == TaskStatus_Idle {
+                distributeReduceTask(task)
+                return nil
+            }
+        }
+    }
+    for c.completedReduceTask &amp;lt; len(c.reduceTasks) {
+        // distribute reduce task
+        currentTime := time.Now().Unix()
+        for i := range c.reduceTasks {
+            var task = &amp;amp;c.reduceTasks[i]
+            if task.status != TaskStatus_Completed &amp;amp;&amp;amp; currentTime-task.startTime &amp;gt; 10 {
+                distributeReduceTask(task)
+                return nil
+            }
+        }
+        c.mu.Unlock()
+        time.Sleep(1 * time.Second)
+        c.mu.Lock()
+    }
 
-	return nil
+    return nil
 }
 
 func (c *Coordinator) SubmitMapTask(args *SubmitMapTaskArgs, reply *SubmitMapTaskReply) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	if c.mapTasks[args.TaskId].status != TaskStatus_Completed {
-		log.Printf(&quot;Accept map task %d from worker %v&quot;, args.TaskId, args.WorkerName)
-		reply.Accept = true
-		c.mapTasks[args.TaskId].status = TaskStatus_Completed
-		for rid, filename := range args.ResultFileHandle {
-			c.reduceTasks[rid].inputFileName = append(c.reduceTasks[rid].inputFileName, filename)
-		}
-	} else {
-		log.Printf(&quot;Refuse map task %d from worker %v&quot;, args.TaskId, args.WorkerName)
-		reply.Accept = false
-	}
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    if c.mapTasks[args.TaskId].status != TaskStatus_Completed {
+        log.Printf(&quot;Accept map task %d from worker %v&quot;, args.TaskId, args.WorkerName)
+        reply.Accept = true
+        c.mapTasks[args.TaskId].status = TaskStatus_Completed
+        for rid, filename := range args.ResultFileHandle {
+            c.reduceTasks[rid].inputFileName = append(c.reduceTasks[rid].inputFileName, filename)
+        }
+    } else {
+        log.Printf(&quot;Refuse map task %d from worker %v&quot;, args.TaskId, args.WorkerName)
+        reply.Accept = false
+    }
 
-	return nil
+    return nil
 }
 
 func (c *Coordinator) SubmitReduceTask(args *SubmitReduceTaskArgs, reply *SubmitReduceTaskReply) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	if c.reduceTasks[args.TaskId].status != TaskStatus_Completed {
-		log.Printf(&quot;Accept reduce task %d from worker %v&quot;, args.TaskId, args.WorkerName)
-		reply.Accept = true
-		c.reduceTasks[args.TaskId].status = TaskStatus_Completed
-		c.reduceTasks[args.TaskId].resultHandle = args.ResultFile
-	} else {
-		log.Printf(&quot;Refuse reduce task %d from worker %v&quot;, args.TaskId, args.WorkerName)
-		reply.Accept = false
-	}
-	return nil
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    if c.reduceTasks[args.TaskId].status != TaskStatus_Completed {
+        log.Printf(&quot;Accept reduce task %d from worker %v&quot;, args.TaskId, args.WorkerName)
+        reply.Accept = true
+        c.reduceTasks[args.TaskId].status = TaskStatus_Completed
+        c.reduceTasks[args.TaskId].resultHandle = args.ResultFile
+    } else {
+        log.Printf(&quot;Refuse reduce task %d from worker %v&quot;, args.TaskId, args.WorkerName)
+        reply.Accept = false
+    }
+    return nil
 }
 
 // main/mrcoordinator.go calls Done() periodically to find out
 // if the entire job has finished.
 func (c *Coordinator) Done() bool {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	return c.completedReduceTask == len(c.reduceTasks)
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    return c.completedReduceTask == len(c.reduceTasks)
 }
 
 // create a Coordinator.
 // main/mrcoordinator.go calls this function.
 // nReduce is the number of reduce tasks to use.
 func MakeCoordinator(files []string, nReduce int) *Coordinator {
-	c := Coordinator{}
+    c := Coordinator{}
 
-	c.reduceTasks = make([]ReduceTask, nReduce)
-	for i := 0; i &amp;lt; nReduce; i++ {
-		t := &amp;amp;c.reduceTasks[i]
-		t.id = i
-		t.status = TaskStatus_Idle
-	}
+    c.reduceTasks = make([]ReduceTask, nReduce)
+    for i := 0; i &amp;lt; nReduce; i++ {
+        t := &amp;amp;c.reduceTasks[i]
+        t.id = i
+        t.status = TaskStatus_Idle
+    }
 
-	for id, splitFile := range files {
-		c.mapTasks = append(c.mapTasks, MapTask{
-			id:            id,
-			status:        TaskStatus_Idle,
-			inputFileName: splitFile,
-		})
-		log.Printf(&quot;Schedule map task %d from %s&quot;, id, splitFile)
-	}
-	go func() {
-		for {
-			c.maintainTask()
-			time.Sleep(time.Second)
-		}
-	}()
+    for id, splitFile := range files {
+        c.mapTasks = append(c.mapTasks, MapTask{
+            id:            id,
+            status:        TaskStatus_Idle,
+            inputFileName: splitFile,
+        })
+        log.Printf(&quot;Schedule map task %d from %s&quot;, id, splitFile)
+    }
+    go func() {
+        for {
+            c.maintainTask()
+            time.Sleep(time.Second)
+        }
+    }()
 
-	log.Println(&quot;Coordinator tasks init finish&quot;)
-	c.server()
-	return &amp;amp;c
+    log.Println(&quot;Coordinator tasks init finish&quot;)
+    c.server()
+    return &amp;amp;c
 }
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -5359,14 +5347,14 @@ func MakeCoordinator(files []string, nReduce int) *Coordinator {
 &lt;pre&gt;&lt;code&gt;package mr
 
 import (
-	&quot;encoding/json&quot;
-	&quot;fmt&quot;
-	&quot;io&quot;
-	&quot;math/rand&quot;
-	&quot;os&quot;
-	&quot;os/exec&quot;
-	&quot;sort&quot;
-	&quot;time&quot;
+    &quot;encoding/json&quot;
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;math/rand&quot;
+    &quot;os&quot;
+    &quot;os/exec&quot;
+    &quot;sort&quot;
+    &quot;time&quot;
 )
 import &quot;log&quot;
 import &quot;net/rpc&quot;
@@ -5374,16 +5362,16 @@ import &quot;hash/fnv&quot;
 
 // Map functions return a slice of KeyValue.
 type KeyValue struct {
-	Key   string
-	Value string
+    Key   string
+    Value string
 }
 
 // use ihash(key) % NReduce to choose the reduce
 // task number for each KeyValue emitted by Map.
 func ihash(key string) int {
-	h := fnv.New32a()
-	h.Write([]byte(key))
-	return int(h.Sum32() &amp;amp; 0x7fffffff)
+    h := fnv.New32a()
+    h.Write([]byte(key))
+    return int(h.Sum32() &amp;amp; 0x7fffffff)
 }
 
 // for sorting by key.
@@ -5394,166 +5382,166 @@ func (a ByKey) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByKey) Less(i, j int) bool { return a[i].Key &amp;lt; a[j].Key }
 
 func ExecuteMap(mapf func(string, string) []KeyValue, taskId int, inputFileHandle string, nReduce int, workerName WorkerIdent) {
-	log.Printf(&quot;Start map task %d&quot;, taskId)
+    log.Printf(&quot;Start map task %d&quot;, taskId)
 
-	file, err := os.Open(inputFileHandle)
-	if err != nil {
-		log.Fatal(err)
-	}
-	content, err := io.ReadAll(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-	kv := mapf(inputFileHandle, string(content))
+    file, err := os.Open(inputFileHandle)
+    if err != nil {
+        log.Fatal(err)
+    }
+    content, err := io.ReadAll(file)
+    if err != nil {
+        log.Fatal(err)
+    }
+    kv := mapf(inputFileHandle, string(content))
 
-	kva := make(map[int][]KeyValue)
-	for _, p := range kv {
-		rid := ihash(p.Key) % nReduce
-		kva[rid] = append(kva[rid], p)
-	}
+    kva := make(map[int][]KeyValue)
+    for _, p := range kv {
+        rid := ihash(p.Key) % nReduce
+        kva[rid] = append(kva[rid], p)
+    }
 
-	params := SubmitMapTaskArgs{TaskId: taskId, ResultFileHandle: make([]string, nReduce), WorkerName: workerName}
-	reply := SubmitMapTaskReply{}
+    params := SubmitMapTaskArgs{TaskId: taskId, ResultFileHandle: make([]string, nReduce), WorkerName: workerName}
+    reply := SubmitMapTaskReply{}
 
-	for rid, intermedia := range kva {
-		filename := fmt.Sprintf(&quot;mr-%d-%d&quot;, taskId, rid)
-		params.ResultFileHandle[rid] = filename
+    for rid, intermedia := range kva {
+        filename := fmt.Sprintf(&quot;mr-%d-%d&quot;, taskId, rid)
+        params.ResultFileHandle[rid] = filename
 
-		file, err := os.Create(filename)
-		defer file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-		enc := json.NewEncoder(file)
-		for _, kv := range intermedia {
-			err := enc.Encode(&amp;amp;kv)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
-	}
+        file, err := os.Create(filename)
+        defer file.Close()
+        if err != nil {
+            log.Fatal(err)
+        }
+        enc := json.NewEncoder(file)
+        for _, kv := range intermedia {
+            err := enc.Encode(&amp;amp;kv)
+            if err != nil {
+                log.Fatal(err)
+            }
+        }
+    }
 
-	if !call(&quot;Coordinator.SubmitMapTask&quot;, &amp;amp;params, &amp;amp;reply) {
-		log.Fatal(&quot;Coordinator is down?&quot;)
-	}
-	if reply.Accept {
-		log.Printf(&quot;Map task%d completed&quot;, taskId)
-	} else {
-		log.Printf(&quot;Map task%d unacceptable&quot;, taskId)
-	}
+    if !call(&quot;Coordinator.SubmitMapTask&quot;, &amp;amp;params, &amp;amp;reply) {
+        log.Fatal(&quot;Coordinator is down?&quot;)
+    }
+    if reply.Accept {
+        log.Printf(&quot;Map task%d completed&quot;, taskId)
+    } else {
+        log.Printf(&quot;Map task%d unacceptable&quot;, taskId)
+    }
 }
 
 func ExecuteReduce(reducef func(string, []string) string, taskId int, inputFileHandles []string, workerName WorkerIdent) {
-	log.Printf(&quot;Start reduce task %d&quot;, taskId)
+    log.Printf(&quot;Start reduce task %d&quot;, taskId)
 
-	kva := make([]KeyValue, 0)
-	for _, handle := range inputFileHandles {
-		if handle == &quot;&quot; {
-			continue
-		}
+    kva := make([]KeyValue, 0)
+    for _, handle := range inputFileHandles {
+        if handle == &quot;&quot; {
+            continue
+        }
 
-		file, err := os.Open(handle)
-		if err != nil {
-			log.Fatal(err)
-		}
-		dec := json.NewDecoder(file)
-		for {
-			var kv KeyValue
-			if err := dec.Decode(&amp;amp;kv); err != nil {
-				break
-			}
-			kva = append(kva, kv)
-		}
-	}
+        file, err := os.Open(handle)
+        if err != nil {
+            log.Fatal(err)
+        }
+        dec := json.NewDecoder(file)
+        for {
+            var kv KeyValue
+            if err := dec.Decode(&amp;amp;kv); err != nil {
+                break
+            }
+            kva = append(kva, kv)
+        }
+    }
 
-	sort.Sort(ByKey(kva))
+    sort.Sort(ByKey(kva))
 
-	oname := fmt.Sprintf(&quot;mr-out-%d&quot;, taskId)
-	ofile, _ := os.CreateTemp(&quot;&quot;, oname+&quot;-*&quot;)
+    oname := fmt.Sprintf(&quot;mr-out-%d&quot;, taskId)
+    ofile, _ := os.CreateTemp(&quot;&quot;, oname+&quot;-*&quot;)
 
-	i := 0
-	for i &amp;lt; len(kva) {
-		j := i + 1
-		for j &amp;lt; len(kva) &amp;amp;&amp;amp; kva[j].Key == kva[i].Key {
-			j++
-		}
-		values := []string{}
-		for k := i; k &amp;lt; j; k++ {
-			values = append(values, kva[k].Value)
-		}
-		output := reducef(kva[i].Key, values)
+    i := 0
+    for i &amp;lt; len(kva) {
+        j := i + 1
+        for j &amp;lt; len(kva) &amp;amp;&amp;amp; kva[j].Key == kva[i].Key {
+            j++
+        }
+        values := []string{}
+        for k := i; k &amp;lt; j; k++ {
+            values = append(values, kva[k].Value)
+        }
+        output := reducef(kva[i].Key, values)
 
-		// this is the correct format for each line of Reduce output.
-		fmt.Fprintf(ofile, &quot;%v %v\n&quot;, kva[i].Key, output)
-		i = j
-	}
+        // this is the correct format for each line of Reduce output.
+        fmt.Fprintf(ofile, &quot;%v %v\n&quot;, kva[i].Key, output)
+        i = j
+    }
 
-	err := os.Rename(ofile.Name(), oname)
-	if err != nil {
-		log.Fatal(err)
-	}
-	params := SubmitReduceTaskArgs{
-		TaskId:     taskId,
-		WorkerName: workerName,
-		ResultFile: oname,
-	}
-	reply := SubmitReduceTaskReply{}
-	if !call(&quot;Coordinator.SubmitReduceTask&quot;, &amp;amp;params, &amp;amp;reply) {
-		log.Fatal(&quot;Coordinator is down?&quot;)
-	}
-	if reply.Accept {
-		log.Printf(&quot;Reduce task%d completed&quot;, taskId)
-	} else {
-		log.Printf(&quot;Reduce task%d unacceptable&quot;, taskId)
-	}
+    err := os.Rename(ofile.Name(), oname)
+    if err != nil {
+        log.Fatal(err)
+    }
+    params := SubmitReduceTaskArgs{
+        TaskId:     taskId,
+        WorkerName: workerName,
+        ResultFile: oname,
+    }
+    reply := SubmitReduceTaskReply{}
+    if !call(&quot;Coordinator.SubmitReduceTask&quot;, &amp;amp;params, &amp;amp;reply) {
+        log.Fatal(&quot;Coordinator is down?&quot;)
+    }
+    if reply.Accept {
+        log.Printf(&quot;Reduce task%d completed&quot;, taskId)
+    } else {
+        log.Printf(&quot;Reduce task%d unacceptable&quot;, taskId)
+    }
 }
 
 // main/mrworker.go calls this function.
 func Worker(mapf func(string, string) []KeyValue,
-	reducef func(string, []string) string) {
-	rand.Seed(time.Now().UnixNano())
-	workerName, err := exec.Command(&quot;uuidgen&quot;).Output()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf(&quot;Worker name: %s\n&quot;, workerName)
+    reducef func(string, []string) string) {
+    rand.Seed(time.Now().UnixNano())
+    workerName, err := exec.Command(&quot;uuidgen&quot;).Output()
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Printf(&quot;Worker name: %s\n&quot;, workerName)
 
-	for {
-		taskReply := GainTaskReply{}
-		call(&quot;Coordinator.GainTask&quot;, GainTaskArgs{WorkName: string(workerName)}, &amp;amp;taskReply)
+    for {
+        taskReply := GainTaskReply{}
+        call(&quot;Coordinator.GainTask&quot;, GainTaskArgs{WorkName: string(workerName)}, &amp;amp;taskReply)
 
-		if taskReply.TaskTy == TaskTy_Map {
-			ExecuteMap(mapf, taskReply.TaskId, taskReply.InputFileHandle[0], taskReply.ReduceNumber, WorkerIdent(workerName))
-		} else if taskReply.TaskTy == TaskTy_Reduce {
-			ExecuteReduce(reducef, taskReply.TaskId, taskReply.InputFileHandle, WorkerIdent(workerName))
-		} else if taskReply.TaskTy == TaskTy_None {
-			log.Printf(&quot;Receive exit signal&quot;)
-			os.Exit(0)
-		} else {
-			log.Printf(&quot;Unrecongized task type %d&quot;, taskReply.TaskTy)
-		}
-	}
+        if taskReply.TaskTy == TaskTy_Map {
+            ExecuteMap(mapf, taskReply.TaskId, taskReply.InputFileHandle[0], taskReply.ReduceNumber, WorkerIdent(workerName))
+        } else if taskReply.TaskTy == TaskTy_Reduce {
+            ExecuteReduce(reducef, taskReply.TaskId, taskReply.InputFileHandle, WorkerIdent(workerName))
+        } else if taskReply.TaskTy == TaskTy_None {
+            log.Printf(&quot;Receive exit signal&quot;)
+            os.Exit(0)
+        } else {
+            log.Printf(&quot;Unrecongized task type %d&quot;, taskReply.TaskTy)
+        }
+    }
 }
 
 // send an RPC request to the coordinator, wait for the response.
 // usually returns true.
 // returns false if something goes wrong.
 func call(rpcname string, args interface{}, reply interface{}) bool {
-	// c, err := rpc.DialHTTP(&quot;tcp&quot;, &quot;127.0.0.1&quot;+&quot;:1234&quot;)
-	sockname := coordinatorSock()
-	c, err := rpc.DialHTTP(&quot;unix&quot;, sockname)
-	if err != nil {
-		log.Fatal(&quot;dialing:&quot;, err)
-	}
-	defer c.Close()
+    // c, err := rpc.DialHTTP(&quot;tcp&quot;, &quot;127.0.0.1&quot;+&quot;:1234&quot;)
+    sockname := coordinatorSock()
+    c, err := rpc.DialHTTP(&quot;unix&quot;, sockname)
+    if err != nil {
+        log.Fatal(&quot;dialing:&quot;, err)
+    }
+    defer c.Close()
 
-	err = c.Call(rpcname, args, reply)
-	if err == nil {
-		return true
-	}
+    err = c.Call(rpcname, args, reply)
+    if err == nil {
+        return true
+    }
 
-	fmt.Println(err)
-	return false
+    fmt.Println(err)
+    return false
 }
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -5572,36 +5560,36 @@ import &quot;strconv&quot;
 type TaskType int
 
 const (
-	TaskTy_Map    = 1
-	TaskTy_Reduce = 2
-	TaskTy_None   = 3
+    TaskTy_Map    = 1
+    TaskTy_Reduce = 2
+    TaskTy_None   = 3
 )
 
 type GainTaskArgs struct {
-	WorkName string
+    WorkName string
 }
 type GainTaskReply struct {
-	TaskId          int
-	TaskTy          TaskType
-	ReduceNumber    int
-	InputFileHandle []string
+    TaskId          int
+    TaskTy          TaskType
+    ReduceNumber    int
+    InputFileHandle []string
 }
 
 type SubmitMapTaskArgs struct {
-	TaskId           int
-	WorkerName       WorkerIdent
-	ResultFileHandle []string
+    TaskId           int
+    WorkerName       WorkerIdent
+    ResultFileHandle []string
 }
 type SubmitMapTaskReply struct {
-	Accept bool
+    Accept bool
 }
 type SubmitReduceTaskArgs struct {
-	TaskId     int
-	WorkerName WorkerIdent
-	ResultFile string
+    TaskId     int
+    WorkerName WorkerIdent
+    ResultFile string
 }
 type SubmitReduceTaskReply struct {
-	Accept bool
+    Accept bool
 }
 
 // Cook up a unique-ish UNIX-domain socket name
@@ -5609,9 +5597,9 @@ type SubmitReduceTaskReply struct {
 // Can&apos;t use the current directory since
 // Athena AFS doesn&apos;t support UNIX-domain sockets.
 func coordinatorSock() string {
-	s := &quot;/var/tmp/824-mr-&quot;
-	s += strconv.Itoa(os.Getuid())
-	return s
+    s := &quot;/var/tmp/824-mr-&quot;
+    s += strconv.Itoa(os.Getuid())
+    return s
 }
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded><category>MIT6.824</category><category>分布式系统</category><author>Mslxl</author></item><item><title>皈依 NixOS</title><link>https://blog.mslxl.com/posts/os/convert-nix/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/os/convert-nix/</guid><pubDate>Thu, 14 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;用了几天时间折腾 NixOS，现在大概是能满足日常日常使用了，几天使用下来体验还算不错。这也不是我第一次使用 Linux 发行版了，但如果不是因为事先了解，初次使用肯定也是发愣的。&lt;/p&gt;
@@ -5621,8 +5609,8 @@ func coordinatorSock() string {
 &lt;li&gt;&lt;code&gt;/bin/sh&lt;/code&gt; 目录只有 &lt;code&gt;sh&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;NixOS 几乎将所有的文件存储在 &lt;code&gt;/nix/store&lt;/code&gt; 下，而后通过链接的方式放到对应的文件夹下，而 &lt;code&gt;/nix/store&lt;/code&gt; 又是通过 &lt;code&gt;/etc/nixos/configuration.nix&lt;/code&gt; 配置获得的。用户也是通过修改 &lt;code&gt;configuration.nix&lt;/code&gt; 文件来修改系统配置甚至是单个用户的配置，在修改后使用 &lt;code&gt;nixos-rebuild switch&lt;/code&gt; 命令应用新配置。这条命令实际上重新“构建“了一个新生代的系统，但之前的老年代并不会删除，用户仍然可以随时切换到之前配置的系统。因此 NixOS 也被称为滚不挂的系统（不作死的情况）。&lt;/p&gt;
-&lt;p&gt;实际上 NixOS 经常被人诟病占用硬盘，上手难度高，软件打包困难等。这些问题确实存在，可能这也是  NixOS 使用人数少的原因。另一方面 NixOS 的配置非常依赖于查阅文档，但官方 Wiki 的部分条目其实是过时的，有时候不得不去一些论坛或者 Issue 去找解决方案。&lt;/p&gt;
-&lt;p&gt;NixOS  的优点主要就是集中在可重复性和软件隔离上。可重复性即如果 &lt;code&gt;configuratoin.nix&lt;/code&gt; 中的内容是相同的且为 pure 的，那么同一份配置文件会产生完全一样的系统。而软件隔离则是因为 NixOS 将几乎所有的软件都存放在 &lt;code&gt;/etc/nixos&lt;/code&gt;中，这些软件可能是同一个程序的不同版本，他们可以在系统中同时存在，同时选择地依赖其他软件的某个特定版本，不会像其他系统一样发生冲突。&lt;/p&gt;
+&lt;p&gt;实际上 NixOS 经常被人诟病占用硬盘，上手难度高，软件打包困难等。这些问题确实存在，可能这也是 NixOS 使用人数少的原因。另一方面 NixOS 的配置非常依赖于查阅文档，但官方 Wiki 的部分条目其实是过时的，有时候不得不去一些论坛或者 Issue 去找解决方案。&lt;/p&gt;
+&lt;p&gt;NixOS 的优点主要就是集中在可重复性和软件隔离上。可重复性即如果 &lt;code&gt;configuratoin.nix&lt;/code&gt; 中的内容是相同的且为 pure 的，那么同一份配置文件会产生完全一样的系统。而软件隔离则是因为 NixOS 将几乎所有的软件都存放在 &lt;code&gt;/etc/nixos&lt;/code&gt;中，这些软件可能是同一个程序的不同版本，他们可以在系统中同时存在，同时选择地依赖其他软件的某个特定版本，不会像其他系统一样发生冲突。&lt;/p&gt;
 &lt;h2&gt;Nix&lt;/h2&gt;
 &lt;p&gt;配置 NixOS 使用的是 Nix 语言，这是一个函数式脚本语言，NixOS 上手难度高的原因主要来自于此。&lt;/p&gt;
 &lt;p&gt;就我个人的感觉来说，Nix 语言更像是围绕 attributes set 的一种配置文件，只是这种配置文件可以以代码的方式执行&lt;/p&gt;
@@ -5666,11 +5654,11 @@ builtins.map
 &lt;pre&gt;&lt;code&gt;{stdenv,
  dpkg,
  wrapGAppsHook,
- fetchurl, 
+ fetchurl,
 
  lib,
  glib,
- electron, 
+ electron,
  gsettings-desktop-schemas,
  makeWrapper,
  gtk3,
@@ -5792,44 +5780,44 @@ in stdenv.mkDerivation  {
 &lt;p&gt;如果用最大的数减去最小的数，第二大的数减去第二小的数，依次类推，所获得的值应该是依次递减的&lt;/p&gt;
 &lt;p&gt;因为 $a_1 \ge a_2 \ge a_3 \ge \ldots \ge a_n$ ，而 $b_1 &amp;lt; b_2 &amp;lt; \ldots &amp;lt; b_n$，则 $-b_1 &amp;gt; -b_2 &amp;gt; \ldots &amp;gt; -b_n$，最终结果 $a_1 - b_1 &amp;gt; a_2 - b_2 &amp;gt; \ldots &amp;gt; a_n - b_n$&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;type Pair struct {
-	a, b int
+    a, b int
 }
 type Pairs []Pair
- 
+
 func (arr Pairs) Less(i, j int) bool {
-	return arr[i].a &amp;gt; arr[j].a
+    return arr[i].a &amp;gt; arr[j].a
 }
 func (arr Pairs) Swap(i, j int) {
-	arr[i], arr[j] = arr[j], arr[i]
+    arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr Pairs) Len() int {
-	return len(arr)
+    return len(arr)
 }
- 
+
 func solve(in *bufio.Reader) {
-	readInt(in)
-	a := readArrInt(in)
-	b := make(Pairs, len(a))
-	for i, v := range a {
-		b[i].a = v
-		b[i].b = i
-	}
-	sort.Sort(b)
-	for i, v := range b {
-		a[v.b] = i
-	}
-	for _, v := range a {
-		fmt.Printf(&quot;%d &quot;, v+1)
-	}
-	fmt.Println()
+    readInt(in)
+    a := readArrInt(in)
+    b := make(Pairs, len(a))
+    for i, v := range a {
+        b[i].a = v
+        b[i].b = i
+    }
+    sort.Sort(b)
+    for i, v := range b {
+        a[v.b] = i
+    }
+    for _, v := range a {
+        fmt.Printf(&quot;%d &quot;, v+1)
+    }
+    fmt.Println()
 }
- 
+
 func main() {
-	in := bufio.NewReader(os.Stdin)
-	T := readInt(in)
-	for i := 0; i &amp;lt; T; i++ {
-		solve(in)
-	}
+    in := bufio.NewReader(os.Stdin)
+    T := readInt(in)
+    for i := 0; i &amp;lt; T; i++ {
+        solve(in)
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;B. XOR Palindormes&lt;/h2&gt;
@@ -5843,47 +5831,47 @@ func main() {
 &lt;p&gt;当 $n &amp;gt; 2$ 且 $n$ 为奇数时，反转 $k+2$ 的结果也是回文串（反转任意两个对称位置），反转 $k + 1$ 的结果也是回文串（反转串 $s$ 的中心位置）&lt;/p&gt;
 &lt;p&gt;特判 $n=2$ 的情况&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;func solve(in *bufio.Reader) {
-	n := readInt(in)
-	s, _ := in.ReadString(&apos;\n&apos;)
-	s = strings.Trim(s, &quot; \r\n\t&quot;)
- 
-	cnt := 0
-	for i := 0; i &amp;lt; len(s)/2; i++ {
-		if i == n-1-i {
-			break
-		}
-		if s[i] != s[n-1-i] {
-			cnt++
-		}
-	}
-	for i := 0; i &amp;lt; cnt; i++ {
-		fmt.Print(&quot;0&quot;)
-	}
-	if n%2 == 0 {
-		for i := cnt; i &amp;lt;= n-cnt; i++ {
-			if (i-cnt)%2 == 0 {
-				fmt.Print(&quot;1&quot;)
-			} else {
-				fmt.Print(&quot;0&quot;)
-			}
-		}
-	} else {
-		for i := cnt; i &amp;lt;= n-cnt; i++ {
-			fmt.Print(&quot;1&quot;)
-		}
-	}
-	for i := n - cnt + 1; i &amp;lt; n+1; i++ {
-		fmt.Print(&quot;0&quot;)
-	}
-	fmt.Println()
+    n := readInt(in)
+    s, _ := in.ReadString(&apos;\n&apos;)
+    s = strings.Trim(s, &quot; \r\n\t&quot;)
+
+    cnt := 0
+    for i := 0; i &amp;lt; len(s)/2; i++ {
+        if i == n-1-i {
+            break
+        }
+        if s[i] != s[n-1-i] {
+            cnt++
+        }
+    }
+    for i := 0; i &amp;lt; cnt; i++ {
+        fmt.Print(&quot;0&quot;)
+    }
+    if n%2 == 0 {
+        for i := cnt; i &amp;lt;= n-cnt; i++ {
+            if (i-cnt)%2 == 0 {
+                fmt.Print(&quot;1&quot;)
+            } else {
+                fmt.Print(&quot;0&quot;)
+            }
+        }
+    } else {
+        for i := cnt; i &amp;lt;= n-cnt; i++ {
+            fmt.Print(&quot;1&quot;)
+        }
+    }
+    for i := n - cnt + 1; i &amp;lt; n+1; i++ {
+        fmt.Print(&quot;0&quot;)
+    }
+    fmt.Println()
 }
- 
+
 func main() {
-	in := bufio.NewReader(os.Stdin)
-	T := readInt(in)
-	for i := 0; i &amp;lt; T; i++ {
-		solve(in)
-	}
+    in := bufio.NewReader(os.Stdin)
+    T := readInt(in)
+    for i := 0; i &amp;lt; T; i++ {
+        solve(in)
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;C. Salyg1n and the MEX Game&lt;/h2&gt;
@@ -5900,19 +5888,19 @@ func main() {
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;交互&lt;/code&gt; &lt;code&gt;贪心&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;除非 Bob 无法行动，否则无论 Alice 在前一步做何决策，Bob 总可以使游戏的结果变为 $0$（即Bob移除0）。而无论 Bob 做什么行动，下一轮中 Alice 总可以抵消掉 Bob  的行动（即将删除的数重新添加）&lt;/p&gt;
+&lt;p&gt;除非 Bob 无法行动，否则无论 Alice 在前一步做何决策，Bob 总可以使游戏的结果变为 $0$（即Bob移除0）。而无论 Bob 做什么行动，下一轮中 Alice 总可以抵消掉 Bob 的行动（即将删除的数重新添加）&lt;/p&gt;
 &lt;p&gt;也就是说在前 $2\cdot n$ 中，Alice 只能维持游戏的结果不减小，而 Bob 什么也做不到。行动策略不论 Bob 删除什么数， Alice 只需要每次添加集合中不存在的最小的数，那么游戏的结果将不会减小&lt;/p&gt;
 &lt;p&gt;糊个堆贪心即可&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import (
-	&quot;bufio&quot;
-	&quot;container/heap&quot;
-	&quot;fmt&quot;
-	&quot;os&quot;
-	&quot;strings&quot;
+    &quot;bufio&quot;
+    &quot;container/heap&quot;
+    &quot;fmt&quot;
+    &quot;os&quot;
+    &quot;strings&quot;
 )
 
 func FPrintln(v interface{}) {
-	_, _ = fmt.Fprintln(os.Stdout, v)
+    _, _ = fmt.Fprintln(os.Stdout, v)
 }
 
 type hp []int
@@ -5926,40 +5914,40 @@ func (h *hp) push(v int)        { heap.Push(h, v) }
 func (h *hp) pop() int          { return heap.Pop(h).(int) }
 
 func solve(in *bufio.Reader) {
-	n := readInt(in)
-	s := make(map[int]bool)
-	seq := readArrInt(in)
-	for _, x := range seq {
-		s[x] = true
-	}
-	mex := make(hp, 0)
-	for i := 0; i &amp;lt;= n+1; i++ {
-		if _, exists := s[i]; !exists {
-			mex.push(i)
-		}
-	}
+    n := readInt(in)
+    s := make(map[int]bool)
+    seq := readArrInt(in)
+    for _, x := range seq {
+        s[x] = true
+    }
+    mex := make(hp, 0)
+    for i := 0; i &amp;lt;= n+1; i++ {
+        if _, exists := s[i]; !exists {
+            mex.push(i)
+        }
+    }
 
-	stop := true
-	for round := 0; round &amp;lt; 2*n+1 &amp;amp;&amp;amp; stop; round++ {
-		v := mex.pop()
-		FPrintln(v)
+    stop := true
+    for round := 0; round &amp;lt; 2*n+1 &amp;amp;&amp;amp; stop; round++ {
+        v := mex.pop()
+        FPrintln(v)
 
-		y := readInt(in)
-		if y == -1 {
-			stop = false
-		} else {
-			delete(s, y)
-			mex.push(y)
-		}
-	}
+        y := readInt(in)
+        if y == -1 {
+            stop = false
+        } else {
+            delete(s, y)
+            mex.push(y)
+        }
+    }
 }
 
 func main() {
-	in := bufio.NewReader(os.Stdin)
-	T := readInt(in)
-	for i := 0; i &amp;lt; T; i++ {
-		solve(in)
-	}
+    in := bufio.NewReader(os.Stdin)
+    T := readInt(in)
+    for i := 0; i &amp;lt; T; i++ {
+        solve(in)
+    }
 }
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -5984,7 +5972,7 @@ func main() {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;函数&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;func add(x int, y int) int {
-	return x + y
+    return x + y
 }
 // 缩写
 func minus(x, y int) int {
@@ -5999,7 +5987,7 @@ func swap(x, y string) (string, string) {
 func split10(sum int) (x, y int) {
     x = sum / 10
     y = sum % 10
-	return
+    return
 }
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -6022,10 +6010,10 @@ func main(){
     var value int
     var pi float64
     // 声明并赋值
-    e := 2.71828 
-    
+    e := 2.71828
+
     sqrt2 := math.Sqrt(float64(sqrt()))
-    
+
     var g complex64 = 3 + 2i;
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -6042,19 +6030,19 @@ func main(){
 &lt;h4&gt;判断&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;package main
 func main(){
-    
+
     if x &amp;gt; 10 {}
-    
+
     if x &amp;gt; 10 {}
     else {}
-    
-    if x &amp;gt; 10 {} 
+
+    if x &amp;gt; 10 {}
     else if x &amp;lt; 10 {}
     else {}
 
-	// 使用简短语句
+    // 使用简短语句
     if v:= LoadSth(); v &amp;gt; 10 {
-        
+
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -6095,7 +6083,7 @@ func main(){
     for false {
         fmt.Println(&quot;Unreachable&quot;)
     }
-    
+
     // 相当于 C/C++ 中的 while true
     for {
         fmt.Println(&quot;Unstopable&quot;)
@@ -6103,7 +6091,7 @@ func main(){
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h4&gt;推迟&lt;/h4&gt;
-&lt;p&gt;使用  &lt;code&gt;defer&lt;/code&gt; 会将后面的语句放在当前作用域结束时执行&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;defer&lt;/code&gt; 会将后面的语句放在当前作用域结束时执行&lt;/p&gt;
 &lt;p&gt;执行顺序如栈，总是先进后执行&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;package main
 import &quot;fmt&quot;
@@ -6124,22 +6112,22 @@ func main(){
 import &quot;fmt&quot;
 func main(){
     var p *int // 指向 int 的指针 *int
-    
+
     num := 42
     ptr := &amp;amp;num // 通过 &amp;amp; 计算地址
-    
+
     fmt.Println(*ptr)
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;结构体&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;type Vertex struct {
-	X int
-	Y int
+    X int
+    Y int
 }
 
 var (
     v1 = Vertex{1, 2}
-    
+
     p = &amp;amp;Vertex{1, 2} // 这是一个指针
 )
 &lt;/code&gt;&lt;/pre&gt;
@@ -6152,16 +6140,16 @@ var s []int = a[1:4] //行为像 python 中的切片
 
 r := []bool{true, false, true, true, false, true}
 s := []struct {
-		i int
-		b bool
-	}{
-		{2, true},
-		{3, false},
-		{5, true},
-		{7, true},
-		{11, false},
-		{13, true},
-	}
+        i int
+        b bool
+    }{
+        {2, true},
+        {3, false},
+        {5, true},
+        {7, true},
+        {11, false},
+        {13, true},
+    }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h4&gt;容量与长度&lt;/h4&gt;
 &lt;p&gt;切片的长度就是它所包含的元素个数。&lt;/p&gt;
@@ -6197,12 +6185,12 @@ for _, v := range pow {
 &lt;pre&gt;&lt;code&gt;var m map[string]Vertex
 
 var m = map[string]Vertex{
-	&quot;Bell Labs&quot;: Vertex{
-		40.68433, -74.39967,
-	},
-	&quot;Google&quot;: { // 若顶级类型只是一个类型名，你可以在文法的元素中省略它
-		37.42202, -122.08408,
-	},
+    &quot;Bell Labs&quot;: Vertex{
+        40.68433, -74.39967,
+    },
+    &quot;Google&quot;: { // 若顶级类型只是一个类型名，你可以在文法的元素中省略它
+        37.42202, -122.08408,
+    },
 }
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -6215,22 +6203,22 @@ var m = map[string]Vertex{
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;方法&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;type Vertex struct {
-	X, Y float64
+    X, Y float64
 }
 
 func (v Vertex) Abs() float64 {
-	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;指针接收者的方法可以修改接收者指向的值（就像 &lt;code&gt;Scale&lt;/code&gt; 在这做的）。由于方法经常需要修改它的接收者，指针接收者比值接收者更常用。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;func (v *Vertex) Scale(f float64) {
-	v.X = v.X * f
-	v.Y = v.Y * f
+    v.X = v.X * f
+    v.Y = v.Y * f
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;接口&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;type Abser interface {
-	Abs() float64
+    Abs() float64
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;类型通过实现一个接口的所有方法来实现该接口。既然无需专门显式声明，也就没有“implements”关键字。&lt;/p&gt;
@@ -6281,13 +6269,13 @@ type WowStruct[T int | float32, S []T] struct {
 }
 
 type NewType[T interface{*int}] []T //通过 interface 消歧义
-type NewType2[T interface{*int|*float64}] []T 
+type NewType2[T interface{*int|*float64}] []T
 
 func Add[T int | float32 | float64](a T, b T) T {
     return a + b
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;var a Slice[int] = []int{1, 2, 3}  
+&lt;pre&gt;&lt;code&gt;var a Slice[int] = []int{1, 2, 3}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;匿名结构体不支持泛型&lt;/p&gt;
 &lt;h3&gt;接口组合&lt;/h3&gt;
@@ -6318,8 +6306,7 @@ type Float interface {
     ~float32 | ~float64
 }
 
-type Slice[T Int | Uint | Float] []T 
-
+type Slice[T Int | Uint | Float] []T
 
 type MyInt int
 var s2 Slice[MyInt]  // MyInt 底层类型是 int，所以可以用于实例化
@@ -6376,16 +6363,16 @@ func main(){
 &lt;p&gt;&lt;code&gt;select&lt;/code&gt; 会阻塞到某个分支可以继续执行为止，这时就会执行该分支。当多个分支都准备好时会随机选择一个执行。&lt;/p&gt;
 &lt;p&gt;当 &lt;code&gt;select&lt;/code&gt; 中的其它分支都没有准备好时，&lt;code&gt;default&lt;/code&gt; 分支就会执行。为了在尝试发送或者接收时不发生阻塞，可使用 &lt;code&gt;default&lt;/code&gt; 分支：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;func fibonacci(c, quit chan int) {
-	x, y := 0, 1
-	for {
-		select {
-		case c &amp;lt;- x:
-			x, y = y, x+y
-		case &amp;lt;-quit:
-			fmt.Println(&quot;quit&quot;)
-			return
-		}
-	}
+    x, y := 0, 1
+    for {
+        select {
+        case c &amp;lt;- x:
+            x, y = y, x+y
+        case &amp;lt;-quit:
+            fmt.Println(&quot;quit&quot;)
+            return
+        }
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Mutex&lt;/h3&gt;
@@ -6423,8 +6410,8 @@ func main(){
 &lt;p&gt;通过 &lt;code&gt;go get/go mod&lt;/code&gt; 指令工具管理依赖包&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;go.mod&lt;/code&gt; 文件并不是在项目中唯一。如果一个包需要被单独引用，它就应该创建一个  &lt;code&gt;go.mod&lt;/code&gt; 文件。其内容如下&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;module example/project/app 
+&lt;p&gt;&lt;code&gt;go.mod&lt;/code&gt; 文件并不是在项目中唯一。如果一个包需要被单独引用，它就应该创建一个 &lt;code&gt;go.mod&lt;/code&gt; 文件。其内容如下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;module example/project/app
 
 go 1.16
 
@@ -6604,22 +6591,16 @@ void solve() {
 &lt;p&gt;有 $n\times m$ 大小的一个单元格组成的板子，在板子上有一些牌，每个牌覆盖两个相邻的单元格，并且没有牌重叠&lt;/p&gt;
 &lt;p&gt;对所有的牌进行上色，要求满足：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;对于所有的牌，它所在的一个单元格被涂为黑色，另一个涂为白色&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;每一行中黑色单元格个个数等于白色的个数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;每一列中黑色的个数等于白色的个数&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;对于所有的牌，它所在的一个单元格被涂为黑色，另一个涂为白色&lt;/li&gt;
+&lt;li&gt;每一行中黑色单元格个个数等于白色的个数&lt;/li&gt;
+&lt;li&gt;每一列中黑色的个数等于白色的个数&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;输出涂色方案，或者输出不可能(&lt;code&gt;-1&lt;/code&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;构造&lt;/code&gt; &lt;code&gt;贪心&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;如果牌是横着放的，那么这一行中黑色和白色的个数都会+1，只需要考虑竖着的排的上色方案&lt;/p&gt;
 &lt;p&gt;首先扫描每一行的U的数量，并为其分配颜色，在分配颜色时给下一行对应的 D 也分配一个相反的颜色&lt;/p&gt;
-&lt;p&gt;然后看第二行，先统计出这一行中的  D 的颜色，然后再次分配 U 的颜色和下一行 D 的颜色，重复此过程&lt;/p&gt;
+&lt;p&gt;然后看第二行，先统计出这一行中的 D 的颜色，然后再次分配 U 的颜色和下一行 D 的颜色，重复此过程&lt;/p&gt;
 &lt;p&gt;对所有行都操作结束后，再对每一列也进行相同的操作&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;void solve() {
   cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
@@ -6708,7 +6689,7 @@ void add_edge(int u, int v) {
   head[u] = eid;
   inde[v]++;
 }
- 
+
 void solve() {
   clear();
   int n, m, k;
@@ -6722,7 +6703,7 @@ void solve() {
     u--, v--;
     add_edge(u, v);
   }
- 
+
   std::queue&amp;lt;int&amp;gt; q;
   rep(i, n) if (inde[i] == 0) { q.push(i); }
   topo_seq.clear();
@@ -6731,7 +6712,7 @@ void solve() {
     topo_seq.push_back(q.front());
     auto u = q.front();
     q.pop();
- 
+
     for (int i = head[u]; ~i; i = e[i].next) {
       const int v = e[i].to;
       inde[v]--;
@@ -6740,7 +6721,7 @@ void solve() {
       }
     }
   }
-  
+
   V&amp;lt;int&amp;gt; f(n);
   for (int i = n - 1; i &amp;gt;= 0; i--) {
     int x = topo_seq[i];
@@ -6748,28 +6729,28 @@ void solve() {
       const int v = e[eid].to;
       f[x] = mmax(f[x], f[v] + (h[v] - h[x] + k) % k);
     }
-  } 
- 
-  for (int i = 0; i &amp;lt; n; i++) {
-    f[i] += h[i]; 
   }
- 
+
+  for (int i = 0; i &amp;lt; n; i++) {
+    f[i] += h[i];
+  }
+
   int ans = maxnum(int);
   int res = *std::max_element(all(f));
- 
+
   V&amp;lt;int&amp;gt; p(n);
   std::iota(all(p), 0);
   std::sort(all(p), [&amp;amp;](const int l, const int r){
       return h[l] &amp;lt; h[r];
   });
-   
+
   debug(p);
   for(auto i: p){
     ans = mmin(ans, res - h[i]);
     res = mmax(res, f[i] + k);
   }
   std::cout &amp;lt;&amp;lt; ans;
-  
+
 }
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded><category>Codeforces</category><category>Competitive Programming</category><author>Mslxl</author></item><item><title>Game tag 板刷网瘾记录</title><link>https://blog.mslxl.com/posts/cp/games-logs1/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/cp/games-logs1/</guid><pubDate>Wed, 30 Aug 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;CF1844A. Subtraction Game&lt;/h2&gt;
@@ -6832,14 +6813,10 @@ main = (read &amp;lt;$&amp;gt; getLine) &amp;gt;&amp;gt;= ((flip replicateM_) so
 &lt;blockquote&gt;
 &lt;p&gt;Alice 和 Bob 正在玩游戏，他们共有两个长度为 $n$ 的由小写字母组成的字符串 $S$ 和 $T$。Alice 和 Bob 轮流行动。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Alice 每回合选择 $i \in [1,n]$ 和一个字符串 $S$ 或 $T$  和一个小写字母 $c$，并将选择的字符串中第 $i$ 个符号替换成 $c$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Bob 选择一个字符串 $S$ 或 $T$，并将其反转&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;Alice 每回合选择 $i \in [1,n]$ 和一个字符串 $S$ 或 $T$ 和一个小写字母 $c$，并将选择的字符串中第 $i$ 个符号替换成 $c$&lt;/li&gt;
+&lt;li&gt;Bob 选择一个字符串 $S$ 或 $T$，并将其反转&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;游戏将进行到  $S = T$为止。&lt;/p&gt;
+&lt;p&gt;游戏将进行到 $S = T$为止。&lt;/p&gt;
 &lt;p&gt;定义游戏的持续时间为 Alice 和 Bob 行动的总次数。Alice 想最小化游戏时间，但 Bob 要最大化时间。当双方都最优行动时，游戏将在多少回合后结束&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;*1200&lt;/code&gt;&lt;/p&gt;
@@ -6874,22 +6851,14 @@ main = (read &amp;lt;$&amp;gt; getLine) &amp;gt;&amp;gt;= ((flip replicateM_) so
 &lt;blockquote&gt;
 &lt;p&gt;Sam 教 Jon 打游戏。游戏规则如下：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;游戏从 $n$ 推石子堆开始，编号 $1$ 到 $n$。第 $i$ 堆石子包含 $s_i$ 个石子&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;玩家轮流行动。每次行动必须从石子中移除到一些石子($&amp;gt;0$)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;不能行动的人输&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在每堆石子上移除的石子数量不能重复&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;游戏从 $n$ 推石子堆开始，编号 $1$ 到 $n$。第 $i$ 堆石子包含 $s_i$ 个石子&lt;/li&gt;
+&lt;li&gt;玩家轮流行动。每次行动必须从石子中移除到一些石子($&amp;gt;0$)&lt;/li&gt;
+&lt;li&gt;不能行动的人输&lt;/li&gt;
+&lt;li&gt;在每堆石子上移除的石子数量不能重复&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Sam 先手。请判断如果双方都最优决策，Jon 是否可以获胜&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;SG&lt;/code&gt;  &lt;code&gt;Nim-Game&lt;/code&gt; &lt;code&gt;*2100&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SG&lt;/code&gt; &lt;code&gt;Nim-Game&lt;/code&gt; &lt;code&gt;*2100&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;SG 函数为 &lt;code&gt;0 1 1 2 2 2 3 3 3 3...&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;鉴定为找规律后组合游戏求和&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import Data.Bits
@@ -6902,9 +6871,8 @@ mex x = iter x 1 2 1
         iter i l r row | l &amp;lt;= i &amp;amp;&amp;amp; i &amp;lt;= r = row
                        | otherwise = iter i (r + 1) (r + 2 + (r - l)) (row + 1)
 
-
 solve:: [Integer] -&amp;gt; Bool
-solve = (==) 0 . foldl1 xor . map mex 
+solve = (==) 0 . foldl1 xor . map mex
 
 main = do
     n &amp;lt;- read &amp;lt;$&amp;gt; getLine
@@ -6968,7 +6936,7 @@ main = do
     assert(i &amp;lt; 4 &amp;amp;&amp;amp; j &amp;lt; 4);
     return m[i][j] + m[i + 1][j] + m[i][j + 1] + m[i + 1][j + 1];
   };
-  
+
   auto fwd = [&amp;amp;m](int i, int j) {
     assert(i &amp;lt; 3 &amp;amp;&amp;amp; j &amp;lt; 3);
     int tmp =m[i][j];
@@ -6977,7 +6945,7 @@ main = do
     m[i + 1][j + 1] = m[i+1][j];
     m[i+1][j] = tmp;
   };
-  
+
   auto bck = [&amp;amp;m](int i, int j){
     int tmp = m[i][j];
     m[i][j] = m[i+1][j];
@@ -7026,12 +6994,8 @@ main = do
 &lt;blockquote&gt;
 &lt;p&gt;制造一个序列，序列从 $x$ 开始，到 $y$ 结束，一共 $n$ 个数。满足&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;序列是严格递增的&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;序列相邻两项的值是严格递减的&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;序列是严格递增的&lt;/li&gt;
+&lt;li&gt;序列相邻两项的值是严格递减的&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;构造&lt;/code&gt; &lt;code&gt;*579&lt;/code&gt;&lt;/p&gt;
@@ -7043,11 +7007,11 @@ main = do
     std::vector&amp;lt;int&amp;gt; d(n);
     d[n-1] = y;
     for(int i = 2; i &amp;lt;= d.size(); i++){
-        d[d.size() - i] = d[d.size() - i + 1] - (i - 1);   
+        d[d.size() - i] = d[d.size() - i + 1] - (i - 1);
     }
     if(x &amp;gt; d[0]){
         std::cout &amp;lt;&amp;lt; -1;
-        return;        
+        return;
     }
     std::cout &amp;lt;&amp;lt; x;
     for(int i = 1; i &amp;lt; n; i++) std::cout &amp;lt;&amp;lt; &quot; &quot; &amp;lt;&amp;lt; d[i];
@@ -7057,12 +7021,8 @@ main = do
 &lt;blockquote&gt;
 &lt;p&gt;有一个长度为 $n$ 的字符串 $s$，可以进行以下任一操作无限次:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;交换相隔一位的字符，即交换 $s_i$ 和 $s_{i+2}$ 的字符&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;反转一段长度为 $k$ 的区间&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;交换相隔一位的字符，即交换 $s_i$ 和 $s_{i+2}$ 的字符&lt;/li&gt;
+&lt;li&gt;反转一段长度为 $k$ 的区间&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;输出通过上述操作所能获得的最小字典序的字符串&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -7133,7 +7093,7 @@ main = (read &amp;lt;$&amp;gt; getLine) &amp;gt;&amp;gt;= (flip replicateM_ $ ((
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;D. Matrix Cascade&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;有一个大小为 $n \times m$  的01矩阵。将矩阵中所有的元素变为 0。每次操作可以将 $(i, j)$ 和 $(x, y) \quad x &amp;gt; i, x - i \ge\mid y - j\mid$ 中的元素反转&lt;/p&gt;
+&lt;p&gt;有一个大小为 $n \times m$ 的01矩阵。将矩阵中所有的元素变为 0。每次操作可以将 $(i, j)$ 和 $(x, y) \quad x &amp;gt; i, x - i \ge\mid y - j\mid$ 中的元素反转&lt;/p&gt;
 &lt;p&gt;输入一个矩阵，问最小需要操作几次才能将矩阵变为全 $0$&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;二维差分&lt;/code&gt; &lt;code&gt;1620&lt;/code&gt;&lt;/p&gt;
@@ -7165,12 +7125,8 @@ main = (read &amp;lt;$&amp;gt; getLine) &amp;gt;&amp;gt;= (flip replicateM_ $ ((
 &lt;li&gt;
 &lt;p&gt;如果当前位置 $(i,j)$ 不存在影响 ($d[i][j] = 0$) 时&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;当 $a[i][j] = 1$时，由于需要进行一次反转使 $a[i][j] = 0$，因此 $d[i][j] = 1$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;当 $a[i][j] = 0$ 时， $d[i][j] = 0$ 保持不变&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;当 $a[i][j] = 1$时，由于需要进行一次反转使 $a[i][j] = 0$，因此 $d[i][j] = 1$&lt;/li&gt;
+&lt;li&gt;当 $a[i][j] = 0$ 时， $d[i][j] = 0$ 保持不变&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -7196,14 +7152,14 @@ main = (read &amp;lt;$&amp;gt; getLine) &amp;gt;&amp;gt;= (flip replicateM_ $ ((
   int ans = 0;
   for (int i = 0; i &amp;lt; n; i++) {
     for (int j = 0; j &amp;lt; n; j++) {
-      a[i][j] ^= b[i][j];                  
-      ans += a[i][j];                      
-      b[i][j] ^= a[i][j];                  
+      a[i][j] ^= b[i][j];
+      ans += a[i][j];
+      b[i][j] ^= a[i][j];
 
-      a[i][j] ^= b[i][j];                 
-      if (i + 1 &amp;lt; n) {                     
-        a[i + 1][j] ^= b[i][j];             
-        if (j - 1 &amp;gt;= 0) {                  
+      a[i][j] ^= b[i][j];
+      if (i + 1 &amp;lt; n) {
+        a[i + 1][j] ^= b[i][j];
+        if (j - 1 &amp;gt;= 0) {
           b[i + 1][j - 1] ^= b[i][j];
         } else if (i + 2 &amp;lt; n) {
           b[i + 2][j] ^= b[i][j];
@@ -7228,31 +7184,21 @@ main = (read &amp;lt;$&amp;gt; getLine) &amp;gt;&amp;gt;= (flip replicateM_ $ ((
 &lt;p&gt;在游戏中，Carol 将随机选两个下标 $i_a$ 和 $i_b$，并令 $a = s_{i_a}$, $b = s_{i_b}$，$i_a$ 和 $i_b$ 可能重合&lt;/p&gt;
 &lt;p&gt;Carol 将：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;告诉 Alice $a$ 的值&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;告诉 Bob $b$ 的值&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;告诉 Alice 和 Bob $a \mid b$ 的值，其中  &lt;code&gt;|&lt;/code&gt;是位或运算&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;告诉 Alice $a$ 的值&lt;/li&gt;
+&lt;li&gt;告诉 Bob $b$ 的值&lt;/li&gt;
+&lt;li&gt;告诉 Alice 和 Bob $a \mid b$ 的值，其中 &lt;code&gt;|&lt;/code&gt;是位或运算&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Carol 不会告诉 Alice 和 Bob 任何有关 $s$ 的信息&lt;/p&gt;
 &lt;p&gt;游戏开始后，Alice 和 Bob 轮流进行猜测。Alice 先手。他们的目标都是找到 $a &amp;lt; b, a &amp;gt; b$ 或 $a=b$ 公式哪个是正确的&lt;/p&gt;
 &lt;p&gt;在每轮猜测中，每个玩家可以进行以下一种操作:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;回答 &lt;code&gt;不知道&lt;/code&gt;，然后下一个玩家继续游戏&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;回答 &lt;code&gt;知道&lt;/code&gt;, 并给出游戏的答案(&lt;code&gt;a&amp;lt;b&lt;/code&gt;, &lt;code&gt;a&amp;gt;b&lt;/code&gt; 或者 &lt;code&gt;a=b&lt;/code&gt;)，游戏结束&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;回答 &lt;code&gt;不知道&lt;/code&gt;，然后下一个玩家继续游戏&lt;/li&gt;
+&lt;li&gt;回答 &lt;code&gt;知道&lt;/code&gt;, 并给出游戏的答案(&lt;code&gt;a&amp;lt;b&lt;/code&gt;, &lt;code&gt;a&amp;gt;b&lt;/code&gt; 或者 &lt;code&gt;a=b&lt;/code&gt;)，游戏结束&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Alice 和 Bob 都能听到对方的回答，并根据回答作出自己的判断。Alice 和 Bob 足够聪明，且只会在完全确定答案的时候回答 &lt;code&gt;知道&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;要求计算游戏所进行回合数的期望值，输出答案对 &lt;code&gt;998244353&lt;/code&gt; 取模&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;*2113&lt;/code&gt; &lt;code&gt;二进制拆分&lt;/code&gt;  &lt;code&gt;分治&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;*2113&lt;/code&gt; &lt;code&gt;二进制拆分&lt;/code&gt; &lt;code&gt;分治&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;很奇妙的一道题&lt;/p&gt;
 &lt;p&gt;先来看样例的几种情况&lt;/p&gt;
 &lt;table&gt;
@@ -7336,7 +7282,7 @@ int pk(int a, int b, int round = 1) {
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;#pragma GCC optimize(2)
 // clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using i16 = short; using i32 = int; using i64 = long long; using u16= unsigned short; using u32 = unsigned int; using u64 = unsigned long long;using f32 = float; using f64 = double; using f128 = long double;
 using pii = std::pair&amp;lt;i32, i32&amp;gt;; using pll = std::pair&amp;lt;i64, i64&amp;gt;; using pil = std::pair&amp;lt;i32, i64&amp;gt;; using pli = std::pair&amp;lt;i64, i32&amp;gt;;
 template&amp;lt;class T&amp;gt; using V = std::vector&amp;lt;T&amp;gt;;
@@ -7453,12 +7399,8 @@ while T != 0:
 &lt;blockquote&gt;
 &lt;p&gt;已知 $a$ 序列可以通过特定的规则变化成 $b$ 序列，规则如下：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;将 $a_1$ 加入序列 $b$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;当 $a_i \ge a_{i-1}\quad(2 \le i \le m)$ 时，将 $a_i$ 加入序列 $b$&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;将 $a_1$ 加入序列 $b$&lt;/li&gt;
+&lt;li&gt;当 $a_i \ge a_{i-1}\quad(2 \le i \le m)$ 时，将 $a_i$ 加入序列 $b$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;比如 $[4,3,2,6,3,3]$ 变化为 $[4,6,3]$&lt;/p&gt;
 &lt;p&gt;现给出长度为 $n$ 的序列 $b$ ，请构造出符合上述条件的序列 $a$，长度不能超过 $2n$&lt;/p&gt;
@@ -7666,7 +7608,7 @@ $$&lt;/p&gt;
 f[i][j][k] = max(f[i-1][j][k] , f[i-1][j-s[i]][k] + 1, f[i-1][j][k-s[i]]+1)
 $$&lt;/p&gt;
 &lt;p&gt;但是受限于数据范围 $1 \le w, f \le 10^9$ 这样肯定不可行&lt;/p&gt;
-&lt;p&gt;考虑列出所有怪物血量可组成的集合的子集，枚举子集 $i$  ，计算使用火魔法消灭 $i$ 使用水魔法消灭 $sum - i$ 所需要的时间，统计最小值&lt;/p&gt;
+&lt;p&gt;考虑列出所有怪物血量可组成的集合的子集，枚举子集 $i$ ，计算使用火魔法消灭 $i$ 使用水魔法消灭 $sum - i$ 所需要的时间，统计最小值&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;const int maxs = 1e4 * 100 + 17;
 void solve() {
   int w, f, n;
@@ -7696,24 +7638,14 @@ void solve() {
 &lt;blockquote&gt;
 &lt;p&gt;现有一均衡器设备接受数组 $a$ 作为输入。均衡器将会：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;升序排序并去重&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果当前数组的长度为$1$ ，均衡器将停止工作，并将数组中唯一的元素作为设备输出&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在数组中的每个元素加上等差数列 $\{n - 0, n - 1, n -2, \ldots, 1\}$ 中对应的元素，其中 $n$ 表示数组长度。即索引从 $0$ 开始时，令第 $i$ 个元素为 $a[i] + (n-i)$&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;升序排序并去重&lt;/li&gt;
+&lt;li&gt;如果当前数组的长度为$1$ ，均衡器将停止工作，并将数组中唯一的元素作为设备输出&lt;/li&gt;
+&lt;li&gt;在数组中的每个元素加上等差数列 $\{n - 0, n - 1, n -2, \ldots, 1\}$ 中对应的元素，其中 $n$ 表示数组长度。即索引从 $0$ 开始时，令第 $i$ 个元素为 $a[i] + (n-i)$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;为了测试设备，将一个数组 $a$ 作为输入，并进行 $q$ 次操作：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;将 $x$ 赋值给指定元素 $a_i$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;将数组 $a$ 作为设备的输入，并记录设备的输出。&lt;strong&gt;数组 $a$ 在设备运行中保持不变&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;将 $x$ 赋值给指定元素 $a_i$&lt;/li&gt;
+&lt;li&gt;将数组 $a$ 作为设备的输入，并记录设备的输出。&lt;strong&gt;数组 $a$ 在设备运行中保持不变&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;找出设备每次操作后的输出值&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -7781,7 +7713,8 @@ void solve() {
 </content:encoded><category>Competitive Programming</category><category>Codeforces</category><author>Mslxl</author></item><item><title>LeetCode 周赛 359</title><link>https://blog.mslxl.com/posts/cp/leetcode-wc359/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/cp/leetcode-wc359/</guid><pubDate>Mon, 21 Aug 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;A. 判别首字母缩略词&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;给你一个字符串数组 words 和一个字符串 s ，请你判断 s 是不是 words 的 首字母缩略词 。&lt;/p&gt;
-&lt;p&gt;如果可以按顺序串联 words 中每个字符串的第一个字符形成字符串 s ，则认为 s 是 words 的首字母缩略词。例如，&quot;ab&quot; 可以由 [&quot;apple&quot;, &quot;banana&quot;] 形成，但是无法从 [&quot;bear&quot;, &quot;aardvark&quot;] 形成。&lt;/p&gt;
+&lt;p&gt;如果可以按顺序串联 words 中每个字符串的第一个字符形成字符串 s ，则认为 s 是 words 的首字母缩略词。
+例如，&quot;ab&quot; 可以由 [&quot;apple&quot;, &quot;banana&quot;] 形成，但是无法从 [&quot;bear&quot;, &quot;aardvark&quot;] 形成。&lt;/p&gt;
 &lt;p&gt;如果 s 是 words 的首字母缩略词，返回 true ；否则，返回 false 。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;模拟&lt;/code&gt;&lt;/p&gt;
@@ -7829,7 +7762,8 @@ public:
 &lt;h2&gt;C. 销售利润最大化&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;给你一个整数 &lt;code&gt;n&lt;/code&gt; 表示数轴上的房屋数量，编号从 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n - 1&lt;/code&gt; 。&lt;/p&gt;
-&lt;p&gt;另给你一个二维整数数组 &lt;code&gt;offers&lt;/code&gt; ，其中 &lt;code&gt;offers[i] = [starti, endi, goldi]&lt;/code&gt; 表示第 &lt;code&gt;i&lt;/code&gt; 个买家想要以 &lt;code&gt;goldi&lt;/code&gt; 枚金币的价格购买从 &lt;code&gt;starti&lt;/code&gt; 到 &lt;code&gt;endi&lt;/code&gt; 的所有房屋。&lt;/p&gt;
+&lt;p&gt;另给你一个二维整数数组 &lt;code&gt;offers&lt;/code&gt; ，其中 &lt;code&gt;offers[i] = [starti, endi, goldi]&lt;/code&gt; 表示第 &lt;code&gt;i&lt;/code&gt; 个买家想要以
+ &lt;code&gt;goldi&lt;/code&gt; 枚金币的价格购买从 &lt;code&gt;starti&lt;/code&gt; 到 &lt;code&gt;endi&lt;/code&gt; 的所有房屋。&lt;/p&gt;
 &lt;p&gt;作为一名销售，你需要有策略地选择并销售房屋使自己的收入最大化。&lt;/p&gt;
 &lt;p&gt;返回你可以赚取的金币的最大数目。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; 同一所房屋不能卖给不同的买家，并且允许保留一些房屋不进行出售。&lt;/p&gt;
@@ -7874,38 +7808,38 @@ public:
 &lt;p&gt;&lt;code&gt;分组&lt;/code&gt; &lt;code&gt;双指针&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;题目要求从一段子区间中删除不大于 $k$ 个数，使得子区间中剩余的数字相同&lt;/p&gt;
 &lt;p&gt;选择子区间中相同的数比较麻烦，我们可以直接将相同的数分为一组，将下标保存在数组中。&lt;/p&gt;
-&lt;p&gt;剩下的问题就是在所有组中找到一个区间，他们的下标中相隔的数字的数量不超过$k$。可以使用前缀和，区间$[l,r]$中需要删除的数字数量为 $pos[r] - pos[l] + (r-l)$。也可以直接算 $(pos[r] - pos[l]) - (r-l)$（区间的总长度减去不需要删除的数字数量）&lt;/p&gt;
+&lt;p&gt;剩下的问题就是在所有组中找到一个区间，他们的下标中相隔的数字的数量不超过$k$。可以使用前缀和，
+区间$[l,r]$中需要删除的数字数量为 $pos[r] - pos[l] + (r-l)$。也可以直接算 $(pos[r] - pos[l]) - (r-l)$（区间的总长度减去不需要删除的数字数量）&lt;/p&gt;
 &lt;p&gt;写写 GO 玩玩&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;func longestEqualSubarray(nums []int, k int) int {
-	maxValue := 0
-	for _, v := range nums {
-		maxValue = max(maxValue, v)
-	}
-	pos := make([][]int, maxValue+1)
-	for i, v := range nums {
-		pos[v] = append(pos[v], i)
-	}
+    maxValue := 0
+    for _, v := range nums {
+        maxValue = max(maxValue, v)
+    }
+    pos := make([][]int, maxValue+1)
+    for i, v := range nums {
+        pos[v] = append(pos[v], i)
+    }
 
-	ans := 0
-	for _, ps := range pos {
-		left := 0
-		for right, p := range ps {
-			for p-ps[left]-(right-left) &amp;gt; k { //删除的数字数量大于了 k
-				left++
-			}
-			ans = max(ans, right-left+1)
-		}
-	}
-	return ans
+    ans := 0
+    for _, ps := range pos {
+        left := 0
+        for right, p := range ps {
+            for p-ps[left]-(right-left) &amp;gt; k { //删除的数字数量大于了 k
+                left++
+            }
+            ans = max(ans, right-left+1)
+        }
+    }
+    return ans
 }
 
 func max(a, b int) int {
-	if a &amp;gt; b {
-		return a
-	}
-	return b
+    if a &amp;gt; b {
+        return a
+    }
+    return b
 }
-
 
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded><category>Competitive Programming</category><category>LeetCode</category><author>Mslxl</author></item><item><title>Educational Codeforces Round 153 A-E (博弈论 DP 拆点)</title><link>https://blog.mslxl.com/posts/cp/cf1860/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/cp/cf1860/</guid><pubDate>Fri, 18 Aug 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;A. Not a Substring&lt;/h2&gt;
@@ -7937,12 +7871,8 @@ func max(a, b int) int {
 &lt;blockquote&gt;
 &lt;p&gt;Monocarp 要进行一项价值 $m$ 的支出。他现在有两种价值的硬币:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;价值为 $1$ 的普通硬币 $a_1$ 枚和同价值的花式硬币无限枚&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;价值为 $k$ 的普通硬币 $a_k$ 枚和同价值的花式硬币无限枚&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;价值为 $1$ 的普通硬币 $a_1$ 枚和同价值的花式硬币无限枚&lt;/li&gt;
+&lt;li&gt;价值为 $k$ 的普通硬币 $a_k$ 枚和同价值的花式硬币无限枚&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Monocarp想要恰巧支付 $m$ 并花费尽可能少的花式硬币。输出消耗的花式硬币的数量。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -7990,7 +7920,7 @@ void solve() {
 
   for (int i = 0; i &amp;lt; s.size(); i++) {
     int nNum = N.order_of_key(s[i]); // 比 s[i] 小的数中有几个 N 态
-    if (nNum == 0) { 
+    if (nNum == 0) {
       // 刚开始第一个数
       N.insert(s[i]);
     } else if (N.size() + (P.size() - P.order_of_key(s[i])) == i) {
@@ -8023,7 +7953,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$j$ 表示当前放 &lt;code&gt;1&lt;/code&gt; 的数量&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$k$ 表示当前  &lt;code&gt;01&lt;/code&gt; 串和 &lt;code&gt;11&lt;/code&gt; 串的数量&lt;/p&gt;
+&lt;p&gt;$k$ 表示当前 &lt;code&gt;01&lt;/code&gt; 串和 &lt;code&gt;11&lt;/code&gt; 串的数量&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;他们之间的状态转移可以是:&lt;/p&gt;
@@ -8071,12 +8001,8 @@ void solve() {
 &lt;p&gt;给一串仅由小写字母组成的字符串 $s$。现在在两个字符中间有一个光标，光标不会出现在字符串的最左侧或者最右侧。&lt;/p&gt;
 &lt;p&gt;光标可以进行两种操作&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;左移/右移一位，代价为 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;跳转到其他左右字符相同的位置，代价也为 1&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;左移/右移一位，代价为 1&lt;/li&gt;
+&lt;li&gt;跳转到其他左右字符相同的位置，代价也为 1&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;有 $q$ 次询问，每次询问从光标从第 $f$ 个位置到第 $t$ 的位置最小的代码&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -8123,7 +8049,7 @@ int main(){
         G[id[s[i]][s[i+1]][1]].push_back({i,0});
     }
 
-    for(int a=0;a&amp;lt;26;a++){  
+    for(int a=0;a&amp;lt;26;a++){
         for(int b=0;b&amp;lt;26;b++){
             // 从中转点的出点开始 0-1 BFS
             dis[a][b] = vector&amp;lt;int&amp;gt;(cnt,1e9);
@@ -8196,7 +8122,7 @@ int main(){
     std::vector&amp;lt;int&amp;gt; s(a.size());
     std::vector&amp;lt;int&amp;gt; mask(a.size());
     for (int i = 0; i &amp;lt; a.size(); i++) s[i] = a[i] - &apos;0&apos;;
-    
+
     for (int i = s.size() - 1; i &amp;gt; 0; i--) {
       if (s[i] &amp;gt;= 5) {
         s[i - 1]++;
@@ -8228,7 +8154,7 @@ int main(){
     i32 m = n * (n - 1) / 2;
     std::vector&amp;lt;int&amp;gt; s(m);
     reads(all(s));
-    
+
     std::sort(all(s));
     for(int i = 0; i &amp;lt; m; i+=--n){
       std::cout &amp;lt;&amp;lt; s[i] &amp;lt;&amp;lt; &apos; &apos;;
@@ -8251,7 +8177,7 @@ void solve(const std::size_t testcase) {
     read(n);
     std::vector&amp;lt;int&amp;gt; a(n), b(n);
     reads(all(a)); reads(all(b));
-    
+
     std::vector&amp;lt;pii&amp;gt; ans(n);
     rep(i, n){
       ans[i].first = a[i] - b[i];
@@ -8297,8 +8223,8 @@ void solve(const std::size_t testcase) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;F. Sum and Product&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;解方程, 统计满足下式的解的数量
-$$
+&lt;p&gt;解方程, 统计满足下式的解的数量&lt;/p&gt;
+&lt;p&gt;$$
 \begin{cases}
 a_i a_j = x \\
 a_i + a_j = y
@@ -8423,14 +8349,14 @@ void solve() {
 &lt;p&gt;首先恭喜我校2银3铜, 听说是校史上就牌子数量的的最好成绩. 其次恭喜我自己终于拿到了XCPC上的第一块牌子(算是弥补了去年打铁的遗憾, RK55 也算是一个好开始吧).&lt;/p&gt;
 &lt;p&gt;这次的队伍算是重组后的队伍, 前前后后自行进行了几场训练, 也参加了几场学校里的自行组织的几场训练, 现在回想起来这些确实给我们队伍的合作提供了很大的帮助. 十分感谢学校提供的训练场地(尽管有点难以描述)和 yrh lmy 等人的帮助. 不同于 lmy 的队伍, 我们队其实是到学校统一组织训练的时候才知道出题人是 SUA 并开始专门挑 SUA 的题目训练, 如果不是因为 lmy 的消息和 yrh 及学校老师组织的训练, 我们队伍这次比赛大概并不会这么轻松愉快.&lt;/p&gt;
 &lt;p&gt;day(-9) 突然抗原阳了,在此之前我还没阳过, 在家里烧了4天, 说实话这一周都过的有点浑浑噩噩的, 阳康后已经 day(-3) 了, 赛前稍微怀着愧疚的心理看了看半平面交, 这段时间说实话感觉精神还不太对, 没办法集中注意力太长时间, 心里已经准备者打铁争铜了,不过当时还有一点希望万一队友能带我飞呢(划去)&lt;/p&gt;
-&lt;p&gt;day0 热身赛前我和队内的佬 mhy 乘大巴到了 QLU, 中午在和队友一起逛 QLU 校园, 围着校园走了一圈,深刻认识到了我财专计科输输输. 绕学校一圈差不多走了 1 小时, 回到艺体中心的时候差点没瘫到座位上. 热身赛题目发现来一眼往年原题(但是已经忘了当初训练谁写的了). 感觉签的挺慢的, 不过都是一遍过. 签完后玩了差不多1小时,稍微测了下评测机后给QLU OJ贡献了差不多70发D题, 说实话感觉评测机挺拉的. 离结束还剩半小时的时候在草稿纸记了记次日需要改的电脑配置, 主要就是交换键盘 ESC 和 CapsLk, 启用 VSCode 的 vim 和 cph 插件, 改字号为 28,  打开 Natrual Scrolling. 打完笔记完后和队长 gjh , 巨佬mhy 一起去&quot;老胖烧烤&quot;吃了一顿. (还没给队长烧烤钱呢, 希望队长看不到这段话)(笑)&lt;/p&gt;
+&lt;p&gt;day0 热身赛前我和队内的佬 mhy 乘大巴到了 QLU, 中午在和队友一起逛 QLU 校园, 围着校园走了一圈,深刻认识到了我财专计科输输输. 绕学校一圈差不多走了 1 小时, 回到艺体中心的时候差点没瘫到座位上. 热身赛题目发现来一眼往年原题(但是已经忘了当初训练谁写的了). 感觉签的挺慢的, 不过都是一遍过. 签完后玩了差不多1小时,稍微测了下评测机后给QLU OJ贡献了差不多70发D题, 说实话感觉评测机挺拉的. 离结束还剩半小时的时候在草稿纸记了记次日需要改的电脑配置, 主要就是交换键盘 ESC 和 CapsLk, 启用 VSCode 的 vim 和 cph 插件, 改字号为 28, 打开 Natrual Scrolling. 打完笔记完后和队长 gjh , 巨佬mhy 一起去&quot;老胖烧烤&quot;吃了一顿. (还没给队长烧烤钱呢, 希望队长看不到这段话)(笑)&lt;/p&gt;
 &lt;p&gt;晚上有点怕第二天晕车, 直接在长清找了个旅馆住下了. 值得一提的是晚上 gjh 直接上门交流, 然后回去抄了张二分的板子&lt;/p&gt;
-&lt;p&gt;day1 正式赛. 我先按照热身赛记的笔记修改比赛机配置, 队友 gjh 和 mhy 开始开题. 事后听闻 gjh 一下开到了 H 题无人区(笑), 有时候不得不感慨太巧了. 改完配置后我按着顺序开了 A 题, 读了 3 行发现是签到, 8分钟时间一遍过. 之后 gjh 给我喂了 I 题的题意, 15分钟提交一遍过. 之后我和 mhy 去开了 G 题, 巨佬 mhy 给喂了一个关键的公式变形, 我自己按着这个变形稍微改了改一遍过. 在这之后 gjh 提出 D 题是二分.  队里没人会二分, 但昨晚某先知刚抄了二分板子. gjh 接过电脑后一遍过 D 题. 这时候我们罚时才 167, 没有榜能跟了, 因为我们就是领榜的人 ,这也给我们痛失金牌做了不少铺垫(之前没遇到过这种情况).&lt;/p&gt;
+&lt;p&gt;day1 正式赛. 我先按照热身赛记的笔记修改比赛机配置, 队友 gjh 和 mhy 开始开题. 事后听闻 gjh 一下开到了 H 题无人区(笑), 有时候不得不感慨太巧了. 改完配置后我按着顺序开了 A 题, 读了 3 行发现是签到, 8分钟时间一遍过. 之后 gjh 给我喂了 I 题的题意, 15分钟提交一遍过. 之后我和 mhy 去开了 G 题, 巨佬 mhy 给喂了一个关键的公式变形, 我自己按着这个变形稍微改了改一遍过. 在这之后 gjh 提出 D 题是二分. 队里没人会二分, 但昨晚某先知刚抄了二分板子. gjh 接过电脑后一遍过 D 题. 这时候我们罚时才 167, 没有榜能跟了, 因为我们就是领榜的人 ,这也给我们痛失金牌做了不少铺垫(之前没遇到过这种情况).&lt;/p&gt;
 &lt;p&gt;因为之前我对计算几何比较熟悉, 我直接去开了 M 题, mhy 和 gjh 去开了 E. 这时候就稍微有点卡题, gjh 过来看了一眼 M, 一会又给我喂了一个三分的思路. 这时候 M 题已经可以说是过了. 但是我没带零点三角切分有向面积的板子, 只依稀记得公式的样子和它的推导巨长. 我推了一段时间后发现推不出来, 因此按照三分的思路换了双指针的写法, 计算面积的时候选择 b - 1 作为基, 特判了 k = 1 的情况, 没想到 WA 了一发. 一时半会没思路就把电脑让给 mhy 写 E 题了, 我在纸上找错误. 当时 mhy 提出了使用费马小定理做 E, 不过当时没人会, 就稍微写了点暴力. 当时想的是万一打个表能找到规律呢, 本地跑的挺快, 结果大胆一交 WA 了. 这时候我大概找到了 M 错误的原因, 接过电脑又改了改, 结果造错了样例浪费 20 分钟. 在这段时间队长 gjh 证明了 E 的正确性, mhy 开始改E. E 改完后mhy佬不太敢交, 我稍微改了改M题后发现交不上去, 大概找了四五分钟的原因. mhy 大胆交了一发E 后 AC 了, 我们就猜测 M 题文件名有空格导致提交失败, 修改文件名后提交就 AC了. 此时刚封榜, 还有 1 小时时间&lt;/p&gt;
 &lt;p&gt;这时候之前积累的隐患就出现, 我们没有看榜单去开了 B 题, 由于代码量过大 gjh 实现不来, 而我被喂了两三遍题意才懂, 结果最后也没写完. 此时我们也没有看榜, 算着自己应该是金尾银首.直到滚榜的时候我们才发现 M 题是个金牌题, 而 L 题作为铜牌题我们甚至都没人去读. 最后草草结果以 RK 55 基本上算银首收场.&lt;/p&gt;
 &lt;p&gt;说多了都是泪, 如果我带了计算几何的板子就可以高速收掉 M 去做其他题, 或者说如果有人在卡题的时候去看了 L 题, 可能就是 7 题金了. 但是叉吸劈吸没有如果, 银了就是银, 只能以后的赛事中吸取教训了.&lt;/p&gt;
 &lt;p&gt;回顾往年, 大一的时候我还是对算法一无所知, 和 lmy 说的功利性不同, 我来打 XCPC 大概只是为了弥补高中时候的遗憾吧, 高中的时候我是有心去参加 oi 的, 但是苦于没有教练, 学校也不支持, 只能做罢. 而大学加入 ACM 学社只是因为热爱和高中留下的遗憾. 不知道能读到这里的人有多少, 我和其他人对 ACM 的观点不太一样, ACM 现在是比较知名的高投入低回报比赛, 而我校作为一个弱校, 训练困难, 鼓励政策也不大, 甚至可以说没有. 在这种情况下用一种功利的心态去打比赛, 我个人认为它回报很难能达到一种能令人满意的程度. 如果只是单纯为了一块牌子, 不如早早收手. 毕竟在现在的这个互联网寒冬中,过去一块牌子乱杀的时代已经一去不复返了&lt;/p&gt;
-&lt;p&gt;对于我个人而言, 去年SDCPC打铁, 区域赛又铁, 现在终于能算出了点成果了. 正如蒋莉所说的, 没有什么是加训解决不了的, 如果有, 那就 all in. 这个比赛很累,  准备时间也很长, 但是如果只要网瘾程度够大, 那这个比赛还是很快乐的. 过去一年队伍聚聚散散, 干过与队友熬夜做题, 早起训练, 也试过晚上独自留在教学楼中熬夜打 cf(值得一提的是打完后给lmy发消息吐槽, 结果发现他也在熬夜打), 现在回味起来还是充满乐趣的. 到现在我也算经历了不少比赛, 感受过天赋性选手, 也在榜单上见过奋斗形选手, 被高中生吊打过, 但也曾吊打过其他大学生(虽然是在很水的赛事上). 我比较认可在我算法模板上的一句话, 但他的来源我已经找不到了: &quot;在没有结束之前, 总要做很多没有意义的事情, 这样才可以在某一天, 用这些无意义的事情去堵住那些讨厌的缺口&quot;. 可能现在我所做的是无意义的, 但总有一天它能发挥它的作用. 希望我校那些真正热爱的人能吸取我们队的教训, 做好重视平时的训练和积累, 加训, 加训, 注意练习中积累一套自己的模板和经验, 别人的模板自己用起来终究不是那么熟练.&lt;/p&gt;
+&lt;p&gt;对于我个人而言, 去年SDCPC打铁, 区域赛又铁, 现在终于能算出了点成果了. 正如蒋莉所说的, 没有什么是加训解决不了的, 如果有, 那就 all in. 这个比赛很累, 准备时间也很长, 但是如果只要网瘾程度够大, 那这个比赛还是很快乐的. 过去一年队伍聚聚散散, 干过与队友熬夜做题, 早起训练, 也试过晚上独自留在教学楼中熬夜打 cf(值得一提的是打完后给lmy发消息吐槽, 结果发现他也在熬夜打), 现在回味起来还是充满乐趣的. 到现在我也算经历了不少比赛, 感受过天赋性选手, 也在榜单上见过奋斗形选手, 被高中生吊打过, 但也曾吊打过其他大学生(虽然是在很水的赛事上). 我比较认可在我算法模板上的一句话, 但他的来源我已经找不到了: &quot;在没有结束之前, 总要做很多没有意义的事情, 这样才可以在某一天, 用这些无意义的事情去堵住那些讨厌的缺口&quot;. 可能现在我所做的是无意义的, 但总有一天它能发挥它的作用. 希望我校那些真正热爱的人能吸取我们队的教训, 做好重视平时的训练和积累, 加训, 加训, 注意练习中积累一套自己的模板和经验, 别人的模板自己用起来终究不是那么熟练.&lt;/p&gt;
 &lt;p&gt;最后写点可能看起来有点像八股的话吧. 感谢现在的队长 gjh 在大一的时候作为我领路人, 感谢 h5 对我平时问题的解答, 感谢大一辅导员任楠开明的态度. 还有与我一起训练的朋友能在我心态爆炸的时候能一同吹水, lmy, xzy 和 yrh 的恶意出题让我见到世界的开阔与变化. 感谢之前一年班长 shy 的陪伴(虽然他现在已经放弃了 xcpc 而转头去做了 semantic seg 的研究). 感谢我的队友和社团成员的陪伴, 希望接下来的大学生活中大家能一同走向辉煌.&lt;/p&gt;
 &lt;p&gt;比赛没拍照, 偷一张学校的宣传图. 先沉淀一个月准备期末考试, 如果网络赛能抢到名额的话, 接下来区域赛再见了.&lt;/p&gt;
 &lt;p&gt;Good luck, and farewell.&lt;/p&gt;
@@ -8451,7 +8377,7 @@ void solve() {
 &lt;p&gt;即向一个 $n$ 种渲染方式的节点中添加一个节点, 会使其变为 $2n-1$ 种染色方式.&lt;/p&gt;
 &lt;p&gt;因此我们可以构造一个树,目的是使其有 $K$ 中染色方式,当其减少最后一次添加的节点时应该有 $\frac{K+1}{2}$ 种或者 $K-1$ 染色方式,因此只需要进行深度搜索,每次搜索时判断数字的奇偶性即可.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -8546,7 +8472,7 @@ int read(){
     int x=0,f=1; char ch=getchar();
     while(ch&amp;gt;&apos;9&apos;||ch&amp;lt;&apos;0&apos;){ if(ch==&apos;-&apos;){ f=-1; } ch=getchar(); }
     while(ch&amp;gt;=&apos;0&apos;&amp;amp;&amp;amp;ch&amp;lt;=&apos;9&apos;){ x=(x&amp;lt;&amp;lt;3)+(x&amp;lt;&amp;lt;1)+(ch^48); ch=getchar(); }
-    return x*f; 
+    return x*f;
 }
 
 int n,k;
@@ -8639,7 +8565,7 @@ int read(){
     int x=0,f=1; char ch=getchar();
     while(ch&amp;gt;&apos;9&apos;||ch&amp;lt;&apos;0&apos;){ if(ch==&apos;-&apos;){ f=-1; } ch=getchar(); }
     while(ch&amp;gt;=&apos;0&apos;&amp;amp;&amp;amp;ch&amp;lt;=&apos;9&apos;){ x=(x&amp;lt;&amp;lt;3)+(x&amp;lt;&amp;lt;1)+(ch^48); ch=getchar(); }
-    return x*f; 
+    return x*f;
 }
 
 const int maxn = 511;
@@ -8649,7 +8575,7 @@ int b[maxn][maxn];
 int c[maxn][maxn];
 
 int main(){
-    int n=read(),m=read(); 
+    int n=read(),m=read();
     for(int i=1;i&amp;lt;=n;i++){
         for(int j=1;j&amp;lt;=m;j++){
             a[i][j]=b[i][j]=c[i][j]=getchar()^48;
@@ -8698,7 +8624,7 @@ int main(){
 &lt;p&gt;&lt;code&gt;思维&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;比较暴力的一种做法, 首先大胆猜测最终所有的塔取的结果一定是通过折半获得的,而数越大时,折半时变化越大,因此其他的元素一定是先进行折半,再进行加减操作&lt;/p&gt;
 &lt;p&gt;在读入数字的时候首先将所有可能取的值存入 &lt;code&gt;std::set div2&lt;/code&gt;, 然后对每个数 $i \in div2$,求出数 $a_i$ 到 $i$ 的所需的变化次数.找到最小的即可&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt; 
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
 #include &amp;lt;limits&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
@@ -8715,11 +8641,11 @@ int main() {
   return 0;
 }
 // clang-format on
- 
+
 #define int ll
 std::vector&amp;lt;int&amp;gt; seq;
 std::set&amp;lt;int&amp;gt; div2;
- 
+
 int gain_op_times(int num, int target){
   if(num == target){
     return 0;
@@ -8736,16 +8662,16 @@ int gain_op_times(int num, int target){
   if(num / 2 &amp;gt; 0){
       res = std::min(res, (target - num/2) + 1 + times) ;
   }
- 
+
   return res;
 }
- 
+
 void solve(const std::size_t testcase) {
   int n, m;
   read(n, m);
   seq.resize(n);
   div2.clear();
- 
+
   rep(i, n) {
     int a;
     read(a);
@@ -8755,7 +8681,7 @@ void solve(const std::size_t testcase) {
       a/=2;
     }
   }
- 
+
   ll ans = std::numeric_limits&amp;lt;ll&amp;gt;::max();
   for(auto target: div2) {
     std::vector&amp;lt;int&amp;gt; diff(n);
@@ -8780,7 +8706,7 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;两个数相加，输出进行了几次进位&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;签到&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt; 
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -8796,7 +8722,7 @@ int main() {
   return 0;
 }
 // clang-format on
- 
+
 // clang-format off
 // ------------ Minify with Regex &quot;^\s*(?!#)(.*)\n&quot; -&amp;gt; &quot; &quot; ------------
 template &amp;lt;class A, class B&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::pair&amp;lt;A, B&amp;gt; const &amp;amp;a) { return s &amp;lt;&amp;lt; &quot;(&quot; &amp;lt;&amp;lt; std::get&amp;lt;0&amp;gt;(a) &amp;lt;&amp;lt; &quot;, &quot; &amp;lt;&amp;lt; std::get&amp;lt;1&amp;gt;(a) &amp;lt;&amp;lt; &quot;)&quot;; } template &amp;lt;size_t n, typename... T&amp;gt; typename std::enable_if&amp;lt;(n &amp;gt;= sizeof...(T))&amp;gt;::type print_tuple(std::ostream &amp;amp;, const std::tuple&amp;lt;T...&amp;gt; &amp;amp;) {} template &amp;lt;size_t n, typename... T&amp;gt; typename std::enable_if&amp;lt;(n &amp;lt; sizeof...(T))&amp;gt;::type print_tuple(std::ostream &amp;amp;os, const std::tuple&amp;lt;T...&amp;gt; &amp;amp;tup) { if (n != 0) os &amp;lt;&amp;lt; &quot;, &quot;; os &amp;lt;&amp;lt; std::get&amp;lt;n&amp;gt;(tup); print_tuple&amp;lt;n + 1&amp;gt;(os, tup); } template &amp;lt;typename... T&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;os, const std::tuple&amp;lt;T...&amp;gt; &amp;amp;tup) { os &amp;lt;&amp;lt; &quot;(&quot;; print_tuple&amp;lt;0&amp;gt;(os, tup); return os &amp;lt;&amp;lt; &quot;)&quot;; } template &amp;lt;class T&amp;gt; std::ostream &amp;amp;print_collection(std::ostream &amp;amp;s, T const &amp;amp;a) { s &amp;lt;&amp;lt; &apos;[&apos;; for (auto it = std::begin(a); it != std::end(a); ++it) { s &amp;lt;&amp;lt; *it; if (it != std::prev(end(a))) s &amp;lt;&amp;lt; &quot;, &quot;; } return s &amp;lt;&amp;lt; &apos;]&apos;; } template &amp;lt;class T, class U&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::map&amp;lt;T, U&amp;gt; const &amp;amp;a) { return print_collection(s, a); } template &amp;lt;class T&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::set&amp;lt;T&amp;gt; const &amp;amp;a) { return print_collection(s, a); } template &amp;lt;class T&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::vector&amp;lt;T&amp;gt; const &amp;amp;a) { return print_collection(s, a); } void __debug_out() { std::cerr &amp;lt;&amp;lt; std::endl; } template &amp;lt;typename T, class = typename std::enable_if&amp;lt;std::is_pointer&amp;lt;T&amp;gt;::value&amp;gt;::type&amp;gt; void __debug_out(T beg, T end) { std::cerr &amp;lt;&amp;lt; &apos;[&apos;; for (auto it = beg; it != end; it++) { std::cerr &amp;lt;&amp;lt; *it; if (it != std::prev(end)) { std::cerr &amp;lt;&amp;lt; &quot;, &quot;; } } std::cerr &amp;lt;&amp;lt; &apos;]&apos; &amp;lt;&amp;lt; std::endl; } template &amp;lt;typename H, typename... Tail&amp;gt; void __debug_out(H h, Tail... T) { std::cerr &amp;lt;&amp;lt; &quot; &quot; &amp;lt;&amp;lt; h; __debug_out(T...); }
@@ -8815,7 +8741,7 @@ void solve(const std::size_t testcase) {
     std::cin &amp;gt;&amp;gt; seq[i];
     std::reverse(seq[i].begin(), seq[i].end());
   }
- 
+
   ll ans = 0;
   auto mappend = [&amp;amp;ans](const std::string lhs,
                         const std::string rhs) -&amp;gt; std::string {
@@ -8841,7 +8767,7 @@ void solve(const std::size_t testcase) {
   };
   std::string mempty(&quot;&quot;);
   std::reduce(seq.begin(), seq.end(), mempty, mappend);
- 
+
   std::cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; &quot;\n&quot;;
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -8855,11 +8781,11 @@ f[i][0] = \sum_{son}{\text{ReLU}(\max{(f[son][0], f[son][1]))}}\\
 f[i][1] = \sum_{son}{\text{ReLU}(f[son][0])}
 \end{cases}
 $$&lt;/p&gt;
-&lt;p&gt;其中 $f[i][j]$ 中的$i$表示当前节点编号，$j$表示是否参加舞会&lt;/p&gt;
+&lt;p&gt;其中 $f[i][j]$ 中的$i$表示当前节点编号，$j$ 表示是否参加舞会&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;加&lt;strong&gt;ReLU&lt;/strong&gt;是因为怎么有人去了还不高兴啊&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;54 行后才是代码主体&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 #include &amp;lt;limits&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
@@ -8967,7 +8893,7 @@ f[i][0] = \sum_{son}{f[son][1]}
 \end{cases}
 $$&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -9047,7 +8973,7 @@ void solve(const std::size_t testcase) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;&lt;a href=&quot;https://atcoder.jp/contests/abc259/tasks/abc259_f?lang=en&quot;&gt;ABC259F Select Edges&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;写不出来状态转移方程&lt;/p&gt;
-&lt;p&gt;使用 $dp[i][j]$ 表示第 $i$ 个节点是否与父节点相连，当$j=0$时表示不相连，当$j=1$时表示相连。&lt;/p&gt;
+&lt;p&gt;使用 $dp[i][j]$ 表示第 $i$ 个节点是否与父节点相连，当 $j=0$ 时表示不相连，当 $j=1$ 时表示相连。&lt;/p&gt;
 &lt;p&gt;在 dfs 时进行讨论，首先肯定要优先选择 $dp[son][1] +w[i] - dp[son][0]$ 大的边进行加边。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -9060,20 +8986,20 @@ void solve(const std::size_t testcase) {
 &lt;li&gt;
 &lt;p&gt;当与父节点连接时&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;$dp[i][1] += \max (dp[v][0]， dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]-1$次&lt;/li&gt;
+&lt;li&gt;$dp[i][1] += \max (dp[v][0], dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]-1$次&lt;/li&gt;
 &lt;li&gt;$dp[i][1] += dp[v][0]$ 不能进行上述操作后&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;当不与父节点相连时&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;$dp[i][0] += \max (dp[v][0]， dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]$次&lt;/li&gt;
+&lt;li&gt;$dp[i][0] += \max (dp[v][0], dp[v][1] + w[i])$，该操作最多加$dp[v][1]+w[i]$ $d[i]$次&lt;/li&gt;
 &lt;li&gt;$dp[i][0] += dp[v][0]$ 不能进行上述操作后&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -9203,7 +9129,7 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;$dp[son] = dp[fa] + (n - dp[son]) - dp[son]$&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
 #include &amp;lt;algorithm&amp;gt;
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -9287,7 +9213,7 @@ void solve(const std::size_t testcase) {
   std::cout &amp;lt;&amp;lt; (std::max_element(dp+1, dp+1+n) - dp);
 }
 &lt;/code&gt;&lt;/pre&gt;
-</content:encoded><category>Competitive Programming</category><author>Mslxl</author></item><item><title>The 2021 ICPC Asia Shanghai Regional Programming Contest</title><link>https://blog.mslxl.com/posts/cp/the-2021-icpc-asia-shanghai-regional-programming-contest/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/cp/the-2021-icpc-asia-shanghai-regional-programming-contest/</guid><pubDate>Mon, 16 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;上海就是神仙打架&lt;/p&gt;
+</content:encoded><category>Competitive Programming</category><author>Mslxl</author></item><item><title>The 2021 ICPC Asia Shanghai Regional Programming Contest</title><link>https://blog.mslxl.com/posts/cp/2021-icpc-asia-shanghai-regional-programming-contest/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/cp/2021-icpc-asia-shanghai-regional-programming-contest/</guid><pubDate>Mon, 16 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;上海就是神仙打架&lt;/p&gt;
 &lt;p&gt;&amp;lt;table&amp;gt;
 &amp;lt;tr&amp;gt;
 &amp;lt;td&amp;gt;&lt;/p&gt;
@@ -9349,11 +9275,11 @@ int main(){
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;E - Strange Integers&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;给 $n$ 个整数 $A_1,A_2,\cdots,A_n$和整数 $k$，从中任选一些数字，要求任选的两个数字的差的绝对值大于 $k$，输出最大可选择的数字数量&lt;/p&gt;
+&lt;p&gt;给 $n$ 个整数 $A_1,A_2,\cdots,A_n$ 和整数 $k$ ，从中任选一些数字，要求任选的两个数字的差的绝对值大于 $k$ ，输出最大可选择的数字数量&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;签到&lt;/code&gt; &lt;code&gt;贪心&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#include&amp;lt;bits/stdc++.h&amp;gt;
- 
+
 #include&amp;lt;iostream&amp;gt;
 // ------------ Minify with Regex &quot;^\s*(?!#)(.*)\n&quot; -&amp;gt; &quot;$1 &quot; ------------
 template &amp;lt;class A, class B&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::pair&amp;lt;A, B&amp;gt; const &amp;amp;a) { return s &amp;lt;&amp;lt; &quot;(&quot; &amp;lt;&amp;lt; std::get&amp;lt;0&amp;gt;(a) &amp;lt;&amp;lt; &quot;, &quot; &amp;lt;&amp;lt; std::get&amp;lt;1&amp;gt;(a) &amp;lt;&amp;lt; &quot;)&quot;; } template &amp;lt;size_t n, typename... T&amp;gt; typename std::enable_if&amp;lt;(n &amp;gt;= sizeof...(T))&amp;gt;::type print_tuple(std::ostream &amp;amp;, const std::tuple&amp;lt;T...&amp;gt; &amp;amp;) {} template &amp;lt;size_t n, typename... T&amp;gt; typename std::enable_if&amp;lt;(n &amp;lt; sizeof...(T))&amp;gt;::type print_tuple(std::ostream &amp;amp;os, const std::tuple&amp;lt;T...&amp;gt; &amp;amp;tup) { if (n != 0) os &amp;lt;&amp;lt; &quot;, &quot;; os &amp;lt;&amp;lt; std::get&amp;lt;n&amp;gt;(tup); print_tuple&amp;lt;n + 1&amp;gt;(os, tup); } template &amp;lt;typename... T&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;os, const std::tuple&amp;lt;T...&amp;gt; &amp;amp;tup) { os &amp;lt;&amp;lt; &quot;(&quot;; print_tuple&amp;lt;0&amp;gt;(os, tup); return os &amp;lt;&amp;lt; &quot;)&quot;; } template &amp;lt;class T&amp;gt; std::ostream &amp;amp;print_collection(std::ostream &amp;amp;s, T const &amp;amp;a) { s &amp;lt;&amp;lt; &apos;[&apos;; for (auto it = std::begin(a); it != std::end(a); ++it) { s &amp;lt;&amp;lt; *it; if (it != std::prev(end(a))) s &amp;lt;&amp;lt; &quot;, &quot;; } return s &amp;lt;&amp;lt; &apos;]&apos;; } template &amp;lt;class T, class U&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::map&amp;lt;T, U&amp;gt; const &amp;amp;a) { return print_collection(s, a); } template &amp;lt;class T&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::set&amp;lt;T&amp;gt; const &amp;amp;a) { return print_collection(s, a); } template &amp;lt;class T&amp;gt; std::ostream &amp;amp;operator&amp;lt;&amp;lt;(std::ostream &amp;amp;s, std::vector&amp;lt;T&amp;gt; const &amp;amp;a) { return print_collection(s, a); } void __debug_out() { std::cerr &amp;lt;&amp;lt; std::endl; } template &amp;lt;typename T, class = typename std::enable_if&amp;lt;std::is_pointer&amp;lt;T&amp;gt;::value&amp;gt;::type&amp;gt; void __debug_out(T beg, T end) { std::cerr &amp;lt;&amp;lt; &apos;[&apos;; for (auto it = beg; it != end; it++) { std::cerr &amp;lt;&amp;lt; *it; if (it != std::prev(end)) { std::cerr &amp;lt;&amp;lt; &quot;, &quot;; } } std::cerr &amp;lt;&amp;lt; &apos;]&apos; &amp;lt;&amp;lt; std::endl; } template &amp;lt;typename H, typename... Tail&amp;gt; void __debug_out(H h, Tail... T) { std::cerr &amp;lt;&amp;lt; &quot; &quot; &amp;lt;&amp;lt; h; __debug_out(T...); }
@@ -9363,7 +9289,7 @@ template &amp;lt;class A, class B&amp;gt; std::ostream &amp;amp;operator&amp;lt;
 #define debug_do if(false)
 #endif
 #define debug(...) debug_do std::cerr &amp;lt;&amp;lt; &quot;[&quot; &amp;lt;&amp;lt; #__VA_ARGS__ &amp;lt;&amp;lt; &quot;]:&quot;, __debug_out(__VA_ARGS__)
- 
+
 using ll = long long;
 ll n,k;
 std::vector&amp;lt;ll&amp;gt; seq;
@@ -9375,7 +9301,7 @@ int main(){
         std::cin &amp;gt;&amp;gt; seq[i];
     }
     std::sort(seq.begin(), seq.end());
- 
+
     int r = n-1;
     int ans = 0;
     int l = n- 2;
@@ -9393,7 +9319,7 @@ int main(){
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;G - Edge Group&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;一个有 $n$ 个顶点 $n-1$条边的无向连通图，n是奇数。将其$n-1$条边分为$\frac{n-1}{2}$组，满足下列约束条件&lt;/p&gt;
+&lt;p&gt;一个有 $n$ 个顶点 $n-1$ 条边的无向连通图，n是奇数。将其 $n-1$ 条边分为 $\frac{n-1}{2}$ 组，满足下列约束条件&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;每组中只有两个边&lt;/li&gt;
 &lt;li&gt;一组中的两个边有一个公共顶点&lt;/li&gt;
@@ -9403,11 +9329,11 @@ int main(){
 &lt;p&gt;&lt;code&gt;树形dp&lt;/code&gt; &lt;code&gt;组合数学&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;首先考虑 $n$ 个边两两分组的情况。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果 $n$ 是奇数，多出来的$1$条边肯定要和父节点上的边进行配对，也就是$n-1$条边相互配对，剩下一条和父节点的配对。&lt;/li&gt;
+&lt;li&gt;如果 $n$ 是奇数，多出来的$1$条边肯定要和父节点上的边进行配对，也就是 $n-1$ 条边相互配对，剩下一条和父节点的配对。&lt;/li&gt;
 &lt;li&gt;如果 $n$ 是偶数，那么这些边就要两两相互配对&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;当 $n$ 为偶数的时候我们需要考虑两两分组有几种情况。&lt;/p&gt;
-&lt;p&gt;考虑$n=2$有1种分法，$n=4$时，新加的两个边中的一条边必须和之前的两个边之一配对，要么和另一个新加的边配对，一个有 $(2+1)\times f(1)$ 种分法。推广到 $f(n) = (n-1)\times f(n-2)$。即 $f(n) = (n-1)!!$&lt;/p&gt;
+&lt;p&gt;考虑$n=2$有1种分法，$n=4$ 时，新加的两个边中的一条边必须和之前的两个边之一配对，要么和另一个新加的边配对，一个有 $(2+1)\times f(1)$ 种分法。推广到 $f(n) = (n-1)\times f(n-2)$。即 $f(n) = (n-1)!!$&lt;/p&gt;
 &lt;p&gt;那么现在就可以得出转移方程:设 k 为子树中奇儿子的数量。&lt;/p&gt;
 &lt;p&gt;$$
 dp[i]=\begin{cases}
@@ -9419,7 +9345,7 @@ $$&lt;/p&gt;
 // Let&apos;s チャレンジ！！
 
 // clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -9478,12 +9404,12 @@ void solve(const std::size_t testcase) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;I - Steadily Growing Steam&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;有 $n$ 张牌，每张牌具有一个点数$t_i$和一个价值$v_i$共两个属性。选择 $\le k$ 张牌，将其点数扩大一倍，然后将这 $n$ 种牌分为两部分，要求两部分的点数和相等，求最大的价值和。&lt;/p&gt;
+&lt;p&gt;有 $n$ 张牌，每张牌具有一个点数 $t_i$ 和一个价值 $v_i$ 共两个属性。选择 $\le k$ 张牌，将其点数扩大一倍，然后将这 $n$ 种牌分为两部分，要求两部分的点数和相等，求最大的价值和。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;背包DP&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;先不考虑 $k$ 次扩大，只考虑 $n$ 张牌分为两部分。&lt;/p&gt;
 &lt;p&gt;可以用 $dp[i][j]$ 表示考虑前 $i$ 个物品时，$\sum t_i$ = j时所取的$\sum v_i$&lt;/p&gt;
-&lt;p&gt;考虑 $k$ 次扩大之后可以用 $dp[i][j][k]$ 表示考虑前 $i$ 个物品时，执行了$k$次扩大操作后，$\sum t_i = j$时所取的 $\sum v_i$ 值&lt;/p&gt;
+&lt;p&gt;考虑 $k$ 次扩大之后可以用 $dp[i][j][k]$ 表示考虑前 $i$ 个物品时，执行了$k$次扩大操作后，$\sum t_i = j$ 时所取的 $\sum v_i$ 值&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;不是&lt;/s&gt;很明显&lt;/p&gt;
 &lt;p&gt;$$
 dp[i][j][k] =  \begin{cases}
@@ -9496,37 +9422,36 @@ dp[i-1][j+t_i\times 2][k-1] \text{选择第} i \text{个物品，翻倍，放到
 $$&lt;/p&gt;
 &lt;p&gt;额外处理一下 $j$ 维的负数问题即可。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#include&amp;lt;bits/stdc++.h&amp;gt;
+
 using namespace std;
-const int N=103;
+const int N = 103;
 using ll = long long;
-ll f[N][3003][N],w[N],v[N];
-int main()
-{
-	memset(f,-0x3f,sizeof f);
-	f[0][1300][0]=0;
-	int n,m;
-	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
-	for(int i=1;i&amp;lt;=n;i++)
-		scanf(&quot;%lld%lld&quot;,&amp;amp;w[i],&amp;amp;v[i]);
-	for(int i=1;i&amp;lt;=n;i++)
-	for(int j=0;j&amp;lt;=m;j++)
-	for(int k=0;k&amp;lt;=2600;k++)
-	{
-		f[i][k][j]=f[i-1][k][j];
-		if(k&amp;gt;=2*v[i]&amp;amp;&amp;amp;j&amp;gt;=1)
-			f[i][k][j]=max(f[i][k][j],f[i-1][k-2*v[i]][j-1]+w[i]);
-		if(k&amp;gt;=v[i])
-			f[i][k][j]=max(f[i][k][j],f[i-1][k-v[i]][j]+w[i]);
-		if(k+2*v[i]&amp;lt;=2600&amp;amp;&amp;amp;j&amp;gt;=1)
-			f[i][k][j]=max(f[i][k][j],f[i-1][k+2*v[i]][j-1]+w[i]);
-		if(k+v[i]&amp;lt;=2600)
-			f[i][k][j]=max(f[i][k][j],f[i-1][k+v[i]][j]+w[i]);
-	}
-	ll ans=-0x3f3f3f3f;
-	for(int i=0;i&amp;lt;=m;i++)
-		ans=max(ans,f[n][1300][i]);
-	cout&amp;lt;&amp;lt;ans;
-	return 0;
+ll f[N][3003][N], w[N], v[N];
+int main() {
+  memset(f, -0x3f, sizeof f);
+  f[0][1300][0] = 0;
+  int n, m;
+  cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+  for (int i = 1; i &amp;lt;= n; i++)
+    scanf(&quot;%lld%lld&quot;, &amp;amp; w[i], &amp;amp; v[i]);
+  for (int i = 1; i &amp;lt;= n; i++)
+    for (int j = 0; j &amp;lt;= m; j++)
+      for (int k = 0; k &amp;lt;= 2600; k++) {
+        f[i][k][j] = f[i - 1][k][j];
+        if (k &amp;gt;= 2 * v[i] &amp;amp;&amp;amp; j &amp;gt;= 1)
+          f[i][k][j] = max(f[i][k][j], f[i - 1][k - 2 * v[i]][j - 1] + w[i]);
+        if (k &amp;gt;= v[i])
+          f[i][k][j] = max(f[i][k][j], f[i - 1][k - v[i]][j] + w[i]);
+        if (k + 2 * v[i] &amp;lt;= 2600 &amp;amp;&amp;amp; j &amp;gt;= 1)
+          f[i][k][j] = max(f[i][k][j], f[i - 1][k + 2 * v[i]][j - 1] + w[i]);
+        if (k + v[i] &amp;lt;= 2600)
+          f[i][k][j] = max(f[i][k][j], f[i - 1][k + v[i]][j] + w[i]);
+      }
+  ll ans = -0x3f3f3f3f;
+  for (int i = 0; i &amp;lt;= m; i++)
+    ans = max(ans, f[n][1300][i]);
+  cout &amp;lt;&amp;lt; ans;
+  return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded><category>Competitive Programming</category><category>ICPC</category><author>Mslxl</author></item><item><title>2020-2021 ACM ICPC Asia Nanjing Regional Contest</title><link>https://blog.mslxl.com/posts/cp/2020-2021-icpc-nanjing/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/cp/2020-2021-icpc-nanjing/</guid><pubDate>Sat, 14 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;table&amp;gt;
@@ -9584,8 +9509,8 @@ int main()
 &lt;p&gt;我们想要降低顶点 $1$ 的度&lt;/p&gt;
 &lt;p&gt;&amp;lt;center&amp;gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;2020njd1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;2020njd2.png&quot; alt=&quot;&quot; /&gt;
-&amp;lt;/center&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;2020njd2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;/center&amp;gt;&lt;/p&gt;
 &lt;p&gt;太难看了，我们重新整理一下&lt;/p&gt;
 &lt;p&gt;&amp;lt;center&amp;gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;2020njd3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -9617,7 +9542,7 @@ int main()
 &lt;p&gt;我们只需要将这个顶点作为根，重复上面的操作即可。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
 #include &amp;lt;algorithm&amp;gt;
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -9936,7 +9861,6 @@ int main() {
 using ld =  double;
 using ll =  long;
 
-
 ld qpow(ld a, ll b)
 {
     ld ans = 1;
@@ -9982,8 +9906,8 @@ int main() {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;H - Harmonious Rectangle&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;定义一个和谐矩阵为存在以下任意一种染色的矩阵 $1\le x_1 \lt x_2 \le n, 1 \le y_1 $
-$$
+&lt;p&gt;定义一个和谐矩阵为存在以下任意一种染色的矩阵 $1\le x_1 \lt x_2 \le n, 1 \le y_1 $&lt;/p&gt;
+&lt;p&gt;$$
 \begin{cases}
 color(x_1, y_1) = color(x_1, y_2) \\
 color(x_2, y_1) = color(x_2, y_2)
@@ -10015,13 +9939,10 @@ $$&lt;/p&gt;
                         return True
     return False
 
-
 map = [[None for i in range(9)] for j in range(9)]
-
 
 def zero(n, m):
     return [[0 for i in range(n)] for j in range(m)]
-
 
 def is_end(map) -&amp;gt; bool:
     for y in map:
@@ -10029,7 +9950,6 @@ def is_end(map) -&amp;gt; bool:
             if x != 2:
                 return False
     return True
-
 
 def inc(map):
     map[0][0] += 1
@@ -10042,7 +9962,6 @@ def inc(map):
                         map[i+1][0] += 1
                 else:
                     map[i][j+1] += 1
-
 
 with open(&quot;H.txt&quot;, &quot;w&quot;) as f:
     f.write(&quot;{&quot;)
@@ -10057,7 +9976,7 @@ with open(&quot;H.txt&quot;, &quot;w&quot;) as f:
             while True:
                 inc(map)
                 if check(map):
-                    ans += 1 
+                    ans += 1
                 if is_end(map):
                     break
             print(ans)
@@ -10183,7 +10102,6 @@ int map[][9] = {
 };
 #define int ll
 
-
 const int modd = 1e9 + 7;
 void solve() {
   int n, m;
@@ -10196,7 +10114,7 @@ void solve() {
   }
   if(m &amp;gt; 9){
     int result = qpow(3LL, n * m, modd);
-    std::cout &amp;lt;&amp;lt; result &amp;lt;&amp;lt; &quot;\n&quot;; 
+    std::cout &amp;lt;&amp;lt; result &amp;lt;&amp;lt; &quot;\n&quot;;
   }else{
     std::cout &amp;lt;&amp;lt; map[n-1][m-1]%modd &amp;lt;&amp;lt; &quot;\n&quot;;
   }
@@ -10411,7 +10329,6 @@ void dfs(int x){
       }
     }
 
-
     for(int j = 0; j &amp;lt;= size[x] + size[v]; j++){
       dp[x][j][0] = temp[j];
       temp[j] = INF;
@@ -10498,7 +10415,6 @@ const int INF = std::numeric_limits&amp;lt;int&amp;gt;::max();
 
 using PII = std::pair&amp;lt;int, int&amp;gt;; // pair of &amp;lt;int,int&amp;gt;
 using State = std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;;
-
 
 const int epsilonEdge = 0;
 
@@ -10595,7 +10511,6 @@ public:
 };
 #pragma clang diagnostic pop
 
-
 int main(){
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
@@ -10610,7 +10525,6 @@ int main(){
     std::deque&amp;lt;PII&amp;gt; deq;
     dis[0][0] = 0;
     deq.emplace_back(0,0);
-
 
     const auto m = str.length();
     while(!deq.empty()){
@@ -10653,7 +10567,6 @@ int main(){
     }
     std::cout &amp;lt;&amp;lt; dis[nfaSize - 1][m];
 
-
     return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -10673,7 +10586,7 @@ int main(){
 &lt;p&gt;根据上述内容，我们一顿爆搜就可以了，当$\max(O,E) \gt \lceil \frac{n+1}{2} \rceil$ 时直接剪掉即可。&lt;/p&gt;
 &lt;p&gt;在实际搜索中，我们没必要记录前缀和，只需要维护当前的奇偶状态即可。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -10811,7 +10724,7 @@ int main() {
 &lt;p&gt;我愿称其为玄学dp。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/meme/neko_brains_overloaded.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 #include &amp;lt;limits&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
@@ -10889,8 +10802,8 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;对于上式$\frac{2\pi(H-1)T}{HM} \mod 2\pi \le \frac{2\pi A}{HM}$ 中，我们可以将 $HM$ 看作 $2\pi$，将 (H-1) 每个时刻两个指针的变化量。&lt;/p&gt;
 &lt;p&gt;当存在 $T(H-1) mod HM \le A$ 时，一定不会有 $T(H-1) mod HM \ge HM - A$，两个部分不会同时存在重叠的答案，所以我们只需要将两部分的答案
 加起来即可。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;先看第一个式子(其中 $[P]$ 表示艾弗森括号)&lt;/strong&gt;
-$$
+&lt;p&gt;&lt;strong&gt;先看第一个式子(其中 $[P]$ 表示艾弗森括号)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$$
 \sum^{HM}_{T=0} [T(H-1) \mod HM \le A]
 $$&lt;/p&gt;
 &lt;p&gt;令 $G=\gcd(H-1, HM)$，当$G=1$时，由于 $T\in[0,HM]$，构成了一个模为 $HM$ 的完全剩余系。
@@ -10968,7 +10881,6 @@ ll FalseNegative=0, TrueNegative=0;
 ll TruePositive=0, FalsePositive=0;
 ld ans = 0, LastX;
 
-
 int main(){
     ll n;
     std::cin &amp;gt;&amp;gt; n;
@@ -11001,12 +10913,12 @@ int main(){
 &lt;h1&gt;A - Joey Takes Money&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;给一个长度为 n 的整数序列 $a_i \ge 1$&lt;/p&gt;
-&lt;p&gt;选择两个数 $a_i$ 和 $b_i$，将其替换为 $x$, $y$，其中 $x * y = a_i * a_j $，这个操作可以进行无数次&lt;/p&gt;
+&lt;p&gt;选择两个数 $a_i$ 和 $b_i$，将其替换为 $x$, $y$，其中 $x _ y = a_i _ a_j $，这个操作可以进行无数次&lt;/p&gt;
 &lt;p&gt;输出这个序列的和乘以$2022$&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;直接暴力就行:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 #include &amp;lt;functional&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
@@ -11057,7 +10969,7 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;走到 $(n,n)$，即求数列 $a_n$ 前 $n$ 项的和 $S_n = \frac{n(4n-1)(n+1)}{6}$&lt;/p&gt;
 &lt;p&gt;本来当存在取模时，除法要求逆元，但是正好题目要求答案乘以 2022，所以最终答案是 $S_n = 337n(4n-1)(n+1)$&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 void solve(const std::size_t testcase);
 #define rep(NAME, MAX) for(decltype(MAX) NAME = 0; NAME &amp;lt; MAX; NAME++)
@@ -11095,7 +11007,7 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;因此我们只需要判断有多少个子区间的异或和为平方数，最后用子区间的个数减去子区间中异或和为平方数的个数即可。&lt;/p&gt;
 &lt;p&gt;这个统计操作有一个相似的题目: &lt;a href=&quot;https://ac.nowcoder.com/acm/problem/51460&quot;&gt;Crazy Binary String&lt;/a&gt;，&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -11142,7 +11054,7 @@ void solve(const std::size_t testcase) {
 &lt;/blockquote&gt;
 &lt;p&gt;从 $l\in [1, \min(n,m)]$ 中二分 $l$，check函数用二维前缀和即可。&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;能卡着时间跑过。&lt;/s&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt; 
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -11330,7 +11242,7 @@ int main() {
 &lt;h1&gt;&lt;a href=&quot;https://www.luogu.com.cn/problem/P8871&quot;&gt;C-莲子的排版设计学&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;全读进来，粗略统计一下输出结果即可。&lt;/p&gt;
 &lt;p&gt;值得一提的是如果想要统计数字 x 是几位数字，可以用 $\lg{(x)} + 1$ 计算。&lt;/p&gt;
-&lt;p&gt;如果不愿意自己对齐空格，可以动态构造格式化字符串，然后用  &lt;code&gt;std::vformat&lt;/code&gt; 或者 &lt;code&gt;printf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果不愿意自己对齐空格，可以动态构造格式化字符串，然后用 &lt;code&gt;std::vformat&lt;/code&gt; 或者 &lt;code&gt;printf&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 #include &amp;lt;bits/stdc++.h&amp;gt;
 // clang-format off
@@ -11396,10 +11308,10 @@ int main() {
 v &amp;amp;= m - 2u &amp;amp; 3u \le m \cr
 v &amp;amp;= \frac{m-u}{2} &amp;amp; 3u \gt m
 \end{cases}
-$$
-当我们枚举 $u$ 时，即可算出 $v$ 的取值，每次枚举都能求出一个极差，枚举所有值，找出极差的最小值即可。&lt;/p&gt;
+$$&lt;/p&gt;
+&lt;p&gt;当我们枚举 $u$ 时，即可算出 $v$ 的取值，每次枚举都能求出一个极差，枚举所有值，找出极差的最小值即可。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -11461,7 +11373,7 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;由于 $k\le 4*1e18$ 可以通过二分的方式来寻找 $k$ 属于哪一组&lt;/p&gt;
 &lt;p&gt;接下来就是简单的数学题了：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -11535,7 +11447,7 @@ void solve(const std::size_t testcase) {
 &lt;p&gt;不妨看看&lt;a href=&quot;https://www.luogu.com.cn/problem/solution/P8875&quot;&gt;官方题解&lt;/a&gt;?&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;它的题面$x,y$的使用顺序正好和我相反，迷惑了半天&lt;/s&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// clang-format off
-#include &amp;lt;bits/stdc++.h&amp;gt; 
+#include &amp;lt;bits/stdc++.h&amp;gt;
 using ll = long long; using ul = unsigned long long; using ld = long double;
 template &amp;lt;typename T&amp;gt; inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){ char c;T f=1; while(!isdigit(c=getchar())) if(c==&apos;-&apos;)f=-1; x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;lt;3) + (c&amp;amp;15); x*=f; } template &amp;lt;typename T, typename... A&amp;gt; inline void read(T &amp;amp;value, A &amp;amp;..._t) { read(value), read(_t...); }
 void solve(const std::size_t testcase);
@@ -11723,7 +11635,6 @@ using ll = long long;
 using ul = unsigned long long;
 using ld = long double;
 
-
 int main() {
 #ifdef ONLINE_JUDGE
   std::ios::sync_with_stdio(false);
@@ -11872,7 +11783,7 @@ int main(){
   rep(i, n) read(seq[i]);
   std::sort(seq.begin(), seq.end());
   std::cout &amp;lt;&amp;lt; std::max(0LL, std::max(seq[n-1], n &amp;gt;= 2? seq[n-1] + seq[n-2]: 0LL));
-	return 0;
+    return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;
 </content:encoded><category>Competitive Programming</category><category>ICPC</category><author>Mslxl</author></item><item><title>Dev-C++ OpenCV 环境搭建</title><link>https://blog.mslxl.com/posts/others/opencv-env/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/opencv-env/</guid><pubDate>Fri, 14 Oct 2022 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
@@ -11944,18 +11855,18 @@ mingw32-make install
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;#include &quot;opencv2/highgui.hpp&quot;
 int main(){
-	cv::namedWindow(&quot;Test Windows&quot;);
-	cv::waitKey();
-	return 0;
+    cv::namedWindow(&quot;Test Windows&quot;);
+    cv::waitKey();
+    return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;试试这个段代码，这段代码将会创建一个空白窗口&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;prev.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </content:encoded><category>C++</category><category>OpenCV</category><author>Mslxl</author></item><item><title>使用 ts 实现 Parser 组合子</title><link>https://blog.mslxl.com/posts/others/ts-combinator/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/ts-combinator/</guid><pubDate>Fri, 07 Oct 2022 12:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Parser 组合子(Parser Combinator) 可用于实现词法分析器或者 LL 语法分析器，它的实现较为简单，但缺点是运行效率较低(尤其是在组合层数较多时)，在对性能要求不高时可采用 Parser 组合子来进行解析任务。&lt;/p&gt;
 &lt;p&gt;本文最终会实现这样的 Parser Combinator:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;let input = &quot;114514aabbcc&quot;
+&lt;pre&gt;&lt;code&gt;const input = &apos;114514aabbcc&apos;
 
-let result = parser.digit1()(input)
+const result = parser.digit1()(input)
 console.log(result)
 
 // { kind: &apos;Right&apos;, right: { first: &apos;aabbcc&apos;, second: &apos;114514&apos; } }
@@ -11965,64 +11876,63 @@ console.log(result)
 &lt;p&gt;要表示 Parser Combinator，首先要先分别表示出 parse 成功和失败的两种状态。
 本文采用了类似 &lt;code&gt;Either&lt;/code&gt; 的概念，其 Left 储存错误信息，而 Right 储存匹配成功项和剩余项。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export interface Left&amp;lt;E&amp;gt; {
-    readonly kind: &apos;Left&apos;,
-    left: E
+  readonly kind: &apos;Left&apos;
+  left: E
 }
 
 export interface Right&amp;lt;E&amp;gt; {
-    readonly kind: &apos;Right&apos;,
-    right: E
+  readonly kind: &apos;Right&apos;
+  right: E
 }
 
 export type Either&amp;lt;L, R&amp;gt; = Left&amp;lt;L&amp;gt; | Right&amp;lt;R&amp;gt;
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;为了方便对 &lt;code&gt;Either&lt;/code&gt; 的基本操作，我们添加以下代码:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;export interface Pair&amp;lt;F,S&amp;gt;{
-    first: F,
-    second: S
+&lt;pre&gt;&lt;code&gt;export interface Pair&amp;lt;F, S&amp;gt; {
+  first: F
+  second: S
 }
 
 export function left&amp;lt;L, R = never&amp;gt;(value: L): Either&amp;lt;L, R&amp;gt; {
-    return {
-        kind: &apos;Left&apos;,
-        left: value
-    }
+  return {
+    kind: &apos;Left&apos;,
+    left: value
+  }
 }
 
 export function right&amp;lt;R, L = never&amp;gt;(value: R): Either&amp;lt;L, R&amp;gt; {
-    return {
-        kind: &apos;Right&apos;,
-        right: value
-    }
+  return {
+    kind: &apos;Right&apos;,
+    right: value
+  }
 }
 
-export function is_left&amp;lt;L=never, R=never&amp;gt; (either: Either&amp;lt;L,R&amp;gt;): boolean{
-    return either.kind == &quot;Left&quot;
+export function is_left&amp;lt;L = never, R = never&amp;gt;(either: Either&amp;lt;L, R&amp;gt;): boolean {
+  return either.kind == &apos;Left&apos;
 }
-export function is_right&amp;lt;L=never, R=never&amp;gt; (either: Either&amp;lt;L,R&amp;gt;): boolean{
-    return either.kind == &quot;Right&quot;
+export function is_right&amp;lt;L = never, R = never&amp;gt;(either: Either&amp;lt;L, R&amp;gt;): boolean {
+  return either.kind == &apos;Right&apos;
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;其中 &lt;code&gt;left&lt;/code&gt; 和 &lt;code&gt;right&lt;/code&gt; 用于构造一个 &lt;code&gt;Either&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;第一个 Parser 组合子: &lt;code&gt;text&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;有了这些准备，我们就可以实现一个最简单的 Parser 组合子了。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;type Parser&amp;lt;E, L&amp;gt; = (input: String) =&amp;gt; either.Either&amp;lt;L, Pair&amp;lt;string, E&amp;gt;&amp;gt;
+&lt;pre&gt;&lt;code&gt;type Parser&amp;lt;E, L&amp;gt; = (input: string) =&amp;gt; either.Either&amp;lt;L, Pair&amp;lt;string, E&amp;gt;&amp;gt;
 
 export function text(expect: string): Parser&amp;lt;string, string&amp;gt; {
-    return function (input: string): either.Either&amp;lt;string, Pair&amp;lt;string, string&amp;gt;&amp;gt; {
-        if (input.startsWith(expect)) {
-            return either.right({ first: input.substring(expect.length), second: expect })
-        } else {
-            return either.left(expect)
-        }
+  return function (input: string): either.Either&amp;lt;string, Pair&amp;lt;string, string&amp;gt;&amp;gt; {
+    if (input.startsWith(expect)) {
+      return either.right({ first: input.substring(expect.length), second: expect })
     }
+    else {
+      return either.left(expect)
+    }
+  }
 }
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;如果 &lt;code&gt;input&lt;/code&gt; 是以 &lt;code&gt;expect&lt;/code&gt; 开头的字符串，则返回 &lt;code&gt;Right&lt;/code&gt; 表示匹配成功，否则返回 &lt;code&gt;Left&lt;/code&gt; 表示失败。这样我们就可以使用 text 来匹配特定的字符了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;let input = &quot;114514abababa&quot;
-let result = text(&quot;114&quot;)(input)
+&lt;pre&gt;&lt;code&gt;const input = &apos;114514abababa&apos;
+const result = text(&apos;114&apos;)(input)
 console.log(result)
 // { kind: &apos;Right&apos;, right: { first: &apos;514abababa&apos;, second: &apos;114&apos; } }
 &lt;/code&gt;&lt;/pre&gt;
@@ -12030,42 +11940,42 @@ console.log(result)
 &lt;h2&gt;&lt;code&gt;oneOf&lt;/code&gt; Parser 组合子&lt;/h2&gt;
 &lt;p&gt;我们在下面实现一个 &lt;code&gt;oneOf&lt;/code&gt; 组合子，它将从提供的所有 Parser 组合子中选择第一个匹配成功项并返回。&lt;/p&gt;
 &lt;p&gt;从一系列结果中选择成功项很容易让我们联想到 &lt;code&gt;Alternative&lt;/code&gt; 的性质，所以让我们先让结果 &lt;code&gt;Either&lt;/code&gt; 能进行 &lt;code&gt;Alternative&lt;/code&gt; 的运算吧(即实现 &lt;code&gt;alt&lt;/code&gt; 和 &lt;code&gt;map&lt;/code&gt; 函数)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-export function map&amp;lt;L, R, E&amp;gt;(either: Either&amp;lt;L, R&amp;gt;, block: (right: R) =&amp;gt; E): Either&amp;lt;L, E&amp;gt; {
-    if (either.kind == &apos;Right&apos;) {
-        let value = block(either.right)
-        return right(value)
-    } else {
-        return either as Either&amp;lt;L, E&amp;gt;
-    }
+&lt;pre&gt;&lt;code&gt;export function map&amp;lt;L, R, E&amp;gt;(either: Either&amp;lt;L, R&amp;gt;, block: (right: R) =&amp;gt; E): Either&amp;lt;L, E&amp;gt; {
+  if (either.kind == &apos;Right&apos;) {
+    const value = block(either.right)
+    return right(value)
+  }
+  else {
+    return either as Either&amp;lt;L, E&amp;gt;
+  }
 }
 
 export function alt&amp;lt;L, R&amp;gt;(...either: Either&amp;lt;L, R&amp;gt;[]): Either&amp;lt;L, R&amp;gt; {
-    return either.reduce((p, c) =&amp;gt; {
-        if (p.kind == &apos;Right&apos;) return p
-        else return c
-    })
+  return either.reduce((p, c) =&amp;gt; {
+    if (p.kind == &apos;Right&apos;)
+      return p
+    else return c
+  })
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;map&lt;/code&gt; 会对 &lt;code&gt;Right&lt;/code&gt; 中的元素进行操作，原样返回 &lt;code&gt;Left&lt;/code&gt; 中的元素，&lt;code&gt;alt&lt;/code&gt; 则会选择第一个 &lt;code&gt;Right&lt;/code&gt;，抛弃前面的所有 &lt;code&gt;Left&lt;/code&gt;（放在 Haskell 上也就是使 &lt;code&gt;Either&lt;/code&gt; 是 &lt;code&gt;Alternative&lt;/code&gt; 的一个实现）&lt;/p&gt;
 &lt;p&gt;有了 &lt;code&gt;alt&lt;/code&gt;， 我们很容易实现 &lt;code&gt;oneOf&lt;/code&gt; 函数。只需要从所有匹配结果中选择第一个成功项即可（即 &lt;code&gt;Right&lt;/code&gt;)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-export function oneOf&amp;lt;E, L&amp;gt;(...parsers: Parser&amp;lt;E, L&amp;gt;[]): (input: string) =&amp;gt; either.Either&amp;lt;L, Pair&amp;lt;string, E&amp;gt;&amp;gt; {
-    return function (input: string): either.Either&amp;lt;L, Pair&amp;lt;string, E&amp;gt;&amp;gt; {
-        return parsers
-            .map((p) =&amp;gt; p(input))
-            .reduce((c, p) =&amp;gt; either.alt(c, p))
-    }
+&lt;pre&gt;&lt;code&gt;export function oneOf&amp;lt;E, L&amp;gt;(...parsers: Parser&amp;lt;E, L&amp;gt;[]): (input: string) =&amp;gt; either.Either&amp;lt;L, Pair&amp;lt;string, E&amp;gt;&amp;gt; {
+  return function (input: string): either.Either&amp;lt;L, Pair&amp;lt;string, E&amp;gt;&amp;gt; {
+    return parsers
+      .map(p =&amp;gt; p(input))
+      .reduce((c, p) =&amp;gt; either.alt(c, p))
+  }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;让我们来试着匹配任一个数字:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export function digit1(): Parser&amp;lt;string, string&amp;gt; {
-    let digit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let digitParser = digit.map(i =&amp;gt; text(i.toString()))
-    return oneOf(...digitParser)
+  const digit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const digitParser = digit.map(i =&amp;gt; text(i.toString()))
+  return oneOf(...digitParser)
 }
 
-digit1()(&quot;1145aa&quot;)
+digit1()(&apos;1145aa&apos;)
 // { kind: &apos;Right&apos;, right: { first: &apos;145aa&apos;, second: &apos;1&apos; } }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;那么如果我们想要匹配一串数字怎么办？这时候就要借助 &lt;code&gt;many&lt;/code&gt; 了&lt;/p&gt;
@@ -12073,40 +11983,40 @@ digit1()(&quot;1145aa&quot;)
 &lt;p&gt;让我们先理一下 &lt;code&gt;many&lt;/code&gt; 的行为。&lt;code&gt;many&lt;/code&gt; 会不停的使用提供的组合子进行匹配，直到匹配失败为止，以数组的形式返回之前的匹配成功项。&lt;/p&gt;
 &lt;p&gt;下面是代码，&lt;s&gt;写的有点摸鱼，但是能用&lt;/s&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export function many0&amp;lt;E, L&amp;gt;(parser: Parser&amp;lt;E, L&amp;gt;): Parser&amp;lt;E[], L&amp;gt; {
-    return function (input: string): either.Either&amp;lt;L, Pair&amp;lt;string, E[]&amp;gt;&amp;gt; {
-        let result: E[] = []
-        let err: L = null
-        let success = false;
-        while (true) {
-            let v = parser(input);
-            if (either.is_left(v)) {
-                err = (v as either.Left&amp;lt;L&amp;gt;).left
-                break;
-            } else {
-                success = true;
-                let rv = v as either.Right&amp;lt;Pair&amp;lt;string, E&amp;gt;&amp;gt;
-                input = rv.right.first
-                result.push(rv.right.second)
-            }
-        }
-        if (success) {
-            return either.right({ first: input, second: result })
-        } else {
-            return either.left(err)
-        }
-
+  return function (input: string): either.Either&amp;lt;L, Pair&amp;lt;string, E[]&amp;gt;&amp;gt; {
+    const result: E[] = []
+    let err: L = null
+    let success = false
+    while (true) {
+      const v = parser(input)
+      if (either.is_left(v)) {
+        err = (v as either.Left&amp;lt;L&amp;gt;).left
+        break
+      }
+      else {
+        success = true
+        const rv = v as either.Right&amp;lt;Pair&amp;lt;string, E&amp;gt;&amp;gt;
+        input = rv.right.first
+        result.push(rv.right.second)
+      }
     }
+    if (success) {
+      return either.right({ first: input, second: result })
+    }
+    else {
+      return either.left(err)
+    }
+  }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;让我们用 &lt;code&gt;many&lt;/code&gt; 和 &lt;code&gt;oneOf&lt;/code&gt; 试着匹配一串数字，修改 &lt;code&gt;digit1&lt;/code&gt; 函数如下:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export function digit1(): Parser&amp;lt;string, string&amp;gt; {
-    let digit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let digitParser = digit.map(i =&amp;gt; text(i.toString()))
-    return many0(oneOf(...digitParser))
+  const digit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const digitParser = digit.map(i =&amp;gt; text(i.toString()))
+  return many0(oneOf(...digitParser))
 }
 
-
-digit1()(&quot;114aba&quot;)
+digit1()(&apos;114aba&apos;)
 
 // { kind: &apos;Right&apos;, right: { first: &apos;aba&apos;, second: [&apos;1&apos;, &apos;1&apos;, &apos;4&apos;] } }
 &lt;/code&gt;&lt;/pre&gt;
@@ -12114,32 +12024,32 @@ digit1()(&quot;114aba&quot;)
 &lt;p&gt;很遗憾没有办法，parser 组合子就是从最小的单位开始匹配，匹配结果理所当然的是一个一个的最小单元，但是你可以在 &lt;code&gt;many&lt;/code&gt; 中将这些元素拼起来(不推荐)，或者再创建一个用于处理匹配结果的组合子。&lt;/p&gt;
 &lt;p&gt;这里利用 &lt;code&gt;Either&lt;/code&gt; 的 &lt;code&gt;map&lt;/code&gt; 再写一个 &lt;code&gt;map&lt;/code&gt; 组合子用于处理匹配结果：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export function map&amp;lt;E, L, R&amp;gt;(parser: Parser&amp;lt;E, L&amp;gt;, block: (e: E) =&amp;gt; R): Parser&amp;lt;R, L&amp;gt; {
-    return function (input: string): either.Either&amp;lt;L, Pair&amp;lt;string, R&amp;gt;&amp;gt; {
-        return either.map(parser(input), (r) =&amp;gt; {
-            let result = block(r.second)
-            return { first: r.first, second: result }
-        })
-    }
+  return function (input: string): either.Either&amp;lt;L, Pair&amp;lt;string, R&amp;gt;&amp;gt; {
+    return either.map(parser(input), (r) =&amp;gt; {
+      const result = block(r.second)
+      return { first: r.first, second: result }
+    })
+  }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;再改造一下 &lt;code&gt;digit1&lt;/code&gt; 函数：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export function digit1(): Parser&amp;lt;string, string&amp;gt; {
-    let digit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let digitParser = digit.map(i =&amp;gt; text(i.toString()))
-    return map(many0(oneOf(...digitParser)), (e)=&amp;gt;{
-        return e.reduce((p,c)=&amp;gt;p+c)
-    })
+  const digit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const digitParser = digit.map(i =&amp;gt; text(i.toString()))
+  return map(many0(oneOf(...digitParser)), (e) =&amp;gt; {
+    return e.reduce((p, c) =&amp;gt; p + c)
+  })
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;现在我们已经可以用 &lt;code&gt;digit1&lt;/code&gt; 来愉快的匹配数字了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;digit1()(&quot;114514ababab&quot;)
+&lt;pre&gt;&lt;code&gt;digit1()(&apos;114514ababab&apos;)
 // { kind: &apos;Right&apos;, right: { first: &apos;ababab&apos;, second: &apos;114514&apos; } }
-digit1()(&quot;66ccff&quot;)
+digit1()(&apos;66ccff&apos;)
 // { kind: &apos;Right&apos;, right: { first: &apos;ccff&apos;, second: &apos;66&apos; } }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;当然， Parser 组合子还不仅如此，你还可以写出 &lt;code&gt;optional&lt;/code&gt; 等等组合子，或者写出自己想要的组合子。Parser 组合子也不止可以处理字符串，只需改动少量代码，上述代码便可处理任意序列&lt;/p&gt;
 &lt;p&gt;这里有一份 Json 解析器是用 Haskell 写的 Parser 组合子，可共参考 &lt;a href=&quot;https://github.com/mslxl/MeoAssistantArknightsCLI/blob/main/app/JsonParser.hs&quot;&gt;JsonParser.hs&lt;/a&gt;&lt;/p&gt;
-</content:encoded><category>TypeScript</category><author>Mslxl</author></item><item><title>关于消失的页面</title><link>https://blog.mslxl.com/posts/others/2022-dispearpage/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/2022-dispearpage/</guid><pubDate>Fri, 22 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;突然发现之前有些文章全是黑历史，全删了_(:3」∠)_。 再换一个简单的主题，原先的主题感觉有点喧宾夺主。&lt;/p&gt;
+</content:encoded><category>TypeScript</category><author>Mslxl</author></item><item><title>关于消失的页面</title><link>https://blog.mslxl.com/posts/others/2022-dispearpage/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/2022-dispearpage/</guid><pubDate>Fri, 22 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;突然发现之前有些文章全是黑历史，全删了*(:3」∠)*。 再换一个简单的主题，原先的主题感觉有点喧宾夺主。&lt;/p&gt;
 &lt;p&gt;内容的话有时间再整理一下。&lt;/p&gt;
 </content:encoded><author>Mslxl</author></item><item><title>使用 Doom Emacs 工作</title><link>https://blog.mslxl.com/posts/tools/doomemacs/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/tools/doomemacs/</guid><pubDate>Mon, 30 Aug 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Table of Contents&lt;/h1&gt;
 &lt;ul&gt;
@@ -12332,8 +12242,8 @@ git checkout develop
     &amp;lt;/rootfiles&amp;gt;
 &amp;lt;/container&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;重新压缩后打开后显示的章节名只有  &lt;code&gt;OEBPS/content.opf&lt;/code&gt; 指向的 ncx 的章节名称，没有&lt;code&gt;OEBPS/content1.opf&lt;/code&gt;中指向的 ncx 的章节名称
-&amp;lt;/li&amp;gt;
+&lt;p&gt;重新压缩后打开后显示的章节名只有 &lt;code&gt;OEBPS/content.opf&lt;/code&gt; 指向的 ncx 的章节名称，没有&lt;code&gt;OEBPS/content1.opf&lt;/code&gt;中指向的 ncx 的章节名称&lt;/p&gt;
+&lt;p&gt;&amp;lt;/li&amp;gt;
 &amp;lt;li&amp;gt;
 创建了一个新文件夹 &lt;code&gt;Test&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
@@ -12396,16 +12306,16 @@ git checkout develop
 &lt;p&gt;3.1版的 OCF 中并没有定义 &lt;code&gt;metadata.xml&lt;/code&gt; 中元数据的用途。也许未来会有。&lt;/p&gt;
 &lt;h3&gt;rights.xml (可选)&lt;/h3&gt;
 &lt;p&gt;该文件用于数字版权管理（DRM），用于在权利人，中间人和用户之间信任交换EPUB出版物的信息。
-3.1 版的 OCF 标准中并未规定 DRM 细细的特殊格式，但未来也许有。&lt;code&gt;rights.xml&lt;/code&gt; 的命名空间应当被显式的声明为  &lt;a href=&quot;https://www.w3.org/TR/2009/REC-xml-names-20091208/&quot;&gt;[XMLNS]&lt;/a&gt; 来避免以后的冲突。&lt;/p&gt;
+3.1 版的 OCF 标准中并未规定 DRM 细细的特殊格式，但未来也许有。&lt;code&gt;rights.xml&lt;/code&gt; 的命名空间应当被显式的声明为 &lt;a href=&quot;https://www.w3.org/TR/2009/REC-xml-names-20091208/&quot;&gt;[XMLNS]&lt;/a&gt; 来避免以后的冲突。&lt;/p&gt;
 &lt;p&gt;当 rights.xml 不存在时，版权信息可能位于其他位置。&lt;/p&gt;
 &lt;h3&gt;signatures.xml (可选)&lt;/h3&gt;
-&lt;p&gt;该文件存有 epub 的数组签名。它的内容必须符合 &lt;a href=&quot;https://www.w3.org/Submission/epub-ocf/#app-schema-signatures&quot;&gt;signatures.xml&lt;/a&gt;  schema.&lt;/p&gt;
+&lt;p&gt;该文件存有 epub 的数组签名。它的内容必须符合 &lt;a href=&quot;https://www.w3.org/Submission/epub-ocf/#app-schema-signatures&quot;&gt;signatures.xml&lt;/a&gt; schema.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;signatures.xml&lt;/code&gt; 的根节点为 &lt;code&gt;signatures&lt;/code&gt;，子节点为定义在 &lt;a href=&quot;https://www.w3.org/Submission/epub-ocf/#refXMLDSIGCORE&quot;&gt;XML DSIG Core&lt;/a&gt; 中的 &lt;code&gt;Signature&lt;/code&gt;。签名可以部分应用，也可以应用到 epub 整体，它可以使任何形式的签名数据，也就是说，不仅仅是 XML。&lt;/p&gt;
 &lt;p&gt;下面的 XML 是 signatures.xml的一个例子，它包含了一个签名，应用到了两个资源，分别是 &lt;code&gt;EPUB/book.xhtml&lt;/code&gt; 和 &lt;code&gt;EPUB/images/cover.jpeg&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;signatures xmlns=&quot;urn:oasis:names:tc:opendocument:xmlns:container&quot;&amp;gt;
     &amp;lt;Signature Id=&quot;sig&quot; xmlns=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&amp;gt;
         &amp;lt;SignedInfo&amp;gt;
-            &amp;lt;CanonicalizationMethod 
+            &amp;lt;CanonicalizationMethod
                 Algorithm=&quot;http://www.w3.org/TR/2001/REC-xml-c14n-20010315&quot;/&amp;gt;
             &amp;lt;SignatureMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#dsa-sha1&quot;/&amp;gt;
             &amp;lt;Reference URI=&quot;#Manifest1&quot;&amp;gt;
@@ -12417,31 +12327,31 @@ git checkout develop
         &amp;lt;KeyInfo&amp;gt;
             &amp;lt;KeyValue&amp;gt;
                 &amp;lt;DSAKeyValue&amp;gt;
-                    &amp;lt;P&amp;gt;…&amp;lt;/P&amp;gt;&amp;lt;Q&amp;gt;…&amp;lt;/Q&amp;gt;&amp;lt;G&amp;gt;…&amp;lt;/G&amp;gt;&amp;lt;Y&amp;gt;…&amp;lt;/Y&amp;gt; 
+                    &amp;lt;P&amp;gt;…&amp;lt;/P&amp;gt;&amp;lt;Q&amp;gt;…&amp;lt;/Q&amp;gt;&amp;lt;G&amp;gt;…&amp;lt;/G&amp;gt;&amp;lt;Y&amp;gt;…&amp;lt;/Y&amp;gt;
                 &amp;lt;/DSAKeyValue&amp;gt;
             &amp;lt;/KeyValue&amp;gt;
         &amp;lt;/KeyInfo&amp;gt;
         &amp;lt;Object&amp;gt;
             &amp;lt;Manifest Id=&quot;Manifest1&quot;&amp;gt;
-                &amp;lt;Reference URI=&quot;EPUB/book.xhtml&quot;&amp;gt;                    
-                    &amp;lt;Transforms&amp;gt;                                                
+                &amp;lt;Reference URI=&quot;EPUB/book.xhtml&quot;&amp;gt;
+                    &amp;lt;Transforms&amp;gt;
                         &amp;lt;Transform
-                            Algorithm=&quot;http://www.w3.org/TR/2001/REC-xml-c14n-20010315&quot;/&amp;gt;                        
+                            Algorithm=&quot;http://www.w3.org/TR/2001/REC-xml-c14n-20010315&quot;/&amp;gt;
                     &amp;lt;/Transforms&amp;gt;
                     &amp;lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&amp;gt;
                     &amp;lt;DigestValue&amp;gt;&amp;lt;/DigestValue&amp;gt;
                 &amp;lt;/Reference&amp;gt;
                 &amp;lt;Reference URI=&quot;EPUB/images/cover.jpeg&quot;&amp;gt;
-                    &amp;lt;Transforms&amp;gt;                                                
+                    &amp;lt;Transforms&amp;gt;
                         &amp;lt;Transform
-                            Algorithm=&quot;http://www.w3.org/TR/2001/REC-xml-c14n-20010315&quot;/&amp;gt;                        
+                            Algorithm=&quot;http://www.w3.org/TR/2001/REC-xml-c14n-20010315&quot;/&amp;gt;
                     &amp;lt;/Transforms&amp;gt;
                     &amp;lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&amp;gt;
                     &amp;lt;DigestValue&amp;gt;&amp;lt;/DigestValue&amp;gt;
                 &amp;lt;/Reference&amp;gt;
             &amp;lt;/Manifest&amp;gt;
         &amp;lt;/Object&amp;gt;
-    &amp;lt;/Signature&amp;gt; 
+    &amp;lt;/Signature&amp;gt;
 &amp;lt;/signatures&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;内容目录&lt;/h2&gt;
@@ -12454,12 +12364,12 @@ git checkout develop
 我认为只需要一个例子就能说明了。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
 &amp;lt;!DOCTYPE package PUBLIC &quot;+//ISBN 978-7-308-05831-5//DTD OEB 1.2 Package//EN&quot; &quot;http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd&quot;&amp;gt;
-&amp;lt;package unique-identifier=&quot;bookid&quot; 
-    xmlns:opf=&quot;http://www.idpf.org/2007/opf&quot; 
+&amp;lt;package unique-identifier=&quot;bookid&quot;
+    xmlns:opf=&quot;http://www.idpf.org/2007/opf&quot;
     xmlns=&quot;http://www.idpf.org/2007/opf&quot; version=&quot;2.0&quot;&amp;gt;
     &amp;lt;metadata&amp;gt;
-        &amp;lt;dc-metadata xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; 
-            xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot; 
+        &amp;lt;dc-metadata xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+            xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot;
             xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&amp;gt;
             &amp;lt;dc:title&amp;gt;龙族 I&amp;lt;/dc:title&amp;gt;
             &amp;lt;dc:creator&amp;gt;江南老贼&amp;lt;/dc:creator&amp;gt;
@@ -12611,15 +12521,13 @@ git checkout develop
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
 &amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.1//EN&quot; &quot;http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd&quot;&amp;gt;
 &amp;lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;zh-CN&quot;&amp;gt;
-&amp;lt;head&amp;gt;
+  &amp;lt;head&amp;gt;
     &amp;lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&amp;gt;
     &amp;lt;title&amp;gt;第二章&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;div&amp;gt;
-        正文
-    &amp;lt;/div&amp;gt;
-&amp;lt;/body&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;div&amp;gt;正文&amp;lt;/div&amp;gt;
+  &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;s&gt;又是你 Edge&lt;/s&gt;&lt;/p&gt;
@@ -12646,7 +12554,7 @@ git checkout develop
 &lt;p&gt;鸽派的精神也被继承下来，被后人传颂，鸽子也被称为了自由和平的象征，是传达各种美好的信物。&lt;/p&gt;
 &lt;p&gt;所以啊，鸽的行为是促进和谐发展的有助于人类进步的，它不应该被指责，一切都需要鸽的力量，它担负起拯救苍生，维护世界和平的重任。
 所以啊，有人在网上发鸽子的图片请不要见怪，这是赞美鸽子的一种行为。让我们发出和平的声音:&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;咕咕咕咕&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;咕咕咕咕&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </content:encoded><category>随笔</category><author>Mslxl</author></item><item><title>咕咕咕咕</title><link>https://blog.mslxl.com/posts/others/gugugu/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/gugugu/</guid><pubDate>Thu, 30 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;各位:&lt;/p&gt;
 &lt;p&gt;你好！&lt;/p&gt;
 &lt;p&gt;当你看到了这封信的时候，我已经离开并飞向了远方，所以这次你算是白跑了一趟了，早在通知书发下来的时候我就已经得知了一切&lt;/p&gt;
@@ -12761,7 +12669,7 @@ git checkout develop
 &lt;p&gt;对当前窗口开关全屏模式，请按 &lt;code&gt;$mod+f&lt;/code&gt; 键。&lt;/p&gt;
 &lt;p&gt;在 I3 中还有一个全局全屏模式，命令为 &lt;code&gt;fullscreen toggle global&lt;/code&gt;&lt;/p&gt;
 &lt;h3&gt;2.4. 打开其他应用程序&lt;/h3&gt;
-&lt;p&gt;除了打开终端外，默认也可以按 &lt;code&gt;$mod + d&lt;/code&gt; 来打开 &lt;code&gt;dmenu&lt;/code&gt; 的菜单。只需要键入你要打开的程序名称就可以打开该应用。&lt;code&gt;dmenu&lt;/code&gt; 将在  &lt;code&gt;$PATH&lt;/code&gt; 中寻找应用程序。&lt;/p&gt;
+&lt;p&gt;除了打开终端外，默认也可以按 &lt;code&gt;$mod + d&lt;/code&gt; 来打开 &lt;code&gt;dmenu&lt;/code&gt; 的菜单。只需要键入你要打开的程序名称就可以打开该应用。&lt;code&gt;dmenu&lt;/code&gt; 将在 &lt;code&gt;$PATH&lt;/code&gt; 中寻找应用程序。&lt;/p&gt;
 &lt;p&gt;此外，如果您的应用程序非常频繁地打开，则可以创建用于直接启动应用程序的键绑定。详情请参阅章节 &lt;a href=&quot;https://i3wm.org/docs/userguide.html#configuring&quot;&gt;配置&lt;/a&gt;。&lt;/p&gt;
 &lt;h3&gt;2.5. 关闭窗口&lt;/h3&gt;
 &lt;p&gt;如果一个应用程序不提供关闭机制（大多数应用提供一个菜单或者像是 &lt;code&gt;Control + w &lt;/code&gt; 的快捷键），你可以按 &lt;code&gt;$mod + Shift + q&lt;/code&gt; 来关闭窗口。对于支持 WM_DELETE 协议的应用程序，这将正确地关闭应用程序（保存或执行其他清理操作）。如果应用程序不支持 WM_DELETE 协议，则 X 服务器将关闭窗口，并且之后的行为取决于应用程序。&lt;/p&gt;
@@ -12948,7 +12856,7 @@ git checkout develop
 &lt;p&gt;啊啊，那样的世界确实被创造出来了，在等着你和休比呢。&lt;/p&gt;
 &lt;p&gt;但是&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;引きよせ合う 二人はどこへ&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;引きよせ合う 二人はどこへ&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </content:encoded><category>随笔</category><author>Mslxl</author></item><item><title>编译原理：绪论 —— 中间代码生成和编译器后端</title><link>https://blog.mslxl.com/posts/others/n5/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n5/</guid><pubDate>Wed, 27 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;中间代码生成&lt;/h2&gt;
 &lt;p&gt;源程序的中间代码表现可以有多种形式，常见的是 &lt;em&gt;三地址码 (Three-address Code)&lt;/em&gt; 和 &lt;em&gt;语法结构树 (Syntax Trees)&lt;/em&gt;，语法结构树简称语法树。在这里我们只介绍一下三地址码。&lt;/p&gt;
@@ -13049,7 +12957,7 @@ x = ++z
 &lt;td&gt;(&lt;code&gt;op&lt;/code&gt; , y , _ , x )&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;x  &lt;code&gt;=&lt;/code&gt; y&lt;/td&gt;
+&lt;td&gt;x &lt;code&gt;=&lt;/code&gt; y&lt;/td&gt;
 &lt;td&gt;(&lt;code&gt;=&lt;/code&gt; , y , _ , x )&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -13095,14 +13003,14 @@ x = ++z
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;在四元式中，第二个分量和第三个分量为源操作数，第四个分量为目标操作数，如果第二个源操作数为空，那么第三个分量也为空。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;三地址指令序列唯一确定了运算完成的顺序&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;三地址指令序列唯一确定了运算完成的顺序&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Example : 中间代码生成&lt;/h3&gt;
 &lt;p&gt;假入输入这样一个程序片段:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;while a &amp;lt; b do
-	if c &amp;lt; 5 then
-		while x &amp;gt; y do
-			z = x + 1;
-	else x = y;
+    if c &amp;lt; 5 then
+        while x &amp;gt; y do
+            z = x + 1;
+    else x = y;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;那么它对应的分析树就是这样的(敲这棵树累死我了):&lt;/p&gt;
 &lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
@@ -13150,8 +13058,8 @@ S3 --- Text20[&quot;=&quot;]
 S3 --- E10[E]
 S3 --- Text21[&quot;;&quot;]
 E10 --- Text22[&quot;id ( y )&quot;]
-&amp;lt;/pre&amp;gt;
-他对应的中间代码应该是这样的:&lt;/p&gt;
+&amp;lt;/pre&amp;gt;&lt;/p&gt;
+&lt;p&gt;他对应的中间代码应该是这样的:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;100: ( j&amp;lt; , a  , b , 102 )
 101: ( j  , -  , - , 112 )
 102: ( j&amp;lt; , c  , 5 , 104 )
@@ -13175,7 +13083,6 @@ E10 --- Text22[&quot;id ( y )&quot;]
 &lt;h2&gt;代码优化&lt;/h2&gt;
 &lt;p&gt;代码优化就是为改进代码所进行的&lt;strong&gt;等价的程序变换&lt;/strong&gt;，使其拥有更好的时空占用。&lt;/p&gt;
 &lt;p&gt;代码优化分为&lt;strong&gt;机器无关代码优化&lt;/strong&gt;和&lt;strong&gt;机器相关代码优化&lt;/strong&gt;，前者是在中间代码中优化，后者是对目标语言进行优化，优化的内容包括很多方面，比如说自动识别代码中的重复运算，并将他们删除，再比如将代价较高的运算替换为代价较低的等价的运算等等。&lt;/p&gt;
-&lt;hr /&gt;
 &lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
 graph TD
 Start-- 字符流 --&amp;gt;词法分析器
@@ -13202,9 +13109,9 @@ Start-- 字符流 --&amp;gt;词法分析器
 &lt;/ol&gt;
 &lt;h5&gt;关于 3 举个例子：&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;begin
-	real x[8]
-	integer i,j;
-	...
+    real x[8]
+    integer i,j;
+    ...
 end
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;首先声明了一个实型数组&lt;code&gt;x&lt;/code&gt; ，因此 &lt;code&gt;x&lt;/code&gt; 的相对地址就是 &lt;code&gt;0&lt;/code&gt;。我们假设一个实型变量占用 8 个字节，因为这个实型数组包含 8 个元素，因此他就占用了 64 个字节，所以接下来声明的变量 &lt;code&gt;i&lt;/code&gt; 的相对地址就是 64,我们再假设一个整形变量占用 4 个字节，那么接下来声明的变量 &lt;code&gt;j&lt;/code&gt; 的相对地址就是 &lt;em&gt;64 + 4 = 68&lt;/em&gt; ，以此类推。&lt;/p&gt;
@@ -13239,8 +13146,7 @@ end
 |64|i|
 |68|j|&lt;/p&gt;
 &lt;h4&gt;对过程语义分析的任务&lt;/h4&gt;
-&lt;p&gt;对于过程来说，作用有
-0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等&lt;/p&gt;
+&lt;p&gt;对于过程来说，作用有 0. 参数和返回值信息 ： 包含了参数个数、参数类型、参数传递方式、返回值类型等等&lt;/p&gt;
 &lt;h4&gt;符号表 (Symbol Table)&lt;/h4&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -13329,8 +13235,8 @@ Start-- 字符流 --&amp;gt;词法分析器
 &lt;p&gt;经过词法扫描后会得到这样的一个 Token 序列:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;id,position&amp;gt; &amp;lt;=&amp;gt; &amp;lt;id,initial&amp;gt; &amp;lt;+&amp;gt; &amp;lt;id,rate&amp;gt; &amp;lt;*&amp;gt; &amp;lt;num,60&amp;gt; &amp;lt;;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;它对应的分析树应该就是这样的:
-&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
+&lt;p&gt;它对应的分析树应该就是这样的:&lt;/p&gt;
+&lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
 graph TD
 赋值语句---A[&quot;标识符 (position)&quot;]
 赋值语句---B[&quot;=&quot;]
@@ -13402,7 +13308,7 @@ Start-- 字符流 --&amp;gt;词法分析器
 &lt;h2&gt;编译器在语言处理中的位置&lt;/h2&gt;
 &lt;p&gt;在变异中，除了编译器，我们还需要其他的一些东西。&lt;/p&gt;
 &lt;p&gt;首先，我们需要&lt;strong&gt;预处理器 (Preprocessor)&lt;/strong&gt;，源程序可能会被分割成模块，储存在不同的文件中，预处理器则会把他们 &lt;strong&gt;聚合&lt;/strong&gt; 在一起，并把其中称之为宏的缩写语句展开。&lt;/p&gt;
-&lt;p&gt;之后，被处理过的源程序则会通过 &lt;strong&gt;编译器&lt;/strong&gt; 和 &lt;strong&gt;汇编器(Assembler)&lt;/strong&gt; 生成可重定位 (Relocatable) 的机器代码，可重定位代码在内存中存放的起始位置 &lt;em&gt;L&lt;/em&gt; 是不固定的，代码中的所有地址都是相对于这个 &lt;em&gt;L&lt;/em&gt; 的相对地址，$起始地址 + 相对地址 = 绝对地址$，因为代码中的内存地址都是相对的，所以，我们需要&lt;strong&gt;加载器 (Loader)&lt;/strong&gt; 来修改可重定位地址，将修改后的指令和数据放在内存中适当的位置，还有一种情况使用的是 &lt;strong&gt;链接器 (Linker)&lt;/strong&gt; 而不是加载器，因为大型程序会被分割成很多部分，在这种情况下，链接器会将生成可重定位的机器代码与库文件进行链接，从而生成可执行代码，同时链接器还会解决&lt;em&gt;外部内存地址&lt;/em&gt;问题，所谓外部内存地址，就是指一个文件中的代码，可能会引用另一个文件中的对象或者过程，这些被引用的对象或者过程的地址，相对于这个文件来说就是&lt;em&gt;外部地址&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;之后，被处理过的源程序则会通过 &lt;strong&gt;编译器&lt;/strong&gt; 和 &lt;strong&gt;汇编器(Assembler)&lt;/strong&gt; 生成可重定位 (Relocatable) 的机器代码，可重定位代码在内存中存放的起始位置 &lt;em&gt;L&lt;/em&gt; 是不固定的，代码中的所有地址都是相对于这个 &lt;em&gt;L&lt;/em&gt; 的相对地址，$\text{起始地址} + \text{相对地址} = \text{绝对地址}$，因为代码中的内存地址都是相对的，所以，我们需要&lt;strong&gt;加载器 (Loader)&lt;/strong&gt; 来修改可重定位地址，将修改后的指令和数据放在内存中适当的位置，还有一种情况使用的是 &lt;strong&gt;链接器 (Linker)&lt;/strong&gt; 而不是加载器，因为大型程序会被分割成很多部分，在这种情况下，链接器会将生成可重定位的机器代码与库文件进行链接，从而生成可执行代码，同时链接器还会解决&lt;em&gt;外部内存地址&lt;/em&gt;问题，所谓外部内存地址，就是指一个文件中的代码，可能会引用另一个文件中的对象或者过程，这些被引用的对象或者过程的地址，相对于这个文件来说就是&lt;em&gt;外部地址&lt;/em&gt;。&lt;/p&gt;
 &lt;p&gt;一个完整的系统大致就是这样&lt;/p&gt;
 &lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
 graph TD
@@ -13417,48 +13323,13 @@ Start-- 源程序 --&amp;gt;预处理器
 &lt;pre&gt;&lt;code&gt;token: &amp;lt;种别码,属性值&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;token 是一个二元组，其中第一个分量种别码用来表示单词的种别，就比如人说的自然语言中都有词性,程序设计语言也有这些东西，他们大体可分为五类:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;单词类型&lt;/th&gt;
-&lt;th&gt;种别&lt;/th&gt;
-&lt;th&gt;种别码&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;关键字&lt;/td&gt;
-&lt;td&gt;program、if、else、then、...&lt;/td&gt;
-&lt;td&gt;一词一码&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;标识符&lt;/td&gt;
-&lt;td&gt;变量名、数组名、记录名、过程名、...&lt;/td&gt;
-&lt;td&gt;多词一码&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;常量&lt;/td&gt;
-&lt;td&gt;整型、浮点型、字符型、布尔型、...&lt;/td&gt;
-&lt;td&gt;一型一码&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;运算符&lt;/td&gt;
-&lt;td&gt;算术 (+ - * / ++ --）&amp;lt;/br&amp;gt;关系 ( &amp;gt; &amp;lt; == != &amp;gt;= &amp;lt;= ) &amp;lt;/br&amp;gt; 逻辑 (&amp;amp;&lt;/td&gt;
-&lt;td&gt;~ )&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;5&lt;/td&gt;
-&lt;td&gt;界限符&lt;/td&gt;
-&lt;td&gt;; ( ) = { } ...&lt;/td&gt;
-&lt;td&gt;一词一码&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;|     | 单词类型 |                               种别                                |  种别码  |
+| :-: | :------: | :---------------------------------------------------------------: | :------: | -------------------------------- |
+|  1  |  关键字  |                   program、if、else、then、...                    | 一词一码 |
+|  2  |  标识符  |                变量名、数组名、记录名、过程名、...                | 多词一码 |
+|  3  |   常量   |                 整型、浮点型、字符型、布尔型、...                 | 一型一码 |
+|  4  |  运算符  | 算术 (+ - * / ++ --）&amp;lt;/br&amp;gt;关系 ( &amp;gt; &amp;lt; == != &amp;gt;= &amp;lt;= ) &amp;lt;/br&amp;gt; 逻辑 (&amp;amp; |   ~ )    | 一词一码 &amp;lt;/br&amp;gt; 或 &amp;lt;/br&amp;gt; 一型一码 |
+|  5  |  界限符  |                          ; ( ) = { } ...                          | 一词一码 |&lt;/p&gt;
 &lt;p&gt;在 &lt;em&gt;1&lt;/em&gt; 中，因为我们每个关键字都是确定的，所以我们为每一个关键字分配一个种别码，也就是一词一码。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;2&lt;/em&gt; 是标识符，他是程序员在编程中为对象等起的名字，由于标识符是一个开放的集合，我们在事先并不能确认到底有那些标识符，因此我们将所有的标识符都作为一个单词并分配同一个种别码，也就是多词一码，为了区分每个标识符，我们使用 token 的第二个分量属性值来储存不同标识符具体的字面值&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;3&lt;/em&gt; 是常量，常量与标识符类似，也是一个开放型集合，但是不同类型的常量他们的构成类型是不同的，因此我们可以给每个不同类型的常量分配一个种别码，也就是也就是一型一码，为了区分不同的常量，我们也是使用 token 的第二个分量来存放每个常量具体的值&lt;/p&gt;
@@ -13466,7 +13337,7 @@ Start-- 源程序 --&amp;gt;预处理器
 &lt;h3&gt;Example&lt;/h3&gt;
 &lt;p&gt;根据以上的分配原则，我们可以看一个例子&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;while (value != 100){
-	num++;
+    num++;
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;对以上代码进行分析，我们可以得到这样的一个 token 序列&lt;/p&gt;
