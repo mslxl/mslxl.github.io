@@ -56,7 +56,7 @@
     "@unocss/eslint-plugin": "^0.62.4",
     "@unocss/preset-attributify": "^0.62.4",
     "@unocss/reset": "^0.62.4",
-    "@unocss/transformer-directives": "^0.62.4",
+    "@unocss/transformer-directives": "^65.4.3",
     "astro-eslint-parser": "^1.1.0",
     "bumpp": "^9.10.2",
     "changelogen": "^0.5.7",
