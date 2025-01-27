@@ -1,0 +1,18 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.astro",
+    "src/**/*.ts",
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": ["dist"]
+}
