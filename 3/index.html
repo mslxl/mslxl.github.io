@@ -10,95 +10,165 @@
 })();</script> <link rel="stylesheet" href="/_astro/_page_.CZH6Yv9J.css">
 <style>p[data-astro-cid-gcn2mc3v]{font-size:.75rem;font-weight:700}html.animation-prepared .transition-swup-header[data-astro-cid-e5lvscu2],html.animation-prepared .transition-swup-footer[data-astro-cid-e5lvscu2]{animation:fade-in-down 1s linear 1}@media (min-width: 1024px){html.animation-prepared .transition-swup-header[data-astro-cid-e5lvscu2],html.animation-prepared .transition-swup-footer[data-astro-cid-e5lvscu2]{animation-name:fade-in-left}}html.animation-prepared .transition-swup-main[data-astro-cid-e5lvscu2]{animation:fade-in-down 1s linear 1}@keyframes fade-in-down{0%{transform:translateY(-1rem);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes fade-in-left{0%{opacity:0;transform:translate(1rem)}to{opacity:1;transform:translate(0)}}html.is-animating .transition-swup-main[data-astro-cid-e5lvscu2]{opacity:0;transform:translateY(-1rem)}html.is-leaving .transition-swup-main[data-astro-cid-e5lvscu2]{opacity:0;transform:translateY(1rem)}.transition-swup-main[data-astro-cid-e5lvscu2]{transition-duration:.5s;transition-timing-function:linear;transform:translateY(0);opacity:1}
 </style>
-<link rel="stylesheet" href="/_astro/index.Czb_Dx_V.css"><script type="module" src="/_astro/page.9zgADcL1.js"></script></head> <body>   <div class="h-100vh max-w-6xl min-w-390px mx-a grid-gap-x-28" p="7.5 lg:y-0 lg:x-20" lg="grid cols-[3fr_1fr] rows-[1fr_9rem]" data-astro-cid-e5lvscu2> <header class="transition-swup-header flex flex-col gap-2.5" m="7.5 lg:x-0 lg:t-20 lg:b-4" lg="row-1-2 col-2-3 justify-between items-start" data-astro-cid-e5lvscu2> <hgroup lg="write-vertical-right items-start b-l-2px b-l-primary-solid text-left" flex="~ col gap-2.5" class="cursor-pointer text-center duration-800 ease-in-out"> <a class="not-underline-hover duration-800 ease-in-out" lg:p="x-2.5 b-12 hover:t-3.75 hover:b-8.75" hover:lg=" bg-primary color-background" href="/"> <h3 class="text-5 font-extrabold font-header">Mslxl&#39;s Blog</h3> <h1 class="text-8 font-extrabold font-header">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" flex="~ col gap-4"> <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center"> <li> <a class="" href="/"> 文章 </a> </li><li> <a class="" href="/archive"> 归档 </a> </li><li> <a class="" href="/categories"> 分类 </a> </li><li> <a class="" href="/tomodachi"> 友人 </a> </li><li> <a class="" href="/about"> 关于 </a> </li> </ul> <ul flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl/" target="_blank" title="github" class="not-underline-hover inline-flex items-center"> <span class="i-mdi-github w-6 h-6">github</span> </a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="not-underline-hover inline-flex items-center"> <span class="i-mdi-rss w-6 h-6">rss</span> </a> </li><li> <a href="https://mastodon.social/@mslxl" target="_blank" title="mastodon" class="not-underline-hover inline-flex items-center"> <span class="i-mdi-mastodon w-6 h-6">mastodon</span> </a> </li> </ul> </nav> </header> <main class="transition-swup-main link-fill overflow-y-scroll scrollbar-hide outline-none" lg="row-1-3 col-1-2 py-20 " data-astro-cid-e5lvscu2>  <section contain-layout flex="~ col gap-3.5"> <article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/os/convert-nix/">皈依 NixOS</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-09-14</time> <a href="/categories/Linux">
-# Linux </a><a href="/categories/NixOS">
-# NixOS </a> </div> </header>  <p class="line-clamp-4">用了几天时间折腾 NixOS，现在大概是能满足日常日常使用了，几天使用下来体验还算不错。这也不是我第一次使用 Linux 发行版了，但如果不是因为事先了解，初次使用肯定也是发愣的。
-不同于其他 Linux 发行版，NixOS 并没有遵守 FHS 标准，也就是说其他发行版的经验很难在 NixOS 同用。在刚安装时最明显的特点有两个：
+<link rel="stylesheet" href="/_astro/index.Czb_Dx_V.css"><script type="module" src="/_astro/page.9zgADcL1.js"></script></head> <body>   <div class="h-100vh max-w-6xl min-w-390px mx-a grid-gap-x-28" p="7.5 lg:y-0 lg:x-20" lg="grid cols-[3fr_1fr] rows-[1fr_9rem]" data-astro-cid-e5lvscu2> <header class="transition-swup-header flex flex-col gap-2.5" m="7.5 lg:x-0 lg:t-20 lg:b-4" lg="row-1-2 col-2-3 justify-between items-start" data-astro-cid-e5lvscu2> <hgroup lg="write-vertical-right items-start b-l-2px b-l-primary-solid text-left" flex="~ col gap-2.5" class="cursor-pointer text-center duration-800 ease-in-out"> <a class="not-underline-hover duration-800 ease-in-out" lg:p="x-2.5 b-12 hover:t-3.75 hover:b-8.75" hover:lg=" bg-primary color-background" href="/"> <h3 class="text-5 font-extrabold font-header">Mslxl&#39;s Blog</h3> <h1 class="text-8 font-extrabold font-header">Integrate Life</h1> </a> </hgroup> <nav class="text-center font-bold" flex="~ col gap-4"> <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center"> <li> <a class="" href="/"> 文章 </a> </li><li> <a class="" href="/archive"> 归档 </a> </li><li> <a class="" href="/categories"> 分类 </a> </li><li> <a class="" href="/tomodachi"> 友人 </a> </li><li> <a class="" href="/about"> 关于 </a> </li> </ul> <ul flex="~ row gap-1 justify-center"> <li> <a href="https://github.com/mslxl/" target="_blank" title="github" class="not-underline-hover inline-flex items-center"> <span class="i-mdi-github w-6 h-6">github</span> </a> </li><li> <a href="/atom.xml" target="_blank" title="rss" class="not-underline-hover inline-flex items-center"> <span class="i-mdi-rss w-6 h-6">rss</span> </a> </li><li> <a href="https://mastodon.social/@mslxl" target="_blank" title="mastodon" class="not-underline-hover inline-flex items-center"> <span class="i-mdi-mastodon w-6 h-6">mastodon</span> </a> </li> </ul> </nav> </header> <main class="transition-swup-main link-fill overflow-y-scroll scrollbar-hide outline-none" lg="row-1-3 col-1-2 py-20 " data-astro-cid-e5lvscu2>  <section contain-layout flex="~ col gap-3.5"> <article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2023sdcpc/">2023 SDCPC 赛后回顾</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-06-05</time> <a href="/categories/suibi">
+# 随笔 </a><a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">周围的人都写了篇小作文, 那我也跟按照圈子里的惯例写个小流水帐吧,文笔不好,算给日后的自己留个纪念吧
+首先恭喜我校2银3铜, 听说是校史上就牌子数量的的最好成绩. 其次恭喜我自己终于拿到了XCPC上的第一块牌子(算是弥补了去年打铁的遗憾, RK55 也算是一个好开始吧).
+这次的队伍算是重组后的队伍, 前前后后自行进行了几场训练, 也参加了几场学校里的自行组织的几场训练, 现在回想起来这些确实给我们队伍的合作提供了很大的帮助. 十分感谢学校提供的训练场地(尽管有点难以描述)和 yrh lmy 等人的帮助. 不同于 lmy 的队伍, 我们队其实是到学校统一组织训练的时候才知道出题人是 SUA 并开始专门挑 SUA 的题目训练, 如果不是因为 lmy 的消息和 yrh 及学校老师组织的训练, 我们队伍这次比赛大概并不会这么轻松愉快.
+day(-9) 突然抗原阳了,在此之前我还没阳过, 在家里烧</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2021-shandong-provincial-collegiate-programming-contest/">2021 Shandong Provincial Collegiate Programming Contest</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-03-04</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">比赛链接
+C - Cat virus
 
-系统配置目录（/etc）下在文件都是只读的
-/bin/sh 目录只有 sh
+对于一颗树, 它的节点可以被染为黑色或者白色. 如果一个节点是白色,那么她的子节点可以是白色,也可以是黑色. 如果这个节点是黑色, 那么她的子节点一定是黑色. 现在输入一个数字 $2\le K \le 2\times 10^{18}$, 根据上述方式构造一棵数, 使之不同的染色方式有 $K$ 种
 
-NixOS 几乎将所有的文件存储在 /nix/store 下，而后通过链接的方式放到对应的文件夹下，而 /nix/store 又是通过 /etc/nixos/configuration.nix 配置获得的。用户也是通过修改 configuration.nix 文件来修改系统配置甚至是单个用户的配置，在修改后使用 nixos-rebuild switch 命令应用新配置。这条命令实际上</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/cf1867/">Codeforces Round 897 (Div. 2)</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-09-12</time> <a href="/categories/Codeforces">
-# Codeforces </a><a href="/categories/Competitive Programming">
-# Competitive Programming </a> </div> </header>  <p class="line-clamp-4">打了一半困了，提前下班了
-A. green_gold_dog, array and permutation
+思维 构造
+刚开始做的时候没带脑子,直接构造了一个 $(1,2), (2,3) \ldots (n-1, n)$,结果狠狠的 TLE
+反向思考,当 $x$ 为白色的时候,它的父节点一定也为白色,而当这个节点是黑色的时候,它的父节点可以是白色,也可以是黑色.
+设节点 a 及其子树有 $n$ 中染色方式, 增加一节点 b 连接到 a, 有以下情况:
 
-给一个长度为 $n$ 的数组 $a$，找到一个长度为 $n$ 的排列 $b$，使之 $a_i - b_i$ 的值不同的数量最大
+当 a 为黑色时, 所有节点都为黑色, 1 种染色方式
+当 a 为白色, b 为黑色时, 有 $n-1$ 中染</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2022-international-collegiate-programming-contest-jinan-site/">2022 International Collegiate Programming Contest Jinan Site</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-01-28</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">Gym-104076
+A - Tower
 
-离散化 贪心
-看样例大胆猜测将数组中第 $k$ 大的元素和排列中的 $n-k$ 放在一起，可以使 $a_i - b_i$ 的值不同的数量最大
-如果用最大的数减去最小的数，第二大的数减去第二小的数，依次类推，所获得的值应该是依次递减的
-因为 $a_1 \ge a_2 \ge a_3 \ge \ldots \ge a_n$ ，而 $b_1 &amp;lt; b_2 &amp;lt; \ldots &amp;lt; b_n$，则 $-b_1 &amp;gt; -b_2 &amp;gt; \ldots &amp;gt; -b_n$，最终结果 $a_1 - b_1 &amp;gt; a_2 - b_2 &amp;gt; \ld</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/others/go-speedrun/">速通 Go 语言基础</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-09-08</time> <a href="/categories/Go">
-# Go </a> </div> </header>  <p class="line-clamp-4">马上就退役了，要为下一步做点准备了。先速通一下 GO 语言基础，本文章参考了 GO TOUR 和字节的青训营课程，通过列出一些代码来快速上手 GO 语言。
-阅读可能要需要具有其他语言的编程经验
-语法
-hello,world
-package main
+有 $n$ 个塔, 每个塔的高度为 $a_i$. 首先先移除其中 $m$ 个塔, 然后可以进行以下操作:
 
-import &quot;fmt&quot;
+将一个塔的高度 $a_i$ 加 1
+将一个塔的高度 $a_i$ 减 1
+将一个塔的高度 $a_i$ 折半,结果向下取整
 
-func main() {
-    fmt.Println(&quot;hello, world&quot;)
-}
+操作中,塔的高度不允许取 $0$, 现在要使剩下的 $n-m$ 个塔的高度相同, 问最小的操作次数.
 
-程序总是从 main 包下的 main 函数开始执行
-import 语句可以导入包，除了使用 import 语言单个单个导入外，还可以使用分组导入
-import (
-    &quot;fmt&quot;
-    &quot;math&quot;
-)
+思维
+比较暴力的一种做法, 首先大胆猜测最终所有的塔取的结果一定是通过折半获得的,而数越大时,折半时变化越大,因此其他的元素一定是先进行折半,再进行加减操作
+在读入数字的时候首先将所有可能取的值存入 std::set div2, 然后对每个数 $i \in div2$,求出数 $a_i$ 到 $i$ 的所需的变化次数.找到最小的即可
+#include &amp;lt;bits/stdc++.h&amp;gt;
+#include &amp;lt</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/treedp/">树形 DP 练习</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-01-18</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a> </div> </header>  <p class="line-clamp-4">前几天基本每场都遇到树形DP，趁此熟悉抓紧练练
+在网上找了个树形DP专项
+P1352: 没有上司的舞会
+热个身
+$$
+\begin{cases}
+f[i][0] = \sum_{son}{\text{ReLU}(\max{(f[son][0], f[son][1]))}}\\
+f[i][1] = \sum_{son}{\text{ReLU}(f[son][0])}
+\end{cases}
+$$
+其中 $f[i][j]$ 中的$i$表示当前节点编号，$j$ 表示是否参加舞会
+加ReLU是因为怎么有人去了还不高兴啊
+54 行后才是代码主体
+// clang-format off
+#include &amp;lt;bits/stdc++.h&amp;gt;
+#include &amp;lt;limits&amp;gt;
+using ll = long long; using ul = unsigned long long; u</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2021-icpc-asia-shanghai-regional-programming-contest/">The 2021 ICPC Asia Shanghai Regional Programming Contest</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-01-16</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">上海就是神仙打架
+&amp;lt;table&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td&amp;gt;
+题目链接
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;center&amp;gt;
+官方题解
+&amp;lt;/center&amp;gt;
+竟然是ppt，他真的，我哭死
+&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+D - Strange Fractions
 
-函数
-func add(x int, y int) int {
-    return x + y
-}
-// 缩写
-func minus(x, y int) int {
-    return x - y
-}
+给出整数$p$和$q$，找到两个正整数满足$\frac{p}{q} = \frac{a}{b} + \frac{b}{a}$
 
-</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/cf1863/">Pinely Round 2 (Div. 1 + Div. 2) A-E</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-08-31</time> <a href="/categories/Codeforces">
-# Codeforces </a><a href="/categories/Competitive Programming">
-# Competitive Programming </a> </div> </header>  <p class="line-clamp-4">A. Channel
+数学
+使用换元法，令$y=\frac{p}{q}, x=\frac{a}{b}$
+则原式等于$y=x + \frac{1}{x}$
+即 $x^2 - xy + 1 = 0$
+题目中已经给了 $y$，我们只需要找到其中一个 $x$即可。
+当 $\Delta=y^2-4\lt 0$时，输出 Imposs</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2020-2021-icpc-nanjing/">2020-2021 ACM ICPC Asia Nanjing Regional Contest</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-01-14</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">&amp;lt;table&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td&amp;gt;
+题目链接
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+官方题解
+&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+A - Ah, It’s Yesterday Once More
 
-有 $n$ 个人订阅了一个频道，当前在线 $a$ 人，收到了 $q$ 个上/下线通知
-上下线通知不包含上线的用户信息。在最开始的时候 Petya 发了一个视频，请判断是否所有的订阅用户都能看到这个视频
+构造一张二维地图，仅有墙壁和空白组成。在每个空白处都有一个人，每个人在接下来的 50000 步中将向一个方向随机移动。
+要求构造的地图必须小于 $20\times 20$，至少有两个空白，每个空白之前必须是相互可达的，不能有环，50000步后所有的人$25%$的可能性不在同一个格子。
 
-模拟
-如果所有的人在同一时刻在线，那么所有用户都能看到
-如果在线人数和收到上线通知的次数和大于等于 $n$，则可能都能看见
-void solve() {
-  int n, a, q;
-  read(n, a, q);
-  std::string s;
-  std::cin &amp;gt;&amp;gt; s;
-  if(a == n){
-    std::cout &amp;lt;&amp;lt; &quot;YES&quot;;
-    return;
-  }
-  int online = a;
-  for(int i = 0; i &amp;lt; q; i++){
-    if(s[i] == &#39;+&#39;){
-     </p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/games-logs1/">Game tag 板刷网瘾记录</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-08-30</time> <a href="/categories/Competitive Programming">
+构造
+很奇怪的一道题，练习的时候莫名其妙的就 A 了。
+由于题目并没有输入数据，所有的人的行动数据都是随机的。很明显按照题目的意思，答案可以是固定的，没必要在程序中生成。而且路线长什么样子没什么关系（因为人的行动完全随机）。
+只</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2020-2021-icpc-shenyang/">The 2020 ICPC Asia Shenyang Regional Programming Contest</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-01-10</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">The 2020 ICPC Asia Shenyang Regional Programming Contest - Codeforces Gym
+B - Whispers of the Old Gods
+
+给出一个正则表达式 pattern 和字符串 str，要求对字符串中的数字进行尽可能少的插入，删除，替换操作。输出最小的操作次数。
+
+做老题结果发现专业对口这件事
+首先根据题目给出的 BNF 写出正则的解析器，然后用 Thompson&#39;s Construction 构造和 pattern 对应的 NFA，
+重合 NFA 的起点和 str 的开始符，向后匹配到 NFA 的结束状态即可。当 str 的下一个字符使得 NFA 没有对应转移时，
+修改 str 的下一个字符，其实也就相当于一个 01-最短路。
+有关 Thompson&#39;s Construction 构造可以参考 Comp412 课</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/cf1731/">Codeforces Round 841 (Div. 2) and Divide by Zero 2022 - ABCD</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2022-12-31</time> <a href="/categories/Competitive Programming">
 # Competitive Programming </a><a href="/categories/Codeforces">
-# Codeforces </a> </div> </header>  <p class="line-clamp-4">CF1844A. Subtraction Game
+# Codeforces </a> </div> </header>  <p class="line-clamp-4">Codeforces Round #841 (Div. 2) and Divide by Zero 2022
+A - Joey Takes Money
 
-输入两个数组 $a,b$
-两个玩家将一摞$n$个石子堆上进行游戏，玩家一轮可以从石堆中移除 $a$ 个石子或 $b$ 个石子，不能行动的玩家输。
-寻找石子堆的石子数量 $n$，使得无论第一个玩家如何行动，第二个玩家总能获胜
+给一个长度为 n 的整数序列 $a_i \ge 1$
+选择两个数 $a_i$ 和 $b_i$，将其替换为 $x$, $y$，其中 $x _ y = a_i _ a_j $，这个操作可以进行无数次
+输出这个序列的和乘以$2022$
 
-*800
-只要一共有 $a+b$ 个石子，那么先手必输
-void solve() {
-  i32 a, b;
-  read(a, b);
-  std::cout &amp;lt;&amp;lt; a+b;
-}
+直接暴力就行:
+// clang-format off
+#include &amp;lt;bits/stdc++.h&amp;gt;
+#include &amp;lt;functional&amp;gt;
+using ll = long long; using ul = unsigned long long; using ld = long double;
+template &amp;lt;typename T&amp;gt; inline typename</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2022-5th-chuanzhi-region/">2022 第五届传智杯初赛</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2022-12-29</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/chuanzhibei">
+# 传智杯 </a> </div> </header>  <p class="line-clamp-4">A-莲子的软件工程学
+记得开 long long 就好，防止取绝对值时爆炸
+#include&amp;lt;bits/stdc++.h&amp;gt;
 
-CF1842A. Tenzing and Tsondu
+using ll = long long;
+using ul = unsigned long long;
+using ld = long double;
 
-Tsondu 和 Tenzing 正在玩纸牌游戏。Tsondu 有 $n$ 个能量为 $a_1, a_2, \ldots,a_n$ 怪物，Tenzing 有 $m$ 个能量为 $b_1, b_2, \ldots, b_m$的怪物
-Tsondu 和 Tenzing 轮</p>  </article> </section> <footer class="mt-5"> <div class="mb-2.5"> 第 3 页 / 共 10 页 </div> <div class="flex items-center gap-2"> <a title="上一页" href="/2"> <span class="inline-block vertical-mid i-mdi-chevron-double-left w-4 h-4"></span> 上一页 </a> <a title="下一页" href="/4"> 下一页 <span class="inline-block vertical-mid i-mdi-chevron-double-right w-4 h-4"></span> </a> </div> </footer>  <div class="p-10" data-astro-cid-e5lvscu2> <div data-astro-cid-e5lvscu2> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter" data-astro-cid-e5lvscu2> <p class="text-sm text-gray-500 text-center" data-astro-cid-e5lvscu2>统计自 2024 年 9 月</p> </div> </div> </main> <footer class="transition-swup-footer py-7.5" lg="row-2-3 col-2-3" data-astro-cid-e5lvscu2> <p data-astro-cid-gcn2mc3v>
+template &amp;lt;typename T&amp;gt;
+inline typename std::enable_if&amp;lt;std::is_integral&amp;lt;T&amp;gt;::value&amp;gt;::type read(T &amp;amp;x){
+  char c;T f=1;
+  while(!isdigit(c=getchar())) if(c==&#39;-&#39;)f=-1;
+  x=(c&amp;amp;15); while(isdigit(c=getchar())) x= (x&amp;lt;&amp;lt;1) + (x&amp;lt;&amp;</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/2022-icpc-asia-xian-regional-contest/">The 2022 ICPC Asia Xian Regional Contest (CHGJ)</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2022-12-13</time> <a href="/categories/Competitive Programming">
+# Competitive Programming </a><a href="/categories/ICPC">
+# ICPC </a> </div> </header>  <p class="line-clamp-4">只把签到题做了做。
+回头把剩下的题补一下
+听说今年要七道题才能铜 😂
+C - Clone Ranran
+题目大意
+然然要准备 $c$ 道题，它可以进行两种操作：
+
+克隆一个自己，使自己的数量变为原来的二倍，这需要消耗 $a$ 分钟时间
+每个自己准备一道题，这需要消耗 $b$ 分钟的时间
+
+然然不可能同时做两件事，问准备 $c$ 道题目最少用时。
+思路
+经过分析我们可以得知，先进行克隆操作总是不亏的，因为每次克隆操作都能使接下来用相同的时间
+准备的题目数量增加2倍。而且我们一定是先进行完所有的克隆操作，最后再准备题目。
+那么什么时候停止克隆呢。我们可以计算每次克隆+准备所有题目的用时和不克隆准备所有题目的用时，
+如果大于就不再克隆了。
+确定了这两点，代码就不难写了
+代码
+#include &amp;lt;bits/stdc++.h&amp;gt;
+#define rep(NAME, MAX) for (i</p>  </article> </section> <footer class="mt-5"> <div class="mb-2.5"> 第 3 页 / 共 5 页 </div> <div class="flex items-center gap-2"> <a title="上一页" href="/2"> <span class="inline-block vertical-mid i-mdi-chevron-double-left w-4 h-4"></span> 上一页 </a> <a title="下一页" href="/4"> 下一页 <span class="inline-block vertical-mid i-mdi-chevron-double-right w-4 h-4"></span> </a> </div> </footer>  <div class="p-10" data-astro-cid-e5lvscu2> <div data-astro-cid-e5lvscu2> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter" data-astro-cid-e5lvscu2> <p class="text-sm text-gray-500 text-center" data-astro-cid-e5lvscu2>统计自 2024 年 9 月</p> </div> </div> </main> <footer class="transition-swup-footer py-7.5" lg="row-2-3 col-2-3" data-astro-cid-e5lvscu2> <p data-astro-cid-gcn2mc3v>
 © 2025 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer" data-astro-cid-gcn2mc3v>Mslxl</a> </p> <p data-astro-cid-gcn2mc3v>
 Theme
 <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer" data-astro-cid-gcn2mc3v>Typography</a>
