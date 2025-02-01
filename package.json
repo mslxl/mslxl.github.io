@@ -58,7 +58,7 @@
     "@unocss/reset": "^65.4.3",
     "@unocss/transformer-directives": "^65.4.3",
     "astro-eslint-parser": "^1.1.0",
-    "bumpp": "^9.10.2",
+    "bumpp": "^10.0.1",
     "changelogen": "^0.5.7",
     "consola": "^3.4.0",
     "dayjs": "^1.11.13",
