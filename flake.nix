@@ -22,7 +22,7 @@
               playwright-driver.browsers
             ];
             packages = (with pkgs; [
-              typst-lsp
+              tinymist
               mdl
 
               shellcheck
