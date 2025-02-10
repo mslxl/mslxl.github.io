@@ -1,9 +1,7 @@
 name: Auto Publish
 on:
   push:
-    branches:
-      - master
-      - main
+  pull_request:
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -15,8 +13,3 @@ jobs:
       - name: Build with nix
         run: |
           bash ./nix-build.sh
-      - name: Publish
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
