@@ -1,4 +1,4 @@
-name: Auto Publish
+name: Test Build
 on:
   push:
   pull_request:
