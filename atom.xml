@@ -141,7 +141,83 @@ reduce(lambda a,b: a+b, map(int, input().split()))
 &lt;hr /&gt;
 &lt;p&gt;我的幻想目前就是这样子。至于工期，我觉得要按年为单位了。毕竟现在开始逐渐没太有时间写 hobby project 了。&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;不过怎么越看越有 Lisp 方言 Hy 的样子了&lt;/s&gt;&lt;/p&gt;
-</content:encoded><category>Weekly</category><category>Python</category><category>Compiler</category><category>多邻国</category><author>Mslxl</author></item><item><title>从 Hexo 到 Astro</title><link>https://blog.mslxl.com/posts/others/hexo-migrate-astro/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/hexo-migrate-astro/</guid><description>从 Hexo 到 Astro 的迁移体验</description><pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Typst } from &apos;astro-typst/src/components&apos;&lt;/p&gt;
+</content:encoded><category>Weekly</category><category>Python</category><category>Compiler</category><category>多邻国</category><author>Mslxl</author></item><item><title>CPS 与 Rust Result</title><link>https://blog.mslxl.com/posts/fun/cps-rust/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/fun/cps-rust/</guid><pubDate>Tue, 21 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;CPS(&lt;a href=&quot;https://en.wikipedia.org/wiki/Continuation-passing_style&quot;&gt;Continuation-passing style&lt;/a&gt;, 连续传递) 是一种编程风格。
+CPS 中的 C 即 Continuation，它是一个作为参数的函数，表示计算后的下一个过程。它的主要作用就是接受函数的结果，
+并控制下一步执行。&lt;/p&gt;
+&lt;p&gt;我们用一段 Kotlin 代码来表示。这是一个 Direct Style 的代码 mul 函数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fun mul(a: Int, b: Int): Int {
+  return a + b
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;它的 CPS 大概是这样的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fun mul&amp;lt;R&amp;gt;(a: Int, b: Int, continuation: (Int)-&amp;gt;R): R{
+  return continuation(a+b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果用它来实现阶乘的话将会是这样&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fun fact(a: Int, k: (Int)-&amp;gt;Int): Int {
+  return match(a){
+    0 -&amp;gt; k(1)
+    n -&amp;gt; fact(n-1) {
+      mul(n, it, k)
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;它和经常见的 fact 函数有什么区别？&lt;s&gt;如果有人给我看这代码我可能会直接丢给 AI&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;我们可以在 continuation（有时写做 k） 中控制征程程序的流程。比如上面的函数中，如果我们想在 x 的阶乘大于 k 时直接返回，
+否则执行 taskB，代码会是这样&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fun task(){
+  fact(x){
+    return if(it &amp;gt; k)  it
+    else taskB(it)
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果在 continuation 中没有调用其他函数，而是直接返回了某个值，那么这个值将会被看作是结果直接返回到顶层。&lt;/p&gt;
+&lt;p&gt;那么这东西有什么用呢？除了在 FP 语言中用于中间表示，或者是协程中的应用外，Rust 使用 CPS 来表示 Result 的 &lt;code&gt;?&lt;/code&gt; 运算符。&lt;/p&gt;
+&lt;p&gt;比如代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+fun taskMayError(
+  onSuccess: (()-&amp;gt;Unit)-&amp;gt;Unit,
+  onError:(()-&amp;gt;Unit)-&amp;gt;Unit,
+  k: ()-&amp;gt;Unit
+): Unit {
+  // 仅使用 if 表示成功/失败
+  if(doSomeOtherTask()){
+    return onSuccess(k)
+  }else{
+    onError{
+      return errorCode
+    }
+  }
+}
+
+fun main(){
+  val onSuccessDo = { k-&amp;gt;
+    return k()
+  }
+  val onErrorDo = { k-&amp;gt;
+    eprintln(&quot;error&quot;)
+    return k()
+  }
+
+  fact(4){ factResult-&amp;gt;
+    return taskMayError(onSuccessDo, onErrorDo){ // 控制流程
+      return mul(2, 3) { mulResult -&amp;gt;
+        return factResult + mulResult
+      }
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;关注函数的实际调用代码，当任务失败时，函数会从 taskMayError 直接返回，而 &lt;code&gt;mul&lt;/code&gt; 及后续过程不会被执行。
+这其实就是 Rust 中 &lt;code&gt;?&lt;/code&gt; 的原理。Rust 编译器将函数拆开重组，再进行 inline（此处感谢 C++ 大手推动 LLVM 相关功能），
+即实现了 &lt;code&gt;?&lt;/code&gt; 运算符的功能。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;s&gt;我试着在 Python 里搞这一套结果栈溢出了&lt;/s&gt;&lt;/p&gt;
+</content:encoded><category>Rust</category><category>CPS</category><author>Mslxl</author></item><item><title>从 Hexo 到 Astro</title><link>https://blog.mslxl.com/posts/others/hexo-migrate-astro/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/hexo-migrate-astro/</guid><description>从 Hexo 到 Astro 的迁移体验</description><pubDate>Wed, 04 Sep 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Typst } from &apos;astro-typst/src/components&apos;&lt;/p&gt;
 &lt;p&gt;该页面出于实验性质使用 Typst 书写，其显示效果、界面风格一致性与交互性可能不如预期。&lt;/p&gt;
 &lt;p&gt;&amp;lt;div data-orientation=&quot;horizontal&quot; role=&quot;separator&quot; label=&quot;Or&quot; class=&quot;shrink-0 bg-primary relative h-px w-full my-4&quot;&amp;gt;
 &amp;lt;span class=&quot;text-xs text-foreground bg-background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center h-[1px] py-1 px-2&quot;&amp;gt;

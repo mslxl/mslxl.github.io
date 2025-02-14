@@ -24,7 +24,24 @@
 而日语却一直坚持了下来，到现在连续打卡已经有 627 天了。这1000余天我通过多邻国学到了什么？其实我觉得我什么也没有学到。
 在老中的特色汉字 buff 下，我还勉强能看懂简单的句子，但却说不出、写不下简单的单词。在今天，我觉得是时候放下 Duolingo 转向其他正常的学习方式了。
 多邻国有什么问题？首先它其中的题目有一些问题。比如在其中的听力中，有时会同时出现
-「&amp;lt;span lang=&quot;jp&quot;&amp;gt;中村さん&amp;lt;/span&amp;gt;」和 「&amp;lt;span lang=&quot;jp</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/others/hexo-migrate-astro/">从 Hexo 到 Astro</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2024-09-04</time> <a href="/categories/Hexo">
+「&amp;lt;span lang=&quot;jp&quot;&amp;gt;中村さん&amp;lt;/span&amp;gt;」和 「&amp;lt;span lang=&quot;jp</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/fun/cps-rust/">CPS 与 Rust Result</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2025-01-21</time> <a href="/categories/Rust">
+# Rust </a><a href="/categories/CPS">
+# CPS </a> </div> </header>  <p class="line-clamp-4">CPS(Continuation-passing style, 连续传递) 是一种编程风格。
+CPS 中的 C 即 Continuation，它是一个作为参数的函数，表示计算后的下一个过程。它的主要作用就是接受函数的结果，
+并控制下一步执行。
+我们用一段 Kotlin 代码来表示。这是一个 Direct Style 的代码 mul 函数
+fun mul(a: Int, b: Int): Int {
+  return a + b
+}
+
+它的 CPS 大概是这样的
+fun mul&amp;lt;R&amp;gt;(a: Int, b: Int, continuation: (Int)-&amp;gt;R): R{
+  return continuation(a+b)
+}
+
+如果用它来实现阶乘的话将会是这样
+fun fact(a: Int, k: (Int)-&amp;gt;Int): Int {
+  return match</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/others/hexo-migrate-astro/">从 Hexo 到 Astro</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2024-09-04</time> <a href="/categories/Hexo">
 # Hexo </a><a href="/categories/Astro">
 # Astro </a><a href="/categories/Typst">
 # Typst </a> </div> </header>  <p class="line-clamp-4">从 Hexo 到 Astro 的迁移体验</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/fun/ce-gtutor/">ChectEngine（二）：常见用例——以官方图形游戏为例</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2024-06-30</time> <a href="/categories/nixiang">
@@ -39,9 +56,7 @@
 # 译 </a><a href="/categories/jisuanjiwangluo">
 # 计算机网络 </a> </div> </header>  <p class="line-clamp-4">古早时期已过期的可靠 UDP 草案，也许还有些许价值</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/cp/cf1901/">Educational Codeforces Round 158 (Rated for Div. 2)</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-11-25</time> <a href="/categories/Competitive Programming">
 # Competitive Programming </a><a href="/categories/Codeforces">
-# Codeforces </a> </div> </header>  <p class="line-clamp-4">复健，也是重新认识自己</p>  </article><article class="prose"> <header flex="~ col"> <h1 class="post-title"> <a class="not-prose" href="/posts/proj/gfs/">MIT6.824 分布式系统 GFS</a> </h1> <div class="text-3.5"> <span>发布于</span> <time>2023-09-21</time> <a href="/categories/MIT6.824">
-# MIT6.824 </a><a href="/categories/fenbushixitong">
-# 分布式系统 </a> </div> </header>  <p class="line-clamp-4">GFS 的运行原理和特点。目前抓包可以看到百度和Mega都在用类似的分布式存储</p>  </article> </section> <footer class="mt-5"> <div class="mb-2.5"> 第 1 页 / 共 5 页 </div> <div class="flex items-center gap-2">  <a title="下一页" href="/2"> 下一页 <span class="inline-block vertical-mid i-mdi-chevron-double-right w-4 h-4"></span> </a> </div> </footer>  <div class="p-10" data-astro-cid-e5lvscu2> <div data-astro-cid-e5lvscu2> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter" data-astro-cid-e5lvscu2> <p class="text-sm text-gray-500 text-center" data-astro-cid-e5lvscu2>统计自 2024 年 9 月</p> </div> </div> </main> <footer class="transition-swup-footer py-7.5" lg="row-2-3 col-2-3" data-astro-cid-e5lvscu2> <p data-astro-cid-gcn2mc3v>
+# Codeforces </a> </div> </header>  <p class="line-clamp-4">复健，也是重新认识自己</p>  </article> </section> <footer class="mt-5"> <div class="mb-2.5"> 第 1 页 / 共 5 页 </div> <div class="flex items-center gap-2">  <a title="下一页" href="/2"> 下一页 <span class="inline-block vertical-mid i-mdi-chevron-double-right w-4 h-4"></span> </a> </div> </footer>  <div class="p-10" data-astro-cid-e5lvscu2> <div data-astro-cid-e5lvscu2> <img class="m-auto" src="https://moe-counter.glitch.me/get/@mslxl" alt="moe-counter" data-astro-cid-e5lvscu2> <p class="text-sm text-gray-500 text-center" data-astro-cid-e5lvscu2>统计自 2024 年 9 月</p> </div> </div> </main> <footer class="transition-swup-footer py-7.5" lg="row-2-3 col-2-3" data-astro-cid-e5lvscu2> <p data-astro-cid-gcn2mc3v>
 © 2025 <a target="_blank" href="https://blog.mslxl.com" rel="noopener noreferrer" data-astro-cid-gcn2mc3v>Mslxl</a> </p> <p data-astro-cid-gcn2mc3v>
 Theme
 <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography" rel="noopener noreferrer" data-astro-cid-gcn2mc3v>Typography</a>
