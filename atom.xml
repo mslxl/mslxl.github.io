@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integrate Life</title><description>My story of discovery</description><link>https://blog.mslxl.com/</link><item><title>CPS 变换</title><link>https://blog.mslxl.com/posts/fun/cps-trans/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/fun/cps-trans/</guid><pubDate>Sat, 08 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;大多数语言都是通过编译器实现 CPS 变换。尤其是 FP 语言将 CPS 作为一种中间代码。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integrate Life</title><description>My story of discovery</description><link>https://blog.mslxl.com/</link><item><title>周报 0x02: 旧日幻梦</title><link>https://blog.mslxl.com/posts/weekly/03feb25/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/weekly/03feb25/</guid><description>「我们的家族没落了」</description><pubDate>Thu, 20 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;我在写什么？&lt;/h2&gt;
+&lt;h3&gt;Maljuna Revo&lt;/h3&gt;
+&lt;p&gt;Maljuna Revo 实际上应该是表示过去的白日梦（世界语），最初这个软件只是用来纪念我碌碌无为的算法竞赛生涯，而后来变成了毕业设计。&lt;/p&gt;
+&lt;p&gt;Revo 是一个由 Tauri 开发的单文件代码编辑器，主体部分采用 React 开发。&lt;/p&gt;
+&lt;p&gt;说实话这个项目从1月就已经开始写了，经过了忙忙碌碌的1月，过了春节后不知从哪里生出一股厌烦，一直停摆到现在。不过本地编辑器已经完成大部分功能了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./prog.png&quot; alt=&quot;Program Screenshot&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;其实工作量还是页面仔&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;在架构设计上，Revo 模仿了 VSCode。将代码分为了四部分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;base: 通用的公共方法和组件&lt;/li&gt;
+&lt;li&gt;platform: 依赖 Rust 接口，可被依赖注入的服务&lt;/li&gt;
+&lt;li&gt;editor: 编辑器&lt;/li&gt;
+&lt;li&gt;workbench: 各类拓展功能视图框架&lt;/li&gt;
+&lt;li&gt;code: 应用程序入口，组织上述模块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+  subgraph Page
+    direction TB
+    code --&amp;gt; workbench --&amp;gt; platform --&amp;gt; base
+    code --&amp;gt; base
+    code --&amp;gt; editor --&amp;gt; platform
+  end
+  subgraph Native
+    direction LR
+    specta --&amp;gt; db
+    specta --&amp;gt; lsp
+    specta --&amp;gt; runner
+    specta --&amp;gt; term
+    specta --&amp;gt; problems
+    specta --&amp;gt; config
+    specta --&amp;gt; win
+    specta --&amp;gt; log
+  end
+  platform o--&quot;command/channel&quot;--o specta
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更多有关实现的内容就不在这里提了，反正你们也不关心&lt;/p&gt;
+&lt;p&gt;简单贴几张图吧&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./prefs.png&quot; alt=&quot;Preference&quot; /&gt;
+&lt;img src=&quot;./runner.png&quot; alt=&quot;Runner&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;我在玩什么&lt;/h2&gt;
+&lt;h3&gt;Darkest Dungeon&lt;/h3&gt;
+&lt;p&gt;最近在玩这个 &lt;a href=&quot;https://neodb.social/game/6xaHyfmH9tRpNaURiYTLe8&quot;&gt;Darkest Dungeon&lt;/a&gt;。
+刚开始玩的时候没有加 mod，真真正正做到了 4 个人下地牢，疯了 5 个。怪我自己抗压能力太弱。&lt;/p&gt;
+&lt;p&gt;之前只在 Bilibili 上闻其名，机制流程复杂但是却挺有意思，难度对我而言可能稍微有点高。之后去打了几个
+二次元 mod 来感受二次元的强度了。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&quot;./game_kitsune_miko.png&quot; alt=&quot;狐妖巫女&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;./game_fuujin_kitsune.png&quot; alt=&quot;风佑巫女&quot; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;绘师&amp;lt;span lang=&quot;jp&quot;&amp;gt;長門ちゃん&amp;lt;/span&amp;gt;画的这两小只真可爱啊&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;然而最终还是被老祖送走两个&lt;/s&gt;&lt;/p&gt;
+</content:encoded><category>Weekly</category><category>Tauri</category><category>Competitive Programming</category><author>Mslxl</author></item><item><title>CPS 变换</title><link>https://blog.mslxl.com/posts/fun/cps-trans/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/fun/cps-trans/</guid><pubDate>Sat, 08 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;大多数语言都是通过编译器实现 CPS 变换。尤其是 FP 语言将 CPS 作为一种中间代码。&lt;/p&gt;
 &lt;p&gt;CPS 变换的过程非常简单&lt;/p&gt;
 &lt;p&gt;对于一个函数 $f: t1 \to t2$，它的 CPS 版本应该是 $f_cps: t1 \to (t2 \to a) \to a$，
 其中 $f_cps\ x\ k \cong k\ (f\ x)$&lt;/p&gt;
@@ -13554,6 +13615,33 @@ Start-- 字符流 --&amp;gt;词法分析器
 目标代码生成器-- 目标机器语言 --&amp;gt;机器相关代码优化器
 机器相关代码优化器-- 目标机器语言 --&amp;gt;Fin
 &amp;lt;/pre&amp;gt;&lt;/p&gt;
+</content:encoded><category>Compiler</category><author>Mslxl</author></item><item><title>编译原理：绪论</title><link>https://blog.mslxl.com/posts/others/n1/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n1/</guid><pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;最近在学习编译原理，把笔记整理一下写在上面&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;什么是编译？&lt;/h2&gt;
+&lt;p&gt;编译是将一种语言翻译为另外一种语言，将被翻译的语言叫做&lt;code&gt;源程序&lt;/code&gt;，而翻译之后的语言叫做目标语言一般来说，编译是将高级语言翻译为低级语言，例如 &lt;code&gt;GCC&lt;/code&gt; 等 C++ 编译器就是将 C++ 翻译为机器语言或中间语言。&lt;/p&gt;
+&lt;p&gt;高级语言(High Level Language)符合人的表达习惯且易于学习和记忆，常见的就是 C++ 、Java。&lt;/p&gt;
+&lt;p&gt;低级语言则相反，并且与运行的机器密切相关，比如汇编语言(Assembly Language)和机器语言(Machine Language)。&lt;/p&gt;
+&lt;p&gt;下面分别是 C++ 、汇编语言和机器语言的画风：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x = 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;MOV X,2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;C706 0000 0002
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过上面几个例子，我们就知道了什么是编译以及为什么要编译。&lt;/p&gt;
+&lt;h2&gt;编译器在语言处理中的位置&lt;/h2&gt;
+&lt;p&gt;在变异中，除了编译器，我们还需要其他的一些东西。&lt;/p&gt;
+&lt;p&gt;首先，我们需要&lt;strong&gt;预处理器 (Preprocessor)&lt;/strong&gt;，源程序可能会被分割成模块，储存在不同的文件中，预处理器则会把他们 &lt;strong&gt;聚合&lt;/strong&gt; 在一起，并把其中称之为宏的缩写语句展开。&lt;/p&gt;
+&lt;p&gt;之后，被处理过的源程序则会通过 &lt;strong&gt;编译器&lt;/strong&gt; 和 &lt;strong&gt;汇编器(Assembler)&lt;/strong&gt; 生成可重定位 (Relocatable) 的机器代码，可重定位代码在内存中存放的起始位置 &lt;em&gt;L&lt;/em&gt; 是不固定的，代码中的所有地址都是相对于这个 &lt;em&gt;L&lt;/em&gt; 的相对地址，$\text{起始地址} + \text{相对地址} = \text{绝对地址}$，因为代码中的内存地址都是相对的，所以，我们需要&lt;strong&gt;加载器 (Loader)&lt;/strong&gt; 来修改可重定位地址，将修改后的指令和数据放在内存中适当的位置，还有一种情况使用的是 &lt;strong&gt;链接器 (Linker)&lt;/strong&gt; 而不是加载器，因为大型程序会被分割成很多部分，在这种情况下，链接器会将生成可重定位的机器代码与库文件进行链接，从而生成可执行代码，同时链接器还会解决&lt;em&gt;外部内存地址&lt;/em&gt;问题，所谓外部内存地址，就是指一个文件中的代码，可能会引用另一个文件中的对象或者过程，这些被引用的对象或者过程的地址，相对于这个文件来说就是&lt;em&gt;外部地址&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;一个完整的系统大致就是这样&lt;/p&gt;
+&lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
+graph TD
+Start-- 源程序 --&amp;gt;预处理器
+预处理器-- 经过处理的源程序 --&amp;gt;编译器
+编译器-- 汇编语言程序 --&amp;gt;汇编器
+汇编器-- 可重定位的机器代码 --&amp;gt;链接器/加载器
+链接器/加载器-- 目标机器代码 --&amp;gt;Fin
+&amp;lt;/pre&amp;gt;&lt;/p&gt;
 </content:encoded><category>Compiler</category><author>Mslxl</author></item><item><title>编译原理：绪论 —— 词法分析</title><link>https://blog.mslxl.com/posts/others/n2/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n2/</guid><pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;词法分析 (Scanning)&lt;/h2&gt;
 &lt;p&gt;词法分析是编译的第一个阶段。词法分析器的主要任务是从左向右逐行扫描 (Scanning) 源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元 (token) 形式。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;token: &amp;lt;种别码,属性值&amp;gt;
@@ -13660,32 +13748,5 @@ Start-- 字符流 --&amp;gt;词法分析器
 机器无关代码优化器-- 中间表示形式 --&amp;gt;目标代码生成器
 目标代码生成器-- 目标机器语言 --&amp;gt;机器相关代码优化器
 机器相关代码优化器-- 目标机器语言 --&amp;gt;Fin
-&amp;lt;/pre&amp;gt;&lt;/p&gt;
-</content:encoded><category>Compiler</category><author>Mslxl</author></item><item><title>编译原理：绪论</title><link>https://blog.mslxl.com/posts/others/n1/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n1/</guid><pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;最近在学习编译原理，把笔记整理一下写在上面&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;什么是编译？&lt;/h2&gt;
-&lt;p&gt;编译是将一种语言翻译为另外一种语言，将被翻译的语言叫做&lt;code&gt;源程序&lt;/code&gt;，而翻译之后的语言叫做目标语言一般来说，编译是将高级语言翻译为低级语言，例如 &lt;code&gt;GCC&lt;/code&gt; 等 C++ 编译器就是将 C++ 翻译为机器语言或中间语言。&lt;/p&gt;
-&lt;p&gt;高级语言(High Level Language)符合人的表达习惯且易于学习和记忆，常见的就是 C++ 、Java。&lt;/p&gt;
-&lt;p&gt;低级语言则相反，并且与运行的机器密切相关，比如汇编语言(Assembly Language)和机器语言(Machine Language)。&lt;/p&gt;
-&lt;p&gt;下面分别是 C++ 、汇编语言和机器语言的画风：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;x = 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;MOV X,2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;C706 0000 0002
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;通过上面几个例子，我们就知道了什么是编译以及为什么要编译。&lt;/p&gt;
-&lt;h2&gt;编译器在语言处理中的位置&lt;/h2&gt;
-&lt;p&gt;在变异中，除了编译器，我们还需要其他的一些东西。&lt;/p&gt;
-&lt;p&gt;首先，我们需要&lt;strong&gt;预处理器 (Preprocessor)&lt;/strong&gt;，源程序可能会被分割成模块，储存在不同的文件中，预处理器则会把他们 &lt;strong&gt;聚合&lt;/strong&gt; 在一起，并把其中称之为宏的缩写语句展开。&lt;/p&gt;
-&lt;p&gt;之后，被处理过的源程序则会通过 &lt;strong&gt;编译器&lt;/strong&gt; 和 &lt;strong&gt;汇编器(Assembler)&lt;/strong&gt; 生成可重定位 (Relocatable) 的机器代码，可重定位代码在内存中存放的起始位置 &lt;em&gt;L&lt;/em&gt; 是不固定的，代码中的所有地址都是相对于这个 &lt;em&gt;L&lt;/em&gt; 的相对地址，$\text{起始地址} + \text{相对地址} = \text{绝对地址}$，因为代码中的内存地址都是相对的，所以，我们需要&lt;strong&gt;加载器 (Loader)&lt;/strong&gt; 来修改可重定位地址，将修改后的指令和数据放在内存中适当的位置，还有一种情况使用的是 &lt;strong&gt;链接器 (Linker)&lt;/strong&gt; 而不是加载器，因为大型程序会被分割成很多部分，在这种情况下，链接器会将生成可重定位的机器代码与库文件进行链接，从而生成可执行代码，同时链接器还会解决&lt;em&gt;外部内存地址&lt;/em&gt;问题，所谓外部内存地址，就是指一个文件中的代码，可能会引用另一个文件中的对象或者过程，这些被引用的对象或者过程的地址，相对于这个文件来说就是&lt;em&gt;外部地址&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;一个完整的系统大致就是这样&lt;/p&gt;
-&lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
-graph TD
-Start-- 源程序 --&amp;gt;预处理器
-预处理器-- 经过处理的源程序 --&amp;gt;编译器
-编译器-- 汇编语言程序 --&amp;gt;汇编器
-汇编器-- 可重定位的机器代码 --&amp;gt;链接器/加载器
-链接器/加载器-- 目标机器代码 --&amp;gt;Fin
 &amp;lt;/pre&amp;gt;&lt;/p&gt;
 </content:encoded><category>Compiler</category><author>Mslxl</author></item></channel></rss>
