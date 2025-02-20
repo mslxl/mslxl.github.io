@@ -25,3 +25,7 @@ html {
   font-size: 18px !important;
   max-width: 48em !important;
 }
+
+.prose #mermaid-0 {
+  line-height: 16px;
+}
