@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integrate Life</title><description>My story of discovery</description><link>https://blog.mslxl.com/</link><item><title>周报 0x01: ボクの理想の Python</title><link>https://blog.mslxl.com/posts/weekly/25jan25/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/weekly/25jan25/</guid><pubDate>Sat, 25 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;为了记录我的精神状态，我决定从今天开始写周报了。虽然说是周报，但不一定每周都写，有可能数个月才写一次。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integrate Life</title><description>My story of discovery</description><link>https://blog.mslxl.com/</link><item><title>CPS 变换</title><link>https://blog.mslxl.com/posts/fun/cps-trans/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/fun/cps-trans/</guid><pubDate>Sat, 08 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;大多数语言都是通过编译器实现 CPS 变换。尤其是 FP 语言将 CPS 作为一种中间代码。&lt;/p&gt;
+&lt;p&gt;CPS 变换的过程非常简单&lt;/p&gt;
+&lt;p&gt;对于一个函数 $f: t1 \to t2$，它的 CPS 版本应该是 $f_cps: t1 \to (t2 \to a) \to a$，
+其中 $f_cps\ x\ k \cong k\ (f\ x)$&lt;/p&gt;
+&lt;p&gt;其变换过程如下:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对返回值是 $t$ 的函数，添加一个 $t \to a$ 类型的 Continuation 参数，并将返回值将变为 $a$&lt;/li&gt;
+&lt;li&gt;在每个函数的 return 处调用 Continuation&lt;/li&gt;
+&lt;li&gt;如果有函数的递归调用表达式 $e$，将$e$的结果绑定到新的变量 $rec_ans$ 上&lt;/li&gt;
+&lt;li&gt;将原递归部分更改为 $e (rec_ans \to &amp;lt;body&amp;gt;)$，其中 $&amp;lt;body&amp;gt;$ 是原本函数的其他部分&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以以下 Haskell 代码 map 为例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;map :: (a -&amp;gt; b) -&amp;gt; [a] -&amp;gt; [b]
+map f [] = []
+map f (x:xs) = f x : map f xs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先添加 Continuation，并更改类型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;map :: (a -&amp;gt; b) -&amp;gt; [a] -&amp;gt; ([b] -&amp;gt; c) -&amp;gt; c
+map f [] k = k []
+map f (x:xs) k = k (f x : map f xs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里递归部分为 &lt;code&gt;map f xs&lt;/code&gt;，提取这部分，并转化为 &lt;code&gt;map f xs (\ans -&amp;gt; &amp;lt;body&amp;gt;)&lt;/code&gt;，其中 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 为后续操作&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;map :: (a -&amp;gt; b) -&amp;gt; [a] -&amp;gt; ([b] -&amp;gt; c) -&amp;gt; c
+map f [] k = k []
+map f (x:xs) k = map f xs (\rec -&amp;gt; k (f x: rec))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;手动模 &lt;code&gt;map (*2) [1,2] id&lt;/code&gt; 一下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;map (*2) [1,2] id
+= map (*2) [2] (\rec -&amp;gt; id ((*2) 1 : rec))
+= map (*2) [] (\rec&apos; -&amp;gt; (\rec -&amp;gt; id ((*2) 1 : rec)) ((*2) 2 : rec&apos;))
+= (\rec&apos; -&amp;gt; (\rec -&amp;gt; id ((*2) 1 : rec)) ((*2) 2 : rec&apos;)) []
+= (\rec -&amp;gt; id ((*2) 1 : rec)) ((*2) 2 : [])
+= (\rec -&amp;gt; id ((*2) 1 : rec)) (4 : [])
+= (\rec -&amp;gt; id ((*2) 1 : rec)) [4]
+= id ((*2) 1 : [4])
+= id (2 : [4])
+= id [2, 4]
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded><category>CPS</category><author>Mslxl</author></item><item><title>周报 0x01: ボクの理想の Python</title><link>https://blog.mslxl.com/posts/weekly/25jan25/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/weekly/25jan25/</guid><pubDate>Sat, 25 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;为了记录我的精神状态，我决定从今天开始写周报了。虽然说是周报，但不一定每周都写，有可能数个月才写一次。&lt;/p&gt;
 &lt;p&gt;换句话说，等我精神不稳定的时候才会来写周报。&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h2&gt;日语&lt;/h2&gt;
@@ -10,7 +48,8 @@
 &lt;p&gt;多邻国有什么问题？首先它其中的题目有一些问题。比如在其中的听力中，有时会同时出现
 「&amp;lt;span lang=&quot;jp&quot;&amp;gt;中村さん&amp;lt;/span&amp;gt;」和 「&amp;lt;span lang=&quot;jp&quot;&amp;gt; なかむらさん&amp;lt;/span&amp;gt;」 两个选项，然而只有前者是被认为正确的。
 再者，使用中文学习日语时不能完全对等的翻译。例如「&amp;lt;span lang=&quot;jp&quot;&amp;gt;この味噌汁は安いです&amp;lt;/span&amp;gt;」的中文表达是 「这个味增汤很便宜」。
-然而中文中的“很”并不表示程度，它只是一种语气词(?)。然而当你尝试翻译回去的时候，也许 「&amp;lt;span lang=&quot;jp&quot;&amp;gt;とても&amp;lt;/span&amp;gt;」 就出现了，你就又错了一题。同理，还有「はい，元気です」中文特色倒桩句「是，我好的很」。总之，在多邻国学习使用汉语学习其他语言可能并不是一个好选择。&lt;/p&gt;
+然而中文中的“很”并不表示程度，它只是一种语气词(?)。然而当你尝试翻译回去的时候，也许 「&amp;lt;span lang=&quot;jp&quot;&amp;gt;とても&amp;lt;/span&amp;gt;」 就出现了，你就又错了一题。
+同理，还有「はい，元気です」中文特色倒桩句「是，我好的很」。总之，在多邻国学习使用汉语学习其他语言可能并不是一个好选择。&lt;/p&gt;
 &lt;p&gt;此外，多邻国最大的问题就是——它不讲语法。所有的问题到要用户自己去悟，而多邻国只会简单的在 Guide 中提一下要出现的句子，此后便是不断的重复。
 这很像 SRS（间隔重复）的学习方式，但是它却希望用户通过重复建立起语感。我个人觉得建立语感最重要的是环境，即大量的不同的句子重复出现。
 显然多邻国给出的句子太少了，每种表达只有寥寥几句。到最后用户可能什么也没学到。&lt;/p&gt;
@@ -113,7 +152,8 @@ stringP = traverse charP
 reduce(lambda a,b: a+b, map(int, input().split()))
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这里的 reduce 竟然需要导包才能实现，听说 Guido van Rossum 称 map, reduce 并不很 Pythonic，因此拒绝将这些功能添加进 Python。
+&lt;p&gt;这里的 reduce 竟然需要导包才能实现，听说 Guido van Rossum 称 map, reduce 并不很 Pythonic，
+因此拒绝将这些功能添加进 Python。
 并且更推荐使用 &lt;code&gt;[int (x) for x in input().split()]&lt;/code&gt; 这种方式。此外，匿名函数是依赖 lambda 表达式实现的，并不支持多行。我觉得这对表达能力是很强的限制。&lt;/p&gt;
 &lt;p&gt;这里可能并不设计谁对谁错，只是个人理念不同。但是我还是更喜欢 Kotlin/Rust 这种链式调用&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;readlint().split(&quot; &quot;)
@@ -141,6 +181,10 @@ reduce(lambda a,b: a+b, map(int, input().split()))
 &lt;hr /&gt;
 &lt;p&gt;我的幻想目前就是这样子。至于工期，我觉得要按年为单位了。毕竟现在开始逐渐没太有时间写 hobby project 了。&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;不过怎么越看越有 Lisp 方言 Hy 的样子了&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;Thanks to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://lemonhx.moe/pldmd&quot;&gt;编程语言设计踩坑实录&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded><category>Weekly</category><category>Python</category><category>Compiler</category><category>多邻国</category><author>Mslxl</author></item><item><title>CPS 与 Rust Result</title><link>https://blog.mslxl.com/posts/fun/cps-rust/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/fun/cps-rust/</guid><pubDate>Tue, 21 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;CPS(&lt;a href=&quot;https://en.wikipedia.org/wiki/Continuation-passing_style&quot;&gt;Continuation-passing style&lt;/a&gt;, 连续传递) 是一种编程风格。
 CPS 中的 C 即 Continuation，它是一个作为参数的函数，表示计算后的下一个过程。它的主要作用就是接受函数的结果，
 并控制下一步执行。&lt;/p&gt;
@@ -13510,33 +13554,6 @@ Start-- 字符流 --&amp;gt;词法分析器
 目标代码生成器-- 目标机器语言 --&amp;gt;机器相关代码优化器
 机器相关代码优化器-- 目标机器语言 --&amp;gt;Fin
 &amp;lt;/pre&amp;gt;&lt;/p&gt;
-</content:encoded><category>Compiler</category><author>Mslxl</author></item><item><title>编译原理：绪论</title><link>https://blog.mslxl.com/posts/others/n1/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n1/</guid><pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;最近在学习编译原理，把笔记整理一下写在上面&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;什么是编译？&lt;/h2&gt;
-&lt;p&gt;编译是将一种语言翻译为另外一种语言，将被翻译的语言叫做&lt;code&gt;源程序&lt;/code&gt;，而翻译之后的语言叫做目标语言一般来说，编译是将高级语言翻译为低级语言，例如 &lt;code&gt;GCC&lt;/code&gt; 等 C++ 编译器就是将 C++ 翻译为机器语言或中间语言。&lt;/p&gt;
-&lt;p&gt;高级语言(High Level Language)符合人的表达习惯且易于学习和记忆，常见的就是 C++ 、Java。&lt;/p&gt;
-&lt;p&gt;低级语言则相反，并且与运行的机器密切相关，比如汇编语言(Assembly Language)和机器语言(Machine Language)。&lt;/p&gt;
-&lt;p&gt;下面分别是 C++ 、汇编语言和机器语言的画风：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;x = 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;MOV X,2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;C706 0000 0002
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;通过上面几个例子，我们就知道了什么是编译以及为什么要编译。&lt;/p&gt;
-&lt;h2&gt;编译器在语言处理中的位置&lt;/h2&gt;
-&lt;p&gt;在变异中，除了编译器，我们还需要其他的一些东西。&lt;/p&gt;
-&lt;p&gt;首先，我们需要&lt;strong&gt;预处理器 (Preprocessor)&lt;/strong&gt;，源程序可能会被分割成模块，储存在不同的文件中，预处理器则会把他们 &lt;strong&gt;聚合&lt;/strong&gt; 在一起，并把其中称之为宏的缩写语句展开。&lt;/p&gt;
-&lt;p&gt;之后，被处理过的源程序则会通过 &lt;strong&gt;编译器&lt;/strong&gt; 和 &lt;strong&gt;汇编器(Assembler)&lt;/strong&gt; 生成可重定位 (Relocatable) 的机器代码，可重定位代码在内存中存放的起始位置 &lt;em&gt;L&lt;/em&gt; 是不固定的，代码中的所有地址都是相对于这个 &lt;em&gt;L&lt;/em&gt; 的相对地址，$\text{起始地址} + \text{相对地址} = \text{绝对地址}$，因为代码中的内存地址都是相对的，所以，我们需要&lt;strong&gt;加载器 (Loader)&lt;/strong&gt; 来修改可重定位地址，将修改后的指令和数据放在内存中适当的位置，还有一种情况使用的是 &lt;strong&gt;链接器 (Linker)&lt;/strong&gt; 而不是加载器，因为大型程序会被分割成很多部分，在这种情况下，链接器会将生成可重定位的机器代码与库文件进行链接，从而生成可执行代码，同时链接器还会解决&lt;em&gt;外部内存地址&lt;/em&gt;问题，所谓外部内存地址，就是指一个文件中的代码，可能会引用另一个文件中的对象或者过程，这些被引用的对象或者过程的地址，相对于这个文件来说就是&lt;em&gt;外部地址&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;一个完整的系统大致就是这样&lt;/p&gt;
-&lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
-graph TD
-Start-- 源程序 --&amp;gt;预处理器
-预处理器-- 经过处理的源程序 --&amp;gt;编译器
-编译器-- 汇编语言程序 --&amp;gt;汇编器
-汇编器-- 可重定位的机器代码 --&amp;gt;链接器/加载器
-链接器/加载器-- 目标机器代码 --&amp;gt;Fin
-&amp;lt;/pre&amp;gt;&lt;/p&gt;
 </content:encoded><category>Compiler</category><author>Mslxl</author></item><item><title>编译原理：绪论 —— 词法分析</title><link>https://blog.mslxl.com/posts/others/n2/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n2/</guid><pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;词法分析 (Scanning)&lt;/h2&gt;
 &lt;p&gt;词法分析是编译的第一个阶段。词法分析器的主要任务是从左向右逐行扫描 (Scanning) 源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元 (token) 形式。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;token: &amp;lt;种别码,属性值&amp;gt;
@@ -13643,5 +13660,32 @@ Start-- 字符流 --&amp;gt;词法分析器
 机器无关代码优化器-- 中间表示形式 --&amp;gt;目标代码生成器
 目标代码生成器-- 目标机器语言 --&amp;gt;机器相关代码优化器
 机器相关代码优化器-- 目标机器语言 --&amp;gt;Fin
+&amp;lt;/pre&amp;gt;&lt;/p&gt;
+</content:encoded><category>Compiler</category><author>Mslxl</author></item><item><title>编译原理：绪论</title><link>https://blog.mslxl.com/posts/others/n1/</link><guid isPermaLink="true">https://blog.mslxl.com/posts/others/n1/</guid><pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;最近在学习编译原理，把笔记整理一下写在上面&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;什么是编译？&lt;/h2&gt;
+&lt;p&gt;编译是将一种语言翻译为另外一种语言，将被翻译的语言叫做&lt;code&gt;源程序&lt;/code&gt;，而翻译之后的语言叫做目标语言一般来说，编译是将高级语言翻译为低级语言，例如 &lt;code&gt;GCC&lt;/code&gt; 等 C++ 编译器就是将 C++ 翻译为机器语言或中间语言。&lt;/p&gt;
+&lt;p&gt;高级语言(High Level Language)符合人的表达习惯且易于学习和记忆，常见的就是 C++ 、Java。&lt;/p&gt;
+&lt;p&gt;低级语言则相反，并且与运行的机器密切相关，比如汇编语言(Assembly Language)和机器语言(Machine Language)。&lt;/p&gt;
+&lt;p&gt;下面分别是 C++ 、汇编语言和机器语言的画风：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x = 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;MOV X,2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;C706 0000 0002
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过上面几个例子，我们就知道了什么是编译以及为什么要编译。&lt;/p&gt;
+&lt;h2&gt;编译器在语言处理中的位置&lt;/h2&gt;
+&lt;p&gt;在变异中，除了编译器，我们还需要其他的一些东西。&lt;/p&gt;
+&lt;p&gt;首先，我们需要&lt;strong&gt;预处理器 (Preprocessor)&lt;/strong&gt;，源程序可能会被分割成模块，储存在不同的文件中，预处理器则会把他们 &lt;strong&gt;聚合&lt;/strong&gt; 在一起，并把其中称之为宏的缩写语句展开。&lt;/p&gt;
+&lt;p&gt;之后，被处理过的源程序则会通过 &lt;strong&gt;编译器&lt;/strong&gt; 和 &lt;strong&gt;汇编器(Assembler)&lt;/strong&gt; 生成可重定位 (Relocatable) 的机器代码，可重定位代码在内存中存放的起始位置 &lt;em&gt;L&lt;/em&gt; 是不固定的，代码中的所有地址都是相对于这个 &lt;em&gt;L&lt;/em&gt; 的相对地址，$\text{起始地址} + \text{相对地址} = \text{绝对地址}$，因为代码中的内存地址都是相对的，所以，我们需要&lt;strong&gt;加载器 (Loader)&lt;/strong&gt; 来修改可重定位地址，将修改后的指令和数据放在内存中适当的位置，还有一种情况使用的是 &lt;strong&gt;链接器 (Linker)&lt;/strong&gt; 而不是加载器，因为大型程序会被分割成很多部分，在这种情况下，链接器会将生成可重定位的机器代码与库文件进行链接，从而生成可执行代码，同时链接器还会解决&lt;em&gt;外部内存地址&lt;/em&gt;问题，所谓外部内存地址，就是指一个文件中的代码，可能会引用另一个文件中的对象或者过程，这些被引用的对象或者过程的地址，相对于这个文件来说就是&lt;em&gt;外部地址&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;一个完整的系统大致就是这样&lt;/p&gt;
+&lt;p&gt;&amp;lt;pre class=&quot;mermaid&quot;&amp;gt;
+graph TD
+Start-- 源程序 --&amp;gt;预处理器
+预处理器-- 经过处理的源程序 --&amp;gt;编译器
+编译器-- 汇编语言程序 --&amp;gt;汇编器
+汇编器-- 可重定位的机器代码 --&amp;gt;链接器/加载器
+链接器/加载器-- 目标机器代码 --&amp;gt;Fin
 &amp;lt;/pre&amp;gt;&lt;/p&gt;
 </content:encoded><category>Compiler</category><author>Mslxl</author></item></channel></rss>
