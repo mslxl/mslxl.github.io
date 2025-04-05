@@ -9,8 +9,8 @@ import { typst } from 'astro-typst'
 import { defineConfig, sharpImageService } from 'astro/config'
 import { firefox } from 'playwright'
 import rehypeKatex from 'rehype-katex'
+import rehypeMermaid from 'rehype-mermaid'
 import remarkMath from 'remark-math'
-import remarkMermaid from 'remark-mermaidjs'
 import UnoCSS from 'unocss/astro'
 import { themeConfig } from './src/.config'
 
@@ -27,10 +27,11 @@ export default defineConfig({
       theme: 'dracula',
       wrap: true,
     },
-    remarkPlugins: [remarkMath, [remarkMermaid, {
-      browser: firefox,
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex, [rehypeMermaid, {
+      browserType: firefox,
+      strategy: 'inline-svg',
     }]],
-    rehypePlugins: [rehypeKatex],
   },
   integrations: [
     UnoCSS({
