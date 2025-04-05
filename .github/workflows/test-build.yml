@@ -12,4 +12,5 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build with nix
         run: |
+          chmod a+rx ./nix-build.sh
           bash ./nix-build.sh
