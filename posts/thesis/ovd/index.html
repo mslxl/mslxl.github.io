@@ -51,10 +51,10 @@ p[data-astro-cid-gcn2mc3v]{font-size:.75rem;font-weight:700}html.animation-prepa
 <p><img alt="伪标签与人工方法对比" width="1198" height="320" loading="lazy" decoding="async" src="/_astro/image-20250408152659477.C3337DI7_Z1iWM9C.webp" ></p>
 <p>上图中左侧为传统的学习方法，其训练成本很高。而右侧为伪标签方法。伪标签方法利用自己生成的标签训练自己。</p>
 <h4 id="伪标签的生成">伪标签的生成</h4>
-<p>该工作使用 VLM 生成伪标签。首先通过输入图文对分别提取特征，获得特征向量，然后利用图文交互的 cross-attention 机制获得多模态特征，计算图像区域和文本单词的注意力权重，再利用 Grad-CAM  对注意力权重进行可视化，得到目标的 Activation Map 区域，该局域即为 RPN 网络的目标 ROI。该ROI 构成该目标名称的伪边界框标签。</p>
+<p>该工作使用 VLM 生成伪标签。首先通过输入图文对分别提取特征，获得特征向量，然后利用图文交互的 cross-attention 机制获得多模态特征，计算图像区域和文本单词的注意力权重，再利用 Grad-CAM 对注意力权重进行可视化，得到目标的 Activation Map 区域，该局域即为 RPN 网络的目标 ROI。该ROI 构成该目标名称的伪边界框标签。</p>
 <p><img alt="伪标签生成" width="990" height="327" loading="lazy" decoding="async" src="/_astro/image-20250408154837372.BcLF8fea_HwmDC.webp" ></p>
 <h3 id="检测模型训练">检测模型训练</h3>
-<p>通过伪标签数据即可训练 OVD 的检测。将图像数据根据伪标签获得 ROI，然后经过编码器得到特征向量，文本直接经过文本编码器得到向量。之后经过计算跨模态  embedding 的相似度，根据伪标签计算交叉熵。</p>
+<p>通过伪标签数据即可训练 OVD 的检测。将图像数据根据伪标签获得 ROI，然后经过编码器得到特征向量，文本直接经过文本编码器得到向量。之后经过计算跨模态 embedding 的相似度，根据伪标签计算交叉熵。</p>
 <h2 id="其他详细资料">其他详细资料</h2>
 <p><a href="https://zhuanlan.zhihu.com/p/610639148">面向开放词汇的目标检测Open-Vocabulary Object Detection（OVD）的介绍</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/595169030">Open-Vocabulary Object Detection 工作调研</a></p>
