@@ -20,10 +20,10 @@ export const defaultConfig: ThemeConfig = {
         name: 'rss',
         href: '/atom.xml',
       },
-      // {
-      //   name: 'twitter',
-      //   href: 'https://github.com/moeyua/astro-theme-typography',
-      // },
+      {
+        name: 'twitter',
+        href: 'https://x.com/mslxl_bak/',
+      },
       {
         name: 'mastodon',
         href: 'https://mastodon.social/@mslxl',
