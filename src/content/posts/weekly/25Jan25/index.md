@@ -36,6 +36,10 @@ categories:
 
 总而言之，如果要学习一种语言，多邻国并不是一个很好的选择。但要是作为一个能够复习的游戏来说，倒也勉强合格。它只能拿来复习，至于拿来学习——还是找本书更靠谱些。
 
+<p style="font-size: 0.8em;">
+10月21日追加: 有关 Duolingo 的算法可见墨墨背单词于 21 年的研究报告： <a href="https://github.com/maimemo/maimemo-memory-research">maimemo/maimemo-memory-research</a>
+</p>
+
 至于我抛开多邻国后去了哪？我将我的学习任务拆分成了单词和句子两部分。
 单词现在依靠 Anki 搭配卡组 [5mdld/anki-jlpt-decks](https://github.com/5mdld/anki-jlpt-decks)，
 而句子则通过《皆の日本語》这本知名教材来完成。
