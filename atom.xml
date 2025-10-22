@@ -375,7 +375,9 @@ map f (x:xs) k = map f xs (\rec -&amp;gt; k (f x: rec))
 这很像 SRS（间隔重复）的学习方式，但是它却希望用户通过重复建立起语感。我个人觉得建立语感最重要的是环境，即大量的不同的句子重复出现。
 显然多邻国给出的句子太少了，每种表达只有寥寥几句。到最后用户可能什么也没学到。&lt;/p&gt;
 &lt;p&gt;总而言之，如果要学习一种语言，多邻国并不是一个很好的选择。但要是作为一个能够复习的游戏来说，倒也勉强合格。它只能拿来复习，至于拿来学习——还是找本书更靠谱些。&lt;/p&gt;
-&lt;p&gt;&amp;lt;p class=&quot;font-size: 0.8em;&quot;&amp;gt;&lt;strong&gt;10月21日追加&lt;/strong&gt;: 有关 Duolingo 的算法可见墨墨背单词于 21 年的研究报告：&lt;a href=&quot;https://github.com/maimemo/maimemo-memory-research&quot;&gt;maimemo/maimemo-memory-research&lt;/a&gt;&amp;lt;/p&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;p style=&quot;font-size: 0.8em;&quot;&amp;gt;
+10月21日追加: 有关 Duolingo 的算法可见墨墨背单词于 21 年的研究报告： &amp;lt;a href=&quot;https://github.com/maimemo/maimemo-memory-research&quot;&amp;gt;maimemo/maimemo-memory-research&amp;lt;/a&amp;gt;
+&amp;lt;/p&amp;gt;&lt;/p&gt;
 &lt;p&gt;至于我抛开多邻国后去了哪？我将我的学习任务拆分成了单词和句子两部分。
 单词现在依靠 Anki 搭配卡组 &lt;a href=&quot;https://github.com/5mdld/anki-jlpt-decks&quot;&gt;5mdld/anki-jlpt-decks&lt;/a&gt;，
 而句子则通过《皆の日本語》这本知名教材来完成。&lt;/p&gt;
