@@ -1,0 +1,7 @@
+svg.typst-doc {
+  max-width: 100%;
+  height: auto !important;
+  /* display: block; */
+  margin-left: auto;
+  margin-right: auto;
+}

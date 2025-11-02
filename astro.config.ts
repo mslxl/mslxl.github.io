@@ -1,10 +1,10 @@
-import { defineConfig } from 'astro/config'
+import { defineConfig, sharpImageService } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
 import unocss from 'unocss/astro'
 import astroExpressiveCode from 'astro-expressive-code'
 import mdx from '@astrojs/mdx'
-
+import { typst } from 'astro-typst'
 import { remarkPlugins, rehypePlugins } from './plugins'
 import { SITE } from './src/config'
 
@@ -17,6 +17,16 @@ export default defineConfig({
     robotsTxt(),
     unocss({ injectReset: true }),
     astroExpressiveCode(),
+    typst({
+      options: {
+        remPx: 14,
+      },
+      target: (id: string) => {
+        console.debug(`Detecting ${id}`)
+        if (id.endsWith('.html.typ') || id.includes('/html/')) return 'html'
+        return 'svg'
+      },
+    }),
     mdx(),
   ],
   markdown: {
@@ -31,8 +41,14 @@ export default defineConfig({
     // Used for all `<Image />` and `<Picture />` components unless overridden with `layout` prop
     layout: 'constrained',
     responsiveStyles: true,
+    service: sharpImageService({
+      limitInputPixels: false,
+    }),
   },
   vite: {
+    ssr: {
+      external: ['@myriaddreamin/typst-ts-node-compiler'],
+    },
     server: {
       headers: {
         // Enable CORS for dev: allow Giscus iframe to load local styles

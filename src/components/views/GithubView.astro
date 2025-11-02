@@ -6,7 +6,6 @@ import GithubItem from '~/components/views/GithubItem.astro'
 import Warning from '~/components/base/Warning.astro'
 import { UI } from '~/config'
 import { formatDate, isDiffMonth } from '~/utils/datetime'
-import { withBasePath } from '~/utils/path'
 import { matchLogo, extractPackageName, processVersion } from '~/utils/data'
 
 import type { RepoWithOwner, Url, Icon } from '~/types'
@@ -34,9 +33,11 @@ const { collectionType } = Astro.props
 const { monorepos, mainLogoOverrides, subLogoMatches } = UI.githubView
 
 const MAX_PER_PKG = 5
+// const WARNING = `No GitHub data available for display.
+//   See <a href='https://astro-antfustyle-theme.vercel.app/blog/customizing-github-activity-pages/'>
+//   Customizing GitHub Activity Pages</a> for details.`
 const WARNING = `No GitHub data available for display.
-  See <a href='https://astro-antfustyle-theme.vercel.app/blog/customizing-github-activity-pages/'>
-  Customizing GitHub Activity Pages</a> for details.`
+  This is not your fault — please check back later!`
 
 let isEmpty = false
 
@@ -170,21 +171,11 @@ if (collectionType === 'prs') {
               {formatDate(new Date())}
             </time>
           </span>
-          <span class="lt-sm:hidden">&nbsp;|&nbsp;</span>
+          {/* <span class="lt-sm:hidden">&nbsp;|&nbsp;</span>
           <span>
             Scheduled refresh:
             <span class="text-[var(--fg-deeper)]">Every Saturday</span>
-          </span>
-        </p>
-        <p class="my-0! lt-sm:my-1.5!">
-          See
-          <Link
-            class="op-100!"
-            href={withBasePath('/blog/customizing-github-activity-pages/')}
-          >
-            Customizing GitHub Activity Pages
-          </Link>
-          to configure your own
+          </span> */}
         </p>
         <p class="my-0! lt-sm:my-1.5!">
           Inspired by

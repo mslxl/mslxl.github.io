@@ -1,7 +1,7 @@
 ---
 title: Epub 文件结构
 categories: ['Epub']
-date: 2019-09-20
+pubDate: 2019-09-20
 ---
 
 epub 文件的实质其实是一个固定格式的 zip 压缩包，文件名以 UTF-8 编码，但是不同的软件对于同一个 epub 标准有不同的实现。

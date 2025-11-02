@@ -1,6 +1,6 @@
 ---
 title: "周报 0x02: 旧日幻梦"
-date: "2025-02-20"
+pubDate: "2025-02-20"
 categories:
   - Weekly
   - Tauri

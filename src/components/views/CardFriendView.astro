@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content'
+
+import CardFriendItem from '~/components/views/CardFriendItem.astro'
+import Warning from '~/components/base/Warning.astro'
+
+import type { CollectionKey } from 'astro:content'
+import type { CardFriendItemData } from '~/components/views/CardFriendItem.astro'
+
+interface Props {
+  collectionType: CollectionKey
+  gap?: 'number'
+  minCardWidth?: number
+  maxCardWidth?: number
+}
+
+const { collectionType, gap = 16, minCardWidth, maxCardWidth } = Astro.props
+
+const WARNING = `No content available for display.
+  Please review and modify <code>CardFriendView.astro</code> as needed.`
+
+let isEmpty = false
+let dataForFriends: CardFriendItemData[] = []
+
+if (collectionType === ('friends' as CollectionKey)) {
+  const friends = await getCollection('friends')
+  dataForFriends = friends
+    .map((it) => it.data)
+    .map((item) => ({
+      href: item.href,
+      icon: item.icon,
+      image: item.image,
+      title: item.id,
+      description: item.desc,
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title))
+}
+
+if (dataForFriends.length === 0) isEmpty = true
+---
+
+{
+  isEmpty ? (
+    <Warning html={WARNING} />
+  ) : (
+    <>
+      <div
+        class="grid mx-20 lt-md:mx-1 fade-in"
+        style={{
+          '--fade-in-duration': '0.6s',
+          'gap': `${gap}px`,
+          'grid-template-columns': `repeat(auto-fill, minmax(${minCardWidth ? `${minCardWidth}px` : '180px'}, ${maxCardWidth ? `${maxCardWidth}px` : '1fr'}))`,
+        }}
+      >
+        {dataForFriends.map((item) => (
+          <CardFriendItem item={item} />
+        ))}
+      </div>
+    </>
+  )
+}

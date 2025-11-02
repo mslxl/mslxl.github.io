@@ -4,7 +4,7 @@ categories:
   - 译
   - i3wm
   - Linux
-date: 2018-08-23
+pubDate: 2018-08-23
 ---
 
 [原页面](https://i3wm.org/docs/userguide.html)

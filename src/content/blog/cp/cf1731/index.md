@@ -1,6 +1,6 @@
 ---
 title: Codeforces Round 841 (Div. 2) and Divide by Zero 2022 - ABCD
-date: 2022-12-31
+pubDate: 2022-12-31
 categories:
   - Competitive Programming
   - Codeforces

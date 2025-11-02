@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { firefox } from 'playwright'
 
 import remarkDirective from 'remark-directive'
 import remarkDirectiveSugar from 'remark-directive-sugar'
@@ -12,6 +13,7 @@ import rehypeCallouts from 'rehype-callouts'
 import rehypeKatex from 'rehype-katex'
 import rehypeExternalLinks from 'rehype-external-links'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehyprMermaid from 'rehype-mermaid'
 // @ts-expect-error(rehype-wrap-all is not typed)
 import rehypeWrapAll from 'rehype-wrap-all'
 
@@ -72,6 +74,14 @@ export const rehypePlugins: RehypePlugins = [
     rehypeCallouts,
     {
       theme: 'vitepress',
+    },
+  ],
+  // https://github.com/remcohaszing/rehype-mermaid
+  [
+    rehyprMermaid,
+    {
+      browser: firefox,
+      strategy: 'inline-svg',
     },
   ],
   // https://github.com/rehypejs/rehype-external-links

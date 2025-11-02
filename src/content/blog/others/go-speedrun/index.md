@@ -1,6 +1,6 @@
 ---
 title: "速通 Go 语言基础"
-date: 2023-09-08
+pubDate: 2023-09-08
 categories:
   - Go
 ---

@@ -1,6 +1,6 @@
 ---
 title: "2023 SDCPC 赛后回顾"
-date: 2023-06-05
+pubDate: 2023-06-05
 categories:
   - 随笔
   - Competitive Programming

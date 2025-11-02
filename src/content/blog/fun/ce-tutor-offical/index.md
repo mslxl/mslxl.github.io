@@ -1,6 +1,6 @@
 ---
 title: ChectEngine（一）：基本使用——以官方小游戏为例
-date: 2024-06-28
+pubDate: 2024-06-28
 categories:
   - 逆向
   - Cheat Engine

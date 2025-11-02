@@ -1,6 +1,6 @@
 ---
 title: 论鸽子
-date: 2018-10-06
+pubDate: 2018-10-06
 categories:
   - 随笔
 ---

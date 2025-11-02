@@ -1,6 +1,6 @@
 ---
 title: V2Ray Setup
-date: 2020-01-19
+pubDate: 2020-01-19
 categories:
   - V2Ray
 ---

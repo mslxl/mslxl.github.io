@@ -166,46 +166,19 @@ export const projectSchema = z.object({
 
 export type ProjectSchema = z.infer<typeof projectSchema>
 
-/* Photos */
-export const photoSchema = z.object({
-  id: z
-    .string()
-    .describe(
-      '**Required**. File (name/path) of the image in the `src/content/photos/` directory or a remote image URL.'
-    ),
-  desc: z.string().default('').describe('Optional description for the image.'),
-})
-
-export type PhotoSchema = z.infer<typeof photoSchema>
-
-/* Stremas */
-export const streamSchema = z.object({
-  id: z.string().describe('**Required**. Sets the stream title.'),
-  pubDate: z.coerce
-    .date()
-    .describe(
-      '**Required**. Specifies the publication date. See supported formats [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse#examples).'
-    ),
-  link: z
+/* Friends */
+export const friendSchema = z.object({
+  id: z.string().describe('**Required**. Name of the friend site.'),
+  href: z
     .string()
     .url('Invalid url.')
-    .describe('**Required**. Specifies the URL link to the stream.'),
-  radio: z
-    .boolean()
-    .default(false)
-    .describe(
-      'Indicates whether the stream is a radio broadcast. If `true`, an icon will be added to the stream item in the list.'
-    ),
-  video: z
-    .boolean()
-    .default(false)
-    .describe(
-      'Indicates whether the stream is a video broadcast. If `true`, an icon will be added to the stream item in the list.'
-    ),
-  platform: z
+    .describe('**Required**. URL linking to the friend site.'),
+  desc: z
     .string()
-    .default('')
-    .describe('Specifies the platform where the stream is published.'),
+    .optional()
+    .describe('A brief description summarizing the friend site.'),
+  icon: z.string().optional().describe('i-[icon]'),
+  image: z.string().optional().describe('Image URL of the friend site.'),
 })
 
-export type StreamSchema = z.infer<typeof streamSchema>
+export type FriendSchema = z.infer<typeof friendSchema>

@@ -1,6 +1,6 @@
 ---
 title: "MIT6.824 分布式系统 GFS"
-date: 2023-09-21
+pubDate: 2023-09-21
 categories:
   - MIT6.824
   - 分布式系统

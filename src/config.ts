@@ -1,15 +1,14 @@
 import type { Site, Ui, Features } from './types'
 
 export const SITE: Site = {
-  website: 'https://astro-antfustyle-theme.vercel.app/',
+  website: 'https://blog.mslxl.com/',
   base: '/',
-  title: 'Astro AntfuStyle Theme',
-  description:
-    'A customizable, feature-rich Astro theme for blog and portfolio creation',
-  author: 'Stephanie Lin',
-  lang: 'en',
-  ogLocale: 'en_US',
-  imageDomains: ['cdn.bsky.app', 'images.unsplash.com'],
+  title: 'Integrate Life',
+  description: "Mslxl's blog - Integrate subtle to life",
+  author: 'Mslxl',
+  lang: 'zh',
+  ogLocale: 'zh_CN',
+  imageDomains: [],
 }
 
 export const UI: Ui = {
@@ -27,20 +26,6 @@ export const UI: Ui = {
       text: 'Projects',
     },
     {
-      path: '/highlights',
-      title: 'Highlights',
-      displayMode: 'iconToTextOnMobile',
-      text: 'Highlights',
-      icon: 'i-ri-screenshot-line',
-    },
-    {
-      path: '/photos',
-      title: 'Photos',
-      displayMode: 'iconToTextOnMobile',
-      text: 'Photos',
-      icon: 'i-ri-camera-ai-line',
-    },
-    {
       path: '/shorts',
       title: 'Shorts',
       displayMode: 'iconToTextOnMobile',
@@ -48,31 +33,19 @@ export const UI: Ui = {
       icon: 'i-meteor-icons-grid',
     },
     {
-      path: '/changelog',
-      title: 'Changelog',
+      path: '/friends',
+      title: 'Friends',
       displayMode: 'iconToTextOnMobile',
-      text: 'Changelog',
-      icon: 'i-ri-draft-line',
+      text: 'Friends',
+      icon: 'i-ri-group-line',
     },
   ],
   socialLinks: [
     {
-      link: 'https://github.com/lin-stephanie/astro-antfustyle-theme',
-      title: 'AntfuStyle on Github',
+      link: 'https://github.com/mslxl',
+      title: 'Github',
       displayMode: 'alwaysIcon',
       icon: 'i-uil-github-alt',
-    },
-    {
-      link: 'https://x.com/astrodotbuild',
-      title: 'Astro on Twitter',
-      displayMode: 'alwaysIcon',
-      icon: 'i-ri-twitter-x-fill',
-    },
-    {
-      link: 'https://bsky.app/profile/astro.build',
-      title: 'Astro on Bluesky',
-      displayMode: 'alwaysIcon',
-      icon: 'i-meteor-icons-bluesky',
     },
   ],
   navBarLayout: {
@@ -88,21 +61,13 @@ export const UI: Ui = {
     ],
     mergeOnMobile: true,
   },
-  tabbedLayoutTabs: [
-    { title: 'Changelog', path: '/changelog' },
-    { title: 'AstroBlog', path: '/feeds' },
-    { title: 'AstroStreams', path: '/streams' },
-  ],
+  tabbedLayoutTabs: false,
   groupView: {
     maxGroupColumns: 3,
     showGroupItemColorOnHover: true,
   },
   githubView: {
-    monorepos: [
-      'withastro/astro',
-      'withastro/starlight',
-      'lin-stephanie/astro-loaders',
-    ],
+    monorepos: ['mslxl/algorimejo', 'Memorilo/memorilo'],
     mainLogoOverrides: [
       [/starlight/, 'https://starlight.astro.build/favicon.svg'],
     ],
@@ -148,13 +113,13 @@ export const FEATURES: Features = {
   share: [
     true,
     {
-      twitter: [true, '@ste7lin'],
-      bluesky: [true, '@ste7lin.bsky.social'],
-      mastodon: false,
+      twitter: [true, '@mslxl_bak'],
+      bluesky: [true, '@mslxl.bsky.social'],
+      mastodon: [true, '@mslxl'],
       facebook: false,
       pinterest: false,
       reddit: false,
-      telegram: false,
+      telegram: true,
       whatsapp: false,
       email: false,
     },
@@ -162,10 +127,10 @@ export const FEATURES: Features = {
   giscus: [
     true,
     {
-      'data-repo': 'lin-stephanie/astro-antfustyle-theme',
-      'data-repo-id': 'R_kgDOLylKbA',
-      'data-category': 'Giscus',
-      'data-category-id': 'DIC_kwDOLylKbM4Cpugn',
+      'data-repo': 'mslxl/mslxl.github.io',
+      'data-repo-id': 'MDEwOlJlcG9zaXRvcnkxMjcwMTEwMjI=',
+      'data-category': 'Show and tell',
+      'data-category-id': 'DIC_kwDOB5IIzs4CfW4f',
       'data-mapping': 'title',
       'data-strict': '0',
       'data-reactions-enabled': '1',
@@ -177,7 +142,7 @@ export const FEATURES: Features = {
   search: [
     true,
     {
-      includes: ['blog', 'changelog'],
+      includes: ['blog', 'projects'],
       filter: true,
       navHighlight: true,
       batchLoadSize: [true, 5],

@@ -1,6 +1,6 @@
 ---
 title: MIT6.824 分布式系统 MapReduce
-date: 2023-09-15
+pubDate: 2023-09-15
 categories:
   - "MIT6.824"
   - 分布式系统

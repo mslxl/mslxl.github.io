@@ -1,6 +1,6 @@
 ---
 title: "CPS 与 Rust Result"
-date: 2025-01-21
+pubDate: 2025-01-21
 categories:
   - Rust
   - CPS

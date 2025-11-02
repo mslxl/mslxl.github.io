@@ -1,6 +1,6 @@
 ---
 title: "皈依 NixOS"
-date: 2023-09-14
+pubDate: 2023-09-14
 categories:
   - Linux
   - NixOS

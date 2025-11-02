@@ -1,6 +1,6 @@
 ---
 title: "Hindley Milner"
-date: 2025-02-21
+pubDate: 2025-02-21
 categories:
   - Hindley Milner
   - Compiler

@@ -1,6 +1,6 @@
 ---
 title: "CPS 变换"
-date: 2025-02-08
+pubDate: 2025-02-08
 categories:
   - CPS
 ---

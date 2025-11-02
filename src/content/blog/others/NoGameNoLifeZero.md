@@ -1,6 +1,6 @@
 ---
 title: No Game No Life Zero
-date: 2018-08-21
+pubDate: 2018-08-21
 categories:
   - 随笔
 ---

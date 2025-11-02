@@ -1,6 +1,6 @@
 ---
-title: "Harbour.Space Scholarship Contest 2023-2024 (Div. 1 + Div. 2) A-E 二进制拆分 组合数学"
-date: 2023-08-27
+title: "Harbour.Space Scholarship (Div. 1 + Div. 2) A-E 二进制拆分 组合数学"
+pubDate: 2023-08-27
 categories:
     - Competitive Programming
     - Codeforces

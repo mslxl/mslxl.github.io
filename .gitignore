@@ -2,6 +2,7 @@
 dist/
 result
 .direnv/
+/typst/*.pdf
 # generated types
 .astro/
 

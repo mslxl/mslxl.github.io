@@ -11,6 +11,12 @@ import { SITE } from '~/config'
   aria-current={Astro.url.pathname === `${withBasePath('/')}` ? 'page' : false}
 >
   <div class="logo-container">
+    <img
+      class="w-[2em] h-[2em] rounded-full filt"
+      src="https://gravatar.com/avatar/05f5322f81caf6d7838dddb3c004824f"
+      alt={SITE.author}
+      aria-hidden="true"
+    />
     <!-- ICON SVG -->
     <!-- <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +55,7 @@ import { SITE } from '~/config'
     <!-- TEXT SVG -->
     <!-- Generator: https://danmarshall.github.io/google-font-to-svg-path/ -->
     <!-- Google font: Great Vibes -->
-    <svg
+    <!-- <svg
       width="107.548"
       height="32.732"
       viewBox="0 0 107.548 32.732"
@@ -70,7 +76,7 @@ import { SITE } from '~/config'
         >
         </path>
       </g>
-    </svg>
+    </svg> -->
   </div>
 </Link>
 

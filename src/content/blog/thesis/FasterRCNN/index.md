@@ -1,6 +1,6 @@
 ---
 title: "Faster R-CNN"
-date: 2025-04-03
+pubDate: 2025-04-03
 categories:
   - 目标检测
   - AI

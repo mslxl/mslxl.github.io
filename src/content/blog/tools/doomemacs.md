@@ -3,7 +3,7 @@ title: 使用 Doom Emacs 工作
 categories:
   - 译
   - Emacs
-date: 2021-08-30 00:00:00
+pubDate: 2021-08-30
 ---
 
 # Table of Contents

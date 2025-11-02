@@ -3,7 +3,7 @@ title: The 2022 ICPC Asia Xian Regional Contest (CHGJ)
 categories:
   - Competitive Programming
   - ICPC
-date: 2022-12-13
+pubDate: 2022-12-13
 ---
 
 只把签到题做了做。

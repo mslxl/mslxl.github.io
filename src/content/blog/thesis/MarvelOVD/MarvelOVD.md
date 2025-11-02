@@ -1,6 +1,6 @@
 ---
 title: "MarvelOVD"
-date: 2025-04-08
+pubDate: 2025-04-08
 categories:
   - OVD
   - 目标检测

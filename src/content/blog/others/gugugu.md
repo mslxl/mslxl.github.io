@@ -1,6 +1,6 @@
 ---
 title: 咕咕咕咕
-date: 2018-08-30
+pubDate: 2018-08-30
 categories:
   - 随笔
 ---

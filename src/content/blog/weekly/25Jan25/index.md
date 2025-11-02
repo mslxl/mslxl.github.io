@@ -1,6 +1,6 @@
 ---
 title: "周报 0x01: ボクの理想の Python"
-date: "2025-01-25"
+pubDate: "2025-01-25"
 categories:
   - Weekly
   - Python

@@ -1,6 +1,6 @@
 ---
 title: 树形 DP 练习
-date: 2023-01-18
+pubDate: 2023-01-18
 categories:
   - Competitive Programming
 ---

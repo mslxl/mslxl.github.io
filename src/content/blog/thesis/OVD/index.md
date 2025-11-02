@@ -1,6 +1,6 @@
 ---
 title: "开放词汇目标检测（OVD）"
-date: 2025-03-28
+pubDate: 2025-03-28
 categories:
   - OVD
   - 目标检测

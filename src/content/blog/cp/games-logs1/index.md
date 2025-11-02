@@ -1,6 +1,6 @@
 ---
 title: "Game tag 板刷网瘾记录"
-date: 2023-08-30
+pubDate: 2023-08-30
 categories:
     - Competitive Programming
     - Codeforces

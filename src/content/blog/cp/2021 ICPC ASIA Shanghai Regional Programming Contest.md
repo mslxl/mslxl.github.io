@@ -1,6 +1,6 @@
 ---
 title: "The 2021 ICPC Asia Shanghai Regional Programming Contest"
-date: 2023-01-16
+pubDate: 2023-01-16
 categories:
   - Competitive Programming
   - ICPC

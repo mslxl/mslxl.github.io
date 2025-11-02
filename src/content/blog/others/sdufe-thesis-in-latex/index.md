@@ -1,6 +1,6 @@
 ---
 title: 使用 LaTeX 完成毕业论文——SDUFE thesis 开发记录
-date: 2024-04-27
+pubDate: 2024-04-27
 categories:
   - LaTeX
   - 山东财经大学

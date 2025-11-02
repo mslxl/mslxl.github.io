@@ -1,6 +1,6 @@
 ---
 title: 2022 第五届传智杯初赛
-date: 2022-12-29
+pubDate: 2022-12-29
 categories:
   - Competitive Programming
   - 传智杯

@@ -1,6 +1,6 @@
 #set page(margin: (bottom: 2em, top: 2em, left: 0pt, right: 0pt))
 #set text(size: 16pt)
-#import "../../../../components/typst-components.typ": *
+#import "../../../../../typst/components.typ": *
 
 
 
@@ -12,9 +12,7 @@ At the beginning, I think so.
 
 #line(length: 100%)
 
-#outline()
-
-
+// #outline()
 
 = Life
 

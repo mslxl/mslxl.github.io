@@ -1,6 +1,6 @@
 ---
 title: "Educational Codeforces Round 153 A-E (博弈论 DP 拆点)"
-date: 2023-08-18
+pubDate: 2023-08-18
 categories:
   - Competitive Programming
   - Codeforces

@@ -1,6 +1,6 @@
 ---
 title: "Dev-C++ OpenCV 环境搭建"
-date: 2022-10-14
+pubDate: 2022-10-14
 categories: ['C++', 'OpenCV']
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "2021 Shandong Provincial Collegiate Programming Contest"
-date: 2023-03-04
+pubDate: 2023-03-04
 categories:
   - Competitive Programming
   - ICPC

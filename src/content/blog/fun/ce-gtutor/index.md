@@ -1,6 +1,6 @@
 ---
 title: ChectEngine（二）：常见用例——以官方图形游戏为例
-date: 2024-06-30
+pubDate: 2024-06-30
 categories:
   - 逆向
   - Cheat Engine

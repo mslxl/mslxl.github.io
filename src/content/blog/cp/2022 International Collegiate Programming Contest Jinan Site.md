@@ -1,6 +1,6 @@
 ---
 title: "2022 International Collegiate Programming Contest Jinan Site"
-date: 2023-01-28
+pubDate: 2023-01-28
 categories:
   - Competitive Programming
   - ICPC

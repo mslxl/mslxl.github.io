@@ -2,7 +2,7 @@
 #set text(size: 16pt)
 #set text(lang: "zh")
 
-#import "../../../../components/typst-components.typ": *
+#import "../../../../../typst/components.typ": *
 #import "@preview/tablem:0.1.0": tablem
 #import "@preview/mitex:0.2.4": *
 #import "@preview/codly:1.0.0": *

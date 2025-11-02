@@ -1,6 +1,6 @@
 ---
 title: 使用 ts 实现 Parser 组合子
-date: 2022-10-07T20:00:00+08:00
+pubDate: 2022-10-07T20:00:00+08:00
 categories:
     - TypeScript
 ---

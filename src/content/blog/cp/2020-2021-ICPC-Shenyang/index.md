@@ -1,6 +1,6 @@
 ---
 title: "The 2020 ICPC Asia Shenyang Regional Programming Contest"
-date: 2023-01-10
+pubDate: 2023-01-10
 categories:
   - Competitive Programming
   - ICPC

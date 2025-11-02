@@ -27,6 +27,7 @@
 
               shellcheck
              
+              jq
               nodejs
               nodejs.pkgs.pnpm
             ]);
@@ -34,20 +35,19 @@
             FONTCONFIG_FILE = pkgs.makeFontsConf {
               fontDirectories = with pkgs; [
                 nerd-fonts.iosevka
+                maple-mono.CN
                 source-han-sans
                 source-han-serif
               ];
             };
+            PLAYWRIGHT_BROWSERS_PATH="${pkgs.playwright-driver.browsers}";
+            PLAYWRIGHT_VERSION="${pkgs.playwright-driver.version}";
+            PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS="true";
             shellHook = ''
+              jq --arg version "$PLAYWRIGHT_VERSION" '.devDependencies.playwright = $version' package.json > tmp.json && mv tmp.json package.json
+
               if [ ! -d "node_modules" ]; then pnpm install; fi
               export PROJ_NIX_ENV=1
-
-              export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
-              # export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
-
-              # playwright_chromium_revision="$(${pkgs.jq}/bin/jq --raw-output '.browsers[] | select(.name == "chromium").revision' ${pkgs.playwright-driver}/browsers.json)"
-              # export PLAYWRIGHT_LAUNCH_OPTIONS_EXECUTABLE_PATH=${pkgs.playwright-driver.browsers}/chromium-$playwright_chromium_revision/chrome-linux/chrome
-              # export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=$PLAYWRIGHT_LAUNCH_OPTIONS_EXECUTABLE_PATH
 
               env | grep ^PLAYWRIGHT
             '';
