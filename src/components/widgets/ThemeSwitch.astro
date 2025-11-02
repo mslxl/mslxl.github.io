@@ -1,0 +1,160 @@
+---
+
+---
+
+<button
+  id="theme-switch"
+  class="op-60 hover:op-100 op-transition"
+  title="Toggles light & dark"
+  aria-label="Toggles light & dark"
+>
+  <div u-i-ri-sun-line u-dark:i-ri-moon-line></div>
+</button>
+
+<!-- Initialize as inline scripts for faster response, avoiding FOUC  -->
+<script is:inline data-astro-rerun>
+  function initTheme() {
+    let theme
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      theme = localStorage.theme
+    } else {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      window.localStorage.setItem('theme', theme)
+    }
+
+    const toggleThemeButton = document.getElementById('theme-switch')
+    toggleThemeButton.setAttribute('role', 'switch')
+
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark')
+      toggleThemeButton.setAttribute('aria-label', 'light')
+      toggleThemeButton.setAttribute('aria-checked', 'false')
+    } else {
+      document.documentElement.classList.add('dark')
+      toggleThemeButton.setAttribute('aria-label', 'dark')
+      toggleThemeButton.setAttribute('aria-checked', 'true')
+    }
+
+    const colorThemeMetaTag = document.querySelector("meta[name='theme-color']")
+    const bgColor = getComputedStyle(document.body).getPropertyValue('--c-bg')
+    colorThemeMetaTag?.setAttribute('content', bgColor)
+  }
+
+  initTheme()
+</script>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    let isDark: boolean
+
+    const changeGiscusTheme = (isDark: boolean) => {
+      const newTheme = isDark
+        ? `${location.origin}/giscus/dark.css`
+        : `${location.origin}/giscus/light.css`
+
+      const giscusScript = document.getElementById('giscus-script')
+      if (giscusScript) {
+        giscusScript.setAttribute('data-theme', newTheme)
+        const iframe = document.querySelector('iframe.giscus-frame')
+        if (
+          iframe &&
+          iframe instanceof HTMLIFrameElement &&
+          iframe.contentWindow
+        ) {
+          iframe.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: newTheme } } },
+            'https://giscus.app'
+          )
+        }
+      }
+    }
+
+    const updateAria = (buttonElement: HTMLElement) => {
+      buttonElement.setAttribute('aria-label', isDark ? 'dark' : 'light')
+      buttonElement.setAttribute('aria-checked', isDark ? 'true' : 'false')
+    }
+
+    const setColorTheme = () => {
+      const colorThemeMetaTag = document.querySelector(
+        "meta[name='theme-color']"
+      )
+      const bgColor = getComputedStyle(document.body).getPropertyValue('--c-bg')
+      colorThemeMetaTag?.setAttribute('content', bgColor)
+    }
+
+    const saveTheme = () => {
+      window.localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    }
+
+    /* Handle user toggle button */
+    const handleToggle = (event: MouseEvent) => {
+      const currentTarget = event.currentTarget
+
+      const toggle = () => {
+        document.documentElement.classList.toggle('dark')
+        isDark = document.documentElement.classList.contains('dark')
+        changeGiscusTheme(isDark)
+        updateAria(currentTarget as HTMLElement)
+        setColorTheme()
+        saveTheme()
+      }
+
+      const isAppearanceTransition =
+        // @ts-expect-error (View Transitions API)
+        document.startViewTransition &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      if (!isAppearanceTransition) {
+        toggle()
+        return
+      }
+
+      const x = event.clientX
+      const y = event.clientY
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y)
+      )
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore (View Transitions API)
+      const transition = document.startViewTransition(() => toggle())
+
+      transition.ready.then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ]
+
+        document.documentElement.animate(
+          {
+            clipPath: isDark ? clipPath.reverse() : clipPath,
+          },
+          {
+            duration: 400,
+            easing: 'ease-out',
+            pseudoElement: isDark
+              ? '::view-transition-old(root)'
+              : '::view-transition-new(root)',
+          }
+        )
+      })
+    }
+
+    const toggleThemeButton = document.getElementById('theme-switch')
+    toggleThemeButton?.addEventListener('click', handleToggle)
+
+    /* Listening system changes */
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', ({ matches }) => {
+        isDark = matches
+        document.documentElement.classList.toggle('dark', isDark)
+        changeGiscusTheme(isDark)
+        if (toggleThemeButton) updateAria(toggleThemeButton)
+        saveTheme()
+      })
+  })
+</script>

@@ -1,0 +1,29 @@
+---
+title: AstroEco is Contributing...
+description: Display your GitHub pull requests using astro-loader-github-prs
+subtitle: ''
+bgType: plum
+toc: false
+ogImage: false
+---
+
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import StandardLayout from '~/layouts/StandardLayout.astro'
+import GithubView from '~/components/views/GithubView.astro'
+import Link from '~/components/base/Link.astro'
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  bgType={frontmatter.bgType}
+  ogImage={frontmatter.ogImage}
+>
+  <StandardLayout class="max-w-65ch" isCentered={true}>
+    <Fragment slot="head">
+      <h1>AstroEco is <span class="animate-pulse">Contributing...</span></h1>
+      <p class="mt--4! op-50 italic"
+      >Display your GitHub pull requests using <Link href="https://github.com/lin-stephanie/astro-loaders/tree/main/packages/astro-loader-github-prs" external={true} class="op-100!">astro-loader-github-prs</Link></p>
+    </Fragment>
+    <GithubView collectionType="prs" />
+  </StandardLayout>
+</BaseLayout>

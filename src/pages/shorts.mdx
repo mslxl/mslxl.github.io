@@ -1,0 +1,27 @@
+---
+title: Shorts
+subtitle: Share your short notes or quick thoughts
+description: Share your short notes or quick thoughts
+bgType: particle
+toc: false
+ogImage: true
+---
+
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import StandardLayout from '~/layouts/StandardLayout.astro'
+import CardView from '~/components/views/CardView.astro'
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  bgType={frontmatter.bgType}
+  ogImage={frontmatter.ogImage}
+>
+  <StandardLayout
+    title={frontmatter.title}
+    subtitle={frontmatter.subtitle}
+    isCentered={true}
+  >
+    <CardView collectionType="shorts" mode="grid" />
+  </StandardLayout>
+</BaseLayout>

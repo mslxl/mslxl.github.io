@@ -1,15 +1,15 @@
-/// <reference path="../.astro/types.d.ts" />
-/// <reference types="astro/client" />
-declare namespace App {
-  interface Locals {
-    translate: (key: string, param?: string | number) => string
+// https://unocss.dev/presets/attributify#typescript-support-jsx-tsx
+import type {
+  AttributifyAttributes,
+  AttributifyNames,
+} from 'unocss/preset-attributify'
+
+type Prefix = 'u-' // change it to your prefix
+
+declare global {
+  namespace astroHTML.JSX {
+    interface HTMLAttributes
+      extends AttributifyAttributes,
+        Partial<Record<AttributifyNames<Prefix>, string>> {}
   }
-}
-
-interface ImportMetaEnv {
-  readonly PUBLIC_GOOGLE_ANALYTICS_ID: string
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv
 }

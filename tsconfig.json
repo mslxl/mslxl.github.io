@@ -1,18 +1,11 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules", ".local"],
   "compilerOptions": {
-    "jsx": "preserve",
-    "lib": ["esnext", "dom"],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["./src/*"]
     }
-  },
-  "include": [
-    "src/**/*.astro",
-    "src/**/*.ts",
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": ["dist"]
+  }
 }

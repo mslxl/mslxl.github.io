@@ -1,0 +1,226 @@
+---
+import { getCollection, render } from 'astro:content'
+
+import Categorizer from '~/components/base/Categorizer.astro'
+import ListItem from '~/components/views/ListItem.astro'
+import Toc from '~/components/toc/Toc.astro'
+import Warning from '~/components/base/Warning.astro'
+
+import { FEATURES } from '~/config'
+import { isSameYear, getYear } from '~/utils/datetime'
+import { getFilteredPosts, getSortedPosts } from '~/utils/data'
+
+import type { CollectionEntry, CollectionKey } from 'astro:content'
+import type { StreamSchema } from '~/content/schema'
+
+interface Props {
+  collectionType: CollectionKey
+  pageToc: boolean
+}
+
+const { collectionType, pageToc } = Astro.props
+
+const VALID_COLLECTION_TYPE = ['blog', 'changelog', 'streams', 'feeds']
+const WARNING = `The '${collectionType}' collection type is not built-in.
+  Modify <code>ListView.astro</code> to render it.`
+
+/* Toc */
+const { toc } = FEATURES
+const tocEnabled = Array.isArray(toc) && toc[0] && pageToc
+let years: string[] = []
+
+/* Posts */
+let sortedBlogItems: CollectionEntry<'blog' | 'changelog'>[] = []
+if (collectionType === 'blog' || collectionType === 'changelog') {
+  const blogItems = await getFilteredPosts(collectionType)
+  sortedBlogItems = getSortedPosts(blogItems)
+
+  if (tocEnabled) {
+    const yearsSet = new Set<number>()
+    sortedBlogItems.forEach((item) => {
+      const year = getYear(item.data.pubDate)
+      yearsSet.add(year)
+    })
+
+    years = Array.from(yearsSet)
+      .sort((a, b) => b - a)
+      .map((year) => year.toString())
+  }
+}
+
+/* Streams */
+let sortedStreamItems: StreamSchema[] = []
+if (collectionType === 'streams') {
+  const streamItems = await getCollection(collectionType)
+
+  sortedStreamItems = streamItems
+    .map((item) => item.data)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
+
+  if (tocEnabled) {
+    const yearsSet = new Set<number>()
+    sortedStreamItems.forEach((item) => {
+      const year = getYear(item.pubDate)
+      yearsSet.add(year)
+    })
+
+    years = Array.from(yearsSet)
+      .sort((a, b) => b - a)
+      .map((year) => year.toString())
+  }
+}
+
+/* Feeds */
+let sortedFeedItems: CollectionEntry<'feeds'>[] = []
+if (collectionType === 'feeds') {
+  const feedItems = await getCollection(collectionType)
+
+  sortedFeedItems = feedItems.sort((a, b) => {
+    if (!a.data.pubdate || !b.data.pubdate)
+      throw new Error("Feed item is missing 'pubdate' field.")
+
+    return b.data.pubdate.valueOf() - a.data.pubdate.valueOf()
+  })
+
+  if (tocEnabled) {
+    const yearsSet = new Set<number>()
+    sortedFeedItems.forEach((item) => {
+      const year = getYear(item.data.pubdate as Date)
+      yearsSet.add(year)
+    })
+
+    years = Array.from(yearsSet)
+      .sort((a, b) => b - a)
+      .map((year) => year.toString())
+  }
+}
+---
+
+{tocEnabled && <Toc anchors={years} />}
+
+{
+  (collectionType === 'blog' || collectionType === 'changelog') && (
+    <div aria-label="Post list">
+      {sortedBlogItems.length === 0 ? (
+        <div class="py-2 op-50">nothing here yet</div>
+      ) : (
+        sortedBlogItems.map(async (item, idx) => {
+          const { data, id } = item
+          const { remarkPluginFrontmatter } = await render(item)
+          const minutesRead =
+            data.minutesRead || remarkPluginFrontmatter.minutesRead
+
+          return (
+            <>
+              {!isSameYear(
+                data.pubDate,
+                sortedBlogItems[idx - 1]?.data.pubDate
+              ) && (
+                <Categorizer
+                  {idx}
+                  needId={tocEnabled}
+                  text={getYear(data.pubDate).toString()}
+                />
+              )}
+              <ListItem
+                {idx}
+                {collectionType}
+                redirect={data.redirect}
+                postSlug={id}
+                title={data.title}
+                video={data.video}
+                radio={data.radio}
+                date={data.pubDate}
+                {minutesRead}
+                platform={data.platform}
+              />
+            </>
+          )
+        })
+      )}
+    </div>
+  )
+}
+
+{
+  collectionType === 'streams' && (
+    <div aria-label="Stream list">
+      {sortedStreamItems.length === 0 ? (
+        <div class="py-2 op-50">nothing here yet</div>
+      ) : (
+        sortedStreamItems.map((item, idx) => {
+          return (
+            <>
+              {!isSameYear(
+                item.pubDate,
+                sortedStreamItems[idx - 1]?.pubDate
+              ) && (
+                <Categorizer
+                  {idx}
+                  needId={tocEnabled}
+                  text={getYear(item.pubDate).toString()}
+                />
+              )}
+              <ListItem
+                {idx}
+                {collectionType}
+                redirect={item.link}
+                title={item.id}
+                video={item.video}
+                radio={item.radio}
+                date={item.pubDate}
+                platform={item.platform}
+              />
+            </>
+          )
+        })
+      )}
+    </div>
+  )
+}
+
+{
+  collectionType === 'feeds' && (
+    <div aria-label="Feed list">
+      {sortedFeedItems.length === 0 ? (
+        <div class="py-2 op-50">nothing here yet</div>
+      ) : (
+        sortedFeedItems.map((item, idx) => {
+          const { data } = item
+          if (!data.link)
+            throw new Error(
+              `Feed item with id '${item.id}' is missing 'link' field.`
+            )
+          if (!data.title)
+            throw new Error(
+              `Feed item with id '${item.id}' is missing 'title' field.`
+            )
+
+          return (
+            <>
+              {!isSameYear(
+                item.data.pubdate as Date,
+                sortedFeedItems[idx - 1]?.data.pubdate as Date
+              ) && (
+                <Categorizer
+                  {idx}
+                  needId={tocEnabled}
+                  text={getYear(item.data.pubdate as Date).toString()}
+                />
+              )}
+              <ListItem
+                {idx}
+                {collectionType}
+                redirect={item.data.link as string}
+                title={item.data.title as string}
+                date={item.data.pubdate as Date | string}
+              />
+            </>
+          )
+        })
+      )}
+    </div>
+  )
+}
+
+{!VALID_COLLECTION_TYPE.includes(collectionType) && <Warning html={WARNING} />}

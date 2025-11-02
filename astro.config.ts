@@ -1,66 +1,52 @@
-import mdx from '@astrojs/mdx'
-import react from '@astrojs/react'
+import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
-import vue from '@astrojs/vue'
-import swup from '@swup/astro'
-import expressiveCode from 'astro-expressive-code'
 import robotsTxt from 'astro-robots-txt'
-import { typst } from 'astro-typst'
-import { defineConfig, sharpImageService } from 'astro/config'
-import { firefox } from 'playwright'
-import rehypeKatex from 'rehype-katex'
-import rehypeMermaid from 'rehype-mermaid'
-import remarkMath from 'remark-math'
-import UnoCSS from 'unocss/astro'
-import { themeConfig } from './src/.config'
+import unocss from 'unocss/astro'
+import astroExpressiveCode from 'astro-expressive-code'
+import mdx from '@astrojs/mdx'
 
-// https://astro.build/config
+import { remarkPlugins, rehypePlugins } from './plugins'
+import { SITE } from './src/config'
+
+// https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
-  site: themeConfig.site.website,
-  prefetch: true,
-  base: '/',
-  image: {
-    service: sharpImageService({ limitInputPixels: false }),
-  },
-  markdown: {
-    shikiConfig: {
-      theme: 'dracula',
-      wrap: true,
-    },
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, [rehypeMermaid, {
-      browserType: firefox,
-      strategy: 'inline-svg',
-    }]],
-  },
+  site: SITE.website,
+  base: SITE.base,
   integrations: [
-    UnoCSS({
-      injectReset: true,
-    }),
-    robotsTxt(),
     sitemap(),
-    expressiveCode(),
-    typst(),
+    robotsTxt(),
+    unocss({ injectReset: true }),
+    astroExpressiveCode(),
     mdx(),
-    vue(),
-    react(),
-    swup({
-      theme: false,
-      animationClass: 'transition-swup-',
-      cache: true,
-      preload: true,
-      accessibility: true,
-      smoothScrolling: true,
-      updateHead: true,
-      updateBodyClass: true,
-    }),
   ],
-  vite: {
-    ssr: {
-      external: ['@myriaddreamin/typst-ts-node-compiler'],
-    },
+  markdown: {
+    syntaxHighlight: false,
+    remarkPlugins,
+    rehypePlugins,
   },
-  server: {
-    host: '0.0.0.0',
+  image: {
+    domains: SITE.imageDomains,
+    // https://docs.astro.build/en/guides/images/#responsive-image-behavior
+    // Used for all local (except `/public`) and authorized remote images using `![]()` syntax; not configurable per-image
+    // Used for all `<Image />` and `<Picture />` components unless overridden with `layout` prop
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
+  vite: {
+    server: {
+      headers: {
+        // Enable CORS for dev: allow Giscus iframe to load local styles
+        'Access-Control-Allow-Origin': '*',
+      },
+    },
+    build: { chunkSizeWarningLimit: 1200 },
+  },
+  // https://docs.astro.build/en/reference/experimental-flags/
+  experimental: {
+    contentIntellisense: true,
+    preserveScriptOrder: true,
+    headingIdCompat: true,
+    chromeDevtoolsWorkspace: true,
+    failOnPrerenderConflict: true,
   },
 })

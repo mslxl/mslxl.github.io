@@ -1,0 +1,88 @@
+{
+  "Add frontmatter to a page": {
+    "scope": "markdown,mdx",
+    "prefix": "pageFrontmatter",
+    "body": [
+      "---",
+      "title: ${1:${TM_FILENAME_BASE/([^-]+)(-|$)/${1:/capitalize}${2:+ }/g}}",
+      "subtitle: ${2:If not needed, leave the field as an empty string or delete it}",
+      "description: ${3:If not needed, leave the field as an empty string or delete it}",
+      "bgType: ${4|false,plum,dot,rose,particle|}",
+      "toc: ${5|true,false|}",
+      "ogImage: ${6:To auto-generate OG image, delete the field or set to `true`. To disable it, set the field to `false`. To use a custom image, provide the full filename from `/public/og-images/`}",
+      "---",
+      "$0",
+    ],
+    "description": "Add the frontmatter block for a new page",
+  },
+
+  "Add frontmatter to a post": {
+    "scope": "markdown,mdx",
+    "prefix": "postFrontmatter",
+    "body": [
+      "---",
+      "title: ${16:${TM_FILENAME_BASE/([^-]+)(-|$)/${1:/capitalize}${2:+ }/g}}",
+      "subtitle: ${1:If not needed, leave the field as an empty string or delete it}",
+      "description: ${2:If not needed, leave the field as an empty string or delete it}",
+      "pubDate: ${3:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
+      "lastModDate: ${4:If not needed, leave the field as an empty string or delete it}",
+      "minutesRead: ${5:To auto-generate, delete the field; to hide it on the page, enter 0}",
+      "radio: ${6|false,true|}",
+      "video: ${7|false,true|}",
+      "platform: ${8:If not needed, leave the field as an empty string or delete it}",
+      "toc: ${9|true,false|}",
+      "share: ${10|true,false|}",
+      "giscus: ${11|true,false|}",
+      "search: ${12|true,false|}",
+      "ogImage: ${13:To auto-generate OG image, delete the field or set to `true`. To disable it, set the field to `false`. To use a custom image, provide the full filename from `/public/og-images/`}",
+      "redirect: ${14:If not needed, delete the field; otherwise, provide a valid URL}",
+      "draft: ${15|false,true|}",
+      "---",
+      "$0",
+    ],
+    "description": "Add the frontmatter block for a new Markdown/MDX post",
+  },
+
+  "Add a project data": {
+    "scope": "json",
+    "prefix": "projectData",
+    "body": [
+      "{",
+      "  \"id\": \"${1:Name of the project to be displayed}\",",
+      "  \"link\": \"${2:URL linking to the project page or repository}\",",
+      "  \"desc\": \"${3:A brief description summarizing the project}\",",
+      "  \"icon\": \"${4:Icon representing the project. It must be in the format `i-<collection>-<icon>` or `i-<collection>:<icon>` as per [UnoCSS](https://unocss.dev/presets/icons) specs. [Check all available icons here](https://icones.js.org/)}\"",
+      "  \"category\": \"${5:Category of the project}\",",
+      "}",
+    ],
+    "description": "Insert a project entry for projects data",
+  },
+
+  "Add a stream data": {
+    "scope": "json",
+    "prefix": "streamData",
+    "body": [
+      "{",
+      "  \"id\": \"${1:Sets the stream title}\",",
+      "  \"pubDate\": \"${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}\",",
+      "  \"link\": \"${3:Specifies the URL link to the stream}\",",
+      "  \"radio\": ${4|false,true|},",
+      "  \"video\": ${5|false,true|},",
+      "  \"platform\": \"${6:If not needed, leave the field as an empty string or delete it}\"",
+      "}",
+    ],
+    "description": "Insert a stream entry for streams data",
+  },
+
+  "Add a photo data": {
+    "scope": "json",
+    "prefix": "photoData",
+    "body": [
+      "{",
+      "  \"id\": \"${1:File (name/path) of the image in the `src/content/photos/` directory or a remote image URL}\",",
+      "  \"desc\": \"${2:If not needed, leave the field as an empty string or delete it}\"",
+      "}",
+    ],
+    "description": "Insert a photo entry for photos data",
+  },
+}

@@ -25,3 +25,15 @@ pnpm-debug.log*
 Markdown style guide.md
 
 src/**/*.pdf
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# eslint cache
+.eslintcache
+
+# local archive
+.local

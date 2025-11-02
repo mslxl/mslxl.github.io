@@ -1,0 +1,41 @@
+---
+title: Projects
+subtitle: Tech Stack & Credits for the Astro AntfuStyle Theme
+description: Tech Stack & Credits for the Astro AntfuStyle Theme
+bgType: dot
+toc: true
+ogImage: true
+---
+
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import StandardLayout from '~/layouts/StandardLayout.astro'
+import GroupView from '~/components/views/GroupView.astro'
+import Link from '~/components/base/Link.astro'
+
+import { withBasePath } from '~/utils/path'
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  bgType={frontmatter.bgType}
+  ogImage={frontmatter.ogImage}
+>
+  <StandardLayout
+    class="max-w-300"
+    title={frontmatter.title}
+    subtitle={frontmatter.subtitle}
+    isCentered={true}
+  >
+    <div slot="head" class="flex flex-wrap justify-center items-center gap-4">
+      <Link class="btn-orange" href={withBasePath('/releases/')}>
+        <span class="i-ph-rocket-launch-duotone"></span>
+        <span class="ml-1.5">Latest Releases</span>
+      </Link>
+      <Link class="btn-violet" href={withBasePath('/prs/')}>
+        <span class="i-lucide-git-pull-request"></span>
+        <span class="ml-1.5">Recent Pull Requests</span>
+      </Link>
+    </div>
+    <GroupView collectionType="projects" pageToc={frontmatter.toc} />
+  </StandardLayout>
+</BaseLayout>
