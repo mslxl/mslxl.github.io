@@ -10,6 +10,9 @@ ogImage: false
 import BaseLayout from '~/layouts/BaseLayout.astro'
 import StandardLayout from '~/layouts/StandardLayout.astro'
 import RenderPage from '~/components/views/RenderPage.astro'
+import Link from '~/components/base/Link.astro'
+
+import { withBasePath } from '~/utils/path'
 
 <BaseLayout
   title={frontmatter.title}
@@ -18,11 +21,18 @@ import RenderPage from '~/components/views/RenderPage.astro'
   ogImage={frontmatter.ogImage}
 >
   <StandardLayout title={frontmatter.title} subtitle={frontmatter.subtitle}>
+    <div slot="head" class="flex flex-wrap items-center gap-4">
+      <Link class="btn-orange" href={withBasePath('/blog/')}>
+        <span class="i-ph-rocket-launch-duotone"></span>
+        <span class="ml-1.5">Enter Blog Posts List</span>
+      </Link>
+    </div>
     <RenderPage
       slot="article"
       collectionType="home"
       id="index"
       pageToc={frontmatter.toc}
     />
+
   </StandardLayout>
 </BaseLayout>
