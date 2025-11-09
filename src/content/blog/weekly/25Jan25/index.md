@@ -1,5 +1,5 @@
 ---
-title: "周报 0x01: ボクの理想の Python"
+title: "周报 01: ボクの理想の Python"
 pubDate: "2025-01-25"
 categories:
   - Weekly

@@ -9,6 +9,7 @@
   radius: 50%,
   // fill: rgb("#eee"),
   stroke: rgb("#000"),
+  baseline: 0.2em
 )[
   #context {
     let content = [
@@ -18,6 +19,7 @@
         fill: rgb("#eee"),
         stroke: rgb("#000"),
         radius: 100%,
+        clip: true,
         align(center + horizon,
           if avatar != "" {
             image(avatar)
@@ -46,11 +48,11 @@
       content
     }
   }
-]
+] 
 
-#let dead(name) = box(stroke: rgb("#000"), inset: (left:0.2em,right:0.2em), height: 1em)[
+#let dead(name) = box(stroke: rgb("#000"), inset: (left:0.2em,right:0.2em), height: 1em, baseline: 0.2em)[
   #context {
     set text(size: text.size - 0.4em)
-    align(horizon)[#name]
+    align(horizon + center)[#name]
   }
 ]

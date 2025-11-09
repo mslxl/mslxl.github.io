@@ -1,5 +1,5 @@
 ---
-title: "周报 0x02: 旧日幻梦"
+title: "周报 02: 旧日幻梦"
 pubDate: "2025-02-20"
 categories:
   - Weekly
