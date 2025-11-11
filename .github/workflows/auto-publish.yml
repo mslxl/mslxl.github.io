@@ -31,6 +31,13 @@ jobs:
         uses: cachix/install-nix-action@v27
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cache Astro
+        uses: actions/cache@v4
+        with:
+          path: |
+            dist/_astro
+            public/og-images
+          key: ${{ runner.os }}-primes
       - name: Build with Nix
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
