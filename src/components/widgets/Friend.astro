@@ -1,0 +1,31 @@
+---
+interface Props {
+  avatar?: string
+  name: string
+  url?: string
+}
+
+const { avatar, name, url } = Astro.props
+---
+
+<button
+  onclick={url && `javascript:window.open(${encodeURIComponent(url)})`}
+  class="shadow-none"
+>
+  <span class="border rounded-full h-[1.25em] pr-2 flex items-center">
+    {
+      avatar ? (
+        <img
+          src={avatar}
+          alt="@"
+          class="inline-block rounded-full size-[1em]"
+        />
+      ) : (
+        <span>@</span>
+      )
+    }
+    <span class="text-sm">
+      {name}
+    </span>
+  </span>
+</button>

@@ -1,0 +1,99 @@
+---
+title: 富文本编辑器探索记录
+pubDate: 2025-11-10
+lastModDate: 2025-11-10
+---
+
+import { Code } from 'astro:components'
+import Friend from '~/components/widgets/Friend.astro'
+import AvatarGlader from '~/content/friends/_gld.jpg'
+
+为什么要搞一个富文本编辑器？起初是我和朋友 <Friend avatar={AvatarGlader.src} name='Glader' url='https://example.com/glader' /> 谋划想做一个双链笔记应用带 SRS 且支持 Incremental Reading 时，发现现有的编辑器都不太符合我们的需求。
+
+- 如果使用类似 Markdown 类型的标记语言，虽然轻量但扩展性有限，尤其是在处理稍微复杂的内容时就显得力不从心。一个典型的例子就是 [Logseq](https://github.com/logseq/logseq)。他在无法嵌套不同类型的块（比如无法在公示中创建 cloze），同时在一个插件渲染的区域中无法调用另一个插件。
+- 如果使用 Quill 这种富文本编辑器框架，在实现大纲式笔记需要魔该大量内容，同时由于实现 SRS 需要在Flashcard所在的文字区域存储一些信息，魔改起来也比较麻烦。
+
+像是 RemNote 就能很好的处理这些问题，但 RemNote 是商业闭源软件，我们无法得知 RemNote 是如何实现编辑器的。而且在 Incremental Reading 方面支持也相当羸弱，我们希望能做一个开源的版本，且具备需要的功能。
+
+话说回来，富文本编辑器的实现难度也不小，这可是公认的天坑。当前也已经有了很多的优秀的编辑器实现，比如 Quill, Draft, Slate, ProseMirror、TipTap 还有 wangEditor 等等。或许在这些现有的编辑器基础上进行二次开发会是一个不错的选择。
+但我还是想从零开始实现一个编辑器，主要是为了更好的理解富文本编辑器的实现原理，同时也能更灵活的定制功能。
+
+我之前也在 [V2EX](https://www.v2ex.com/t/1171305) 上询问过有关富文本编辑器的学习资料，但收获并不大。总归还是要靠自己摸索。开这个 Post 的目的也是为了
+记录我在实现富文本编辑器过程中遇到的问题和解决方案，也希望能和大家交流讨论。而对于编辑器的具体实现，我目前的目标是实现可用的编辑器，给笔记软件用上，再逐步优化和完善功能。 目前我还是
+处于探索阶段，很多东西和想法还不成熟，希望能通过不断的尝试和实践，最终实现一个符合需求的富文本编辑器。这一阶段的过程和结果都会记录在这里，或许能提供一些有用的参考。
+
+---
+
+## 实现方案
+
+现在的富文本编辑器实现方案大致可以分为3类：
+
+| 类型 | 描述                                               | 代表性编辑器              |
+| ---- | -------------------------------------------------- | ------------------------- |
+| L0   | 依赖浏览器 `document.execCommand` API 实现的编辑器 | `wangEditor`              |
+| L1   | 编辑器自行维护的数据结构                           | `Quill`, `Draft`, `Slate` |
+| L2   | 编辑器自行维护的数据结构 + Canvas 实现的编辑器     | `Google Doc`              |
+
+### L0 编辑器
+
+L0 的编辑器实现方案是最简单的，主要依赖浏览器提供的 `document.execCommand` API 来实现文本的编辑和格式化功能。通过调用这个 API，可以实现诸如加粗、斜体、插入链接等基本的富文本功能。
+但是 `document.execCommand` API 已经被废弃。最重要的是， `document.execCommand` 在不同浏览器的表现不一致，而且他的表现我们无法控制。
+
+import ExecCmd from './_exec-cmd.svelte'
+import ExecCmdSrc from './_exec-cmd.svelte?raw'
+
+<ExecCmd client:only="svelte" />
+
+<details>
+  <summary>组件代码</summary>
+  <Code lang="svelte" code={ExecCmdSrc.toString()} />
+</details>
+
+通过这种方法实现的编辑器问题很明显：
+
+- 功能受限：只能实现加粗、斜体等基本功能，无法满足复杂的编辑需求。当然可以通过 `innerHTML` 或者 `appendChild` 等方法实现一些自定义功能，但这样做会导致代码变得复杂且难以维护。
+- 控制性弱：为了获取当前文本的状态（是否被加粗等），需要 parse 拿到的 HTML 或者频繁调用 `document.createTreeWalker`
+- 跨浏览器兼容性差：不同浏览器对 `document.execCommand` 的支持和实现方式不一致，导致编辑器在不同浏览器上的表现不一致。有的浏览器加粗使用 `<b>` 标签，有的使用 `<strong>` 标签。对于换行的处理也不一样，有些浏览器会添加 `<p>`，而有的只会使用 `<br>`。
+
+如果要继续使用 L0 方案实现富文本编辑器，可能需要做大量的兼容性处理工作，且功能上也会受到很大限制。
+
+### L1 编辑器
+
+L1 编辑器的实现方案是编辑器自行维护一套数据结构来表示文档内容。通过监听用户的输入事件，编辑器可以根据用户的操作更新内部的数据结构，并同步更新显示的内容。
+
+像是 CodeMirror（代码编辑器也是富文本编辑器）、 Quill 等都是采用这种方案。整个编辑器以 MVC 架构来设计，数据模型（Model）负责存储和管理文档内容，视图（View）负责显示内容，控制器（Controller）负责处理用户输入并更新模型和视图。用户所有的输入
+会被应用到 Model 上，Model 发生变化后，View 会重新渲染以反映最新的内容。
+
+使用 `contenteditable` 属性来实现文本的编辑功能是一种常见的实现文本编辑的方案，但使用 `contenteditable` 也会带来一些选区上的问题，尤其是在跨越 `contenteditable` 节点时无法从一个节点选择到另一个节点。
+
+import CrossEditable from './_cross-editable.svelte'
+import CrossEditableSrc from './_cross-editable.svelte?raw'
+
+<CrossEditable />
+
+<details>
+  <summary>组件代码</summary>
+  <Code lang="svelte" code={CrossEditableSrc.toString()} />
+</details>
+
+但如果不使用 `contenteditable`，那么就无法出现光标，也无法拉出 IME。一种常见的方法是通过隐藏一个 `input` 元素来拉出 IME，然后通过监听 `input` 事件来获取用户的输入内容，再将这些内容应用到编辑器的 Model 上。
+同时，由于用户的焦点在 `input` 上，用户无法进行选择操作，对于文字的选择需要自行实现，通过计算用户选择的位置，通过 CSS 或者其他方式自绘选区，这部分的逻辑会比较复杂。不过似乎 Monaco Editor 就是这样实现的。
+
+### L2 编辑器
+
+这是最复杂的一种实现方案，类似于 Google Docs 这种在线文档编辑器。它能保证在多个浏览器和设备上有一致的表现，逃避 DOM 诡异的表现，同时也能实现高度定制化的编辑功能。
+
+L2 编辑器是通过 Canvas 来实现的，编辑器完全控制内容的渲染和交互逻辑，不依赖浏览器的 `contenteditable` 功能。通过监听用户的输入事件，编辑器可以根据用户的操作更新内部的数据结构，并使用 Canvas API 来绘制内容。
+
+但是这种方案实现起来非常复杂，它脱离了浏览器的 DOM，需要处理文本的布局、光标的渲染、选择范围的管理等问题。虽然 L2 方案可以实现高度定制化的编辑器，但开发成本和维护成本都非常高。这种方式几乎等于重新实现一个 Skia。
+
+此外，为了处理 IME 的问题，同样需要隐藏一个 `input` 元素来拉出 IME，然后通过监听 `input` 事件来获取用户的输入内容。更多内容这里不再阐述了，因为它实在是太复杂了。
+
+## 数据结构
+
+### Delta
+
+---
+
+后续内容将缓慢学习和探索
+**TO BE CONTINUED...**

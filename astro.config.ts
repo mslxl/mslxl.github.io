@@ -8,27 +8,22 @@ import { typst } from 'astro-typst'
 import { remarkPlugins, rehypePlugins } from './plugins'
 import { SITE } from './src/config'
 
+import svelte from '@astrojs/svelte';
+
 // https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
   site: SITE.website,
   base: SITE.base,
-  integrations: [
-    sitemap(),
-    robotsTxt(),
-    unocss({ injectReset: true }),
-    astroExpressiveCode(),
-    typst({
-      options: {
-        remPx: 14,
-      },
-      target: (id: string) => {
-        console.debug(`Detecting ${id}`)
-        if (id.endsWith('.html.typ') || id.includes('/html/')) return 'html'
-        return 'svg'
-      },
-    }),
-    mdx(),
-  ],
+  integrations: [sitemap(), robotsTxt(), unocss({ injectReset: true }), astroExpressiveCode(), typst({
+    options: {
+      remPx: 14,
+    },
+    target: (id: string) => {
+      console.debug(`Detecting ${id}`)
+      if (id.endsWith('.html.typ') || id.includes('/html/')) return 'html'
+      return 'svg'
+    },
+  }), mdx(), svelte()],
   markdown: {
     syntaxHighlight: false,
     remarkPlugins,
