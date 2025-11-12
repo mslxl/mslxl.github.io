@@ -4,26 +4,15 @@ export async function GET() {
   // https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
   const manifest = {
     id: withBasePath('/'),
-    name: 'Astro AntfuStyle Theme',
-    short_name: 'AntfuStyle',
+    name: 'Integrate Life - Blog of Mslxl',
+    short_name: 'Integrate Life',
     description:
-      'A customizable, feature-rich Astro theme for blog and portfolio',
+      'Integrate my thoughts and experiences on programming, technology, and more.',
     icons: [
       {
-        src: withBasePath('icon-192.png'),
+        src: withBasePath('favicon.png'),
         type: 'image/png',
-        sizes: '192x192',
-      },
-      {
-        src: withBasePath('icon-512.png'),
-        type: 'image/png',
-        sizes: '512x512',
-      },
-      {
-        src: withBasePath('icon-mask.png'),
-        type: 'image/png',
-        sizes: '512x512',
-        purpose: 'maskable',
+        sizes: '80x80',
       },
     ],
     scope: withBasePath('/'),
