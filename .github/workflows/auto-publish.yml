@@ -37,7 +37,8 @@ jobs:
           path: |
             dist/_astro
             public/og-images
-          key: ${{ runner.os }}-primes
+            .astro
+          key: ${{ runner.os }}-build
       - name: Build with Nix
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
