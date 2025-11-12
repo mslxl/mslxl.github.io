@@ -1,7 +1,7 @@
 ---
 title: 富文本编辑器探索记录
 pubDate: 2025-11-10
-lastModDate: 2025-11-10
+lastModDate: 2025-11-13
 ---
 
 import { Code } from 'astro:components'
@@ -91,7 +91,69 @@ L2 编辑器是通过 Canvas 来实现的，编辑器完全控制内容的渲染
 
 ## 数据结构
 
-### Delta
+对于需要自行实现数据结构的编辑器，如 L1 和 L2 方案，选择合适的数据结构是非常重要的。常见的有以下几种：
+
+- 树形结构：这种结构将文档内容表示为一个树，节点可以是文本块、段落、标题等。每个节点可以有多个子节点，适合表示层次化的内容结构。比如 Slate 就是使用树形结构来表示文档内容的。
+- 块级结构：这种结构将文档内容划分为多个块，每个块可以是一个段落、列表项等。块之间可以有不同的格式和样式，适合表示块级内容。比如 Quill 就是使用块级结构来表示文档内容的。
+- 操作序列：这种结构将文档内容表示为一系列的操作，每个操作表示对文档内容的修改。通过应用这些操作，可以重现文档的内容。比如 OT（Operational Transformation）和 CRDT（Conflict-free Replicated Data Type）就是基于操作序列的。
+
+### 树形结构
+
+通常来说用树形结构来模仿 HTML 的 DOM 结构是很常见的做法。 Slate 编辑器就是使用这种方式来表示文档内容的。
+
+```json
+{
+  "type": "document",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "text": "这是一个段落。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "children": [
+        {
+          "text": "这是一个标题。"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "children": [
+            {
+              "type": "list-item",
+              "children": [{ "text": "这是一个无序列表项。" }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+但在使用树形结构去表述文档时，也将树上操作的复杂性引入进来。比如在一个树上插入文本，需要找到对应的节点，然后更新节点的内容。如果需要插入一个新的块（比如段落），还需要调整树的结构，确保新块被正确地插入到树中。而且同一种显示结果的背后可能对应多种树形结构的表示方式（例如斜体加粗可以是 `bold > italic > text` 或者 `italic > bold > text`），如果用户进行后续操作时可能会出现进行相同的操作而造成不同的结果，这就需要在操作时进行规范化处理，确保树的结构符合预期。
+
+此外，为了处理格式的嵌套，必须处理很多边缘情况。例如 `ul` 里嵌套一个 `quote` 和 `quote` 里嵌套一个 `ul`，这种嵌套关系会使得树的结构变得复杂，操作起来也更加困难。
+
+Slate 为了操作树形结构，提供了 2 类操作：
+
+- 节点操作 Node Operation
+  - InsertNodeOperation
+  - MergeNodeOperation
+  - MoveNodeOperation
+  - RemoveNodeOperation
+  - SetNodeOperation
+  - SplitNodeOperation
+- 文本操作 Text Operation
+  - InsertTextOperation
+  - RemoveTextOperation
+
+也就是说，树形结构在视图层面上带来了丰富的表达力，但在操作层面上也带来了复杂性。
 
 ---
 
