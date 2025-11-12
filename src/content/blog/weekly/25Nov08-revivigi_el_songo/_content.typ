@@ -30,9 +30,9 @@ Bedaŭrinde mi dormis tro longe kiam mi provis rezervi semeston por la JLPT N2 k
 
 == ADHD
 
-Antaŭe, dum interŝanĝoj kun amikoj, oni sugestis la eblecon ke mi eble havas ADHD. Post iom da observado kaj memreflekto, mi decidis fari formalan evaluadon. Ĉi-jare frue mi faris ADHD-ekzamenon ĉe hospitalo en Jinan. La ekzamenado konsistis ĉefe el mallonga konversacio pri historia kuracaro — mi antaŭe suferis de acute concomitant esotropia kaj pro tio jam havis brain MRI laŭdosieran registron, kaj la kuracisto ŝajnis speciale atenta pri tiuj pasintaj rezultoj. La kontrolo estis dividita en du partojn: diversaj atento-testejoj, cognitive tests, eye movement function tests ktp., kiuj estis plejparte per instrumentoj kaj demandoj; la alia parto celis ekskludi aliajn malsanojn aŭ faktorojn, probable ligitaj al miaj antaŭaj ekzamenaj registroj.
+Antaŭe, dum interŝanĝoj kun amikoj, oni sugestis la eblecon ke mi eble havas Attention Deficit Hyperactivity Disorder(ADHD). Post iom da observado kaj memreflekto, mi decidis fari formalan evaluadon. Ĉi-jare frue mi faris ADHD-ekzamenon ĉe hospitalo en Jinan. La ekzamenado konsistis ĉefe el mallonga konversacio pri historia kuracaro — mi antaŭe suferis de acute concomitant esotropia kaj pro tio jam havis brain MRI laŭdosieran registron, kaj la kuracisto ŝajnis speciale atenta pri tiuj pasintaj rezultoj. La kontrolo estis dividita en du partojn: diversaj atento-testejoj, cognitive tests, eye movement function tests ktp., kiuj estis plejparte per instrumentoj kaj demandoj; la alia parto celis ekskludi aliajn malsanojn aŭ faktorojn, probable ligitaj al miaj antaŭaj ekzamenaj registroj.
 
-Fine, la kuracisto donis la diagnozon ADHD kaj konfirmis ke mi vere havas Attention Deficit Hyperactivity Disorder (ADHD). Tiu rezulto donis ioman senson de kvieto. Mi pli bone komprenis miajn pasintajn agojn kaj kutimojn, kaj rimarkis ke kelkaj kondutoj kiujn mi antaŭe atribuis al "malsategemo" aŭ "manko de motiva forto" fakte estis manifestiĝoj de ADHD. Eble tio ankaŭ parte klarigas kial mi havis malfacilaĵojn dum la entrance exams. Sed pravigi la pasintecon ne plu helpas; gravas kiel mi alfrontos la estontecon. Nun mi devos labori pli sistemate por adaptiĝi kaj venki tiujn defiojn.
+Fine, la kuracisto donis la diagnozon ADHD kaj konfirmis ke mi vere havas ADHD. Tiu rezulto donis ioman senson de kvieto. Mi pli bone komprenis miajn pasintajn agojn kaj kutimojn, kaj rimarkis ke kelkaj kondutoj kiujn mi antaŭe atribuis al "malsategemo" aŭ "manko de motiva forto" fakte estis manifestiĝoj de ADHD. Eble tio ankaŭ parte klarigas kial mi havis malfacilaĵojn dum la entrance exams. Sed pravigi la pasintecon ne plu helpas; gravas kiel mi alfrontos la estontecon. Nun mi devos labori pli sistemate por adaptiĝi kaj venki tiujn defiojn.
 
 Poste mi iomete tempo ricevis medikamentan terapion; mi sentis ke la periodo post la diagnozo estis mia plej efika lernperiodo — efektive ĝi havis utilon. La batalo kontraŭ ADHD tamen daŭras.
 
@@ -40,7 +40,7 @@ Poste mi iomete tempo ricevis medikamentan terapion; mi sentis ke la periodo pos
 
 Lastatempe mi legis kelkajn hazardajn librojn, ĉefe ĉi tiuj:
 - 《记忆的科学》：rekomendita en la Anki-grupo; tre mallonga libro pri la scienco de memoro kaj praktikaj metodoj por efika memorado.
-- 《分心不是我的错》：ĉi tiu libro priskribas Attention Deficit Hyperactivity Disorder (ADHD), inkluzive de simptomoj, kaŭzoj kaj strategioj por alfronti ĝin.
+- 《分心不是我的错》：ĉi tiu libro priskribas ADHD, inkluzive de simptomoj, kaŭzoj kaj strategioj por alfronti ĝin.
 - 《动手学深度学习》：praktika enkonduko al deep learning; tio estis recite komence ĉar mia esploro unue temis pri vision, sed pro posta direkta ŝanĝo mi ne finis la tutan libron.
 - 《经济学原理——微观经济学分册》：#strike[Estas neakcepteble, ke diplomiĝinto de financa lernejo nenion scias pri financo]. Basan tekston pri microeconomics, rekomendita de amiko; mi ne planas legi la macro-parton por nun, sed la micro-parto mi legas. Eble ĝi helpos min kompreni la mondon.
 
