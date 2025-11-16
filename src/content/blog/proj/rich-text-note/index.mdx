@@ -95,7 +95,6 @@ L2 编辑器是通过 Canvas 来实现的，编辑器完全控制内容的渲染
 
 - 树形结构：这种结构将文档内容表示为一个树，节点可以是文本块、段落、标题等。每个节点可以有多个子节点，适合表示层次化的内容结构。比如 Slate 就是使用树形结构来表示文档内容的。
 - 块级结构：这种结构将文档内容划分为多个块，每个块可以是一个段落、列表项等。块之间可以有不同的格式和样式，适合表示块级内容。比如 Quill 就是使用块级结构来表示文档内容的。
-- 操作序列：这种结构将文档内容表示为一系列的操作，每个操作表示对文档内容的修改。通过应用这些操作，可以重现文档的内容。比如 OT（Operational Transformation）和 CRDT（Conflict-free Replicated Data Type）就是基于操作序列的。
 
 ### 树形结构
 
@@ -140,6 +139,133 @@ L2 编辑器是通过 Canvas 来实现的，编辑器完全控制内容的渲染
 
 此外，为了处理格式的嵌套，必须处理很多边缘情况。例如 `ul` 里嵌套一个 `quote` 和 `quote` 里嵌套一个 `ul`，这种嵌套关系会使得树的结构变得复杂，操作起来也更加困难。
 
+树形结构为视图层面上带来了丰富的表达力，但在操作层面上也带来了复杂性。
+
+### 块级结构
+
+块级结构相对来说要简单一些，文档内容被划分为多个块，每个块可以有自己的格式和样式。每个块内部的文本可以有不同的属性，比如加粗、斜体、颜色等。
+
+```json
+[
+  { "insert": "Gandalf", "attributes": { "bold": true } },
+  { "insert": " the " },
+  { "insert": "Grey", "attributes": { "color": "#cccccc" } }
+]
+```
+
+块级结构的优点是操作相对简单，因为每个块都是独立的，可以单独进行操作。插入、删除、修改块时，只需要更新对应的块即可，不需要调整整个树的结构。缺点是表达力相对较弱，灵活度不足，无法很好地表示复杂的嵌套关系。
+
+## 数据结构实现
+
+### Quill [^1] [^2]
+
+Quill 采用块级结构来表示文档内容，结构称为 Quill-Delta。 Quill 的官方文档对 Delta 的设计有详细的介绍： Delta 用一系列操作组成，它可以描述对文档的修改，也可以描述整个文档。
+
+[^1]: [Designing the Delta Format - Quill Rich Text Editor](https://quilljs.com/docs/guides/designing-the-delta-format)
+
+[^2]: [slab/delta: Simple and expressive JSON format for describing rich-text content and their changes](https://github.com/slab/delta)
+
+#### 基础要求
+
+Delta 要求结构必需满足以下条件：
+
+- 紧凑(Compact)
+- 规范(Canonical)
+
+紧凑是指同样的内容应该使用最少的操作来表示。例如，连续的文本插入应该合并为一个块，而不是多个单独的块。同时，块的属性也应该保持最简，避免冗余。下面的是一个非紧凑的 Delta：
+
+```js
+const content = [
+  { text: 'Hel' },
+  { text: 'lo' },
+  { text: 'World', attributes: { bold: true, italic: false } },
+]
+```
+
+它的问题有两个： `Hel` 和 `lo` 的属性相同，且合并后不会对渲染结果产生影响，因此可以合并为一个块； `World` 的 `italic` 属性为 `false`，这是冗余的，可以去掉。因此，紧凑后的 Delta 应该是：
+
+```js
+const content = [
+  { text: 'Hello' },
+  { text: 'World', attributes: { bold: true } },
+]
+```
+
+规范是指同样的内容应该有唯一的表示方式，避免出现多种不同的表示方式导致的歧义。例如，加粗和斜体的顺序不应该影响最终的渲染结果，因此应该有一个统一的顺序来表示这些属性。下面的是一个非规范的 Delta：
+
+```js
+const content = [
+  { text: 'Hello', attributes: { bold: true } },
+  { text: 'World', attributes: { fontWeight: 'bold' } },
+]
+```
+
+它的问题是 `bold` 和 `fontWeight: 'bold'` 都表示加粗，但使用了不同的属性名称，导致不规范。
+
+```js
+const content = [
+  { text: 'Hello', attributes: { color: 'red' } },
+  { text: 'World', attributes: { color: '#F00' } },
+]
+```
+
+这也是一个非规范的 Delta，因为 `red` 和 `#F00` 都表示红色，但使用了不同的表示方式。
+
+规范要求 Delta 的设计的运行时的自动规范都需要遵守上述规则，以确保 Delta 的一致性和可预测性。
+
+Quill 默认要求 Delta 的规范在运行时满足：
+
+- 使用六个字符十六进制来表示颜色，而不是RGB格式
+- 表示换行只有一种方式，那就是用 `\n` 表示
+- `text: "Hello  World" ` 明确表示“Hello”和“World”之间恰好有两个空格
+
+除此之外，Delta 还处理了一些其它问题。
+
+#### 行格式化
+
+Quill 使用 `\n` 来表示行的结束，因此每个块级元素（如段落、标题、列表项等）都以 `\n` 结尾。有一些块级元素的属性可能与内容有送
+
+```js
+const content = [
+  { text: 'Hello', attributes: { align: 'center' } },
+  { text: '\nWorld' },
+]
+```
+
+这里 `align: 'center'` 应用到整行，使 `Hello` 居中对齐。但若用户删除 `\World` 中的换行符，这时文本结构就出现了问题。
+
+```js
+const content = [
+  { text: 'Hello', attributes: { align: 'center' } },
+  { text: 'World' },
+]
+```
+
+如果 `Hello` 和 `World` 之间没有换行符，不管是 `Hello` 不再居中，还是 `HelloWorld` 不再居中，形成的 Delta 都是非规范非紧凑的。此外，假如在下面的例子中删除 `\n`，剩下的又该是什么？
+
+```js
+const content = [
+  { text: 'Hello', attributes: { align: 'center' } },
+  { text: '\n' },
+  { text: 'World', attributes: { align: 'right' } },
+]
+```
+
+不管是 `HelloWorld` 居中，还是 `HelloWorld` 右对齐，都会导致 Delta 非规范非紧凑。遵循特定的规则处理则会使 Delta 变得复杂。 Delta 通过将所有的 `\n` 独立出来，并将行属性应用到 `\n` 上来解决这个问题。
+
+```js
+const content = [
+  { text: 'Hello' },
+  { text: '\n', attributes: { align: 'center' } },
+  { text: 'World' },
+  { text: '\n', attributes: { align: 'right' } }, // Deltas 总是以 `\n` 结尾
+]
+```
+
+### Slate
+
+TODO
+
 Slate 为了操作树形结构，提供了 2 类操作：
 
 - 节点操作 Node Operation
@@ -152,8 +278,6 @@ Slate 为了操作树形结构，提供了 2 类操作：
 - 文本操作 Text Operation
   - InsertTextOperation
   - RemoveTextOperation
-
-也就是说，树形结构在视图层面上带来了丰富的表达力，但在操作层面上也带来了复杂性。
 
 ---
 
