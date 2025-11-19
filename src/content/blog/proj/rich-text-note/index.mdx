@@ -1,7 +1,7 @@
 ---
 title: 富文本编辑器探索记录
 pubDate: 2025-11-10
-lastModDate: 2025-11-13
+lastModDate: 2025-11-20
 ---
 
 import { Code } from 'astro:components'
@@ -262,6 +262,78 @@ const content = [
 ]
 ```
 
+#### 描述变更
+
+Delta 除了在描述文档外，还可以用来描述对文档的变更。 Delta 支持三种基本的操作： 插入（insert）、删除（delete）、格式化（format）和保留（retain）。通过组合这些操作，可以描述对文档的各种修改。
+实际上，Delta 描述文档就是描述对空白文档的修改。
+
+##### Delete
+
+描述删除文本，需要描述在哪里删除以及删除多少字符。若要删除 embds，其删除操作的长度恒为 1
+
+```js
+const delta = [
+  {
+    delete: {
+      index: 4,
+      length: 1,
+    },
+  },
+  {
+    delete: {
+      index: 12,
+      length: 3,
+    },
+  },
+]
+```
+
+删除操作是基于索引的，并确保没有范围重叠，否则就会违反 [规范性](#基础要求)。
+
+##### Insert
+
+将上文的 `text` 改为 `insert` 还不够，因为 Delta 还需要描述插入的位置。 Delta 可以通过在插入操作中添加类似 `delete` 操作的 `index` 来解决这个问题。
+但插入 `index` 可能会在 `index` 的处理上引入大量的复杂性，`index` 必须指向文档在未应用任何操作前的位置，否则后续操作可能会删除之前的内容，取消正确的格式化，这可能会违背紧凑性。所有的操作还必须被严格的排序，先按 `index` 排序，再按 `length` 排序，再按类型排序。
+
+我们还可以采用 [Retain](#Retain) 中描述的方式来简化插入操作。
+
+##### Format
+
+与删除类似，格式化需要指定文本凡未以及格式本身。在原本的 `attributes` 对象中本身存在格式，因此格式化操作提供了一个额外的 `attributes` 对像与现有的对象合并。
+有一个特殊情况是要去除格式，quill 使用 `null` 表示删除格式，即 `{ bold: null }` 表示删除加粗格式。
+
+这里同样借助 [Retain](#Retain) 中描述的方式来简化格式化操作。避免使用 `index` 引入复杂性。
+
+```js
+const delta = [
+  {
+    format: /* 临时省略 */,
+    attributes: {
+      bold: true,
+    },
+  },
+]
+```
+
+##### Retain
+
+如果我们暂时放下紧凑性的形式，可以描述一种更简单的格式来表达插入、删除和格式化：
+
+- Delta操作的长度至少与被修改的文档等长
+- 每个操作都会描述当前 `index` 字符的内容
+- `insert` 操作会使 Delta 比它描述的文档更长
+
+若文档原本为 `HelloWorld`，我们想要加粗 `Hello` 并在其后插入一个空格，可以这样描述：
+
+```js
+const change = [
+  { format: 5, attributes: { bold: true } }, // Hello
+  { insert: ' ' },
+]
+```
+
+由于每个字符都被描述，因此不再需要明确的索引和长度。这使得重叠区间和错序索引无法表达，从而简化了 Delta 的处理逻辑。
+
 ### Slate
 
 TODO
@@ -283,3 +355,7 @@ Slate 为了操作树形结构，提供了 2 类操作：
 
 后续内容将缓慢学习和探索
 **TO BE CONTINUED...**
+
+```
+
+```
