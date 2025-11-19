@@ -39,7 +39,7 @@
     "@types/p5": "^1.7.6",
     "@typescript-eslint/parser": "^8.46.0",
     "@unocss/reset": "66.5.3",
-    "astro": "^5.15.6",
+    "astro": "^5.15.9",
     "astro-expressive-code": "^0.41.3",
     "astro-loader-bluesky-posts": "^1.2.2",
     "astro-loader-github-prs": "^1.2.1",
