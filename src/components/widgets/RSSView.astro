@@ -1,0 +1,342 @@
+---
+import Link from '~/components/base/Link.astro'
+import ImageViewer from '~/components/widgets/ImageViewer.astro'
+
+interface Props {
+  feedUrl: string
+  viewMoreUrl?: string
+  viewMoreText?: string
+  class?: string
+}
+
+const {
+  feedUrl,
+  viewMoreUrl = feedUrl,
+  viewMoreText = 'View more',
+  class: className,
+} = Astro.props
+
+if (!feedUrl) throw new Error('RSSView requires `feedUrl`.')
+---
+
+<rss-view
+  class:list={['block', className]}
+  data-feed-url={feedUrl}
+>
+  <div class="rss-view-status">Loading RSS...</div>
+  <div class="rss-view-list" aria-live="polite"></div>
+  <div class="rss-view-more">
+    <Link
+      class="btn-orange inline-flex items-center gap-1.5"
+      href={viewMoreUrl}
+      external={true}
+    >
+      <span>{viewMoreText}</span>
+      <span class="i-ri-arrow-right-up-line" aria-hidden="true"></span>
+    </Link>
+  </div>
+</rss-view>
+
+<ImageViewer
+  selector="rss-view .rss-view-list"
+  options={{ title: 0, navbar: 0 }}
+  asyncInsert={true}
+/>
+
+<script>
+  interface FeedItem {
+    link: string
+    dateRaw: string
+    contentHtml: string
+  }
+
+  const FEED_ACCEPT =
+    'application/rss+xml, application/xml, text/xml;q=0.9,*/*;q=0.8'
+  const STATUS = {
+    loading: 'Loading RSS...',
+    misconfigured: 'RSS feed URL is not configured.',
+    empty: 'No posts yet.',
+    failed: 'Failed to load RSS. Please try again later.',
+  } as const
+  const MEDIA_CONTAINERS = ':scope > div, :scope > p, :scope > figure'
+  const CONTENT_ATTRS = ['src', 'href'] as const
+  const LINK_SELECTORS = ['link', 'guid[isPermaLink="true"]'] as const
+  const CONTENT_SELECTORS = ['description', 'content\\:encoded'] as const
+  const DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+  })
+
+  const text = (node: ParentNode, selector: string) =>
+    node.querySelector(selector)?.textContent?.trim() || ''
+
+  const firstText = (node: ParentNode, selectors: readonly string[]) => {
+    for (const selector of selectors) {
+      const value = text(node, selector)
+      if (value) return value
+    }
+    return ''
+  }
+
+  const toHttpUrl = (value: string, baseUrl: string, fallback = '') => {
+    try {
+      const url = new URL(value, baseUrl)
+      return ['http:', 'https:'].includes(url.protocol)
+        ? url.toString()
+        : fallback
+    } catch {
+      return fallback
+    }
+  }
+
+  const normalizeUrl = (value: string, baseUrl: string) => {
+    const raw = value.trim()
+    if (!raw || raw.startsWith('data:') || raw.startsWith('blob:')) return raw
+    return toHttpUrl(raw, baseUrl, raw)
+  }
+
+  const normalizeContentHtml = (html: string, baseUrl: string) => {
+    if (!html) return ''
+
+    const doc = new DOMParser().parseFromString(html, 'text/html')
+    for (const node of doc.body.querySelectorAll<HTMLElement>(
+      '[src], [href]'
+    )) {
+      for (const attr of CONTENT_ATTRS) {
+        const value = node.getAttribute(attr)
+        if (value !== null) node.setAttribute(attr, normalizeUrl(value, baseUrl))
+      }
+    }
+    return doc.body.innerHTML.trim()
+  }
+
+  const formatDate = (dateRaw: string) => {
+    const date = new Date(dateRaw)
+    if (Number.isNaN(date.getTime())) return null
+
+    return {
+      iso: date.toISOString(),
+      text: DATE_FORMATTER.format(date),
+    }
+  }
+
+  const decorateMedia = (entryContent: HTMLElement) => {
+    const groups = [
+      entryContent,
+      ...entryContent.querySelectorAll<HTMLElement>(MEDIA_CONTAINERS),
+    ]
+
+    for (const group of groups) {
+      const directImageCount = group.querySelectorAll(':scope > img').length
+      if (!directImageCount) continue
+
+      group.classList.add(
+        'rss-media-group',
+        directImageCount > 1 ? 'rss-media-multi' : 'rss-media-single'
+      )
+    }
+
+    for (const img of entryContent.querySelectorAll<HTMLImageElement>('img')) {
+      img.loading = 'lazy'
+      img.decoding = 'async'
+      img.addEventListener('error', () => img.remove(), { once: true })
+    }
+  }
+
+  const parseRssItem = (item: Element, feedUrl: string): FeedItem => {
+    const link = toHttpUrl(firstText(item, LINK_SELECTORS), feedUrl)
+    const rawHtml =
+      firstText(item, CONTENT_SELECTORS) ||
+      item.getElementsByTagName('content:encoded')[0]?.textContent?.trim() ||
+      ''
+
+    return {
+      link,
+      dateRaw: text(item, 'pubDate'),
+      contentHtml: normalizeContentHtml(rawHtml, link || feedUrl),
+    }
+  }
+
+  const parseFeed = (xmlText: string, feedUrl: string) => {
+    const xml = new DOMParser().parseFromString(xmlText, 'application/xml')
+    if (xml.querySelector('parsererror')) throw new Error('Invalid XML')
+
+    return Array.from(xml.querySelectorAll('item'))
+      .map((item) => parseRssItem(item, feedUrl))
+      .filter((item) => item.link)
+  }
+
+  const renderItem = (item: FeedItem) => {
+    const article = document.createElement('article')
+    const date = formatDate(item.dateRaw)
+
+    if (date) {
+      const time = document.createElement('time')
+      time.dateTime = date.iso
+      time.textContent = date.text
+      article.appendChild(time)
+    }
+
+    if (item.contentHtml) {
+      const content = document.createElement('div')
+      content.className = 'rss-view-entry-content'
+      content.innerHTML = item.contentHtml
+      decorateMedia(content)
+      article.appendChild(content)
+      return article
+    }
+
+    const openLink = document.createElement('a')
+    openLink.href = item.link
+    openLink.rel = 'noopener noreferrer'
+    openLink.textContent = 'Open post'
+    article.appendChild(openLink)
+    return article
+  }
+
+  class RSSView extends HTMLElement {
+    #statusEl: HTMLDivElement | null = null
+    #listEl: HTMLDivElement | null = null
+    #abortController: AbortController | null = null
+
+    connectedCallback() {
+      this.#statusEl = this.querySelector('.rss-view-status')
+      this.#listEl = this.querySelector('.rss-view-list')
+      void this.#loadFeed()
+    }
+
+    disconnectedCallback() {
+      this.#abortController?.abort()
+    }
+
+    #setStatus(text: string, isError = false) {
+      if (!this.#statusEl) return
+      this.#statusEl.textContent = text
+      this.#statusEl.dataset.error = isError ? 'true' : 'false'
+      this.#statusEl.classList.remove('hidden')
+    }
+
+    async #loadFeed() {
+      if (!this.#statusEl || !this.#listEl) return
+      const feedUrl = this.dataset.feedUrl?.trim() || ''
+      if (!feedUrl) {
+        this.#setStatus(STATUS.misconfigured, true)
+        return
+      }
+
+      this.#setStatus(STATUS.loading)
+      this.#listEl.replaceChildren()
+      this.#abortController?.abort()
+      const controller = new AbortController()
+      this.#abortController = controller
+
+      try {
+        const response = await fetch(feedUrl, {
+          cache: 'no-store',
+          signal: controller.signal,
+          headers: { accept: FEED_ACCEPT },
+        })
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        const items = parseFeed(await response.text(), feedUrl)
+
+        if (!items.length) {
+          this.#setStatus(STATUS.empty)
+          return
+        }
+
+        const fragment = document.createDocumentFragment()
+        items.forEach((item, index) => {
+          if (index) fragment.appendChild(document.createElement('hr'))
+          fragment.appendChild(renderItem(item))
+        })
+
+        this.#listEl.appendChild(fragment)
+        this.#statusEl.classList.add('hidden')
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return
+        this.#setStatus(STATUS.failed, true)
+      }
+    }
+  }
+
+  if (!customElements.get('rss-view')) {
+    customElements.define('rss-view', RSSView)
+  }
+</script>
+
+<style is:global>
+  rss-view {
+    --rss-single-size: min(12.5rem, 66vw);
+    --rss-multi-size: 11rem;
+  }
+
+  rss-view .rss-view-status {
+    padding: 0.5rem 0;
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  rss-view .rss-view-status[data-error='true'] {
+    opacity: 0.75;
+    color: #e11d48;
+  }
+
+  rss-view .rss-view-more {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  rss-view .rss-view-list article > time {
+    display: block;
+    margin-bottom: 0.35rem;
+    opacity: 0.55;
+    font-size: 0.85rem;
+  }
+
+  rss-view .rss-view-entry-content img {
+    display: block;
+    margin: 0 !important;
+    border-radius: 0.4rem;
+    background: #8882;
+  }
+
+  rss-view .rss-media-group {
+    margin-block: 0.45rem !important;
+  }
+
+  rss-view .rss-media-single {
+    width: var(--rss-single-size);
+  }
+
+  rss-view .rss-media-single > img {
+    width: 100%;
+    max-height: var(--rss-single-size);
+    object-fit: contain;
+  }
+
+  rss-view .rss-media-multi {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--rss-multi-size);
+    align-items: start;
+    justify-content: start;
+    gap: 0.35rem;
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.15rem;
+  }
+
+  rss-view .rss-media-multi > img {
+    width: var(--rss-multi-size);
+    height: var(--rss-multi-size);
+    object-fit: cover;
+  }
+
+  @media (max-width: 640px) {
+    rss-view {
+      --rss-single-size: min(9rem, 58vw);
+      --rss-multi-size: 9rem;
+    }
+  }
+</style>

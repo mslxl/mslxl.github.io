@@ -20,18 +20,24 @@ export const UI: Ui = {
       text: 'Blog',
     },
     {
+      path: '/mblog',
+      title: 'Microblog',
+      displayMode: 'alwaysText',
+      text: 'Microblog',
+    },
+    {
       path: '/projects',
       title: 'Projects',
       displayMode: 'alwaysText',
       text: 'Projects',
     },
-    {
-      path: '/shorts',
-      title: 'Shorts',
-      displayMode: 'iconToTextOnMobile',
-      text: 'Shorts',
-      icon: 'i-meteor-icons-grid',
-    },
+    // {
+    //   path: '/shorts',
+    //   title: 'Shorts',
+    //   displayMode: 'iconToTextOnMobile',
+    //   text: 'Shorts',
+    //   icon: 'i-meteor-icons-grid',
+    // },
     {
       path: '/friends',
       title: 'Friends',

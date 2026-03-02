@@ -1,0 +1,31 @@
+---
+title: Microblog
+subtitle: Real-time RSS preview from mblog.mslxl.com
+description: Real-time RSS preview from mblog.mslxl.com
+bgType: false
+toc: false
+ogImage: false
+---
+
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import StandardLayout from '~/layouts/StandardLayout.astro'
+import RSSView from '~/components/widgets/RSSView.astro'
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  bgType={frontmatter.bgType}
+  ogImage={frontmatter.ogImage}
+>
+  <StandardLayout
+    class="prose"
+    title={frontmatter.title}
+    subtitle={frontmatter.subtitle}
+  >
+    <RSSView
+      feedUrl="https://mblog.mslxl.com/rss.xml"
+      viewMoreUrl="https://mblog.mslxl.com/"
+      viewMoreText="View more"
+    />
+  </StandardLayout>
+</BaseLayout>
