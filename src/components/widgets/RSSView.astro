@@ -1,6 +1,7 @@
 ---
 import ImageViewer from '~/components/widgets/ImageViewer.astro'
 import RSSViewClient from '~/components/widgets/RSSView.svelte'
+import { fetchFeedItemsAtBuild } from '~/utils/rss-view'
 
 interface Props {
   feedUrl: string
@@ -17,10 +18,18 @@ const {
 } = Astro.props as Props
 
 if (!feedUrl) throw new Error('RSSView requires `feedUrl`.')
+
+const initialItems = await fetchFeedItemsAtBuild(feedUrl)
 ---
 
 <div class:list={['rss-view-host', className]}>
-  <RSSViewClient client:load {feedUrl} {viewMoreUrl} {viewMoreText} />
+  <RSSViewClient
+    client:load
+    {feedUrl}
+    {viewMoreUrl}
+    {viewMoreText}
+    {initialItems}
+  />
 </div>
 
 <ImageViewer

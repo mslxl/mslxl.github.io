@@ -12,17 +12,24 @@
   } as const
 
   export let feedUrl: string
+  export let initialItems: FeedItem[] = []
   export let viewMoreUrl: string | undefined = undefined
   export let viewMoreText = 'View more'
 
-  let items: FeedItem[] = []
-  let loadingState: 'loading' | 'idle' | 'error' = 'loading'
-  let statusText: string | null = STATUS.loading
+  let items: FeedItem[] = initialItems
+  let loadingState: 'loading' | 'idle' | 'error' = items.length ? 'idle' : 'loading'
+  let statusText: string | null = items.length ? null : STATUS.loading
   let statusError = false
   let abortController: AbortController | null = null
   let resolvedViewMoreUrl = viewMoreUrl || feedUrl
 
   $: resolvedViewMoreUrl = viewMoreUrl || feedUrl
+  $: if (initialItems !== items && !items.length && initialItems.length) {
+    items = initialItems
+    loadingState = 'idle'
+    statusText = null
+    statusError = false
+  }
 
   const delay = (ms: number) =>
     new Promise<void>((resolve) => {
@@ -32,6 +39,14 @@
   const setStatus = (text: string | null, isError = false) => {
     statusText = text
     statusError = isError
+  }
+
+  const mergeNewItems = (nextItems: FeedItem[]) => {
+    if (!items.length) return nextItems
+
+    const existingLinks = new Set(items.map((item) => item.link))
+    const freshItems = nextItems.filter((item) => !existingLinks.has(item.link))
+    return freshItems.length ? [...freshItems, ...items] : items
   }
 
   const fetchFeedText = async (signal: AbortSignal) => {
@@ -62,7 +77,11 @@
       return
     }
 
-    setStatus(STATUS.loading)
+    if (!items.length) {
+      setStatus(STATUS.loading)
+    } else {
+      setStatus(null)
+    }
     loadingState = 'loading'
 
     abortController?.abort()
@@ -70,11 +89,16 @@
     abortController = controller
 
     try {
-      items = parseFeedXml(await fetchFeedText(controller.signal), feedUrl)
+      const nextItems = parseFeedXml(await fetchFeedText(controller.signal), feedUrl)
 
-      if (!items.length) {
-        setStatus(STATUS.empty)
+      if (!nextItems.length) {
+        if (!items.length) {
+          setStatus(STATUS.empty)
+        } else {
+          setStatus(null)
+        }
       } else {
+        items = mergeNewItems(nextItems)
         setStatus(null)
       }
 
@@ -82,8 +106,14 @@
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return
 
-      setStatus(STATUS.failed, true)
-      loadingState = 'error'
+      if (!items.length) {
+        setStatus(STATUS.failed, true)
+        loadingState = 'error'
+        return
+      }
+
+      setStatus(null)
+      loadingState = 'idle'
     }
   }
 

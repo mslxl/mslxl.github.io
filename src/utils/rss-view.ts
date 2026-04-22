@@ -4,12 +4,24 @@ export interface FeedItem {
   contentHtml: string
 }
 
+const MAX_RETRY_COUNT = 3
+const RETRY_DELAY_MS = 500
 const CONTENT_ATTR_PATTERN = /\b(src|href)\s*=\s*(["'])(.*?)\2/gi
 const CLASS_ATTR_PATTERN = /\bclass\s*=\s*(["'])(.*?)\1/i
 const IMAGE_TAG_PATTERN = /<img\b[^>]*>/gi
 const LEADING_IMAGE_SEQUENCE_PATTERN = /^\s*((?:<img\b[^>]*>\s*)+)/i
 const LEADING_IMAGE_WRAPPER_PATTERN =
   /^\s*(<(div|figure|p)\b[^>]*>)\s*((?:<img\b[^>]*>\s*)+)<\/\2>/i
+const ITEM_PATTERN = /<item\b[\s\S]*?<\/item>/gi
+const LINK_PATTERNS = [
+  /<link\b[^>]*>([\s\S]*?)<\/link>/i,
+  /<guid\b[^>]*\bisPermaLink\s*=\s*["']?true["']?[^>]*>([\s\S]*?)<\/guid>/i,
+] as const
+const CONTENT_PATTERNS = [
+  /<description\b[^>]*>([\s\S]*?)<\/description>/i,
+  /<content:encoded\b[^>]*>([\s\S]*?)<\/content:encoded>/i,
+] as const
+const DATE_PATTERN = /<pubDate\b[^>]*>([\s\S]*?)<\/pubDate>/i
 const LINK_SELECTORS = ['link', 'guid[isPermaLink="true"]'] as const
 const CONTENT_SELECTORS = ['description', 'content\\:encoded'] as const
 const DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
@@ -21,10 +33,33 @@ type FeedImageListKind = 'single' | 'even' | 'odd' | null
 export const FEED_ACCEPT =
   'application/rss+xml, application/xml, text/xml;q=0.9,*/*;q=0.8'
 
+const delay = (ms: number) =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, ms)
+  })
+
 const firstText = (node: ParentNode, selectors: readonly string[]) => {
   for (const selector of selectors) {
     const value = node.querySelector(selector)?.textContent?.trim()
     if (value) return value
+  }
+  return ''
+}
+
+const readXmlText = (decode: (value: string) => string, value = '') => {
+  const trimmed = value.trim()
+  const cdataMatch = /^<!\[CDATA\[([\s\S]*?)\]\]>$/.exec(trimmed)
+  return decode(cdataMatch ? cdataMatch[1] : trimmed).trim()
+}
+
+const firstMatch = (
+  source: string,
+  patterns: readonly RegExp[],
+  decode: (value: string) => string
+) => {
+  for (const pattern of patterns) {
+    const match = pattern.exec(source)
+    if (match?.[1]) return readXmlText(decode, match[1])
   }
   return ''
 }
@@ -165,4 +200,49 @@ export const parseFeedXml = (
   }
 
   return items
+}
+
+export const parseFeedXmlAtBuild = async (
+  xmlText: string,
+  sourceUrl: string
+): Promise<FeedItem[]> => {
+  const { decode } = await import('html-entities')
+  const items: FeedItem[] = []
+
+  for (const [itemXml] of xmlText.matchAll(ITEM_PATTERN)) {
+    const link = toHttpUrl(firstMatch(itemXml, LINK_PATTERNS, decode), sourceUrl)
+    if (!link) continue
+
+    const contentHtml = normalizeContentHtml(
+      firstMatch(itemXml, CONTENT_PATTERNS, decode),
+      link
+    )
+
+    items.push({
+      link,
+      dateRaw: readXmlText(decode, DATE_PATTERN.exec(itemXml)?.[1] || ''),
+      contentHtml,
+    })
+  }
+
+  return items
+}
+
+export const fetchFeedItemsAtBuild = async (sourceUrl: string) => {
+  for (let attempt = 0; attempt <= MAX_RETRY_COUNT; attempt += 1) {
+    try {
+      const response = await fetch(sourceUrl, {
+        cache: 'no-store',
+        headers: { accept: FEED_ACCEPT },
+      })
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+
+      return await parseFeedXmlAtBuild(await response.text(), sourceUrl)
+    } catch {
+      if (attempt === MAX_RETRY_COUNT) return []
+      await delay(RETRY_DELAY_MS * (attempt + 1))
+    }
+  }
+
+  return []
 }
