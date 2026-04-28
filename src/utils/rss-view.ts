@@ -190,7 +190,7 @@ export const parseFeedXml = (
       firstText(item, CONTENT_SELECTORS) ||
       item.getElementsByTagName('content:encoded')[0]?.textContent?.trim() ||
       ''
-    const contentHtml = normalizeContentHtml(rawHtml, link)
+    const contentHtml = normalizeContentHtml(rawHtml, sourceUrl)
 
     items.push({
       link,
@@ -215,7 +215,7 @@ export const parseFeedXmlAtBuild = async (
 
     const contentHtml = normalizeContentHtml(
       firstMatch(itemXml, CONTENT_PATTERNS, decode),
-      link
+      sourceUrl
     )
 
     items.push({

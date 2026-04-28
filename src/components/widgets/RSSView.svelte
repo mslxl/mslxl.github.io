@@ -44,9 +44,9 @@
   const mergeNewItems = (nextItems: FeedItem[]) => {
     if (!items.length) return nextItems
 
-    const existingLinks = new Set(items.map((item) => item.link))
-    const freshItems = nextItems.filter((item) => !existingLinks.has(item.link))
-    return freshItems.length ? [...freshItems, ...items] : items
+    const nextLinks = new Set(nextItems.map((item) => item.link))
+    const staleItems = items.filter((item) => !nextLinks.has(item.link))
+    return [...nextItems, ...staleItems]
   }
 
   const fetchFeedText = async (signal: AbortSignal) => {
