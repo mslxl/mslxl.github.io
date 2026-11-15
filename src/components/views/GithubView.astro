@@ -42,11 +42,10 @@ const WARNING = `No GitHub data available for display.
 let isEmpty = false
 
 /* Releases */
-let releases: CollectionEntry<'releases'>[] = []
 let extendedReleases: ExtendedReleaseData[] = []
 
 if (collectionType === 'releases') {
-  releases = await getCollection(collectionType)
+  const releases = await getCollection('releases')
 
   const pkgCountMap: Record<string, number> = {}
   extendedReleases = releases
@@ -89,15 +88,14 @@ if (collectionType === 'releases') {
       return +new Date(b.publishedAt) - +new Date(a.publishedAt)
     })
 
-  isEmpty = releases.length === 0 || extendedReleases.length === 0
+  isEmpty = extendedReleases.length === 0
 }
 
 /* PRs */
-let prs: CollectionEntry<'prs'>[] = []
 let extendedPrs: ExtendedPrData[] = []
 
 if (collectionType === 'prs') {
-  prs = await getCollection(collectionType)
+  const prs = await getCollection('prs')
 
   extendedPrs = prs
     .filter(
@@ -122,7 +120,7 @@ if (collectionType === 'prs') {
       return +new Date(b.createdAt) - +new Date(a.createdAt)
     })
 
-  isEmpty = prs.length === 0 || extendedPrs.length === 0
+  isEmpty = extendedPrs.length === 0
 }
 ---
 

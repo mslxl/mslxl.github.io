@@ -4,6 +4,7 @@ import robotsTxt from 'astro-robots-txt'
 import unocss from 'unocss/astro'
 import astroExpressiveCode from 'astro-expressive-code'
 import mdx from '@astrojs/mdx'
+import { unified } from '@astrojs/markdown-remark'
 import { typst } from 'astro-typst'
 import { remarkPlugins, rehypePlugins } from './plugins'
 import { SITE } from './src/config'
@@ -23,11 +24,13 @@ export default defineConfig({
       if (id.endsWith('.html.typ') || id.includes('/html/')) return 'html'
       return 'svg'
     },
-  }), mdx(), svelte()],
+  }), mdx({ extendMarkdownConfig: false, syntaxHighlight: false }), svelte()],
   markdown: {
     syntaxHighlight: false,
-    remarkPlugins,
-    rehypePlugins,
+    processor: unified({
+      remarkPlugins,
+      rehypePlugins,
+    }),
   },
   image: {
     domains: SITE.imageDomains,
@@ -51,13 +54,5 @@ export default defineConfig({
       },
     },
     build: { chunkSizeWarningLimit: 1200 },
-  },
-  // https://docs.astro.build/en/reference/experimental-flags/
-  experimental: {
-    contentIntellisense: true,
-    preserveScriptOrder: true,
-    headingIdCompat: true,
-    chromeDevtoolsWorkspace: true,
-    failOnPrerenderConflict: true,
   },
 })

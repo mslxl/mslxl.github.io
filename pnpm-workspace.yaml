@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+  simple-git-hooks: true
+overrides:
+  fflate: 0.8.3
+  katex: 0.18.2
+  minimatch: 11.0.8
+  '@atproto/api>zod': 4.6.7
+  '@atproto/common-web>zod': 4.6.7
+  '@atproto/lexicon>zod': 4.6.7
+  '@atproto/xrpc>zod': 4.6.7

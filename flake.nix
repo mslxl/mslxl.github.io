@@ -29,7 +29,7 @@
              
               jq
               nodejs
-              nodejs.pkgs.pnpm
+              pnpm
             ]);
             # Fontconfig error: Cannot load default config file
             FONTCONFIG_FILE = pkgs.makeFontsConf {

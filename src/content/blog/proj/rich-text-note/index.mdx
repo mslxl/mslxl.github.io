@@ -4,7 +4,6 @@ pubDate: 2025-11-10
 lastModDate: 2025-11-20
 ---
 
-import { Code } from 'astro:components'
 import Friend from '~/components/widgets/Friend.astro'
 import AvatarGlader from '~/content/friends/_gld.jpg'
 
@@ -46,7 +45,7 @@ import ExecCmdSrc from './_exec-cmd.svelte?raw'
 
 <details>
   <summary>组件代码</summary>
-  <Code lang="svelte" code={ExecCmdSrc.toString()} />
+  <pre><code>{ExecCmdSrc.toString()}</code></pre>
 </details>
 
 通过这种方法实现的编辑器问题很明显：
@@ -73,7 +72,7 @@ import CrossEditableSrc from './_cross-editable.svelte?raw'
 
 <details>
   <summary>组件代码</summary>
-  <Code lang="svelte" code={CrossEditableSrc.toString()} />
+  <pre><code>{CrossEditableSrc.toString()}</code></pre>
 </details>
 
 但如果不使用 `contenteditable`，那么就无法出现光标，也无法拉出 IME。一种常见的方法是通过隐藏一个 `input` 元素来拉出 IME，然后通过监听 `input` 事件来获取用户的输入内容，再将这些内容应用到编辑器的 Model 上。

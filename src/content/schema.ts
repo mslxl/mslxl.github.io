@@ -1,4 +1,5 @@
 import { z } from 'astro:content'
+import type { infer as ZodInfer } from 'zod'
 
 /* Pages*/
 export const pageSchema = z.object({
@@ -40,7 +41,7 @@ export const pageSchema = z.object({
     ),
 })
 
-export type PageSchema = z.infer<typeof pageSchema>
+export type PageSchema = ZodInfer<typeof pageSchema>
 
 /* Posts */
 export const postSchema = z.object({
@@ -140,7 +141,7 @@ export const postSchema = z.object({
     .describe('Optional categories for the post.'),
 })
 
-export type PostSchema = z.infer<typeof postSchema>
+export type PostSchema = ZodInfer<typeof postSchema>
 
 /* Projects */
 export const projectSchema = z.object({
@@ -164,7 +165,7 @@ export const projectSchema = z.object({
   category: z.string().describe('**Required**. Category of the project.'),
 })
 
-export type ProjectSchema = z.infer<typeof projectSchema>
+export type ProjectSchema = ZodInfer<typeof projectSchema>
 
 /* Friends */
 export const friendSchema = z.object({
@@ -181,4 +182,4 @@ export const friendSchema = z.object({
   image: z.string().optional().describe('Image URL of the friend site.'),
 })
 
-export type FriendSchema = z.infer<typeof friendSchema>
+export type FriendSchema = ZodInfer<typeof friendSchema>
