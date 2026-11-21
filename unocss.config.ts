@@ -48,9 +48,14 @@ const githubVersionClass = Object.keys(githubVersionColor).map(
 const githubSubLogos = githubView.subLogoMatches.map((item) => item[1])
 
 export default defineConfig({
-  // Astro 5 no longer pipes `src/content/**/*.{md,mdx}` through Vite
   content: {
-    filesystem: ['./src/{content,pages}/**/*.{md,mdx}'],
+    // UnoCSS 66.6.5+ replaces the integration's default component glob when
+    // `filesystem` is set, so keep every source family rendered by the build.
+    filesystem: [
+      './src/content/**/*.{md,mdx}',
+      './src/pages/**/*.{astro,md,mdx}',
+      './src/{layouts,components}/**/*.astro',
+    ],
   },
 
   // will be deep-merged to the default theme
